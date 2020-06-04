@@ -3,7 +3,7 @@
 <!-- ------------------------------------------ -->
 <%-- <%@include file="/WEB-INF/views/_innerInclude/beforeBody.jsp"%> --%>
 <!-- ------------------------------------------ -->
-<div class="wrapper">
+<div class="wrapper">  
 <!-- ------------------------------------------ -->
 <%-- <%@include file="/WEB-INF/views/_innerInclude/header.jsp"%> --%>
 <%-- <%@include file="/WEB-INF/views/_innerInclude/sidebar.jsp"%> --%>
