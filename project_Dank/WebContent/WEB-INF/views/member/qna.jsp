@@ -32,64 +32,99 @@
 								<div class="card-head-row">
 									<div class="card-title col-3">자주 찾는 질문</div>
 
-									<div class="container-fluid">
-										<div class="collapse" id="search-nav">
-											<form class="navbar-left navbar-form nav-search mr-md-3">
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<button type="submit" class="btn btn-search pr-1">
-															<i class="fa fa-search search-icon"></i>
-														</button>
-													</div>
-													<input type="text" placeholder="Search ..."
-														class="form-control">
-
-													<button type="button" class="btn btn-focus btn-xs"
-														id="alert_demo2" style="background: orange;">검색</button>
+								
+								</div>
+							</div>
+						
+						
+						<div class="form-group" id="">
+												
+												<div class="input-icon" style="display:inline-block;">
+													
+													<span class="input-icon-addon">
+														<i class="fa fa-search" ></i>
+													</span>
+													<input type="text" class="form-control" placeholder="Search for..."">
+													
+													
 												</div>
-											</form>
+												<button class="btn btn-info" style="display: inline-block;">검색</button>
+											
+											</div>
+										
+								
+										<div class="card-body" >
+									<ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">전체</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#1" role="tab" aria-controls="pills-profile" aria-selected="false">예금</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#2" role="tab" aria-controls="pills-contact" aria-selected="false">대출</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#3" role="tab" aria-controls="pills-contact" aria-selected="false">회원정보</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#4" role="tab" aria-controls="pills-contact" aria-selected="false">기타</a>
+										</li>
+									</ul>
+									<div class="tab-content mt-2 mb-3" id="pills-tabContent">
+										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+											<p>이곳은 전체 가 보이는 화면입니다.</p>
+										</div>
+										<div class="tab-pane fade" id="1" role="tabpanel" aria-labelledby="pills-profile-tab">
+											<p>1.예금을 하면 어떤 점에서 좋나요?</p>
+											<div style="border: 1px solid gray; background-color: #E2E2E2;">
+											<p>예금을 많이 할수록 당신은 부자가 될겁니다.</p>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="2" role="tabpanel" aria-labelledby="pills-contact-tab">
+											<p>1.대출을 하면 어떤 점에서 좋나요?</p>
+											<div style="border: 1px solid gray; background-color: #E2E2E2;">
+											<p>당신의 삶이 매우 부지런해집니다.</p>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="3" role="tabpanel" aria-labelledby="pills-contact-tab">
+											<p>1.회원가입을 하지 않고 서비스를 이용할 수 있나요?</p>
+											<div style="border: 1px solid gray; background-color: #E2E2E2;">
+											<p>아뇨.</p>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="4" role="tabpanel" aria-labelledby="pills-contact-tab">
+											<p>1.홈페이지가 열리지 않아요</p>
+											<div style="border: 1px solid gray; background-color: #E2E2E2;">
+											<p>천천히 열어보세요</p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card-body">
-								<button type="button" class="btn btn-focus btn-xs"
-									id="alert_demo2" style="width: 130px;">전체</button>
-
-								<button type="button" class="btn btn-focus btn-xs"
-									id="alert_demo2" style="width: 130px;">예금</button>
-								<button type="button" class="btn btn-focus btn-xs"
-									id="alert_demo2" style="width: 130px;">대출</button>
-								<button type="button" class="btn btn-focus btn-xs"
-									id="alert_demo2" style="width: 130px;">회원정보</button>
-								<button type="button" class="btn btn-focus btn-xs"
-									id="alert_demo2" style="width: 130px;">기타</button>
-							</div>
-							<div class="card-body">
-								<a data-toggle="collapse" href="#action_mw1" style="color:  black; font-size: 30px;"> 
-									<span style="display: block;">1. 입금은 어떻게 하나요?</span>
-								</a>
-								<div class="collapse" id="action_mw1">
-									<blockquote style="margin-left: 50px; background: gray; color: white;"> 내용들거갈곳 내용들거갈곳내용들거갈곳내용들거갈곳내용들거갈곳내용들거갈곳내용들거갈곳내용들거갈곳내용들거갈곳</blockquote>
+						
+						<div class="card-body">
+									<div class="demo">
+										<ul class="pagination pg-primary">
+											<li class="page-item">
+												<a class="page-link" href="#" aria-label="Previous">
+													<span aria-hidden="true"> < </span>
+													<span class="sr-only"></span>
+												</a>
+											</li>
+											<li class="page-item active"><a class="page-link" href="#">1</a></li>
+											<li class="page-item"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item">
+												<a class="page-link" href="#" aria-label="Next">
+													<span aria-hidden="true">></span>
+													<span class="sr-only"></span>
+												</a>
+											</li>
+										</ul>
+									</div>
 								</div>
-							</div>
-							
-							<div class="card-body">
-								<a data-toggle="collapse" href="#action_mw2" style="color:  black; font-size: 30px;"> 
-									<span style="display: block; ">2. 출금은 어떻게 하나요?</span>
-								</a>
-								<div class="collapse" id="action_mw2">
-									<blockquote style="margin-left: 50px; background: gray; color: white;" >내용들어갈곳</blockquote>
-								</div>
-							</div>
-							<div class="card-body">
-								<a data-toggle="collapse" href="#action_mw3" style="color:  black; font-size: 30px;"> 
-									<span style="display: block;">3. 조회는 어떻게 하나요?</span>
-								</a>
-								<div class="collapse" id="action_mw3">
-									<blockquote style="margin-left: 50px; background: gray; color: white;">내용들어갈곳</blockquote>
-								</div>
-							</div>
+						
+				
 							</div>
 						</div>
 					</div>
