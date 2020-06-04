@@ -13,8 +13,10 @@ import dank.mvc.vo.LoanProductVO;
 
 @Controller
 public class loanController {
+
 	@Autowired
 	private LoanDao loanDao;
+
 	
 	@RequestMapping(value = "/product")
 	public String product(Model model) {
