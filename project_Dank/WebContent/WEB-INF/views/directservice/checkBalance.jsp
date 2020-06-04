@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="content">
 				<!-- 상단의 푸른색 공간 시작 -->
@@ -33,7 +33,7 @@
 							</div>
 							<!-- 계좌 조회 -->
 							<!-- 계좌 이체 -->
-							<div class="card" id="wireMoney">
+							<div class="card" id="transfer">
 								<div class="card-body pb-0">
 									<h2 class="mb-2">계좌 이체</h2>
 									<p class="text-muted">Wire money</p>
@@ -70,15 +70,16 @@
 									
 									<div class="row">
 									<div class="col-5">
+									
 									<form action="chkvalue" method="post" >
-										<input type="text" id="num" name="num"/>
 										<table class="table mt-1">
 											<tbody>
 												<tr>
 													<th scope="col">계좌 번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" id="accountNumber" name="accountNumber" placeholder="(-없이 입력)">
+															<input type="text" class="form-control input-full" 
+															id="accountNumber" name="accountNumber" placeholder="(-없이 입력)" maxlength="10">
 														</div>
 													</td>
 												</tr>
@@ -86,7 +87,8 @@
 													<th scope="col">계좌 암호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="password" class="form-control input-full" id="accountPassword" placeholder="">
+															<input type="password" class="form-control input-full" 
+															id="accountPassword" name="accountPassword" placeholder="(4자리)" maxlength="4">
 														</div>
 													</td>
 												</tr>
@@ -94,7 +96,8 @@
 													<th scope="col">주민번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" id="cnn" placeholder="(앞 6자리)">
+															<input type="text" class="form-control input-full" 
+															id="cnn" name="cnn" placeholder="(앞 6자리)" maxlength="6">
 														</div>
 													</td>
 												</tr>
@@ -121,7 +124,7 @@
 													<th scope="col">조회 날짜</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input class="form-control" type="date" id="searchDate">
+															<input class="form-control" type="date" id="searchDate" name="searchDate">
 														</div>
 													</td>
 												</tr>
@@ -153,13 +156,14 @@
 											
 											<tbody>
 												<tr>
-													<td>2020.05.22</td>
-													<td>안양고용부</td>
-													<td>
-														<p class="blockquote blockquote-primary">284,000원</p>
-														<span class="h6" style="text-align: left;">620,520원</span>
-													</td>
-													
+													<c:if test="${type!=null}">
+														<td>2020.05.22</td>
+														<td>안양고용부</td>
+														<td>
+															<p class="blockquote blockquote-primary">284,000원</p>
+															<span class="h6" style="text-align: left;">620,520원</span>
+														</td>
+													</c:if>
 												</tr>
 												
 											</tbody>

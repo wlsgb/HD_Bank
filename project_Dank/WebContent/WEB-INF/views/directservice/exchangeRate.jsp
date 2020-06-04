@@ -33,7 +33,7 @@
 							</div>
 							<!-- 계좌 조회 -->
 							<!-- 계좌 이체 -->
-							<div class="card" id="wireMoney">
+							<div class="card" id="transfer">
 								<div class="card-body pb-0">
 									<h2 class="mb-2">계좌 이체</h2>
 									<p class="text-muted">Wire money</p>
