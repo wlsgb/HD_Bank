@@ -22,7 +22,7 @@
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
 				<div class="row">
-						<!-- 좌측 버튼 시작 -->
+						<!-- 좌측 버튼 4개 시작 -->
 						<div class="col-md-2">
 							<!-- 계좌 조회 -->
 							<div class="card card-primary bg-primary-gradient" href="#pills-home-nobd">
@@ -57,7 +57,7 @@
 							</div>
 							<!-- 환율 조회 -->
 						</div>
-						<!-- 좌측 버튼 끝 -->
+						<!-- 좌측 버튼 4개 끝 -->
 						<div class="col-md-10">
 							<div class="card">
 								<div class="card-header">
@@ -70,13 +70,14 @@
 									
 									<div class="row">
 									<div class="col-5">
+									<form action="">
 										<table class="table mt-1">
 											<tbody>
 												<tr>
 													<th scope="col">계좌 번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" id="inlineinput" placeholder="(-없이 입력)">
+															<input type="text" class="form-control input-full" id="accountNumber" placeholder="(-없이 입력)">
 														</div>
 													</td>
 												</tr>
@@ -84,7 +85,7 @@
 													<th scope="col">계좌 암호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" id="inlineinput" placeholder="">
+															<input type="password" class="form-control input-full" id="accountPassword" placeholder="">
 														</div>
 													</td>
 												</tr>
@@ -101,31 +102,25 @@
 													<td>
 														<div class="col-md-12 p-0">
 															<label class="form-radio-label">
-																<input class="form-radio-input" type="radio" name="optionsRadios" value=""  checked="">
+																<input class="form-radio-input" type="radio" name="optionsRadios" checked="checked">
 																<span class="form-radio-sign">전체</span>
 															</label>
 															<label class="form-radio-label ml-12">
-																<input class="form-radio-input" type="radio" name="optionsRadios" value="">
+																<input class="form-radio-input" type="radio" name="optionsRadios">
 																<span class="form-radio-sign">입금</span>
 															</label>
 															<label class="form-radio-label ml-12">
-																<input class="form-radio-input" type="radio" name="optionsRadios" value="">
+																<input class="form-radio-input" type="radio" name="optionsRadios">
 																<span class="form-radio-sign">출금</span>
 															</label>
 														</div>
 													</td>
 												</tr>
 												<tr>
-													<th scope="col">조회 기간</th>
+													<th scope="col">조회 날짜</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<select class="form-control" id="exampleFormControlSelect1">
-																<option>1</option>
-																<option>2</option>
-																<option>3</option>
-																<option>4</option>
-																<option>5</option>
-															</select>
+															<input class="form-control" type="date" id="SearchDate">
 														</div>
 													</td>
 												</tr>
@@ -135,13 +130,14 @@
 													<th colspan="2">
 														<div class="row">
 															<div class="col-md-6 ml-auto mr-auto">
-																<button class="btn btn-success">조회</button>
+																<input type="submit" value="조회" class="btn btn-success"/>
 															</div>
 														</div>
 													</th>
 												</tr>
 											</tfoot>
 										</table>
+										</form>
 									</div>
 									
 									<div class="col-md-7">
