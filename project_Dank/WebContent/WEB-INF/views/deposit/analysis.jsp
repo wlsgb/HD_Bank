@@ -266,65 +266,68 @@
 
 		
 			<script>
-			$("#checkBalance").click(function() {
-				location = "checkBalance";
-			});
-			
-			var barChart = document.getElementById('barChart').getContext('2d'),
-			doughnutChart = document.getElementById('doughnutChart').getContext('2d');
+			$(function() {
+				$("#checkBalance").click(function() {
+					location = "checkBalance";
+				});
+				
+				var barChart = document.getElementById('barChart').getContext('2d'),
+				doughnutChart = document.getElementById('doughnutChart').getContext('2d');
 
-			var myBarChart = new Chart(barChart, {
-				type: 'bar',
-				data: {
-					labels: ["4월 1주", "4월 2주", "4월 3주", "4월 4주", "5월 1주", "5월 2주", "5월 3주", "5월 4주"],
-					datasets : [{
-						label: "억",
-						backgroundColor: 'rgb(23, 125, 255)',
-						borderColor: 'rgb(23, 125, 255)',
-						data: [10.5, 20.3, 5, 16, 15, 30, 24, 15],
-					}],
-				},
-				options: {
-					responsive: true, 
-					maintainAspectRatio: false,
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero:true
+				var myBarChart = new Chart(barChart, {
+					type: 'bar',
+					data: {
+						labels: ["4월 1주", "4월 2주", "4월 3주", "4월 4주", "5월 1주", "5월 2주", "5월 3주", "5월 4주"],
+						datasets : [{
+							label: "억",
+							backgroundColor: 'rgb(23, 125, 255)',
+							borderColor: 'rgb(23, 125, 255)',
+							data: [10.5, 20.3, 5, 16, 15, 30, 24, 15],
+						}],
+					},
+					options: {
+						responsive: true, 
+						maintainAspectRatio: false,
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						},
+					}
+				});
+
+				var myDoughnutChart = new Chart(doughnutChart, {
+					type: 'doughnut',
+					data: {
+						datasets: [{
+							data: [50000, 300000, 90000],
+							backgroundColor: ['#f3545d','#fdaf4b','#1d7af3']
+						}],
+
+						labels: [
+						'식비',
+						'쇼핑',
+						'교통비'
+						]
+					},
+					options: {
+						responsive: true, 
+						maintainAspectRatio: false,
+						legend : {
+							position: 'bottom'
+						},
+						layout: {
+							padding: {
+								left: 20,
+								right: 20,
+								top: 20,
+								bottom: 20
 							}
-						}]
-					},
-				}
-			});
-
-			var myDoughnutChart = new Chart(doughnutChart, {
-				type: 'doughnut',
-				data: {
-					datasets: [{
-						data: [50000, 300000, 90000],
-						backgroundColor: ['#f3545d','#fdaf4b','#1d7af3']
-					}],
-
-					labels: [
-					'식비',
-					'쇼핑',
-					'교통비'
-					]
-				},
-				options: {
-					responsive: true, 
-					maintainAspectRatio: false,
-					legend : {
-						position: 'bottom'
-					},
-					layout: {
-						padding: {
-							left: 20,
-							right: 20,
-							top: 20,
-							bottom: 20
 						}
 					}
-				}
-			});
+				});
+			})
+			
 	</script>

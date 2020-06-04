@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<!-- ------------------------------------------ -->
+<%-- <%@include file="/WEB-INF/views/_innerInclude/beforeBody.jsp"%> --%>
+<!-- ------------------------------------------ -->
+<div class="wrapper">
+<!-- ------------------------------------------ -->
+<%-- <%@include file="/WEB-INF/views/_innerInclude/header.jsp"%> --%>
+<%-- <%@include file="/WEB-INF/views/_innerInclude/sidebar.jsp"%> --%>
+<!-- ------------------------------------------ -->
+<div class="main-panel">
+<!-- ------------------------------------------ -->
+<!-- ------------------------------------------ -->
+<!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ -->
+
 <div class="content">
 				<!-- 상단의 푸른색 공간 시작 -->
 				<div class="panel-header bg-primary-gradient">
@@ -10,7 +23,7 @@
 								<h5 class="text-white op-7 mb-2">어서오세요. Dank 메인 페이지입니다.</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
-								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
+								<a href="#" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
 								<a href="#" class="btn btn-secondary btn-round">고객센터</a>
 							</div>
 						</div>
@@ -86,7 +99,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Check balance</p>
-												<h4 class="card-title">계좌 조회입니다.</h4>
+												<h4 class="card-title">계좌 조회입니다</h4>
 											</div>
 										</div>
 									</div>
@@ -154,22 +167,130 @@
 					<!-- 페이지 레이아웃 끝 -->
 				</div>
 			</div>
-	
-	<script>
-	
-		/* 페이지 이동 자바스크립트 시작 */
-		$("#checkBalance").click(function() {
-			location = "checkbalance";
+
+
+			<!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->
+			<!-- ------------------------------------------ -->
+			<!-- ------------------------------------------ -->
+<%-- 			<%@include file="/WEB-INF/views/_innerInclude/footer.jsp"%> --%>
+			<!-- ------------------------------------------ -->
+			</div>   <!-- 메인패널닫기 -->
+			<!-- ------------------------------------------ -->
+			</div> <!--바깥래퍼닫기-->
+			<!-- ------------------------------------------ -->
+<%-- 			<%@include file="/WEB-INF/views/_innerInclude/addjs.jsp"%> --%>
+			<!-- ------------------------------------------ -->
+			<!-- ------------------------------------------ -->
+			<!-- ▽▽▽▽▽▽▽ 해당되는 script 밑으로복사▽▽▽▽▽▽▽▽▽▽ -->
+			
+			
+			<script>
+			/* 페이지 이동 자바스크립트 시작 */
+			$("#checkBalance").click(function() {
+				location = "checkbalance";
+			});
+			$("#transfer").click(function() {
+				location = "transfer";
+			});
+			$("#analysis").click(function() {
+				location = "analysis";
+			});
+			$("#exchangeRate").click(function() {
+				location = "exchangerate";
+			});
+			/* 페이지 이동 자바스크립트 끝 */
+		Circles.create({
+			id:'circles-1',
+			radius:45,
+			value:60,
+			maxValue:100,
+			width:7,
+			text: 5,
+			colors:['#f1f1f1', '#FF9E27'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-2',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:7,
+			text: 36,
+			colors:['#f1f1f1', '#2BB930'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-3',
+			radius:45,
+			value:40,
+			maxValue:100,
+			width:7,
+			text: 12,
+			colors:['#f1f1f1', '#F25961'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
+
+		var mytotalIncomeChart = new Chart(totalIncomeChart, {
+			type: 'bar',
+			data: {
+				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
+				datasets : [{
+					label: "Total Income",
+					backgroundColor: '#ff9e27',
+					borderColor: 'rgb(23, 125, 255)',
+					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
+				}],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: false,
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							display: false //this will remove only the label
+						},
+						gridLines : {
+							drawBorder: false,
+							display : false
+						}
+					}],
+					xAxes : [ {
+						gridLines : {
+							drawBorder: false,
+							display : false
+						}
+					}]
+				},
+			}
 		});
-		$("#transfer").click(function() {
-			location = "transfer";
+
+		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
 		});
-		$("#analysis").click(function() {
-			location = "analysis";
-		});
-		$("#exchangeRate").click(function() {
-			location = "exchangerate";
-		});
-		/* 페이지 이동 자바스크립트 끝 */
-	
 	</script>
+</body>
+</html>
