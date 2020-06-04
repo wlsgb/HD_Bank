@@ -1,10 +1,7 @@
 package dank.mvc.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 
-import org.apache.velocity.tools.config.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,14 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DirectServiceController {
 
 	@RequestMapping(value = "/checkbalance")
-	public String viewCheckBalance(Model m) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(2020, 1, 1);
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH);
-		int day = cal.get(Calendar.DATE);
-		System.out.println(year + "³â" + month + "¿ù" + day + "ÀÏ");
-		
+	public String viewCheckBalance() {
+		return "directservice/checkBalance";
+	}
+	
+	@RequestMapping(value = "/chkvalue")
+	public String cheValue(Model m, HttpServletRequest req, String num, String accountNumber) {
+		System.out.println("num : " + num);
+		System.out.println("accountNumber : " + accountNumber);
+		String[] type = req.getParameterValues("type");
+		System.out.println("type : " + type[0]);
 		return "directservice/checkBalance";
 	}
 

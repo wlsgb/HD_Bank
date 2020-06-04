@@ -5,6 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class loanController {
+	
+	@RequestMapping(value = "/jinhyu")
+	public String jinhyu() {
+		return "loan/product";
+	}
+	
 	@RequestMapping(value = "/product")
 	public String product() {
 		return "loan/product";

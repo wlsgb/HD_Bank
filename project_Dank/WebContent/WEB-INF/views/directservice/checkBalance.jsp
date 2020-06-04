@@ -70,14 +70,15 @@
 									
 									<div class="row">
 									<div class="col-5">
-									<form action="">
+									<form action="chkvalue" method="post" >
+										<input type="text" id="num" name="num"/>
 										<table class="table mt-1">
 											<tbody>
 												<tr>
 													<th scope="col">계좌 번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" id="accountNumber" placeholder="(-없이 입력)">
+															<input type="text" class="form-control input-full" id="accountNumber" name="accountNumber" placeholder="(-없이 입력)">
 														</div>
 													</td>
 												</tr>
@@ -93,7 +94,7 @@
 													<th scope="col">주민번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" id="inlineinput" placeholder="(앞 6자리)">
+															<input type="text" class="form-control input-full" id="cnn" placeholder="(앞 6자리)">
 														</div>
 													</td>
 												</tr>
@@ -102,15 +103,15 @@
 													<td>
 														<div class="col-md-12 p-0">
 															<label class="form-radio-label">
-																<input class="form-radio-input" type="radio" name="optionsRadios" checked="checked">
+																<input class="form-radio-input" type="radio" name="type" checked="checked" value="0">
 																<span class="form-radio-sign">전체</span>
 															</label>
 															<label class="form-radio-label ml-12">
-																<input class="form-radio-input" type="radio" name="optionsRadios">
+																<input class="form-radio-input" type="radio" name="type" value="1">
 																<span class="form-radio-sign">입금</span>
 															</label>
 															<label class="form-radio-label ml-12">
-																<input class="form-radio-input" type="radio" name="optionsRadios">
+																<input class="form-radio-input" type="radio" name="type" value="2">
 																<span class="form-radio-sign">출금</span>
 															</label>
 														</div>
@@ -120,7 +121,7 @@
 													<th scope="col">조회 날짜</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input class="form-control" type="date" id="SearchDate">
+															<input class="form-control" type="date" id="searchDate">
 														</div>
 													</td>
 												</tr>
