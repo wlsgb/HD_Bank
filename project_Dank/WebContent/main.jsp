@@ -184,9 +184,21 @@
 			<!-- ▽▽▽▽▽▽▽ 해당되는 script 밑으로복사▽▽▽▽▽▽▽▽▽▽ -->
 			
 			
-			<script>$("#checkBalance").click(function() {
-				location = "checkBalance";
+			<script>
+			/* 페이지 이동 자바스크립트 시작 */
+			$("#checkBalance").click(function() {
+				location = "checkbalance";
 			});
+			$("#transfer").click(function() {
+				location = "transfer";
+			});
+			$("#analysis").click(function() {
+				location = "analysis";
+			});
+			$("#exchangeRate").click(function() {
+				location = "exchangerate";
+			});
+			/* 페이지 이동 자바스크립트 끝 */
 		Circles.create({
 			id:'circles-1',
 			radius:45,
