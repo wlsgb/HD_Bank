@@ -156,7 +156,6 @@
 			</div>
 	
 	<script>
-	
 		/* 페이지 이동 자바스크립트 시작 */
 		$("#checkBalance").click(function() {
 			location = "checkbalance";

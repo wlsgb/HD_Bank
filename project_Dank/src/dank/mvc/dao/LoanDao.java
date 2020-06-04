@@ -16,4 +16,8 @@ public class LoanDao {
 	public List<LoanProductVO> getLoanProductList(){
 		return ss.selectList("loan.product");
 	}
+	
+	public LoanProductVO getProductInfo(int lp_num) {
+		return ss.selectOne("loan.productinfo", lp_num);
+	}
 }

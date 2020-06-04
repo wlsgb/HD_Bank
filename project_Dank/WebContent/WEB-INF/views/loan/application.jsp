@@ -29,7 +29,7 @@
 				<div class="col-3"></div>
 				<div class="row row-card-no-pd col-6">
 						
-						<c:forEach items="${list }" var="e">
+						<c:forEach items="${list }" var="e" >
 						<div class="col-sm-10 col-md-10">
 								<div class="card card-stats card-round">
 								
@@ -55,7 +55,7 @@
 		
 			
 			<div class="col-sm-2 col-md-2 row">
-			<h6 style="color: white;">투명</h6>
+			<h6 style="color: white;">투명1</h6>
 			<div class="col-8"></div>						
 			<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
 			

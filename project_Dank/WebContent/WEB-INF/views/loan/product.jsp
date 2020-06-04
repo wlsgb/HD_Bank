@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 			<div class="content">
 					<div class="panel-header bg-primary-gradient">
 					<div class="page-inner py-5">
@@ -21,14 +21,15 @@
 					</div>
 				</div>
 				<!--대출 목록   -->
+				
 				<div class="row mt--4">
 				<div class="col-1"></div>
 				<div class="row row-card-no-pd col-10">
-					
+					<c:forEach items="${list }" var="e">
 						<div class="col-sm-6 col-md-3">
 								<div class="card card-stats card-round">
-									<a href="index.jsp">
-									<div class="card-body ">
+									<!-- <a href="index.jsp"> -->
+									<div class="card-body ajax">
 										<div class="row">
 											<div class="col-3">
 												<div class="icon-big text-center">
@@ -37,79 +38,18 @@
 											</div>
 											<div class="col-9 col-stats">
 												<div class="numbers">
+												<input type="hidden" id="lp_num" value="${e.lp_num }">
 													<p class="card-category">무담보 대출</p>
-													<h4 class="card-title">kosmo대출</h4>
+													<h4 class="card-title">${e.lp_name }</h4>
 												</div>
 											</div>
 										</div>
 									</div>
-											</a>
+											<!-- </a> -->
 								</div>
 							</div>
-			
-							<div class="col-sm-6 col-md-3">
-								<div class="card card-stats card-round">
-								<a href="index.jsp">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-3">
-												<div class="icon-big text-center">
-													<i class="flaticon-coins text-success"></i>
-												</div>
-											</div>
-											<div class="col-9 col-stats">
-												<div class="numbers">
-													<p class="card-category">무담보 대출</p>
-													<h4 class="card-title">교육생 대출</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="card card-stats card-round">
-								<a href="index.jsp">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-3">
-												<div class="icon-big text-center">
-													<i class="flaticon-coins text-success"></i>
-												</div>
-											</div>
-											<div class="col-9 col-stats">
-												<div class="numbers">
-													<p class="card-category">무담보 대출</p>
-													<h4 class="card-title">신용 대출</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="card card-stats card-round">
-								<a href="index.jsp">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-3">
-												<div class="icon-big text-center">
-													<i class="flaticon-coins text-success"></i>
-												</div>
-											</div>
-											<div class="col-9 col-stats">
-												<div class="numbers">
-													<p class="card-category">무담보 대출</p>
-													<h4 class="card-title">억만장자 대출</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-									</a>
-								</div>
-							</div>
+			</c:forEach>
+				
 						</div>
 				</div>
 				<!--대출 정보 나오는 곳  -->
@@ -126,106 +66,27 @@
 						</div>
 			<div>
 			
-			<p class="text-center"><button type="button" class="btn btn-info" onclick="location='applicationform'">대출 신청</button></p>
+			<p class="text-center"><button type="button" id="btn" class="btn btn-info" onclick="location='applicationform'">대출 신청</button></p>
 		
 			</div>
-			
 			</div>
 
 
 		
 			
 			<script>
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
+				
+				$('.ajax').click(function() {
+					console.log($(this).find('input').val())
+					$.ajax({
+						url:'productinfo?lp_num='+$(this).find('input').val(),
+						success: function(data) {
+							$('#target').html(data)
 						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+					})
+				})
+				
+				$('#btn').click(function() {
+					location='applicationform?lp_num='+$('#target input').val();
+				})
 	</script>
