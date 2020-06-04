@@ -86,7 +86,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Check balance</p>
-												<h4 class="card-title">계좌 조회</h4>
+												<h4 class="card-title">계좌 조회입니다.</h4>
 											</div>
 										</div>
 									</div>
