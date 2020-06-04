@@ -1,7 +1,7 @@
 package dank.mvc.vo;
 
 public class LoanProductVO {
-	private int lp_num,lp_interestrate,lp_cancelfee,lp_maximun;
+	private int lp_num,lp_interestrate,lp_cancelfee,lp_maximum;
 	private String lp_name;
 	public int getLp_num() {
 		return lp_num;
@@ -21,11 +21,11 @@ public class LoanProductVO {
 	public void setLp_cancelfee(int lp_cancelfee) {
 		this.lp_cancelfee = lp_cancelfee;
 	}
-	public int getLp_maximun() {
-		return lp_maximun;
+	public int getLp_maximum() {
+		return lp_maximum;
 	}
-	public void setLp_maximun(int lp_maximun) {
-		this.lp_maximun = lp_maximun;
+	public void setLp_maximum(int lp_maximum) {
+		this.lp_maximum = lp_maximum;
 	}
 	public String getLp_name() {
 		return lp_name;

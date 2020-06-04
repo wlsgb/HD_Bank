@@ -33,7 +33,7 @@ public class loanController {
 		info.append("</div><div class=\"col-md-12\">");
 		info.append("<p class=\"text-center\">").append("이자율 : ").append(vo.getLp_interestrate()).append("%</p><br>");
 		info.append("</div><div class=\"col-md-12\">");
-		info.append("<p class=\"text-center\">").append("최대 대출 가능 금액 : ").append(vo.getLp_maximun()).append("원</p><br>");
+		info.append("<p class=\"text-center\">").append("최대 대출 가능 금액 : ").append(vo.getLp_maximum()).append("원</p><br>");
 		info.append("</div><div class=\"col-md-12\">");
 		info.append("<p class=\"text-center\">").append("중도 해지 수수료 : ").append(vo.getLp_cancelfee()).append("%</p>");
 		info.append("</div>");
@@ -43,7 +43,9 @@ public class loanController {
 	}
 
 	@RequestMapping(value = "/application")
-	public String application() {
+	public String application(Model model) {
+		List<LoanProductVO> list = loanDao.getLoanProductList();
+		model.addAttribute("list", list);
 		return "loan/application";
 	}
 
