@@ -1,12 +1,22 @@
 package dank.mvc.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import dank.mvc.dao.LoanDao;
 
 @Controller
 public class loanController {
+	@Autowired
+	private LoanDao loanDao;
+	
 	@RequestMapping(value = "/product")
-	public String product() {
+	public String product(Model model) {
+		System.out.println("product start");
+		model.addAttribute("list", loanDao.getLoanProductList());
+		System.out.println("product");
 		return "loan/product";
 	}
 

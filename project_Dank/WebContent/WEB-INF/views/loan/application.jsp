@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 			<div class="content">
@@ -28,6 +28,8 @@
 				<div class="row mt--4">
 				<div class="col-3"></div>
 				<div class="row row-card-no-pd col-6">
+						
+						<c:forEach items="${list }" var="e">
 						<div class="col-sm-10 col-md-10">
 								<div class="card card-stats card-round">
 								
@@ -42,7 +44,7 @@
 											<div class="col-5 col-stats">
 												<div class="numbers">
 													<p class="card-category">무담보 대출</p>
-													<h4 class="card-title">kosmo대출</h4>
+													<h4 class="card-title">${e.lp_name }1</h4>
 												</div>
 											</div>
 										</div>
@@ -58,6 +60,9 @@
 			<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
 			
 			</div>
+			</c:forEach>
+			
+			
 			
 							<div class="col-sm-10 col-md-10">
 								<div class="card card-stats card-round">
