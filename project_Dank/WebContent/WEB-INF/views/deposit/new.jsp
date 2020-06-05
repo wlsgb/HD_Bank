@@ -9,10 +9,10 @@
 							<div>
 								<h2 class="text-white pb-2 fw-bold">예금</h2>
 								<h5 class="text-white op-7 mb-2">
-								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
-								 <span class="h2 mr-1"> > </span>
-								 <a href="" class="btn btn-white btn-sm btn-border mr-1">신규</a>
-								 </h5>
+									<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
+									<span class="h2 mr-1"> > </span>
+									<a href="#" class="btn btn-white btn-sm btn-border mr-1">신규</a>
+								</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
@@ -26,7 +26,7 @@
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
 				<div class="row">
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-6 col-md-3" href="#hani" role="tap" aria-controls="haha">
 							<div class="card card-stats card-primary card-round">
 								<div class="card-body">
 									<div class="numbers">
@@ -65,7 +65,7 @@
 					</div>
 					<!-- 상단 페이지 이동 4개 -->
 				<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12" >
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row">

@@ -17,6 +17,10 @@ public class DepositController {
 	public String newPage() {
 		return "deposit/new";
 	}
+	@RequestMapping(value = "/saving_new")
+	public String saving_new() {
+		return "deposit/saving_new";
+	}
 
 	@RequestMapping(value = "/share_new_req")
 	public String share_new_req() {
