@@ -2,6 +2,8 @@ package dank.mvc.model;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class DepositController {
@@ -14,6 +16,10 @@ public class DepositController {
 	@RequestMapping(value = "/new")
 	public String newPage() {
 		return "deposit/new";
+	}
+	@RequestMapping(value = "/saving_new")
+	public String saving_new() {
+		return "deposit/saving_new";
 	}
 
 	@RequestMapping(value = "/share_new_req")
@@ -41,11 +47,31 @@ public class DepositController {
 		return "deposit/share_new_check";
 	}
 
+//	@RequestMapping(value = { "/inquire" })
+//	public String inqurePage(
+//			@RequestParam(value = "gonum", required = true, defaultValue = "0") String gonum
+//			) {
+//		return "deposit/deposite_inquire";
+//	}
 	@RequestMapping(value = { "/inquire" })
-	public String inqurePage() {
-		return "deposit/deposite_inquire";
+	public ModelAndView inquirePage(
+			@RequestParam(value = "mem_code",defaultValue = "0") String mem_code
+			) {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		
+		
+		
+		
+		
+		mav.setViewName("deposit/deposite_inquire");
+		
+		return mav;
 	}
-
+	
+	
+	
 	@RequestMapping(value = { "/inquire_detail" })
 	public String inqure_detailPage() {
 		return "deposit/deposite_inquire_detail";
