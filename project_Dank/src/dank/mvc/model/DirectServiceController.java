@@ -15,11 +15,13 @@ public class DirectServiceController {
 	}
 	
 	@RequestMapping(value = "/chkvalue")
-	public String cheValue(Model m, HttpServletRequest req, String num, String accountNumber) {
-		System.out.println("num : " + num);
+	public String cheValue(Model m, HttpServletRequest req, String accountNumber, String accountPassword, String cnn, String type, String searchDate) {
 		System.out.println("accountNumber : " + accountNumber);
-		String[] type = req.getParameterValues("type");
-		System.out.println("type : " + type[0]);
+		System.out.println("accountPassword : " + accountPassword);
+		System.out.println("cnn : " + cnn);
+		System.out.println("type : " + type);
+		System.out.println("searchDate : " + searchDate);
+		m.addAttribute("type", type);
 		return "directservice/checkBalance";
 	}
 
