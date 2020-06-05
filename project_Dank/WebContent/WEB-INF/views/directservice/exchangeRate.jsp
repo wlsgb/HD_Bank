@@ -13,7 +13,7 @@
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
-								<a href="#" class="btn btn-secondary btn-round">고객센터</a>
+								<a href="qna" class="btn btn-secondary btn-round">고객센터</a>
 							</div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 							</div>
 							<!-- 계좌 조회 -->
 							<!-- 계좌 이체 -->
-							<div class="card" id="wireMoney">
+							<div class="card" id="transfer">
 								<div class="card-body pb-0">
 									<h2 class="mb-2">계좌 이체</h2>
 									<p class="text-muted">Wire money</p>
@@ -145,8 +145,8 @@
 			$("#checkBalance").click(function() {
 				location = "checkbalance";
 			});
-			$("#wireMoney").click(function() {
-				location = "wiremoney";
+			$("#transfer").click(function() {
+				location = "transfer";
 			});
 			$("#analysis").click(function() {
 				location = "analysis";

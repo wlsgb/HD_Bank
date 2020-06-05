@@ -11,7 +11,7 @@
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
-								<a href="#" class="btn btn-secondary btn-round">고객센터</a>
+								<a href="qna" class="btn btn-secondary btn-round">고객센터</a>
 							</div>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Check balance</p>
-												<h4 class="card-title">계좌 조회입니다.</h4>
+												<h4 class="card-title">계좌 조회</h4>
 											</div>
 										</div>
 									</div>
@@ -156,7 +156,6 @@
 			</div>
 	
 	<script>
-	
 		/* 페이지 이동 자바스크립트 시작 */
 		$("#checkBalance").click(function() {
 			location = "checkbalance";

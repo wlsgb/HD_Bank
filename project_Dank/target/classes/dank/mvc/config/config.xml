@@ -5,6 +5,8 @@
   <configuration>
   	<typeAliases>
 <!--   		<typeAlias type="dank.mvc.vo.*****" alias="*****"/> -->
-  		
+  		<typeAlias type="dank.mvc.vo.LoanProductVO" alias="lpvo"/>
+  		<typeAlias type="dank.mvc.vo.LoanCheckVO" alias="lcvo"/>
+  		<typeAlias type="dank.mvc.vo.LoanApplicationVO" alias="lavo"/>
   	</typeAliases>
   </configuration>

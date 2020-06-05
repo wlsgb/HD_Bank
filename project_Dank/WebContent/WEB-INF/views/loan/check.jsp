@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 			<div class="content">	
 	<div class="panel-header bg-primary-gradient">
@@ -16,7 +16,7 @@
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
-								<a href="#" class="btn btn-secondary btn-round">고객센터</a>
+								<a href="qna" class="btn btn-secondary btn-round">고객센터</a>
 							</div>
 						</div>
 					</div>
@@ -39,23 +39,37 @@
 														<th>신청금액</th>
 														<th>결과여부</th>
 														<th>대출실행</th>
+														<th>상세보기</th>
 													</tr>
 												</thead>
 												<tbody>
+												<c:forEach items="${list }" var="e">
 													<tr>
-														<td>코스모대출</td>
-														<td>2020.05.29</td>
-														<td>30,000,000</td>
-														<td>승인대기</td>
-														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">대출실행</button></td>
-													</tr>
-														<tr>
-														<td>억만장자대출</td>
-														<td>2020.05.10</td>
-														<td>300,000,000</td>
-														<td>대출승인</td>
+													 <td>${e.loanProductVO.lp_name}</td>
+														<td>${e.loanApplicationVO.la_sysdate }</td>
+														<td>${e.loanApplicationVO.la_hamount }</td>
+														<td>${e.lc_state }</td>
+														
+														<c:choose>
+															<c:when test="${e.lc_state eq '심사대기중'}">
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">심사대기</button></td>														
+															</c:when>
+															<c:when test="${e.lc_state eq '서류제출대기' }">
+														<td><button type="button" class="btn btn-lg btn-primary">서류제출</button></td>
+															</c:when>
+															<c:when test="${e.lc_state eq '승인완료' }">
 														<td><button type="button" class="btn btn-lg btn-primary">대출실행</button></td>
+															
+															</c:when>
+															<c:otherwise>
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">대출실행</button></td>
+															
+															</c:otherwise>
+														</c:choose>	
+														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
+												</c:forEach>
+													
 												</tbody>
 											</table>
 										
@@ -126,99 +140,8 @@
 			
 			
 			<script>
-			
-			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
+		$('.checkdetail').click(function() {
+			location='checkdetail?lc_num='+$(this).val();
 		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
 	</script>
 
