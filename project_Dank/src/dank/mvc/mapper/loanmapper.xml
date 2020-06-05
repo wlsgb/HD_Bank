@@ -16,6 +16,38 @@
   	</insert>
   	
   	<insert id="application" parameterType="lpvo">
-  		insert into loan_application values (loan_check_seq.currVal,#{la_hamount},#{la_startdate},#{la_livingterm},#{la_repayterm},#{lr_type})
+  		insert into loan_application values (loan_check_seq.currVal,#{la_hamount},#{la_startdate},#{la_livingterm},#{la_repayterm},#{lr_type},sysdate)
   	</insert>
+  	<resultMap type="lcvo" id="check">
+  		<id property="lc_num" column="lc_num"/>
+  		<result property="lc_state" column="lc_state"/>
+  		<result property="mem_code" column="mem_code"/>
+  		<result property="hd_code" column="hd_code"/>
+  		<result property="lp_num" column="lp_num"/>
+  		
+  		<association property="loanApplicationVO" column="lc_num" javaType="lavo">
+  			<id property="lc_num" column="lc_num"/>
+  			<result property="la_hamount" column="la_hamount"/>
+  			<result property="la_startdate" column="la_startdate"/>
+  			<result property="la_livingterm" column="la_livingterm"/>
+  			<result property="la_repayterm" column="la_repayterm"/>
+  			<result property="lr_type" column="lr_type"/>
+  			<result property="la_sysdate" column="la_sysdate"/>
+  		</association>
+  		<association property="loanProductVO" column="lp_num" javaType="lpvo">
+  			<id property="lp_num" column="lp_num"/>
+  			<result property="lp_name" column="lp_name"/>
+  			<result property="lp_interestrate" column="lp_interestrate"/>
+  			<result property="lp_cancelfee" column="lp_cancelfee"/>
+  			<result property="lp_maximum" column="lp_maximum"/>
+  		</association>
+  	</resultMap>
+  	
+  	<select id="checkdetail" resultMap="check">
+  	select la.lc_num lc_num,la.la_hamount la_hamount,la.la_startdate la_startdate,la.la_livingterm la_livingterm,la.la_repayterm la_repayterm, la.lr_type lr_type, to_char(la.la_sysdate,'yyyy-mm-dd') la_sysdate,
+lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num,
+lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum
+from loan_application la, loan_check lc,loan_product lp
+where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1
+  	</select>
   </mapper>

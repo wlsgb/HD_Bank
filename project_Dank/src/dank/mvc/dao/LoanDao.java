@@ -29,4 +29,7 @@ public class LoanDao {
 	public void insertLoanApllication(LoanApplicationVO avo) {
 		ss.insert("loan.application", avo);
 	}
+	public List<LoanCheckVO> checkdetail() {
+		return ss.selectList("loan.checkdetail");
+	}
 }

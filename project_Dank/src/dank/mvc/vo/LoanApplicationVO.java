@@ -3,7 +3,15 @@ package dank.mvc.vo;
 public class LoanApplicationVO {
 
 	private int lc_num,la_hamount;
-	private String la_startdate,la_livingterm,la_repayterm,lr_type;
+	private String la_startdate,la_livingterm,la_repayterm,lr_type,la_sysdate;
+	
+	
+	public String getLa_sysdate() {
+		return la_sysdate;
+	}
+	public void setLa_sysdate(String la_sysdate) {
+		this.la_sysdate = la_sysdate;
+	}
 	public int getLc_num() {
 		return lc_num;
 	}

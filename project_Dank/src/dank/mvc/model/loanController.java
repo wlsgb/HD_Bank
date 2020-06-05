@@ -74,8 +74,16 @@ public class loanController {
 	}
 
 	@RequestMapping(value = "/check")
-	public String check() {
-		return "loan/check";
+	public ModelAndView check() {
+		ModelAndView mav = new ModelAndView("loan/check");
+		List<LoanCheckVO> list =loanDao.checkdetail();
+		for(LoanCheckVO e : list) {
+			System.out.println(e.getLoanProductVO().getLp_name());
+			System.out.println(e.getLoanApplicationVO().getLa_sysdate());
+			System.out.println(e.getLc_state());
+		}
+		mav.addObject("list", list);
+		return mav;
 	}
 
 	@RequestMapping(value = "/checkdetail")

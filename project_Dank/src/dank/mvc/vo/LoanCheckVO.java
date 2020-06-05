@@ -3,6 +3,23 @@ package dank.mvc.vo;
 public class LoanCheckVO {
 	private int lc_num,mem_code,hd_code,lp_num;
 	private String lc_state;
+	private LoanApplicationVO loanApplicationVO;
+	private LoanProductVO loanProductVO;
+	
+	
+	
+	public LoanProductVO getLoanProductVO() {
+		return loanProductVO;
+	}
+	public void setLoanProductVO(LoanProductVO loanProductVO) {
+		this.loanProductVO = loanProductVO;
+	}
+	public LoanApplicationVO getLoanApplicationVO() {
+		return loanApplicationVO;
+	}
+	public void setLoanApplicationVO(LoanApplicationVO loanApplicationVO) {
+		this.loanApplicationVO = loanApplicationVO;
+	}
 	public int getLc_num() {
 		return lc_num;
 	}
