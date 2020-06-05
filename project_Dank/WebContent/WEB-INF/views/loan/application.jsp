@@ -65,7 +65,7 @@
 						</div>
 						</div>
 				</div>	
-			<p class="text-center"><button type="submit" class="btn btn-info" id="btn">대출 신청</button></p>
+			<p class="text-center"><button type="submit" class="btn btn-info">대출 신청</button></p>
 				</form>
 		
 			</div>
