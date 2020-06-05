@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="content">
 				<!-- 상단의 푸른색 공간 시작 -->
@@ -41,100 +41,104 @@
 								
 								<div class="card-body">
 									<div class="row">
-										<div class="col-11">
-											<table class="table mt-1">
-											<tbody>
-												<tr>
-													<th scope="col">
-														본인 계좌 번호
-													</th>
-													<td>
-														<div class="row">
-															<div class="col-2">
-																<select class="form-control" id="exampleFormControlSelect1">
-																	<option>국민</option>
-																	<option>신한</option>
-																</select>
+										<div class="col-8">
+										
+										
+										
+										<!-- 보안카드 신청 form 시작 -->
+											<form action="" method="post">
+												<table class="table mt-1">
+												<tbody>
+													<tr>
+														<th scope="col">
+															본인 계좌 번호
+														</th>
+														<td>
+															<div class="row">
+																<div class="col-8">
+																	<select class="form-control" id="accSel" name="accSel">
+																		<option>주거래 통장 - 110-12356</option>
+																		<option>슈퍼거래통장 - 120-12556</option>
+																	</select>
+																</div>
 															</div>
-															<div class="col-5">
-																<input type="text" class="form-control input-full" placeholder="계좌번호">
+														</td>
+													</tr>
+													<tr>
+														<th scope="col">계좌 비밀번호</th>
+														<td>
+															<div class="row">
+																<div class="col-4">
+																	<input type="password" id="accPwd" name="accPwd"
+																	class="form-control input-full" placeholder="(4자리)" maxlength="4">
+																</div>
 															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<th scope="col">전화번호</th>
-													<td>
-														<div class="row">
-															<div class="col-2">
-																<select class="form-control" id="exampleFormControlSelect1">
-																	<option>SKT</option>
-																	<option>KT</option>
-																	<option>LGU</option>
-																</select>
+														</td>
+													</tr>
+													<tr>
+														<th scope="col">이메일</th>
+														<td>
+															<div class="row">
+																<div class="col-4">
+																	<input type="text" id="emailId" name="emailId"
+																	class="form-control input-full" placeholder="Email">
+																</div>
+																<div class="col-4">
+																	<select class="form-control" id="emailBack" name="emailBack">
+																		<option>@naver.com</option>
+																		<option>@gmail.com</option>
+																	</select>
+																</div>
+																<div class="col-4">
+																	<button class="btn btn-primary" id="emailsend">인증코드 전송</button>
+																</div>
 															</div>
-															<div class="col-2">
-																<input type="text" class="form-control input-full">
+														</td>
+													</tr>
+													<tr>
+														<th scope="col">인증번호</th>
+														<td>
+															<div class="row">
+																<div class="col-8">
+																	<input type="text" id="accNum" name="accNum"
+																	class="form-control input-full">                                      
+																</div>
+																<div class="col-4 mt-1">
+																	<button class="btn btn-success btn-sm" disabled="disabled">Success</button>
+																</div>
 															</div>
-															<div class="col-2">
-																<input type="text" class="form-control input-full">
+														</td>
+													</tr>
+													<tr>
+														<th scope="col">주민등록번호</th>
+														<td>
+															<div class="row">
+																<div class="col-6">
+																	<input type="text" id="cnn" name="cnn"
+																	class="form-control input-full" placeholder="(앞 6자리)" maxlength="6">
+																</div>
 															</div>
-															<div class="col-2">
-																<input type="text" class="form-control input-full">
+														</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th colspan="2">
+															<div class="row">
+																<div class="col-md-6 ml-auto mr-auto">
+																	<button class="btn btn-danger" id="cancel">취소</button>
+																	<input type="submit" class="btn btn-success" value="확인">
+																</div>
 															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<th scope="col">이메일</th>
-													<td>
-														<div class="row">
-															<div class="col-8">
-																<input type="text" class="form-control input-full">                                      
-															</div>
-															<div class="col-4">
-																<button class="btn btn-primary" id="emailsend">전송</button>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<th scope="col">인증번호</th>
-													<td>
-														<div class="row">
-															<div class="col-8">
-																<input type="text" class="form-control input-full">                                      
-															</div>
-															<div class="col-4 mt-1">
-																<button class="btn btn-success btn-sm" disabled="disabled">Success</button>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<th scope="col">주민등록번호</th>
-													<td>
-														<div class="row">
-															<div class="col-7">
-																<input type="text" class="form-control input-full">
-															</div>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<th colspan="2">
-														<div class="row">
-															<div class="col-md-6 ml-auto mr-auto">
-																<button class="btn btn-danger" id="cancel">취소</button>
-																<button class="btn btn-success" id="send">확인</button>
-															</div>
-														</div>
-													</th>
-												</tr>
-											</tfoot>
-										</table>
+														</th>
+													</tr>
+												</tfoot>
+											</table>
+										</form>
+										<!-- 보안카드 신청 form 끝 -->
+										
+										
+										
 										</div>
 									</div>
 								</div>
@@ -149,17 +153,16 @@
 			
 			
 			
-			<script>
+	<script>
+		$(function() {
 			$("#cancel").click(function() {
 				location = "security";
 			});
-			$("#send").click(function() {
-				location = "securitycardsuccess";
-			});
 			$('#emailsend').click(function(e) {
+				var email = $("#emailId").val()+ "@"+ $("#emailBack").val();
 				swal({
 					title: '이메일을 전송 하시겠습니까?',
-					text: "이메일을 확인해주세요. \n hani@naver.com",
+					text: "이메일을 확인해주세요. \n"+email,
 					type: 'warning',
 					buttons:{
 						confirm: {
@@ -190,97 +193,6 @@
 					}
 				});
 			});
+		})
 			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
 	</script>
