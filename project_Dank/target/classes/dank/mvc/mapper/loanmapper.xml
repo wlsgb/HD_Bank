@@ -10,4 +10,12 @@
   	<select id="productinfo" parameterType="int" resultType="lpvo">
   		select lp_num,lp_name,lp_interestrate,lp_cancelfee,lp_maximum from loan_product where lp_num = #{lp_num}
   	</select>
+  	
+  	<insert id="check" parameterType="int">
+  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.nextVal,'심사대기중',1,#{lp_num})
+  	</insert>
+  	
+  	<insert id="application" parameterType="lpvo">
+  		insert into loan_application values (loan_check_seq.currVal,#{la_hamount},#{la_startdate},#{la_livingterm},#{la_repayterm},#{lr_type})
+  	</insert>
   </mapper>

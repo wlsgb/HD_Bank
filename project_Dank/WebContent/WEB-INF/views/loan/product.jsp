@@ -66,7 +66,7 @@
 						</div>
 			<div>
 			
-			<p class="text-center"><button type="button" id="btn" class="btn btn-info" onclick="location='applicationform'">대출 신청</button></p>
+			<p class="text-center"><button type="button" id="btn" class="btn btn-info">대출 신청</button></p>
 		
 			</div>
 			</div>
@@ -87,6 +87,6 @@
 				})
 				
 				$('#btn').click(function() {
-					location='applicationform?lp_num='+$('#target input').val();
+					location='applicationform?lp_num='+$('#target').children('input').val();
 				})
 	</script>
