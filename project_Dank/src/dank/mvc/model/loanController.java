@@ -87,7 +87,8 @@ public class loanController {
 	}
 
 	@RequestMapping(value = "/checkdetail")
-	public String checkdetail() {
+	public String checkdetail(int lc_num) {
+		System.out.println(lc_num);
 		return "loan/checkdetail";
 	}
 

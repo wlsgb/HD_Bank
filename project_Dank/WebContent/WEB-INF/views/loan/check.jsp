@@ -49,7 +49,23 @@
 														<td>${e.loanApplicationVO.la_sysdate }</td>
 														<td>${e.loanApplicationVO.la_hamount }</td>
 														<td>${e.lc_state }</td>
+														
+														<c:choose>
+															<c:when test="${e.lc_state eq '심사대기중'}">
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">심사대기</button></td>														
+															</c:when>
+															<c:when test="${e.lc_state eq '서류제출대기' }">
+														<td><button type="button" class="btn btn-lg btn-primary">서류제출</button></td>
+															</c:when>
+															<c:when test="${e.lc_state eq '승인완료' }">
+														<td><button type="button" class="btn btn-lg btn-primary">대출실행</button></td>
+															
+															</c:when>
+															<c:otherwise>
 														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">대출실행</button></td>
+															
+															</c:otherwise>
+														</c:choose>	
 														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
 												</c:forEach>
@@ -125,7 +141,7 @@
 			
 			<script>
 		$('.checkdetail').click(function() {
-			location=''
+			location='checkdetail?lc_num='+$(this).val();
 		})
 	</script>
 
