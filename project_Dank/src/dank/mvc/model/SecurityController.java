@@ -20,7 +20,7 @@ public class SecurityController {
 		return "myinfo/securityCard";
 	}
 
-	@RequestMapping(value = "/securitycardsuccess")
+	@RequestMapping(value = "/securitycardcreate")
 	public String viewSecurity_card_success() {
 		return "myinfo/securityCardSuccess";
 	}
