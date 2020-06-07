@@ -46,7 +46,7 @@
 										
 										
 										<!-- 보안카드 신청 form 시작 -->
-											<form action="" method="post">
+											<form action="emailsend" method="post">
 												<table class="table mt-1">
 												<tbody>
 													<tr>
@@ -90,7 +90,7 @@
 																	</select>
 																</div>
 																<div class="col-4">
-																	<button class="btn btn-primary" id="emailsend">인증코드 전송</button>
+																	<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
 																</div>
 															</div>
 														</td>
@@ -100,11 +100,12 @@
 														<td>
 															<div class="row">
 																<div class="col-8">
-																	<input type="text" id="accNum" name="accNum"
+																	<input type="text" id="codenum" name="codenum"
 																	class="form-control input-full">                                      
 																</div>
-																<div class="col-4 mt-1">
-																	<button class="btn btn-success btn-sm" disabled="disabled">Success</button>
+																<div class="col-4 mt-1" id="codeTarget">
+																	<button type="button" class="btn btn-primary" id="codeCheck">확인</button>
+																	
 																</div>
 															</div>
 														</td>
@@ -155,11 +156,24 @@
 			
 	<script>
 		$(function() {
+			var email = null;
+			var emailCode = null;
 			$("#cancel").click(function() {
 				location = "security";
 			});
-			$('#emailsend').click(function(e) {
-				var email = $("#emailId").val()+ "@"+ $("#emailBack").val();
+			
+			$("#codeCheck").click(function() {
+				console.log("emailCode : "+emailCode);
+				console.log("codenum : "+$("#codenum").val());
+				if ($("#codenum").val() == emailCode) {
+					$("#codeTarget").html('<button class="btn btn-success btn-sm" disabled="disabled">Success</button>');
+					$("#codeTarget").append('<input type="hidden" value="success" name="successData" />')
+				}
+				
+			})
+			
+			$('#emailBtn').click(function(e) {
+				email = $("#emailId").val()+ $("#emailBack").val();
 				swal({
 					title: '이메일을 전송 하시겠습니까?',
 					text: "이메일을 확인해주세요. \n"+email,
@@ -177,6 +191,12 @@
 					}
 				}).then((Delete) => {
 					if (Delete) {
+						$.ajax({
+							url:"emailsend?email="+email,
+							success:function(data){
+								emailCode = data;
+							}
+						})
 						swal({
 							title: '전송되었습니다.',
 							text: '전송된 코드를 입력해주세요.',
@@ -186,7 +206,8 @@
 									text : '확인',
 									className : 'btn btn-success'
 								}
-							}
+							},
+							
 						});
 					} else {
 						swal.close();
