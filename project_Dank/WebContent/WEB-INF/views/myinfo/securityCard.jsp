@@ -46,7 +46,7 @@
 										
 										
 										<!-- 보안카드 신청 form 시작 -->
-											<form action="emailsend" method="post">
+											<form action="securitycardcreate" method="post">
 												<table class="table mt-1">
 												<tbody>
 													<tr>
