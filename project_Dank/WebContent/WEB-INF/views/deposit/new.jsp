@@ -83,7 +83,10 @@
 													<th scope="col">수퍼 정기 예금</th>
 													<td>
 													<div class="row">
-														<div class="col-md-4 ml-auto">
+														<div class="col-md-3 ml-auto">
+															<input type="button" class="btn btn-default" id="" value="신청하기" onclick="location='deposit_new_req'">
+														</div>
+														<div class="col-md-4">
 															<input type="button" class="btn btn-default" id="" value="비교하기">
 														</div>
 													</div>

@@ -31,8 +31,7 @@
 											<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
 										</div>
 									</div>
-									<p class="card-category">
-									당사에서 진행하는 여러가지 이벤트를 즐겨주세요.</p>
+									<p class="card-category"> 당사에서 진행하는 여러가지 이벤트를 즐겨주세요. </p>
 								</div>
 								
 								<div class="card-body">
