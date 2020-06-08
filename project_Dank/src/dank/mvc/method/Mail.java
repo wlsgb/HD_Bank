@@ -1,4 +1,4 @@
-package dank.method;
+package dank.mvc.method;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -12,20 +12,26 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Mail {
 	
-	public int securityCodeMaking(int len) {
+	// 입력한 숫자만큼 자릿수가 랜덤한 숫자로 생성된다.
+	// 예 ) 4 => 2459
+	public String securityCodeMaking(int len) {
 		StringBuffer emailSecuCode = new StringBuffer();
 		for (int i = 0; i < len; i++) {
 			int random = (int) (Math.random()*9+1);
 			emailSecuCode.append(random);
 		}
-		return Integer.parseInt(emailSecuCode.toString());
+		return emailSecuCode.toString();
 	}
 	
-	// 1 : 전송 성공
-	// 0 : 전송 실패
-	public int emailSend(String RecipientMail, String RecipientName, String title) {
+	// 전송 실패 : 0
+	// 전송 성공 : 전송 코드가 나옴
+	
+	public String emailSend(String RecipientMail, String RecipientName, String title) {
 			// SMTP 서버 정보를 설정
 				Properties props = new Properties();
 				// 발송 STMP 서버
@@ -57,17 +63,18 @@ public class Mail {
 					// 메일 내용 설정
 					StringBuilder content = new StringBuilder();
 					content.append("HD-Bank 계정").append("\n");
-					content.append("보안 코드 : ").append(securityCodeMaking(4));
+					String code = securityCodeMaking(4);
+					content.append("보안 코드 : ").append(code);
 					// 일반 테스트 형태
 					message.setText(content.toString());
 					// 이메일 보내기
 					Transport.send(message);
 					System.out.println("메일이 전송 되었습니다.");
-					return 1;
+					return code;
 				} catch (MessagingException | UnsupportedEncodingException e) {
 					System.out.println("메일이 전송 실패입니다.");
 					e.printStackTrace();
-					return 0;
+					return "0";
 				}
 
 	}
