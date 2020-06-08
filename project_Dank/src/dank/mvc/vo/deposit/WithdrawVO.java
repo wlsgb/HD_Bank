@@ -1,9 +1,11 @@
-package dank.mvc.vo;
+package dank.mvc.vo.deposit;
 
 public class WithdrawVO {
-//	"WIT_CODE"	number		NOT NULL,
-//	"WIT_MONEY"	number		NOT NULL,
-//	"WIT_DATE"	date		NOT NULL\
+//	CREATE TABLE "WITHDRAW" (
+//			"WIT_CODE"	number		NOT NULL,
+//			"WIT_MONEY"	number		NOT NULL,
+//			"WIT_DATE"	date		NOT NULL
+//		);
 	private int wit_code,wit_money;
 	private String wit_date;
 	public int getWit_code() {

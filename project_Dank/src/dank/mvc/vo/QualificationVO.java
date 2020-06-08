@@ -1,6 +1,6 @@
 package dank.mvc.vo;
 
-public class QualificationYN {
+public class QualificationVO {
 	private int qua_code,qua_minperiod,qua_maxperiod,qua_minage,qua_maxage;
 	
 	public int getQua_code() {
