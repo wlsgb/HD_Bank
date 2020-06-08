@@ -147,7 +147,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						</div>
 			
 					
-			<p class="text-center"><button type="submit" class="btn btn-info"">대출 신청</button></p>
+			<p class="text-center"><button type="submit" class="btn btn-info">대출 신청</button></p>
 		</form>
 			</div>
 		
