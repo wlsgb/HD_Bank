@@ -46,7 +46,7 @@
 										
 										
 										<!-- 보안카드 신청 form 시작 -->
-											<form action="securitycardcreate" method="post">
+											<form action="securitycardinfoView" method="post">
 												<table class="table mt-1">
 												<tbody>
 													<tr>
@@ -56,7 +56,7 @@
 														<td>
 															<div class="row">
 																<div class="col-8">
-																	<select class="form-control" id="accSel" name="accSel">
+																	<select class="form-control" id="accSel" name="ac_num">
 																		<option>주거래 통장 - 110-12356</option>
 																		<option>슈퍼거래통장 - 120-12556</option>
 																	</select>
@@ -69,7 +69,7 @@
 														<td>
 															<div class="row">
 																<div class="col-4">
-																	<input type="password" id="accPwd" name="accPwd"
+																	<input type="password" id="accPwd" name="ac_pwd" required="required"
 																	class="form-control input-full" placeholder="(4자리)" maxlength="4">
 																</div>
 															</div>
@@ -80,7 +80,7 @@
 														<td>
 															<div class="row">
 																<div class="col-4">
-																	<input type="text" id="emailId" name="emailId"
+																	<input type="text" id="emailId" name="emailId" required="required"
 																	class="form-control input-full" placeholder="Email">
 																</div>
 																<div class="col-4">
@@ -115,7 +115,7 @@
 														<td>
 															<div class="row">
 																<div class="col-6">
-																	<input type="text" id="cnn" name="cnn"
+																	<input type="text" id="cnn" name="cnn" re
 																	class="form-control input-full" placeholder="(앞 6자리)" maxlength="6">
 																</div>
 															</div>

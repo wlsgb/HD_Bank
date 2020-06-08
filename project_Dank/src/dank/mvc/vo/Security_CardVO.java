@@ -1,5 +1,6 @@
 package dank.mvc.vo;
 
+
 public class Security_CardVO {
 	private int sc_code;
 	private String sc_detcode_1, sc_detcode_2, sc_detcode_3, sc_detcode_4, sc_detcode_5, sc_detcode_6, sc_detcode_7,
@@ -7,6 +8,7 @@ public class Security_CardVO {
 			sc_detcode_15, sc_detcode_16, sc_detcode_17, sc_detcode_18, sc_detcode_19, sc_detcode_20, sc_detcode_21,
 			sc_detcode_22, sc_detcode_23, sc_detcode_24, sc_detcode_25, sc_detcode_26, sc_detcode_27, sc_detcode_28,
 			sc_detcode_29, sc_detcode_30;
+
 
 	public int getSc_code() {
 		return sc_code;
