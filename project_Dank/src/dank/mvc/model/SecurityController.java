@@ -10,8 +10,10 @@ import dank.mvc.method.Mail;
 import dank.mvc.method.SecurityCode;
 
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.Security_CardVO;
+
+
 import dank.mvc.vo.deposit.AccountVO;
+
 
 @Controller
 public class SecurityController {

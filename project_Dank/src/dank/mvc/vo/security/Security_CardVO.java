@@ -1,4 +1,4 @@
-package dank.mvc.vo;
+package dank.mvc.vo.security;
 
 
 public class Security_CardVO {
