@@ -19,5 +19,7 @@
   		<typeAlias type="dank.mvc.vo.Security_CardVO" alias="cardvo"/>
   		<!-- 보안 알리아스 끝-->
   		
+  		<typeAlias type="dank.mvc.vo.PageVO" alias="pvo"/>
+  		<typeAlias type="dank.mvc.vo.MemberVO" alias="mem"/>
   	</typeAliases>
   </configuration>

@@ -13,7 +13,11 @@ public class SecurityDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 	
-	public void cardCreate(Security_CardVO vo ) {
+	public void cardCreate(Security_CardVO vo) {
 		ss.insert("security.cardCreat",vo);
+	}
+	
+	public int priCodeChk(Security_CardVO vo) {
+		return ss.selectOne("security.priCodeChk", vo);
 	}
 }
