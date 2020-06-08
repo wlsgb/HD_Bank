@@ -10,7 +10,6 @@ import dank.mvc.method.Mail;
 import dank.mvc.method.SecurityCode;
 import dank.mvc.vo.AccountVO;
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.Security_CardVO;
 
 @Controller
 public class SecurityController {
