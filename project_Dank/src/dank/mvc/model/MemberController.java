@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import dank.mvc.dao.MemberDao;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.PageVO;
+import dank.mvc.vo.QnaVO;
 
 @Controller
 public class MemberController {
@@ -44,9 +45,9 @@ public class MemberController {
 			System.out.println("End :"+vo.getEnd());
 			model.addAttribute("paging", vo);
 			model.addAttribute("list", memberDao.getList(vo));
-			for(MemberVO e : memberDao.getList(vo)) {
-				System.out.println(e.getQna_num());
-			}
+			/*
+			 * for(QnaVO e : memberDao.getList(vo)) { System.out.println(e.getQna_num()); }
+			 */
 			return "member/qna";
 		
 	}
