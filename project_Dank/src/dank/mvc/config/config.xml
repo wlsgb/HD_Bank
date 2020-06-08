@@ -18,5 +18,9 @@
   		<typeAlias type="dank.mvc.vo.Security_CardVO" alias="cardvo"/>
   		<!-- 보안 알리아스 끝-->
   		
+  		<!-- 예금 영역 시작 -->
+  		<typeAlias type="dank.mvc.vo.SavingVO" alias="savvo"/>
+  		<typeAlias type="dank.mvc.vo.QualificationYNVO" alias="quavo"/>
+  		<!-- 예금 영역 끝 -->
   	</typeAliases>
   </configuration>

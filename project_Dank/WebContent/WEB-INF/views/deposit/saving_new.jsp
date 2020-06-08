@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content">
 	<div class="panel-header bg-primary-gradient">
 		<div class="page-inner py-5">
@@ -57,7 +56,15 @@
 													<div class="col-7 col-stats">
 														<div class="numbers">
 															<p class="card-category">기간</p>
-															<h4 class="card-title">6~36개월<br/></h4>
+															<c:choose>
+																<c:when test="${saving.qua_code != 0}">
+																	<h4 class="card-title">${saving.qua_minperiod }~${saving.qua_maxperiod }개월<br/></h4>
+																</c:when>
+																<c:when test="${saving.qua_code == 0}">
+																	<h4 class="card-title">제한없음</h4>
+																</c:when>
+															</c:choose>
+															
 														</div>
 													</div>
 												</div>

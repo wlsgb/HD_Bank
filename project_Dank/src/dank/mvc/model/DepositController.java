@@ -1,13 +1,21 @@
 package dank.mvc.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dank.mvc.dao.DepositDao;
+import dank.mvc.vo.SavingVO;
+
 @Controller
 public class DepositController {
-
+	@Autowired
+	private DepositDao depositDao;
+	
 	@RequestMapping(value = "/analysis")
 	public String viewAnalysis() {
 		return "deposit/analysis";
@@ -17,17 +25,15 @@ public class DepositController {
 	public String newPage() {
 		return "deposit/new";
 	}
-	@RequestMapping(value = "/saving_new")
-	public String newReqPage() {
-		return "deposit/saving_new";
-	}
-	
 	
 	@RequestMapping(value = "/saving_new")
-	public String saving_new() {
+	public String saving_new(Model m, int sav_code) {
+		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		m.addAttribute("saving",saving);
 		return "deposit/saving_new";
 	}
-
+	 
+	
 	@RequestMapping(value = "/share_new_req")
 	public String share_new_req() {
 		return "deposit/share_new_req";
@@ -64,10 +70,6 @@ public class DepositController {
 			@RequestParam(value = "mem_code",defaultValue = "0") String mem_code
 			) {
 		ModelAndView mav = new ModelAndView();
-		
-		
-		
-		
 		
 		
 		
