@@ -1,9 +1,10 @@
-package dank.mvc.vo;
+package dank.mvc.vo.security;
+
+import dank.mvc.vo.MemberVO;
 
 public class Security_Card_RegVO {
 
 	private int scr_code, mem_code, cer_code, sc_code;
-	private CertifyVO certifyVO;
 	private Security_CardVO security_CardVO;
 	private MemberVO memberVO;
 
@@ -38,15 +39,6 @@ public class Security_Card_RegVO {
 	public void setSc_code(int sc_code) {
 		this.sc_code = sc_code;
 	}
-
-	public CertifyVO getCertifyVO() {
-		return certifyVO;
-	}
-
-	public void setCertifyVO(CertifyVO certifyVO) {
-		this.certifyVO = certifyVO;
-	}
-
 
 	public Security_CardVO getSecurity_CardVO() {
 		return security_CardVO;

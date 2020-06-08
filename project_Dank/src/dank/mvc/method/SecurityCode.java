@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.dao.SecurityDao;
-import dank.mvc.vo.Security_CardVO;
+import dank.mvc.vo.security.Security_CardVO;
 
 @Repository
 public class SecurityCode {

@@ -7,21 +7,21 @@
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">´ëÃâ</h2>
+								<h2 class="text-white pb-2 fw-bold">ëŒ€ì¶œ</h2>
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								 <span class="h2 mr-1"> > </span>
-								 <a href="check" class="btn btn-white btn-sm btn-border mr-1">´ëÃâÇöÈ² Á¶È¸</a>
+								 <a href="check" class="btn btn-white btn-sm btn-border mr-1">ëŒ€ì¶œí˜„í™© ì¡°íšŒ</a>
 								 </h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
-								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">ºü¸¥ ÆäÀÌÁö</a>
-								<a href="qna" class="btn btn-secondary btn-round">°í°´¼¾ÅÍ</a>
+								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">ë¹ ë¥¸ íŽ˜ì´ì§€</a>
+								<a href="qna" class="btn btn-secondary btn-round">ê³ ê°ì„¼í„°</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!--´ëÃâ ½ÅÃ» Á¶È¸  -->
+				<!--ëŒ€ì¶œ ì‹ ì²­ ì¡°íšŒ  -->
 		<form action="" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
@@ -30,16 +30,16 @@
 								
 									<div class="card-body ">
 										<div class="row">
-										<h2>&nbsp;&nbsp;&nbsp;&nbsp;´ëÃâ ½ÅÃ» ÇöÈ²</h2>
+										<h2>&nbsp;&nbsp;&nbsp;&nbsp;ëŒ€ì¶œ ì‹ ì²­ í˜„í™©</h2>
 											<table class="table table-hover">
 												<thead>
 													<tr>
-														<th>»óÇ°¸í</th>
-														<th>½ÅÃ»³¯Â¥</th>
-														<th>½ÅÃ»±Ý¾×</th>
-														<th>°á°ú¿©ºÎ</th>
-														<th>´ëÃâ½ÇÇà</th>
-														<th>»ó¼¼º¸±â</th>
+														<th>ìƒí’ˆëª…</th>
+														<th>ì‹ ì²­ë‚ ì§œ</th>
+														<th>ì‹ ì²­ê¸ˆì•¡</th>
+														<th>ê²°ê³¼ì—¬ë¶€</th>
+														<th>ëŒ€ì¶œì‹¤í–‰</th>
+														<th>ìƒì„¸ë³´ê¸°</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -51,22 +51,22 @@
 														<td>${e.lc_state }</td>
 														
 														<c:choose>
-															<c:when test="${e.lc_state eq '½É»ç´ë±âÁß'}">
-														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">½É»ç´ë±â</button></td>														
+															<c:when test="${e.lc_state eq 'ì‹¬ì‚¬ëŒ€ê¸°ì¤‘'}">
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">ì‹¬ì‚¬ëŒ€ê¸°</button></td>														
 															</c:when>
-															<c:when test="${e.lc_state eq '¼­·ùÁ¦Ãâ´ë±â' }">
-														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">¼­·ùÁ¦Ãâ</button></td>
+															<c:when test="${e.lc_state eq 'ì„œë¥˜ì œì¶œëŒ€ê¸°' }">
+														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">ì„œë¥˜ì œì¶œ</button></td>
 															</c:when>
-															<c:when test="${e.lc_state eq '½ÂÀÎ¿Ï·á' }">
-														<td><button type="button" class="btn btn-lg btn-primary">´ëÃâ½ÇÇà</button></td>
+															<c:when test="${e.lc_state eq 'ìŠ¹ì¸ì™„ë£Œ' }">
+														<td><button type="button" class="btn btn-lg btn-primary">ëŒ€ì¶œì‹¤í–‰</button></td>
 															
 															</c:when>
 															<c:otherwise>
-														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">´ëÃâ½ÇÇà</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">ëŒ€ì¶œì‹¤í–‰</button></td>
 															
 															</c:otherwise>
 														</c:choose>	
-														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">»ó¼¼º¸±â</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">ìƒì„¸ë³´ê¸°</button></td>
 													</tr>
 												</c:forEach>
 													
@@ -84,7 +84,7 @@
 		</form>
 		
 		
-		<!--»óÈ¯ÇØ¾ßÇÏ´Â ´ëÃâ  -->
+		<!--ìƒí™˜í•´ì•¼í•˜ëŠ” ëŒ€ì¶œ  -->
 		<form action="" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
@@ -94,33 +94,33 @@
 									<div class="card-body ">
 										<div class="row">
 											<table class="table table-hover">
-											<h2>&nbsp;&nbsp;&nbsp;&nbsp;´ëÃâ »óÈ¯ ÇöÈ²</h2>
+											<h2>&nbsp;&nbsp;&nbsp;&nbsp;ëŒ€ì¶œ ìƒí™˜ í˜„í™©</h2>
 												<thead>
 													<tr>
-														<th>»óÇ°¸í</th>
-														<th>½ÅÃ»³¯Â¥</th>
-														<th>½ÅÃ»±Ý¾×</th>
-														<th>ÃÑ»óÈ¯¿ø¾×</th>
-														<th>ÀÌ»ç»óÈ¯¾×</th>
-														<th>»ó¼¼º¸±â</th>
+														<th>ìƒí’ˆëª…</th>
+														<th>ì‹ ì²­ë‚ ì§œ</th>
+														<th>ì‹ ì²­ê¸ˆì•¡</th>
+														<th>ì´ìƒí™˜ì›ì•¡</th>
+														<th>ì´ì‚¬ìƒí™˜ì•¡</th>
+														<th>ìƒì„¸ë³´ê¸°</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td>ÄÚ½º¸ð´ëÃâ</td>
+														<td>ì½”ìŠ¤ëª¨ëŒ€ì¶œ</td>
 														<td>2020.05.29</td>
 														<td>30,000,000</td>
 														<td>30,000,000</td>
 														<td>4,000,000</td>
-														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='checkdetail'">»ó¼¼º¸±â</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='checkdetail'">ìƒì„¸ë³´ê¸°</button></td>
 													</tr>
 														<tr>
-														<td>¾ï¸¸ÀåÀÚ´ëÃâ</td>
+														<td>ì–µë§Œìž¥ìžëŒ€ì¶œ</td>
 														<td>2020.05.10</td>
 														<td>300,000,000</td>
 														<td>300,000,000</td>
 														<td>30,000,000</td>
-														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='checkdetail'">»ó¼¼º¸±â</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='checkdetail'">ìƒì„¸ë³´ê¸°</button></td>
 													</tr>
 												</tbody>
 											</table>
@@ -142,10 +142,11 @@
 			<script>
 		$('.checkdetail').click(function() {
 			location='checkdetail?lc_num='+$(this).val();
-		})
+
 		
 		$('.file').click(function() {
 			location='checkfile?lc_num='+$(this).val();
+
 		})
 	</script>
 
