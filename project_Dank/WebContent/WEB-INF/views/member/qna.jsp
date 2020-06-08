@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 		<div class="content">
 			<!-- 상단의 푸른색 공간 시작 -->
@@ -73,31 +73,62 @@
 									</ul>
 									<div class="tab-content mt-2 mb-3" id="pills-tabContent">
 										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-											<p>이곳은 전체 가 보이는 화면입니다.</p>
+											<c:forEach items="${list }" var="e">
+												<div>${e.qna_num }번 )
+												<c:if test="${e.cat_num eq 2}">예금</c:if>
+												<c:if test="${e.cat_num eq 3}">대출</c:if>
+												<c:if test="${e.cat_num eq 4}">회원정보</c:if>
+												<c:if test="${e.cat_num eq 5}">기타</c:if> </div>
+												<div>${e.qna_title }</div>
+												<div>${e.qna_content }</div>
+												<div>${e.qna_date }</div>
+											</c:forEach>
 										</div>
 										<div class="tab-pane fade" id="1" role="tabpanel" aria-labelledby="pills-profile-tab">
-											<p>1.예금을 하면 어떤 점에서 좋나요?</p>
-											<div style="border: 1px solid gray; background-color: #E2E2E2;">
-											<p>예금을 많이 할수록 당신은 부자가 될겁니다.</p>
-											</div>
+											
+											<c:forEach items="${list }" var="e">
+												<c:if test="${e.cat_num eq 2}">
+												<div>${e.qna_num }번) 예금</div>
+												<div>${e.qna_title }</div>
+												<div>${e.qna_content }</div>
+												<div>${e.qna_date }</div>
+												</c:if>
+											</c:forEach>
+											
 										</div>
 										<div class="tab-pane fade" id="2" role="tabpanel" aria-labelledby="pills-contact-tab">
-											<p>1.대출을 하면 어떤 점에서 좋나요?</p>
-											<div style="border: 1px solid gray; background-color: #E2E2E2;">
-											<p>당신의 삶이 매우 부지런해집니다.</p>
-											</div>
+											<c:forEach items="${list }" var="e">
+												<c:if test="${e.cat_num eq 3}">
+												<div>${e.qna_num }번) 대출</div>
+												<div>${e.qna_title }</div>
+												<div>${e.qna_content }</div>
+												<div>${e.qna_date }</div>
+												</c:if>
+											</c:forEach>
+											<!-- <div style="border: 1px solid gray; background-color: #E2E2E2;">
+											</div> -->
 										</div>
 										<div class="tab-pane fade" id="3" role="tabpanel" aria-labelledby="pills-contact-tab">
-											<p>1.회원가입을 하지 않고 서비스를 이용할 수 있나요?</p>
-											<div style="border: 1px solid gray; background-color: #E2E2E2;">
-											<p>아뇨.</p>
-											</div>
+											<c:forEach items="${list }" var="e">
+												<c:if test="${e.cat_num eq 4}">
+												<div>${e.qna_num }번) 회원정보</div>
+												<div>${e.qna_title }</div>
+												<div>${e.qna_content }</div>
+												<div>${e.qna_date }</div>
+												</c:if>
+											</c:forEach>
+										
 										</div>
 										<div class="tab-pane fade" id="4" role="tabpanel" aria-labelledby="pills-contact-tab">
-											<p>1.홈페이지가 열리지 않아요</p>
-											<div style="border: 1px solid gray; background-color: #E2E2E2;">
-											<p>천천히 열어보세요</p>
-											</div>
+											<c:forEach items="${list }" var="e">
+												<c:if test="${e.cat_num eq 5}">
+												<div>${e.qna_num }번) 기타</div>
+												<div>${e.qna_title }</div>
+												<div>${e.qna_content }</div>
+												<div>${e.qna_date }</div>
+												</c:if>
+											</c:forEach>
+											
 										</div>
 									</div>
 								</div>
@@ -106,7 +137,33 @@
 									<div class="demo">
 										<ul class="pagination pg-primary">
 											<li class="page-item">
-												<a class="page-link" href="#" aria-label="Previous">
+											
+											<!-- 이전 페이지  -->
+											<c:if test="${paging.startPage != 1 }">
+												<a
+													href="qna?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"></a>
+											</c:if>
+											<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+												var="p">
+												<c:choose>
+													<c:when test="${p == paging.nowPage }">
+														<b>${p }</b> <!--현재 페이지 일경우 링크 해제 -->
+													</c:when>
+													<c:when test="${p != paging.nowPage }">
+													<!--다른페이지 링크   -->
+														<a href="qna?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+													</c:when>
+												</c:choose>
+											</c:forEach>
+											<!-- 다음페이지  -->
+											<c:if test="${paging.endPage != paging.lastPage}">
+												<a
+													href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"></a>
+											</c:if>
+											
+											
+											
+												<!-- <a class="page-link" href="#" aria-label="Previous">
 													<span aria-hidden="true"> < </span>
 													<span class="sr-only"></span>
 												</a>
@@ -118,9 +175,13 @@
 												<a class="page-link" href="#" aria-label="Next">
 													<span aria-hidden="true">></span>
 													<span class="sr-only"></span>
-												</a>
+												</a> -->
 											</li>
 										</ul>
+												
+											
+										</div>
+										
 									</div>
 								</div>
 						
@@ -130,104 +191,6 @@
 					</div>
 
 				</div>
-			</div>
-		</div>
-	
-
-
 <script>
-	Circles.create({
-		id : 'circles-1',
-		radius : 45,
-		value : 60,
-		maxValue : 100,
-		width : 7,
-		text : 5,
-		colors : [ '#f1f1f1', '#FF9E27' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	Circles.create({
-		id : 'circles-2',
-		radius : 45,
-		value : 70,
-		maxValue : 100,
-		width : 7,
-		text : 36,
-		colors : [ '#f1f1f1', '#2BB930' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	Circles.create({
-		id : 'circles-3',
-		radius : 45,
-		value : 40,
-		maxValue : 100,
-		width : 7,
-		text : 12,
-		colors : [ '#f1f1f1', '#F25961' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	var totalIncomeChart = document.getElementById('totalIncomeChart')
-			.getContext('2d');
-
-	var mytotalIncomeChart = new Chart(totalIncomeChart, {
-		type : 'bar',
-		data : {
-			labels : [ "S", "M", "T", "W", "T", "F", "S", "S", "M", "T" ],
-			datasets : [ {
-				label : "Total Income",
-				backgroundColor : '#ff9e27',
-				borderColor : 'rgb(23, 125, 255)',
-				data : [ 6, 4, 9, 5, 4, 6, 4, 3, 8, 10 ],
-			} ],
-		},
-		options : {
-			responsive : true,
-			maintainAspectRatio : false,
-			legend : {
-				display : false,
-			},
-			scales : {
-				yAxes : [ {
-					ticks : {
-						display : false
-					//this will remove only the label
-					},
-					gridLines : {
-						drawBorder : false,
-						display : false
-					}
-				} ],
-				xAxes : [ {
-					gridLines : {
-						drawBorder : false,
-						display : false
-					}
-				} ]
-			},
-		}
-	});
-
-	$('#lineChart').sparkline([ 105, 103, 123, 100, 95, 105, 115 ], {
-		type : 'line',
-		height : '70',
-		width : '100%',
-		lineWidth : '2',
-		lineColor : '#ffa534',
-		fillColor : 'rgba(255, 165, 52, .14)'
-	});
+	
 </script>
