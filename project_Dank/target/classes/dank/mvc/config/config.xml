@@ -5,7 +5,19 @@
   <configuration>
   	<typeAliases>
 <!--   		<typeAlias type="dank.mvc.vo.*****" alias="*****"/> -->
+
+		<!-- 대출 영역 시작 -->
   		<typeAlias type="dank.mvc.vo.LoanProductVO" alias="lpvo"/>
+  		<typeAlias type="dank.mvc.vo.LoanCheckVO" alias="lcvo"/>
+  		<typeAlias type="dank.mvc.vo.LoanApplicationVO" alias="lavo"/>
+		<!-- 대출 영역 끝 -->
+		
+  		<!-- 보안 알리아스 시작-->
+  		<typeAlias type="dank.mvc.vo.CertifyVO" alias="cervo"/>
+  		<typeAlias type="dank.mvc.vo.Security_Card_RegVO" alias="scrvo"/>
+  		<typeAlias type="dank.mvc.vo.Security_CardVO" alias="cardvo"/>
+  		<!-- 보안 알리아스 끝-->
+  		
   		<typeAlias type="dank.mvc.vo.PageVO" alias="pvo"/>
   		<typeAlias type="dank.mvc.vo.MemberVO" alias="mem"/>
   	</typeAliases>

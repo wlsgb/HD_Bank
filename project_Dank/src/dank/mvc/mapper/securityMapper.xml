@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="security">
+  	<insert id="cardCreat" parameterType="cardvo">
+  		INSERT INTO security_card VALUES (
+			#{sc_code},
+			#{sc_detcode_1},#{sc_detcode_2},#{sc_detcode_3},#{sc_detcode_4},#{sc_detcode_5},
+			#{sc_detcode_6},#{sc_detcode_7},#{sc_detcode_8},#{sc_detcode_9},#{sc_detcode_10},
+			#{sc_detcode_11},#{sc_detcode_12},#{sc_detcode_13},#{sc_detcode_14},#{sc_detcode_15},
+			#{sc_detcode_16},#{sc_detcode_17},#{sc_detcode_18},#{sc_detcode_19},#{sc_detcode_20},
+			#{sc_detcode_21},#{sc_detcode_22},#{sc_detcode_23},#{sc_detcode_24},#{sc_detcode_25},
+			#{sc_detcode_26},#{sc_detcode_27},#{sc_detcode_28},#{sc_detcode_29},#{sc_detcode_30}
+		)
+  	</insert>
+  	
+  	<select id="priCodeChk" parameterType="cardvo" resultType="int" >
+  		select count(*) from security_card where sc_code=#{sc_code}
+  	</select>
+  	
+  </mapper>
