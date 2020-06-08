@@ -12,26 +12,27 @@ public class SecurityController {
 
 	@RequestMapping(value = "/security")
 	public String viewSecurity() {
-		return "myinfo/security";
+		return "security/security";
 	}
 
 	@RequestMapping(value = "/securitycard")
 	public String viewSecurity_card() {
-		return "myinfo/securityCard";
+		return "security/securityCard";
 	}
 
 	@RequestMapping(value = "/securitycardcreate")
-	public String viewSecurity_card_success() {
-		return "myinfo/securityCardSuccess";
+	public String viewSecurity_card_success(Model m) {
+		
+		return "security/securityCardSuccess";
 	}
 
 	@RequestMapping(value = "/securityotp")
 	public String viewSecurity_otp() {
-		return "myinfo/securityOtp";
+		return "security/securityOtp";
 	}
 
 	@RequestMapping(value = "/securityotpsuccess")
 	public String viewCheckBalance() {
-		return "myinfo/securityOtpSuccess";
+		return "security/securityOtpSuccess";
 	}
 }
