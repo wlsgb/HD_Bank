@@ -55,7 +55,7 @@
 														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">심사대기</button></td>														
 															</c:when>
 															<c:when test="${e.lc_state eq '서류제출대기' }">
-														<td><button type="button" class="btn btn-lg btn-primary">서류제출</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">서류제출</button></td>
 															</c:when>
 															<c:when test="${e.lc_state eq '승인완료' }">
 														<td><button type="button" class="btn btn-lg btn-primary">대출실행</button></td>
@@ -142,6 +142,10 @@
 			<script>
 		$('.checkdetail').click(function() {
 			location='checkdetail?lc_num='+$(this).val();
+		})
+		
+		$('.file').click(function() {
+			location='checkfile?lc_num='+$(this).val();
 		})
 	</script>
 
