@@ -1,8 +1,10 @@
 package dank.mvc.vo;
 
 public class SavingVO {
-	private int sav_code,sav_interestrate,sav_online,qua_code;
+	private int sav_code,sav_interestrate,sav_online,qua_code,shas_code;
 	private String sav_name;
+	private QualificationVO qualificationVO;
+	
 	
 	public int getSav_code() {
 		return sav_code;
