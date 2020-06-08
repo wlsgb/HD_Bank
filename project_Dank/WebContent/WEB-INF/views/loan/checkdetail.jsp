@@ -30,9 +30,11 @@
 									<div class="card-body ">
 										<div class="row">
 											<div class="col-1"></div>
-											<div class="col-10 jumbotron">
+											<div class="col-10">
 												
-												<h3>대출 신청 정보</h3>
+												<h1>대출 신청 정보</h1>
+												<hr>
+												<h3>대출자 정보</h3>
 												<div class="form-group">
 													<label for="name" class="col-sd-2 control-label">이름</label>
 													<div class="col-sd-10">
@@ -42,35 +44,72 @@
 												
 												<hr>
 												<h3>대출 정보</h3>
-												<div class="form-group">
-													<label for="loanname" class="col-sd-2 control-label">대출명</label>
-													<div class="col-sd-10">
-	   													<input type="email" class="form-control" id="loanname" readonly="readonly" value="선택한 대출">
+												<div class="form-group row">
+													<label class="col-2 control-label" >대출번호</label>
+													<div class="col-10">
+														${vo.lc_num }
+														<input type="hidden" name="lp_num" id="lp_num" value="${vo.lc_num }">
 													</div>
 												</div>
 												
-												<div class="form-group">
-													<label for="interestrate" class="col-sd-2">대출이율</label>
-													<div class="col-sd-10">
-   														<input type="email" class="form-control" id="interestrate" readonly="readonly" value="선택한 대출 이율">
-   													</div>
-												</div>
-												<div class="form-group">
-												<label for="amount" class="col-sd-2">대출 희망 금액</label>
-												<div class="col-sd-10">
-												<input type="number" class="form-control" id="amount" value="30000000" readonly="readonly">
+												<div class="form-group row">
+													<label class="col-2 control-label" >대출상태</label>
+													<div class="col-10">
+														${vo.lc_state }
+													</div>
 												</div>
 												
-											</div>
-												
-												<div class="form-group">
-												<label for="period" class="col-sd-2">상환기간</label>
-												<div class="col-sd-10">
-												<select class="form-control" id="period" >
-													<option selected="selected">10년</option>
-												</select>
+												<div class="form-group row">
+													<label class="col-2 control-label" >신청날짜</label>
+													<div class="col-10">
+														${vo.loanApplicationVO.la_sysdate }
+													</div>
 												</div>
-											</div>
+												
+												
+												<div class="form-group row">
+													<label class="col-2 control-label" >대출명</label>
+													<div class="col-10">
+														${vo.loanProductVO.lp_name }
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<label class="col-2 control-label" >희망대출금액</label>
+													<div class="col-10">
+														${vo.loanApplicationVO.la_hamount }원
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<label class="col-2 control-label" >희망대출일</label>
+													<div class="col-10">
+														${vo.loanApplicationVO.la_startdate }
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<label class="col-2 control-label" >상환방식</label>
+													<div class="col-10">
+														${vo.loanApplicationVO.lr_type }
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<label class="col-2 control-label" >거치기간</label>
+													<div class="col-10">
+														${vo.loanApplicationVO.la_livingterm }
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<label class="col-2 control-label" >상환기간</label>
+													<div class="col-10">
+														${vo.loanApplicationVO.la_repayterm }
+													</div>
+												</div>
+												
+												
 												
 												<hr>
 												<h3>첨부 파일</h3>
@@ -112,98 +151,6 @@
 			
 			<script>
 			
-			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+		console.log('')
 	</script>
 
