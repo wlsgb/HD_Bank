@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.DepositDao;
-import dank.mvc.vo.SavingVO;
+import dank.mvc.vo.deposit.SavingVO;
+
 
 @Controller
 public class DepositController {
@@ -26,12 +27,12 @@ public class DepositController {
 		return "deposit/new";
 	}
 	
-	@RequestMapping(value = "/saving_new")
-	public String saving_new(Model m, int sav_code) {
-		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-		m.addAttribute("saving",saving);
-		return "deposit/saving_new";
-	}
+//	@RequestMapping(value = "/saving_new")
+//	public String saving_new(Model m, int sav_code) {
+//		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+//		m.addAttribute("saving",saving);
+//		return "deposit/saving_new";
+//	}
 	 
 	
 	@RequestMapping(value = "/share_new_req")
