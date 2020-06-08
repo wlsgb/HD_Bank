@@ -17,9 +17,9 @@ public class DepositController {
 	public String newPage() {
 		return "deposit/new";
 	}
-	@RequestMapping(value = "/deposit_new_req")
+	@RequestMapping(value = "/saving_new")
 	public String newReqPage() {
-		return "deposit/deposit_new_req";
+		return "deposit/saving_new";
 	}
 	
 	
