@@ -2,8 +2,21 @@ package dank.mvc.vo;
 
 public class MemberVO {
 
-	private String mem_email,mem_pwd,mem_name,mem_phn,mem_in_date,mem_birth,mem_gender,mem_loc;
 	private int mem_code,mem_pri_chk;
+	private String mem_email, mem_pwd, mem_mem_name, mem_phn, mem_in_date, mem_birth, mem_gender, mem_loc;
+	
+	public int getMem_code() {
+		return mem_code;
+	}
+	public void setMem_code(int mem_code) {
+		this.mem_code = mem_code;
+	}
+	public int getMem_pri_chk() {
+		return mem_pri_chk;
+	}
+	public void setMem_pri_chk(int mem_pri_chk) {
+		this.mem_pri_chk = mem_pri_chk;
+	}
 	public String getMem_email() {
 		return mem_email;
 	}
@@ -16,11 +29,11 @@ public class MemberVO {
 	public void setMem_pwd(String mem_pwd) {
 		this.mem_pwd = mem_pwd;
 	}
-	public String getMem_name() {
-		return mem_name;
+	public String getMem_mem_name() {
+		return mem_mem_name;
 	}
-	public void setMem_name(String mem_name) {
-		this.mem_name = mem_name;
+	public void setMem_mem_name(String mem_mem_name) {
+		this.mem_mem_name = mem_mem_name;
 	}
 	public String getMem_phn() {
 		return mem_phn;
@@ -52,18 +65,5 @@ public class MemberVO {
 	public void setMem_loc(String mem_loc) {
 		this.mem_loc = mem_loc;
 	}
-	public int getMem_code() {
-		return mem_code;
-	}
-	public void setMem_code(int mem_code) {
-		this.mem_code = mem_code;
-	}
-	public int getMem_pri_chk() {
-		return mem_pri_chk;
-	}
-	public void setMem_pri_chk(int mem_pri_chk) {
-		this.mem_pri_chk = mem_pri_chk;
-	}
-	
-}
 
+}
