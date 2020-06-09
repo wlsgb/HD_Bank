@@ -4,7 +4,7 @@ import dank.mvc.vo.MemberVO;
 
 public class Security_Card_RegVO {
 
-	private int scr_code, mem_code, cer_code, sc_code;
+	private int scr_code, mem_code, scr_certify, sc_code;
 	private Security_CardVO security_CardVO;
 	private MemberVO memberVO;
 
@@ -24,12 +24,12 @@ public class Security_Card_RegVO {
 		this.mem_code = mem_code;
 	}
 
-	public int getCer_code() {
-		return cer_code;
+	public int getScr_certify() {
+		return scr_certify;
 	}
 
-	public void setCer_code(int cer_code) {
-		this.cer_code = cer_code;
+	public void setScr_certify(int scr_certify) {
+		this.scr_certify = scr_certify;
 	}
 
 	public int getSc_code() {
