@@ -28,13 +28,13 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-head-row card-tools-still-right">
-							<h4 class="card-title">${saving.sav_name}</h4>
+							<h4 class="card-title">${ins.ins_name}</h4>
 							<div class="card-tools">
 								<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
 								<button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
 							</div>
 						</div>
-						<p class="card-catrgory">예금 상품 / 가입</p>
+						<p class="card-catrgory">적금 상품 / 가입</p>
 					</div>
 					<!-- 카드 바디 시작 -->
 					<div class="card-body">
@@ -57,10 +57,10 @@
 														<div class="numbers">
 															<p class="card-category">기간</p>
 															<c:choose>
-																<c:when test="${saving.qua_code != 0}">
-																	<h4 class="card-title">${saving.qualificationVO.qua_minperiod }~${saving.qualificationVO.qua_maxperiod }개월<br/></h4>
+																<c:when test="${ins.qua_code != 0}">
+																	<h4 class="card-title">${ins.qualificationVO.qua_minperiod }~${ins.qualificationVO.qua_maxperiod }개월<br/></h4>
 																</c:when>
-																<c:when test="${saving.qua_code == 0}">
+																<c:when test="${ins.qua_code == 0}">
 																	<h4 class="card-title">제한없음</h4>
 																</c:when>
 															</c:choose>
@@ -86,7 +86,7 @@
 													<div class="col-7 col-stats">
 														<div class="numbers">
 															<p class="card-category">금액</p>
-															<h4 class="card-title">1만원 이상<br/></h4>
+															<h4 class="card-title">${ins.qualificationVO.qua_minmoney }원 이상<br/></h4>
 														</div>
 													</div>
 												</div>
@@ -108,7 +108,7 @@
 													<div class="col-7 col-stats">
 														<div class="numbers">
 															<p class="card-category">최고</p>
-															<h4 class="card-title">연 2% <span class="h6">(36개월)</span></h4>
+															<h4 class="card-title">연 ${ins.ins_interestrate }% <span class="h6">(${ins.qualificationVO.qua_maxperiod}개월)</span></h4>
 														</div>
 													</div>
 												</div>
@@ -128,10 +128,12 @@
 										<!-- 취소 버튼 -->
 											<button class="btn btn-danger" onclick="">취소</button>
 										</div>
-										<div class="col-3">
-										<!-- 신청 버튼 -->
-											<button class="btn btn-primary" onclick="">신청</button>
-										</div>
+										<c:if test="${ins.ins_online != 0}">
+											<div class="col-3">
+											<!-- 신청 버튼 -->
+												<button class="btn btn-primary" onclick="">신청</button>
+											</div>
+										</c:if>
 									</div>
 									
 								</div>

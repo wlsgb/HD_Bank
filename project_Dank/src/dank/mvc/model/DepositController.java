@@ -1,5 +1,7 @@
 package dank.mvc.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.DepositDao;
+import dank.mvc.vo.deposit.Installment_savingVO;
+import dank.mvc.vo.deposit.QualificationVO;
 import dank.mvc.vo.deposit.SavingVO;
 
 
@@ -23,16 +27,25 @@ public class DepositController {
 	}
 
 	@RequestMapping(value = "/new")
-	public String newPage() {
+	public String newPage(Model m) {
+		List<SavingVO> savlist= depositDao.savinglist();
+		m.addAttribute("savlist",savlist);
 		return "deposit/new";
 	}
 	
-//	@RequestMapping(value = "/saving_new")
-//	public String saving_new(Model m, int sav_code) {
-//		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-//		m.addAttribute("saving",saving);
-//		return "deposit/saving_new";
-//	}
+	@RequestMapping(value = "/saving_new")
+	public String saving_new(Model m, int sav_code) {
+		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		m.addAttribute("saving",saving);
+		return "deposit/saving_new";
+	}
+	
+	@RequestMapping(value = "/installment_new")
+	public String installment_new(Model m, int ins_code) {
+		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
+		m.addAttribute("ins",ins);
+		return "deposit/installment_new";
+	}
 	 
 	
 	@RequestMapping(value = "/share_new_req")
