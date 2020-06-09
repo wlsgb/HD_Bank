@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.method.Mail;
 import dank.mvc.method.SecurityCode;
-import dank.mvc.vo.AccountVO;
+
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.security.Security_CardVO;
 import dank.mvc.vo.security.Security_Card_RegVO;
+
+
+import dank.mvc.vo.deposit.AccountVO;
+
 
 @Controller
 public class SecurityController {

@@ -1,9 +1,11 @@
-package dank.mvc.vo;
+package dank.mvc.vo.deposit;
 
 public class DepositVO {
-//	"DEP_CODE"	number		NOT NULL,
-//	"DEP_MONEY"	number		NOT NULL,
-//	"DEP_DATE"	date		NOT NULL
+//	CREATE TABLE "DEPOSIT" (
+//			"DEP_CODE"	number		NOT NULL,
+//			"DEP_MONEY"	number		NOT NULL,
+//			"DEP_DATE"	date		NOT NULL
+//		);
 	private int dep_code,dep_money;
 	private String dep_date;
 	public int getDep_code() {
@@ -24,6 +26,4 @@ public class DepositVO {
 	public void setDep_date(String dep_date) {
 		this.dep_date = dep_date;
 	}
-
-	
 }

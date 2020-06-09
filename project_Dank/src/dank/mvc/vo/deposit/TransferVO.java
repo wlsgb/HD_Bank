@@ -1,13 +1,14 @@
-package dank.mvc.vo;
+package dank.mvc.vo.deposit;
 
-public class Auto_TransferVO {
-//	"AT_CODE"	number		NOT NULL,
-//	"AT_DPS_AC"	varchar2(30)		NOT NULL,
-//	"AT_SET_MONY"	number		NOT NULL,
-//	"AT_INTERV"	number		NOT NULL,
-//	"AT_STARTDT"	varchar2(30)		NOT NULL,
-//	"AT_STOPDT"	varchar2(30)		NOT NULL
-	
+public class TransferVO {
+//	CREATE TABLE "TRANSFER" (
+//			"AT_CODE"	number		NOT NULL,
+//			"AT_DPS_AC"	varchar2(30)		NOT NULL,
+//			"AT_SET_MONY"	number		NOT NULL,
+//			"AT_INTERV"	number		NULL,
+//			"AT_STARTDT"	varchar2(30)		NULL,
+//			"AT_STOPDT"	varchar2(30)		NULL
+//		);
 	private int at_code,at_set_mony,at_interv;
 	private String at_dps_ac,at_startdt,at_stopdt;
 	public int getAt_code() {
@@ -46,6 +47,4 @@ public class Auto_TransferVO {
 	public void setAt_stopdt(String at_stopdt) {
 		this.at_stopdt = at_stopdt;
 	}
-	
-
 }
