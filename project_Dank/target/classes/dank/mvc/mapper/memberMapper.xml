@@ -4,12 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-<<<<<<< HEAD
+
 	<select id="serNameEmail" parameterType="int" resultType="mem">
 		select mem_email,mem_name from member where mem_code=#{num}
 	</select>
 	
 
-=======
->>>>>>> branch 'minv1' of https://github.com/wlsgb/HD_Bank.git
 </mapper>
