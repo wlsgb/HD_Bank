@@ -3,7 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-<insert id="add" parameterType="mem">
+
+	<select id="serNameEmail" parameterType="int" resultType="mem">
+		select mem_email,mem_name from member where mem_code=#{num}
+	</select>
 	
-</insert>
 </mapper>
