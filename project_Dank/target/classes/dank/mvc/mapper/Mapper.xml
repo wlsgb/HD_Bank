@@ -2,7 +2,25 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="???">
+ <mapper namespace="member">
+	<insert id="add" parameterType="mem">
+		insert into member
+		values(member_seq.nextVal,#{mem_code},#{mem_email},#{mem_pwd},#{mem_name},#{mem_phn},#{mem_in_date},#{mem_pri_chk},#{mem_birth},#{mem_gender},#{mem_loc},sysdate)
+		<!-- 인서트문 외우기 #은 membervo에서 넘어온 각각의 id,pwd,name이다. -->
+	</insert>
+<!-- 	<select id="idchk" resultType="int" parameterType="String"> -->
+<!-- 		select count(*) cnt from memberdemo where id=#{id} -->
+<!-- 	</select> -->
 
-  
+<!-- 	<select id="list" resultType="mem" parameterType="pvo"> -->
+<!-- 	select * from( -->
+<!-- select rownum r_num, a.* from -->
+<!-- ( -->
+<!-- select * from memberdemo order by num desc -->
+<!-- ) a -->
+<!-- ) where r_num between #{start} and #{end} -->
+<!-- 	</select> -->
+<!-- 	<select id="totalCount" resultType="int"> -->
+<!-- 	select count(*) cnt from memberdemo -->
+<!-- 	</select> -->
   </mapper>

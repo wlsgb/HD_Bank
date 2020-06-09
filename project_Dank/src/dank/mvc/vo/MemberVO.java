@@ -2,7 +2,7 @@ package dank.mvc.vo;
 
 public class MemberVO {
 
-	private String mem_email,mem_pwd,mem_name,mem_phn,mem_birth,mem_gender,mem_loc;
+	private String mem_email,mem_pwd,mem_name,mem_phn,mem_in_date,mem_birth,mem_gender,mem_loc;
 	private int mem_code,mem_pri_chk;
 	public String getMem_email() {
 		return mem_email;
@@ -27,6 +27,12 @@ public class MemberVO {
 	}
 	public void setMem_phn(String mem_phn) {
 		this.mem_phn = mem_phn;
+	}
+	public String getMem_in_date() {
+		return mem_in_date;
+	}
+	public void setMem_in_date(String mem_in_date) {
+		this.mem_in_date = mem_in_date;
 	}
 	public String getMem_birth() {
 		return mem_birth;
@@ -58,6 +64,5 @@ public class MemberVO {
 	public void setMem_pri_chk(int mem_pri_chk) {
 		this.mem_pri_chk = mem_pri_chk;
 	}
-	
 	
 }
