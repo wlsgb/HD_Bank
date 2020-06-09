@@ -4,8 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+
 	<select id="serNameEmail" parameterType="int" resultType="mem">
 		select mem_email,mem_name from member where mem_code=#{num}
 	</select>
 	
+
 </mapper>
