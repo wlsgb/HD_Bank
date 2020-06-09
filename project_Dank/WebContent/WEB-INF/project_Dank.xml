@@ -45,6 +45,7 @@
 <constructor-arg ref="factoryBean"/>
 </bean>
 
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 
 

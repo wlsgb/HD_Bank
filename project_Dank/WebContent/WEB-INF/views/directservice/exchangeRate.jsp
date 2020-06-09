@@ -145,8 +145,8 @@
 			$("#checkBalance").click(function() {
 				location = "checkbalance";
 			});
-			$("#wireMoney").click(function() {
-				location = "wiremoney";
+			$("#transfer").click(function() {
+				location = "transfer";
 			});
 			$("#analysis").click(function() {
 				location = "analysis";
