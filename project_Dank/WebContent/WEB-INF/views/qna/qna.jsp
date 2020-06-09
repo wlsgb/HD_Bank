@@ -56,23 +56,26 @@
 
 
 					<div class="card-body">
+					<input type="hidden" value="${href }" id="href">
+					<input type="hidden" value="${paging.startPage }" id="startpage">
+					<input type="hidden" value="${paging.endPage}" id="endpage">
 						<ul class="nav nav-pills nav-secondary" id="pills-tab"
 							role="tablist">
 							<li class="nav-item"><a class="nav-link active"
-								id="pills-home-tab" data-toggle="pill" href="#pills-home"
-								role="tab" aria-controls="pills-home" aria-selected="true">전체</a>
+								id="pills-home-tab1" data-toggle="pill" href="#0"
+								role="tab" aria-controls="pills-home" aria-selected="false">전체</a>
 							</li>
 							<li class="nav-item"><a class="nav-link"
-								id="pills-profile-tab" data-toggle="pill" href="#1" role="tab"
+								id="pills-profile-tab2" data-toggle="pill" href="#1" role="tab"
 								aria-controls="pills-profile" aria-selected="false">예금</a></li>
 							<li class="nav-item"><a class="nav-link"
-								id="pills-contact-tab" data-toggle="pill" href="#2" role="tab"
+								id="pills-contact-tab3" data-toggle="pill" href="#2" role="tab"
 								aria-controls="pills-contact" aria-selected="false">대출</a></li>
 							<li class="nav-item"><a class="nav-link"
-								id="pills-contact-tab" data-toggle="pill" href="#3" role="tab"
+								id="pills-contact-tab4" data-toggle="pill" href="#3" role="tab"
 								aria-controls="pills-contact" aria-selected="false">회원정보</a></li>
 							<li class="nav-item"><a class="nav-link"
-								id="pills-contact-tab" data-toggle="pill" href="#4" role="tab"
+								id="pills-contact-tab5" data-toggle="pill" href="#4" role="tab"
 								aria-controls="pills-contact" aria-selected="false">기타</a></li>
 						</ul>
 						<div class="tab-content mt-2 mb-3" id="pills-tabContent">
@@ -90,6 +93,8 @@
 									<div>${e.qna_content }</div>
 									<div>${e.qna_date }</div>
 								</c:forEach>
+								
+								
 							</div>
 							<div class="tab-pane fade" id="1" role="tabpanel"
 								aria-labelledby="pills-profile-tab">
@@ -102,6 +107,8 @@
 										<div>${e.qna_date }</div>
 									</c:if>
 								</c:forEach>
+								
+								
 
 							</div>
 							<div class="tab-pane fade" id="2" role="tabpanel"
@@ -113,9 +120,13 @@
 										<div>${e.qna_content }</div>
 										<div>${e.qna_date }</div>
 									</c:if>
+									
 								</c:forEach>
 								<!-- <div style="border: 1px solid gray; background-color: #E2E2E2;">
 											</div> -->
+											
+								
+									
 							</div>
 							<div class="tab-pane fade" id="3" role="tabpanel"
 								aria-labelledby="pills-contact-tab">
@@ -126,7 +137,10 @@
 										<div>${e.qna_content }</div>
 										<div>${e.qna_date }</div>
 									</c:if>
+									
 								</c:forEach>
+								
+								
 
 							</div>
 							<div class="tab-pane fade" id="4" role="tabpanel"
@@ -138,7 +152,10 @@
 										<div>${e.qna_content }</div>
 										<div>${e.qna_date }</div>
 									</c:if>
+								
 								</c:forEach>
+
+							
 
 							</div>
 						</div>
@@ -148,7 +165,31 @@
 						<div class="demo">
 							<ul class="pagination pg-primary">
 								<li class="page-item">
-									<!-- 이전 페이지  --> <c:if test="${paging.startPage != 1 }">
+								
+								<!-- 이전 페이지  --> <c:if test="${paging.startPage != 1 }">
+										<a 
+										<%-- href="qna?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage} --%>
+										class="href1"></a>
+									</c:if> <c:forEach begin="${paging.startPage }"
+										end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b>${p }</b>
+												<!--현재 페이지 일경우 링크 해제 -->
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<!--다른페이지 링크   -->
+												<a href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="href2">${p }
+												<input type="hidden" value="${p }" class="p"></a>
+												
+											</c:when>
+										</c:choose>
+									</c:forEach> <!-- 다음페이지  --> <c:if
+										test="${paging.endPage != paging.lastPage}">
+										<a <%-- href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" --%> class="href3"></a>
+									</c:if>
+								
+									<%-- <!-- 이전 페이지  --> <c:if test="${paging.startPage != 1 }">
 										<a
 											href="qna?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"></a>
 									</c:if> <c:forEach begin="${paging.startPage }"
@@ -167,7 +208,7 @@
 										test="${paging.endPage != paging.lastPage}">
 										<a
 											href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"></a>
-									</c:if> <!-- <a class="page-link" href="#" aria-label="Previous">
+									</c:if> --%> <!-- <a class="page-link" href="#" aria-label="Previous">
 													<span aria-hidden="true"> < </span>
 													<span class="sr-only"></span>
 												</a>
@@ -196,5 +237,19 @@
 
 </div>
 <script>
+	var href = $('input[aria-selected=true]').val()
+	$('li[href="'+href+'"]').tab('show');
 	
+	 $('.href1').click(function() {
+		location='qna
+		//?nowPage='+($('#startpage').val()-1)+'&cntPerPage='+($('#cntperpage').val())+'&href='+href
+	})
+		$('.href2').click(function() {
+		location='qna
+		//?nowPage='+$(this).children('input').val()+'&cntPerPage='+($('#cntperpage').val())+'&href='+href
+	})
+		$('.href3').click(function() {
+		location='qna
+		//?nowPage='+($('#endpage').val()+1)+'&cntPerPage='+($('#cntperpage').val())+'&href='+href
+	}) 
 </script>

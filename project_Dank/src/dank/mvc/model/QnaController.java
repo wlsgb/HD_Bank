@@ -21,13 +21,15 @@ public class QnaController {
 			@RequestParam(value="nowPage",required = false,
 			defaultValue = "1") String nowPage,
 			@RequestParam(value="cntPerPage",required = false,
-			defaultValue = "10") String cntPerPage) {
+			defaultValue = "10") String cntPerPage,
+			@RequestParam(value="href",required = false,
+			defaultValue = "0") int href) {
 			int total=qnaDao.getTotalCount();
 			
 			vo=new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 			model.addAttribute("paging", vo);
 			model.addAttribute("list", qnaDao.getList(vo));
-			
+			model.addAttribute("href", href);
 			System.out.println("listsize"+qnaDao.getList(vo).size());
 			
 			for(QnaVO e : qnaDao.getList(vo)) {
