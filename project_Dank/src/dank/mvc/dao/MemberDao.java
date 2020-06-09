@@ -17,6 +17,10 @@ public class MemberDao {
 	public String nameChk(String email) {
 		return ss.selectOne("member.namechk", email);
 	}
+	
+	public MemberVO numToEmailName(int num) {
+		return ss.selectOne("member.serNameEmail", num);
+	}
 
 
 }

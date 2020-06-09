@@ -12,7 +12,7 @@
   	</select>
   	
   	<insert id="check" parameterType="int">
-  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.nextVal,'심사대기중',1,#{lp_num})
+  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.neqxtVal,'심사대기중',1,#{lp_num})
   	</insert>
   	
   	<insert id="application" parameterType="lpvo">
@@ -54,9 +54,9 @@
   	
   	<select id="checkdetail" resultMap="check" parameterType="int">
   	select la.lc_num lc_num,la.la_hamount la_hamount,la.la_startdate la_startdate,la.la_livingterm la_livingterm,la.la_repayterm la_repayterm, la.lr_type lr_type, to_char(la.la_sysdate,'yyyy-mm-dd') la_sysdate,
-lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num,
-lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum
-from loan_application la, loan_check lc,loan_product lp
+lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num, 
+lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum 
+from loan_application la, loan_check lc,loan_product lp 
 where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1 and lc.lc_num=#{lc_num}
   	</select>
   	
@@ -67,10 +67,82 @@ where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1 and lc.lc_nu
   	#{file14,jdbcType=VARCHAR},#{file15,jdbcType=VARCHAR},#{file16,jdbcType=VARCHAR},#{file17,jdbcType=VARCHAR},#{file18,jdbcType=VARCHAR},
   	#{file19,jdbcType=VARCHAR},#{file20,jdbcType=VARCHAR})
   	</insert>
-  	<insert id="fileupload1" parameterType="lfvo">
-  	insert into loan_file(lc_num,file1) values(#{lc_num},#{file1})
-  	</insert>
+  
   	<update id="stateupdate" parameterType="int">
-  		update loan_check set lc_state = '심사중' where lc_num = #{lc_num}
+  		update loan_check set lc_state = '서류제출완료' where lc_num = #{lc_num}
+  	</update>
+  	
+  	<select id="filedetail" parameterType="int" resultType="lfvo">
+  	select lc_num,file1,file2,file3,file4,file5,file6,file7,file8,file9,file10,
+  		file11,file12,file13,file14,file15,file16,file17,file18,file19,file20
+  	from loan_file where lc_num = #{lc_num}
+  	</select>
+  	
+  	<update id="refileupload" parameterType="lfvo">
+  	update loan_file set lc_num=#{lc_num}
+  	<if test="file1 neq null">
+  	,file1=#{file1}
+  	</if>
+  	<if test="file2 neq null">
+  	,file2=#{file2}
+  	</if>
+  	<if test="file3 neq null">
+  	,file3=#{file3}
+  	</if>
+  	<if test="file4 neq null">
+  	,file4=#{file4}
+  	</if>
+  	<if test="file5 neq null">
+  	,file5=#{file5}
+  	</if>
+  	<if test="file6 neq null">
+  	,file6=#{file6}
+  	</if>
+  	<if test="file7 neq null">
+  	,file7=#{file7}
+  	</if>
+  	<if test="file8 neq null">
+  	,file8=#{file8}
+  	</if>
+  	<if test="file9 neq null">
+  	,file9=#{file9}
+  	</if>
+  	<if test="file10 neq null">
+  	,file10=#{file10}
+  	</if>
+  	<if test="file11 neq null">
+  	,file11=#{file11}
+  	</if>
+  	<if test="file12 neq null">
+  	,file12=#{file12}
+  	</if>
+  	<if test="file13 neq null">
+  	,file13=#{file13}
+  	</if>
+  	<if test="file14 neq null">
+  	,file14=#{file14}
+  	</if>
+  	<if test="file15 neq null">
+  	,file15=#{file15}
+  	</if>
+  	<if test="file16 neq null">
+  	,file16=#{file16}
+  	</if>
+  	<if test="file16 neq null">
+  	,file16=#{file16}
+  	</if>
+  	<if test="file17 neq null">
+  	,file17=#{file17}
+  	</if>
+  	<if test="file18 neq null">
+  	,file18=#{file18}
+  	</if>
+  	<if test="file19 neq null">
+  	,file19=#{file19}
+  	</if>
+  	<if test="file20 neq null">
+  	,file20=#{file20}
+  	</if>
+  	where lc_num=#{lc_num}
   	</update>
   </mapper>
