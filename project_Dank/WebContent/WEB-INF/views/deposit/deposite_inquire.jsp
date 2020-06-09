@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <div class="content">
@@ -47,6 +48,7 @@
 															<th class="text-right">
 																잔액
 															</th>
+															
 															<th class="text-right">
 																비고
 															</th>
@@ -54,39 +56,46 @@
 														
 													</thead>
 													<tbody>
-													<tr>
-															<td>보통예금</td>
-															<td>110-111-12345</td>
-															<td class="text-right">
-																40,000,000
-															</td>
-															<td class="text-right">
-																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
-															</td>
-														</tr>
+													<c:forEach var="e" items="${aclist}" varStatus="i">
+													
+													<c:if test="${e.saving.sav_name != '0'}">
+													
 														<tr>
-															<td>저축예금</td>
-															<td>110-111-45625</td>
-															<td class="text-right">
-																10,000,000
-															</td>
-															<td class="text-right">
-																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
-															</td>
+																<td>${e.saving.sav_name }</td>
+																<td>${e.ac_num }</td>
+																<td class="text-right">
+																	${e.ac_balance }
+																</td>
+																
+																<td class="text-right">
+																	<a href="inquire_detail"><input type="button" value="조회"  /></a>
+																	<a href="transfer"><input type="button" value="이체" /></a>
+																</td>
 														</tr>
-														<tr>
-															<td>국민예금</td>
-															<td>110-111-78966</td>
-															<td class="text-right">
-																30,000,000
-															</td>
-															<td class="text-right">
-																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
-															</td>
-														</tr>
+													</c:if>
+													</c:forEach>
+<!-- 														<tr> -->
+<!-- 															<td>저축예금</td> -->
+<!-- 															<td>110-111-45625</td> -->
+<!-- 															<td class="text-right"> -->
+<!-- 																10,000,000 -->
+<!-- 															</td> -->
+<!-- 															<td class="text-right"> -->
+<!-- 																<a href="inquire_detail"><input type="button" value="조회"  /></a> -->
+<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
+<!-- 															</td> -->
+<!-- 														</tr> -->
+<!-- 														<tr> -->
+<!-- 															<td>국민예금</td> -->
+<!-- 															<td>110-111-78966</td> -->
+<!-- 															<td class="text-right"> -->
+<!-- 																30,000,000 -->
+<!-- 															</td> -->
+<!-- 															<td class="text-right"> -->
+<!-- 																<a href="inquire_detail"><input type="button" value="조회"  /></a> -->
+<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
+<!-- 															</td> -->
+<!-- 														</tr> -->
 													
 													
 													</tbody>
@@ -118,6 +127,7 @@
 															<th class="text-right">
 																잔액
 															</th>
+															
 															<th class="text-right">
 																비고
 															</th>
@@ -125,39 +135,22 @@
 														
 													</thead>
 													<tbody>
+													<c:forEach var="e" items="${aclist}" varStatus="i">
+													<c:if test="${e.ins.ins_name != '0'}">
 													<tr>
-															<td>주택청약적금</td>
-															<td>110-111-12345</td>
+															<td>${e.ins.ins_name }</td>
+															<td>${e.ac_num }</td>
 															<td class="text-right">
-																40,000,000
+																${e.ac_balance }
 															</td>
-															<td class="text-right">
-																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
-															</td>
-														</tr>
-														<tr>
-															<td>나라사랑적금</td>
-															<td>110-111-45625</td>
-															<td class="text-right">
-																10,000,000
-															</td>
+															
 															<td class="text-right">
 																<a href="inquire_detail"><input type="button" value="조회"  /></a>
 																<a href="transfer"><input type="button" value="이체" /></a>
 															</td>
 														</tr>
-														<tr>
-															<td>대한민국적금</td>
-															<td>110-111-78966</td>
-															<td class="text-right">
-																30,000,000
-															</td>
-															<td class="text-right">
-																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
-															</td>
-														</tr>
+														</c:if>
+													</c:forEach>
 													
 													
 													</tbody>
