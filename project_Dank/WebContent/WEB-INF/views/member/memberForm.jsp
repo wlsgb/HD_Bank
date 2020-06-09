@@ -49,9 +49,9 @@
 				<tr>
 					<td>失紺</td>
 
-					<td><input type="radio" name=mem_gender value="害切"
+					<td><input type="radio" name=mem_gender value="M"
 						checked="checked"> 害切 <input type="radio"
-						name="mem_gender" value="食切"> 食切</td>
+						name="mem_gender" value="F"> 食切</td>
 				</tr>
 
 				<tr>
