@@ -1,6 +1,6 @@
 package dank.mvc.vo.deposit;
 
-public class Sahred_challengeVO {
+public class Shared_challengeVO {
 //	CREATE TABLE "SHARED_CHALLENGE" (
 //			"SHAC_CODE"	number		NOT NULL,
 //			"SHAC_MANNUM"	number	DEFAULT 2	NOT NULL,

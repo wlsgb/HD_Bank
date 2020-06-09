@@ -20,8 +20,17 @@
   		
 
   		<!-- 예금 영역 시작 -->
-<!--   		<typeAlias type="dank.mvc.vo.SavingVO" alias="savvo"/> -->
-<!--   		<typeAlias type="dank.mvc.vo.QualificationYNVO" alias="quavo"/> -->
+  		<typeAlias type="dank.mvc.vo.deposit.AccountVO" alias="acvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.DepositVO" alias="depvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.Installment_savingVO" alias="insvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.ProductVO" alias="provo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.QualificationVO" alias="quavo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.Sav_processVO" alias="savprvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.SavingVO" alias="savvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.Shared_challengeVO" alias="shacvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.Shared_savingVO" alias="shasvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.TransferVO" alias="trvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.WithdrawVO" alias="witvo"/>
   		<!-- 예금 영역 끝 -->
 
   		<typeAlias type="dank.mvc.vo.PageVO" alias="pvo"/>
