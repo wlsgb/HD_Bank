@@ -14,6 +14,14 @@ public class Installment_savingVO {
 //		);
 	private int ins_code,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_slctedterm,shac_code,qua_code;
 	private String ins_name;
+	private QualificationVO qualificationVO;
+	
+	public QualificationVO getQualificationVO() {
+		return qualificationVO;
+	}
+	public void setQualificationVO(QualificationVO qualificationVO) {
+		this.qualificationVO = qualificationVO;
+	}
 	public int getIns_code() {
 		return ins_code;
 	}
