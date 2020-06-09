@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content">
 				<!-- 상단의 푸른색 공간 시작 -->
 				<div class="panel-header bg-primary-gradient">
@@ -26,7 +26,7 @@
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
 				<div class="row">
-						<div class="col-sm-6 col-md-3" href="#hani" role="tap" aria-controls="haha">
+						<div class="col-sm-6 col-md-3" id="savinfo">
 							<div class="card card-stats card-primary card-round">
 								<div class="card-body">
 									<div class="numbers">
@@ -35,7 +35,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-6 col-md-3" id="insinfo">
 							<div class="card card-stats card-info card-round">
 								<div class="card-body">
 									<div class="numbers">
@@ -44,7 +44,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-6 col-md-3" id="shasinfo">
 							<div class="card card-stats card-success card-round">
 								<div class="card-body ">
 									<div class="numbers">
@@ -53,7 +53,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-6 col-md-3" id="shacinfo">
 							<div class="card card-stats card-secondary card-round">
 								<div class="card-body ">
 									<div class="numbers">
@@ -79,15 +79,15 @@
 											<thead>
 											</thead>
 											<tbody>
+												<c:forEach items="${savlist}">
+												
+												</c:forEach>
 												<tr>
 													<th scope="col">수퍼 정기 예금</th>
 													<td>
 													<div class="row">
-														<div class="col-md-3 ml-auto">
+														<div class="col-md-4 ml-auto">
 															<input type="button" class="btn btn-default" id="" value="신청하기" onclick="location='deposit_new_req'">
-														</div>
-														<div class="col-md-4">
-															<input type="button" class="btn btn-default" id="" value="비교하기">
 														</div>
 													</div>
 													</td>
@@ -106,47 +106,11 @@
 													<th scope="col">함께하는 공유 계좌</th>
 													<td>
 													<div class="row">
-														<div class="col-md-3 ml-auto">
+														<div class="col-md-4 ml-auto">
 															<input type="button" class="btn btn-default" id="" value="신청하기" onclick="location='share_new_req'">
-														</div>
-														<div class="col-md-4">
-															<input type="button" class="btn btn-default" id="" value="비교하기">
 														</div>
 													</div>
 													</td>
-												</tr>
-											</tbody>
-										</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col-md-10">
-											<table class="table mt-1">
-											<thead>
-											</thead>
-											<tbody>
-												<tr>
-													<th scope="col">상품명</th>
-													<td>수퍼 정기 예금</td>
-													<td>star 정기 예금</td>
-												</tr>
-												<tr>
-													<th scope="col">금리</th>
-													<td>0.5%</td>
-													<td>0.8%</td>
-												</tr>
-												<tr>
-													<th scope="col">상품특징</th>
-													<td></td>
-													<td></td>
 												</tr>
 											</tbody>
 										</table>
@@ -164,7 +128,6 @@
 		
 			
 			<script>
-			
 			
 		Circles.create({
 			id:'circles-1',
@@ -258,4 +221,26 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
+	</script>
+	
+	<script>
+	$("#savfunc").click(function() {
+		alert("입출금");
+		$.ajax({
+			url:'new',
+			success:function(data){
+				
+			}
+		});
+	});
+	$("#insfunc").click(function() {
+		alert("적금");
+	});
+	$("#shasinfo").click(function() {
+		alert("입출금");
+	});
+	$("#shacinfo").click(function() {
+		alert("입출금");
+	});
+	
 	</script>
