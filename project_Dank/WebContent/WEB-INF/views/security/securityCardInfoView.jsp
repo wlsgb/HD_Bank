@@ -47,6 +47,7 @@
 										
 										<!-- 보안카드 신청 form 시작 -->
 											<form action="securitycardcreate" method="post">
+											<input type="text" name="mem_code"  />
 												<table class="table mt-1">
 												<tbody>
 													<tr>
@@ -90,7 +91,7 @@
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-6 ml-auto mr-auto">
-																	<button class="btn btn-danger" id="cancel">재입력</button>
+																	<button type="button" class="btn btn-danger" id="cancel">재입력</button>
 																	<input type="submit" class="btn btn-success" value="확인">
 																</div>
 															</div>
@@ -120,9 +121,8 @@
 	<script>
 		$(function() {
 			//$(function() 시작
-			var email = null;
-			var emailCode = null;
 			$("#cancel").click(function() {
+				console.log("왜 안돼")
 				location = "securitycard";
 			});
 		//$(function() 끝
