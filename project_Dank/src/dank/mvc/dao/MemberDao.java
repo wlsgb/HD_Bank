@@ -1,4 +1,3 @@
-
 package dank.mvc.dao;
 
 import java.util.List;
@@ -38,3 +37,4 @@ public class MemberDao {
 	}
 
 }
+
