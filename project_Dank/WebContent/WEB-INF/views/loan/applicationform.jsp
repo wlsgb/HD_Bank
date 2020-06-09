@@ -119,24 +119,6 @@ input[type="number"]::-webkit-inner-spin-button {
 												</select>
 												</div>
 											</div>
-												<hr>
-												<h3>첨부 파일</h3>
-												<div class="form-group">
-												<label for="file1" >주민등록등본</label>
-												<input type="file" class="form-control-file" id="file1">
-											</div>
-											<div class="form-group">
-												<label for="file2" >주민등록초본</label>
-												<input type="file" class="form-control-file" id="file2">
-											</div>
-											<div class="form-group">
-												<label for="file3" >가족관계증명서</label>
-												<input type="file" class="form-control-file" id="file3">
-											</div>
-											<div class="form-group">
-												<label for="file4" >소득금액증명서</label>
-												<input type="file" class="form-control-file" id="file4">
-											</div>
 											
 											
 									</div>
