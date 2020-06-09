@@ -8,6 +8,7 @@
 
 		<!-- 대출 영역 시작 -->
   		<typeAlias type="dank.mvc.vo.LoanProductVO" alias="lpvo"/>
+
   		<typeAlias type="dank.mvc.vo.LoanCheckVO" alias="lcvo"/>
   		<typeAlias type="dank.mvc.vo.LoanApplicationVO" alias="lavo"/>
   		<typeAlias type="dank.mvc.vo.LoanFileVO" alias="lfvo"/>
