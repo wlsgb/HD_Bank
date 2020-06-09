@@ -47,6 +47,7 @@
 										
 										<!-- 보안카드 신청 form 시작 -->
 											<form action="securitycardinfoView" method="post">
+											<input type="hidden" value="${mem_num}" />
 												<table class="table mt-1">
 												<tbody>
 													<tr>
