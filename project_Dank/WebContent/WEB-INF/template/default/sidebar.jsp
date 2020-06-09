@@ -18,6 +18,12 @@
 							<span class="btn-label mr-2"></span>로그인
 						</a>
 					</div>
+					<div class="form-group">
+						<a href="login" class="btn btn-primary btn-block">
+							<span class="btn-label mr-2"></span>회원가입
+						</a>
+					</div>
+					
 					<!-- 로그인 창 끝 -->
 					<!-- 로그인 한 후 시작 -->
 					<div class="user">
