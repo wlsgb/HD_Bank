@@ -30,4 +30,9 @@ public class SecurityDao {
 	public int scrNumChk(int num) {
 		return ss.selectOne("security.scrNumChk", num);
 	}
+	
+	public Security_Card_RegVO securityCardDetail(int num) {
+		
+		return ss.selectOne("security.secCardDetail", num);
+	}
 }

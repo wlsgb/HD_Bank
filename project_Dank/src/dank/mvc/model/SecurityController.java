@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import dank.mvc.dao.MemberDao;
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.method.Mail;
 import dank.mvc.method.SecurityCode;
@@ -25,10 +26,28 @@ public class SecurityController {
 
 	@Autowired
 	private SecurityDao securityDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 
+	@Autowired
+	private Mail mail;
+	
 	@RequestMapping(value = "/security")
 	public String viewSecurity() {
 		return "security/security";
+	}
+	
+	// 보안카드 인증 구간
+	@RequestMapping(value = "/securitysertify")
+	public String viewSecuritySertify(Model m) {
+		int code = 2;
+		Security_Card_RegVO vo = securityDao.securityCardDetail(code);
+		m.addAttribute("scrVo",vo);
+		MemberVO memberVO = memberDao.numToEmailName(code);
+		String name = memberVO.getMem_name();
+		m.addAttribute("name", name);
+		return "security/securityCardSertify";
 	}
 
 	@RequestMapping(value = "/securitycard")
@@ -54,6 +73,12 @@ public class SecurityController {
 			securityDao.cardCreate(security_Cardvo);
 			vo.setSc_code(security_Cardvo.getSc_code());
 			securityDao.securityCardReq(vo);
+			// 메일로 만들어진 보안카드를 보내준다.
+			MemberVO memberVO = memberDao.numToEmailName(vo.getMem_code());
+			String name = memberVO.getMem_name();
+			String email = memberVO.getMem_email();
+			String content = securityCode.securityCardSend(security_Cardvo, name);
+			mail.emailSend(email, name, name+"님의 보안카드", content);
 			return "security/securityCardSuccess";
 		}
 		

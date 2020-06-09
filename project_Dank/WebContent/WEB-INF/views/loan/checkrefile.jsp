@@ -21,7 +21,7 @@
 					</div>
 				</div>
 				<!--대출 신청   -->
-		<form action="fileupload" method="post" class="form-horizontal" enctype="multipart/form-data">
+		<form action="refileupload" method="post" class="form-horizontal" enctype="multipart/form-data">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -197,6 +197,6 @@
 
 			
 			<script>
-
+		
 	</script>
 

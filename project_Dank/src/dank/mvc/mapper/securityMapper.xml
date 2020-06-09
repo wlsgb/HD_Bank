@@ -18,7 +18,7 @@
   	<!-- 보안카드 신청 -->
   	<insert id="cardReg" parameterType="scrvo">
   		insert into security_card_reg values(
-  			scr_seq.nextVal,#{mem_num},#{sc_code},1
+  			scr_seq.nextVal,#{mem_code},#{sc_code},1
   		)
   	</insert>
   	
@@ -27,7 +27,57 @@
   	</select>
   	
   	<select id="scrNumChk" parameterType="int" resultType="int">
-  		select count(*) from security_card_reg where mem_num=#{num}
+  		select count(*) from security_card_reg where mem_code=#{num}
+  	</select>
+  	
+  	<resultMap type="scrvo" id="scr_sc">
+  		<id property="scr_code" column="scr_code"/>
+  		<result property="mem_code" column="mem_code"/>
+  		<result property="sc_code" column="sc_code"/>
+  		<result property="scr_certify" column="scr_certify"/>
+  		
+  		<association property="secCard" column="sc_code" javaType="cardvo">
+  			<id property="sc_code" column="sc_code"/>
+  			<result property="sc_detcode_1" column="sc_detcode_1"/>
+  			<result property="sc_detcode_2" column="sc_detcode_2"/>
+  			<result property="sc_detcode_3" column="sc_detcode_3"/>
+  			<result property="sc_detcode_4" column="sc_detcode_4"/>
+  			<result property="sc_detcode_5" column="sc_detcode_5"/>
+  			<result property="sc_detcode_6" column="sc_detcode_6"/>
+  			<result property="sc_detcode_7" column="sc_detcode_7"/>
+  			<result property="sc_detcode_8" column="sc_detcode_8"/>
+  			<result property="sc_detcode_9" column="sc_detcode_9"/>
+  			<result property="sc_detcode_10" column="sc_detcode_10"/>
+  			<result property="sc_detcode_11" column="sc_detcode_11"/>
+  			<result property="sc_detcode_12" column="sc_detcode_12"/>
+  			<result property="sc_detcode_13" column="sc_detcode_13"/>
+  			<result property="sc_detcode_14" column="sc_detcode_14"/>
+  			<result property="sc_detcode_15" column="sc_detcode_15"/>
+  			<result property="sc_detcode_16" column="sc_detcode_16"/>
+  			<result property="sc_detcode_17" column="sc_detcode_17"/>
+  			<result property="sc_detcode_18" column="sc_detcode_18"/>
+  			<result property="sc_detcode_19" column="sc_detcode_19"/>
+  			<result property="sc_detcode_20" column="sc_detcode_20"/>
+  			<result property="sc_detcode_21" column="sc_detcode_21"/>
+  			<result property="sc_detcode_22" column="sc_detcode_22"/>
+  			<result property="sc_detcode_23" column="sc_detcode_23"/>
+  			<result property="sc_detcode_24" column="sc_detcode_24"/>
+  			<result property="sc_detcode_25" column="sc_detcode_25"/>
+  			<result property="sc_detcode_26" column="sc_detcode_26"/>
+  			<result property="sc_detcode_27" column="sc_detcode_27"/>
+  			<result property="sc_detcode_28" column="sc_detcode_28"/>
+  			<result property="sc_detcode_29" column="sc_detcode_29"/>
+  			<result property="sc_detcode_30" column="sc_detcode_30"/>
+  		</association>
+  	</resultMap>
+  	<select id="secCardDetail" resultMap="scr_sc" parameterType="int">
+  		select sc.sc_code,sc.sc_detcode_1,sc.sc_detcode_2,sc.sc_detcode_3,sc.sc_detcode_4,sc.sc_detcode_5,
+		    sc.sc_detcode_6,sc.sc_detcode_7,sc.sc_detcode_8,sc.sc_detcode_9,sc.sc_detcode_10,
+		    sc.sc_detcode_11,sc.sc_detcode_12,sc.sc_detcode_13,sc.sc_detcode_14,sc.sc_detcode_15,
+		    sc.sc_detcode_16,sc.sc_detcode_17,sc.sc_detcode_18,sc.sc_detcode_19,sc.sc_detcode_20,
+		    sc.sc_detcode_21,sc.sc_detcode_22,sc.sc_detcode_23,sc.sc_detcode_24,sc.sc_detcode_25,
+		    sc.sc_detcode_26,sc.sc_detcode_27,sc.sc_detcode_28,sc.sc_detcode_29,sc.sc_detcode_30
+		from security_card sc, security_card_reg scr where sc.sc_code=scr.sc_code and scr.mem_code=#{num}
   	</select>
   	
   </mapper>

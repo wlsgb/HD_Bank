@@ -114,6 +114,11 @@
 										</a>
 									</li>
 									<li>
+										<a href="fileuploadhome">
+											<span class="sub-item">서류 제출</span>
+										</a>
+									</li>
+									<li>
 										<a href="check">
 											<span class="sub-item">대출 현황 조회</span>
 										</a>

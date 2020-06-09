@@ -1,6 +1,7 @@
 package dank.mvc.method;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -17,12 +18,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Mail {
-
-	@Autowired
-	private SecurityCode securityCode;
-
-	// 전송 실패 : 0
-	// 전송 성공 : 전송 코드가 나옴
 
 	public void emailSend(String RecipientMail, String RecipientName, String title, String content) {
 		// SMTP 서버 정보를 설정
@@ -54,7 +49,7 @@ public class Mail {
 			// 제목 설정
 			message.setSubject(title);
 			// 일반 테스트 형태
-			message.setText(content);
+			message.setContent(content, "text/html; charset=EUC-KR");
 			// 이메일 보내기
 			Transport.send(message);
 			System.out.println("메일이 전송 되었습니다.");
