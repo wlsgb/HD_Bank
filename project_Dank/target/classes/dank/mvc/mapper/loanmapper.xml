@@ -54,9 +54,9 @@
   	
   	<select id="checkdetail" resultMap="check" parameterType="int">
   	select la.lc_num lc_num,la.la_hamount la_hamount,la.la_startdate la_startdate,la.la_livingterm la_livingterm,la.la_repayterm la_repayterm, la.lr_type lr_type, to_char(la.la_sysdate,'yyyy-mm-dd') la_sysdate,
-lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num,
-lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum
-from loan_application la, loan_check lc,loan_product lp
+lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num, 
+lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum 
+from loan_application la, loan_check lc,loan_product lp 
 where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1 and lc.lc_num=#{lc_num}
   	</select>
   	
