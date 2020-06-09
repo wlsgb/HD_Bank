@@ -10,7 +10,7 @@
 	</insert> -->
 
 	<select id="list" resultType="qnavo" parameterType="pvo">
-		select * from(
+		select * from( 
 		select rownum r_num, a.* from
 		(
 		select * from qna order by 1 desc
