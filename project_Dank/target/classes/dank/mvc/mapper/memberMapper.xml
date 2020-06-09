@@ -38,4 +38,18 @@
 	</if>
 	order by  asc
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	<select id="serNameEmail" parameterType="int" resultType="mem">
+		select mem_email,mem_name from member where mem_code=#{num}
+	</select>
+	
+	
+	
+	
 </mapper>
