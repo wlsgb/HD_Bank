@@ -3,39 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="member">
-	<!-- #은 getter 다 -->
-<!-- 	<insert id="add" parameterType="mem">
-		insert into qna
-		values(qna_seq.nextVal,#{qna_num},#{he_code},#{cat_num},#{qna_title},#{qna_content},sysdate)
-	</insert> -->
-
-	<select id="list" resultType="mem" parameterType="pvo">
-		select * from(
-		select rownum r_num, a.* from
-		(
-		select * from qna order by 1 desc
-		) a
-		) where r_num between #{start} and #{end}
-	</select>
-	
-	<select id="totalCount" resultType="int">
-		select count(*) cnt from qna
-	</select>
-	
-	<select id="searchlist" resultType="mem" parameterType="pvo">
-	select * from qna
-	<if test="searchValue != null">
-	<where>
-		<choose>
-			<when test="searchType == 1">
-				qna_num like '%'|| #{searchValue} ||'%'
-			</when>
-			<when test="searchType == 2">
-				qna_title like '%'|| #{searchValue} ||'%'
-			</when>
-		</choose>
-	</where>
-	</if>
-	order by  asc
-	</select>
+  	<insert id="add" parameterType="mem">
+		insert into member
+		values(member_seq.nextVal,#{mem_email},#{mem_pwd},#{mem_name},#{mem_phn},#{mem_in_date},#{mem_pri_chk},#{mem_email_chk},#{mem_birth},#{mem_gender},#{mem_loc})
+	</insert>
+  	<select id="namechk" parameterType="String" resultType="String">
+  		select mem_name from member where mem_email=#{email}
+  	</select>
 </mapper>
