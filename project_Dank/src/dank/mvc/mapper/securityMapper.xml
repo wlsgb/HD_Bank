@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="security">
+  	<!-- 보안카드 생성 -->
   	<insert id="cardCreat" parameterType="cardvo">
   		INSERT INTO security_card VALUES (
 			#{sc_code},
@@ -14,9 +15,19 @@
 			#{sc_detcode_26},#{sc_detcode_27},#{sc_detcode_28},#{sc_detcode_29},#{sc_detcode_30}
 		)
   	</insert>
+  	<!-- 보안카드 신청 -->
+  	<insert id="cardReg" parameterType="scrvo">
+  		insert into security_card_reg values(
+  			scr_seq.nextVal,#{mem_num},#{sc_code},1
+  		)
+  	</insert>
   	
   	<select id="priCodeChk" parameterType="cardvo" resultType="int" >
   		select count(*) from security_card where sc_code=#{sc_code}
+  	</select>
+  	
+  	<select id="scrNumChk" parameterType="int" resultType="int">
+  		select count(*) from security_card_reg where mem_num=#{num}
   	</select>
   	
   </mapper>

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
   	<typeAliases>
-<!--   		<typeAlias type="dank.mvc.vo.*****" alias="*****"/> -->
+	<!-- <typeAlias type="dank.mvc.vo.*****" alias="*****"/> -->
 
 		<!-- 대출 영역 시작 -->
   		<typeAlias type="dank.mvc.vo.LoanProductVO" alias="lpvo"/>
@@ -14,12 +14,18 @@
 		<!-- 대출 영역 끝 -->
 		
   		<!-- 보안 알리아스 시작-->
-  		<typeAlias type="dank.mvc.vo.CertifyVO" alias="cervo"/>
-  		<typeAlias type="dank.mvc.vo.Security_Card_RegVO" alias="scrvo"/>
-  		<typeAlias type="dank.mvc.vo.Security_CardVO" alias="cardvo"/>
+  		<typeAlias type="dank.mvc.vo.security.Security_Card_RegVO" alias="scrvo"/>
+  		<typeAlias type="dank.mvc.vo.security.Security_CardVO" alias="cardvo"/>
   		<!-- 보안 알리아스 끝-->
   		
+
+  		<!-- 예금 영역 시작 -->
+<!--   		<typeAlias type="dank.mvc.vo.SavingVO" alias="savvo"/> -->
+<!--   		<typeAlias type="dank.mvc.vo.QualificationYNVO" alias="quavo"/> -->
+  		<!-- 예금 영역 끝 -->
+
   		<typeAlias type="dank.mvc.vo.PageVO" alias="pvo"/>
   		<typeAlias type="dank.mvc.vo.MemberVO" alias="mem"/>
+
   	</typeAliases>
   </configuration>
