@@ -54,29 +54,49 @@
 									<ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
 										<li class="nav-item">
 											<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" 
-											role="tab" aria-controls="pills-home" aria-selected="true">ID를 모르는 경우</a>
+											role="tab" aria-controls="pills-home" aria-selected="true">ID조회</a>
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" 
-											role="tab" aria-controls="pills-profile" aria-selected="false">ID를 알고 있는 경우</a>
+											role="tab" aria-controls="pills-profile" aria-selected="false">무엇을위한 페이지인가...</a>
 										</li>
 										
 									</ul>
+									
+									
+									
+									
+									
 									<div class="tab-content mt-2 mb-3" id="pills-tabContent">
-										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" >
 											<tr>
-												<td>아이디를 모르십니꽈?</td>
+												<td>이름을 입력하세요</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inlineinput" placeholder="그렇다면 재 가입 하십시오">
+													<input type="text" class="form-control input-full" id="inputname" placeholder="이름을 정확히 입력하세요" name="sename">
+												</div></td>
+												<br>
+											</tr>
+											<tr>
+												<td>생년월일은?</td>
+												<td><div class="col-md-9 p-0">
+													<input type="text" class="form-control input-full" id="inputbirth" placeholder="생년월일을 강력히 입력하세요" name="sebirth">
 												</div></td>
 												
 											</tr>
+											<br>
+											<input type="button" id="gogo" style="text-align: center;" class="btn btn-primary btn-round" value="확인">
+											
+									
+									<div id="ajaxtarget" style="display: inline-block; margin: 15px;" ></div>
+										
+										
 										</div>
+										
 										<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 											<tr>
 												<td>ID</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inlineinput" placeholder="아이디">
+													<div id="ajaxtarget"><input type="text" class="form-control input-full" id="inlineinput" placeholder="아이디"></div>
 												</div></td>
 											</tr>
 											<tr>
@@ -100,8 +120,7 @@
 										
 										
 										
-										<div id="buttons" style="text-align: center;">
-									<button class="btn btn-primary btn-round">확인</button>
+										
 								
 									</div>
 										
@@ -128,17 +147,51 @@
 								</div>
 							</div>
 						</div>
-					</div>
+				
 					
 					<!-- 페이지 레이아웃 끝 -->
-				</div>
-			</div>
+			
+			
 
 
 		
 			
 			
-			<script>$("#checkBalance").click(function() {
+			<script> 
+			
+			
+			$(function() {
+			var emailPath = null;
+			var namesy;
+			$('#gogo').click(function () {
+				namesy=encodeURI($('#inputname').val(),"UTF-8");
+				emailPath = 'getemail?mem_name='+namesy+'&mem_birth='+$('#inputbirth').val();
+				
+						$.ajax({
+							url:emailPath,
+							contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+							success: function (data) {
+					
+							
+							'당신의 아이디는'+$('#ajaxtarget').html(data)+'입니다';
+							
+							},
+							error : function(xhr, textStatus, errorThrown){
+						        // Error시, 처리
+						        alert(xhr);
+						        alert(textStatus);
+						        alert(errorThrown);
+						    }
+
+						})
+				})
+			})
+		
+			
+	
+			
+			
+			$("#checkBalance").click(function() {
 				location = "checkBalance";
 			});
 		Circles.create({
@@ -225,12 +278,22 @@
 			}
 		});
 
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+// 		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+// 			type: 'line',
+// 			height: '70',
+// 			width: '100%',
+// 			lineWidth: '2',
+// 			lineColor: '#ffa534',
+// 			fillColor: 'rgba(255, 165, 52, .14)'
+			
+// 		});
+			
+			
+				
+				
+			
+	
+  
+			
+		
 	</script>
