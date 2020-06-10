@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="transfer">
+  
+<!--   if1.출금계좌A체크 -->
+
+<!--   if2.입금계좌B체크 -->
+
+<!--   if3.출금계좌A잔고체크 -->
+
+<!--   tr4.출금계좌A이체증(출금이랑95%비슷)작성 -->
+
+<!--   tr5.출금계좌A입출내역작성,(내통장에표시할거표시) -->
+
+<!--   tr6.출금계좌A통장잔고 업데이트 -->
+
+<!--   tr7.입금계좌B 입금증작성 -->
+
+<!--   tr8.입금계좌B 입출내역작성,(받는분통장에 표시할거 표시) -->
+
+<!--   tr9.입금계좌B 통장잔고 업데이트 -->
+  
+  
+  
+  </mapper>
