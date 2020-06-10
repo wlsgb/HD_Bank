@@ -3,6 +3,7 @@ package dank.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
+import dank.mvc.vo.LoanRepayVO;
+import dank.mvc.vo.deposit.AccountVO;
 
 @Controller
 public class loanController {
@@ -82,6 +85,7 @@ public class loanController {
 	public ModelAndView check() {
 		ModelAndView mav = new ModelAndView("loan/check");
 		List<LoanCheckVO> list =loanDao.checkdetailList();
+		System.out.println(list.size());
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -335,8 +339,54 @@ public class loanController {
 		
 		return mav;
 	}
-
-
+	@RequestMapping(value = "/loanstart")
+	public  ModelAndView loanstart(int lc_num,int ac_num) {
+		System.out.println(lc_num);
+		ModelAndView mav = new ModelAndView("redirect:check");
+		LoanRepayVO vo = new LoanRepayVO();
+		LoanCheckVO check = loanDao.checkdetail(lc_num);
+		System.out.println(check.getLp_num());
+		System.out.println(check.getLc_state());
+		vo.setLc_num(check.getLc_num());
+		vo.setLr_amount(check.getLoanApplicationVO().getLa_hamount());
+		vo.setLr_balance(vo.getLr_amount());
+		Calendar cal = Calendar.getInstance();
+		vo.setLr_repaydate(cal.get(Calendar.DAY_OF_MONTH));
+		int livingterm = Integer.parseInt(check.getLoanApplicationVO().getLa_livingterm().substring(0,1));
+		cal.add(Calendar.YEAR, livingterm);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		int day= cal.get(Calendar.DAY_OF_MONTH);
+		vo.setLr_firstdate(year+"/"+month+"/"+day);
+		vo.setLr_reaccount(ac_num);
+		loanService.startrepay(vo);
+		return mav;
+	}
+	@RequestMapping(value = "/repaymentstart")
+	public ModelAndView repaymentstart(int lc_num) {
+		ModelAndView mav = new ModelAndView("loan/repaymentstart");
+		LoanCheckVO vo = loanDao.checkdetail(lc_num);
+		mav.addObject("vo", vo);
+		List<AccountVO> list = loanDao.repayaccount();
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	public static void main(String[] args) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 2);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		int day= cal.get(Calendar.DAY_OF_MONTH);
+		System.out.println(year);
+		System.out.println(month);
+		System.out.println(day);
+	}
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/repayment")
 	public String repayment() {
 		return "loan/repayment";
@@ -356,10 +406,7 @@ public class loanController {
 	public String caculator() {
 		return "loan/caculator";
 	}
-	@RequestMapping(value = "/gg")
-	public String gg() {
-		return "loan/server/gg";
-	}
+
 	 @RequestMapping("/fileDown.do")
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
