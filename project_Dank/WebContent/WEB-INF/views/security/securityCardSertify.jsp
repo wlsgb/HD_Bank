@@ -37,8 +37,48 @@
 								
 								<div class="card-body">
 									<div class="row">
-										<div class="col-md-12 ml-auto mr-auto" style="text-align: center;">
+									
+										<div class="col-md-4">
+											<span class="blockquote blockquote-primary">보안카드 비밀번호 입력</span>
 											<form action="" method="post">
+												<div class="form-group">
+													<label for="email2">
+														<span class="h4 text-danger">
+															[일련번호]
+														</span>
+														<span class="h5" style="font-style: italic;">
+															${scd[0][1] }
+														</span>에서 두자리 </label>
+													<input type="password" class="form-control" id="email2" placeholder="[일련번호] - ${scd[0][1] }에서 두자리">
+												</div>
+												<div class="form-group">
+													<label for="email2">
+														<span class="h4 text-danger">
+															[${scd[1][0] }]
+														</span> 
+														<span class="h5" style="font-style: italic;">
+															${scd[1][1] }
+														</span>에서 두자리 </label>
+													<input type="password" class="form-control" id="email2" placeholder="[${scd[1][0] }] - ${scd[1][1] }에서 두자리">
+												</div>
+												<div class="form-group">
+													<label for="email2">
+														<span class="h4 text-danger">
+															[${scd[2][0] }]
+														</span>
+														<span class="h5" style="font-style: italic;">
+															${scd[2][1] }
+														</span>에서 두자리 </label>
+													<input type="password" class="form-control" id="email2" placeholder="[${scd[2][0] }] - ${scd[2][1] }에서 두자리">
+												</div>
+												<div class="card-action">
+													<button type="button" class="btn btn-danger">취소</button>
+													<input type="submit" class="btn btn-success" value="확인" />
+												</div>
+											</form>
+										</div>
+											
+										<div class="col-md-8" style="text-align: center;">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
@@ -123,10 +163,7 @@
 															<td style="text-align: center;">${scrVo.secCard.sc_detcode_30 }</td>
 														</tr>
 													</tbody>
-													
 												</table>
-												
-											</form>
 										</div>
 									</div>
 								</div>
@@ -141,101 +178,7 @@
 	
 			
 			
-			<script>
-			$("#success").click(function() {
-				location = "security";
-			});
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+	<script>
+			
 	</script>
 
