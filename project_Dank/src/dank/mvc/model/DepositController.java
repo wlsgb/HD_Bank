@@ -143,7 +143,7 @@ public class DepositController {
 		
 		System.out.println("존재유무"+depositDaosy.checkac(ac_num));
 		
-		if(depositDaosy.checkac(ac_num)<=1) {
+		if(depositDaosy.checkac(ac_num)>=1) {
 		Map<String, String> paramapsp = new HashMap<String, String>();
 		paramapsp.put("ac_num", String.valueOf(ac_num));
 		paramapsp.put("sp_name", "입금테스트용");
@@ -162,30 +162,7 @@ public class DepositController {
 	}
 	
 	
-	@RequestMapping(value={ "/withdraw" })
-	public ModelAndView executewithdraw(HttpSession session,int ac_num) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("******************출금실행댐,계좌번호는 ="+ac_num+",");
-		
-		int money =10000;
-		
-		System.out.println("존재유무"+depositDaosy.checkac(ac_num));
-		
-		if(depositDaosy.checkac(ac_num)<=1) {
-			Map<String, String> paramapsp = new HashMap<String, String>();
-			paramapsp.put("mem_code", String.valueOf(session.getAttribute("mem_code")));
-			paramapsp.put("sp_name", "출금테스트용");
-			Map<String, Integer> paramapbal = new HashMap<String, Integer>();
-			paramapbal.put("mem_code", Integer.parseInt(session.getAttribute("mem_code").toString()));
-			paramapbal.put("dep_money",money);
-			depositservicesy.depositprocess(money, paramapsp, paramapbal);
-		}
-		
-		
-		
-		mav.setViewName("redirect:inquire?mem_code="+session.getAttribute("mem_code"));
-		return mav;
-	}
+	
 	
 	@RequestMapping(value={ "/getsession" })
 	public ModelAndView getsession(HttpServletRequest req,@RequestParam(value = "mem_code") String mem_code) {

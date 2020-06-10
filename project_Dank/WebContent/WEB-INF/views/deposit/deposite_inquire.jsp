@@ -86,7 +86,7 @@
 																	<a href="inquire_detail"><input type="button" value="조회"  /></a>
 																	<a href="transfer"><input type="button" value="이체" /></a>
 																	<a href="deposit?ac_num=${e.ac_num }"><input type="button" value="입금" id="depbtn${i.index}"  /></a>
-																	<a href="#"><input type="button" value="출금" /></a>
+																	<a href="withdraw?ac_num=${e.ac_num }" ><input type="button" value="출금" /></a>
 																</td>
 														</tr>
 													</c:if>

@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import dank.mvc.dao.DepositDaosy;
-
+import dank.mvc.dao.WithdrawDao;
 
 @Service
 @Transactional(isolation = Isolation.SERIALIZABLE)
-public class DepositServicesy {
-	@Autowired
-	private DepositDaosy depositdaosy;
+public class WithdrawService {
 	
-	public void depositprocess(int money,Map<String, String> paramapsp,Map<String, Integer> paramapbal) {
-		depositdaosy.plusdep(money);
-		depositdaosy.plussp(paramapsp);
-		depositdaosy.depupbalance(paramapbal);
+	@Autowired
+	private WithdrawDao withdrawdao;
+	
+	public void withdrawprocess(int money,Map<String, String> paramapsp,Map<String, Integer> paramapbal) {
+		withdrawdao.pluswit(money);
+		withdrawdao.plussp(paramapsp);
+		withdrawdao.witupbalance(paramapbal);
 	}
 
 }

@@ -35,20 +35,23 @@
 <!-- WIT_CODE          NUMBER        -->
 <!-- AT_CODE           NUMBER     -->
   	
-insert into sav_process values(sav_process_seq.nextval
-	,(select ac_code
-	from account
-	where ac_num=#{ac_num} and mem_code=#{mem_code})
-	,#{sp_name}
-	,(select max(dep_code)
-	            from deposit)
-	,null
-	,null
-	,(select ac_balance from account where ac_num=#{ac_num})+(select dep_money 
-	                                                                from deposit 
-	                                                                where dep_code=(select max(dep_code) 
-	                                                                                   from deposit))
-)
+	insert into sav_process values(sav_process_seq.nextval
+		,(select ac_code
+		from account
+		where ac_num=#{ac_num} and mem_code=#{mem_code})
+		,#{sp_name}
+		,(select max(dep_code)
+		            from deposit)
+		,null
+		,null
+		,(select ac_balance 
+				from account 
+				where ac_num=#{ac_num} and mem_code=#{mem_code})
+		+(select dep_money 
+	            from deposit 
+	            where dep_code=(select max(dep_code) 
+	                               from deposit))
+	)
   	</insert>
   	
   	

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="withdraw">
+<!--   		계좌가 DB에 있는지검사 -->
+  		<select id="checkac" parameterType="int" resultType="int">
+		select count(*)
+		from account
+		where ac_num=#{ac_num}
+  		</select>
+  		
+<!--   		계좌에 출금할수있는 잔액이 있는지 검사 -->
+		<select id="checkbalance" parameterType="hashMap" resultType="int">
+		select ac_balance
+		from account
+		where ac_num=#{ac_num} and mem_code=#{mem_code}
+		</select>
+  		
+<!--   		출금표 작성 -->
+  		<insert id="pluswit" parameterType="int"> 		
+  		insert into withdraw values(WITHDRAW_SEQ.nextval,#{wit_money},sysdate)
+  	</insert>
+  	
+<!--   	입출금내역 작성 -->
+  	<insert id="plussp" parameterType="hashMap">
+	  	insert into sav_process values(sav_process_seq.nextval
+			,(select ac_code
+			from account
+			where ac_num=#{ac_num} and mem_code=#{mem_code})
+			,#{sp_name}
+			,null
+			,(select max(WIT_CODE)
+			            from withdraw)
+			,null
+			,(select ac_balance from account where ac_num=#{ac_num} and mem_code=#{mem_code})-(select wit_money 
+			                                                                                    from withdraw
+			                                                                                    where wit_code=(select max(wit_code) 
+			                                                                                                       from withdraw))
+		)
+  	
+  	</insert>
+  	
+<!--   	잔액 업데이트 -->
+	<update id="witupbalance" parameterType="hashMap">
+	update account 
+		set ac_balance=(select sp_balance 
+		                from sav_process 
+		                where sp_code=(select max(sp_code) 
+		                                from sav_process))
+		where ac_code=
+		    (select ac_code
+		    from account
+		    where ac_num=#{ac_num} and mem_code=#{mem_code})
+	</update>
+  		
+  </mapper>
