@@ -41,12 +41,19 @@ public class SecurityController {
 	// 보안카드 인증 구간
 	@RequestMapping(value = "/securitysertify")
 	public String viewSecuritySertify(Model m) {
+		
+		
+		
+		
 		int code = 2;
 		Security_Card_RegVO vo = securityDao.securityCardDetail(code);
 		m.addAttribute("scrVo",vo);
 		MemberVO memberVO = memberDao.numToEmailName(code);
 		String name = memberVO.getMem_name();
 		m.addAttribute("name", name);
+		
+		String[][] securityCheckData = securityCode.cardNumControll(vo.getSecCard());
+		m.addAttribute("scd",securityCheckData);
 		return "security/securityCardSertify";
 	}
 
