@@ -13,13 +13,26 @@
 		select * from( 
 		select rownum r_num, a.* from
 		(
-		select * from qna order by 1 desc
+		select * from qna
+		<if test="categori == 0">
+		where cat_num between 1 and 5 
+		</if>
+		<if test="categori != 0">
+		 where cat_num = #{categori}
+		</if>
+		  order by 1 desc
 		) a
 		) where r_num between #{start} and #{end}
 	</select>
 	
-	<select id="totalCount" resultType="int">
-		select count(*) cnt from qna
+	<select id="totalCount" resultType="int" parameterType="int">
+		select count(*) cnt from qna 
+		<if test="categori == 0">
+		where cat_num between 1 and 5 
+		</if>
+		<if test="categori != 0">
+		 where cat_num = #{categori}
+		</if>
 	</select>
 	
 	<select id="searchlist" resultType="qnavo" parameterType="pvo">
