@@ -18,6 +18,12 @@
 							<span class="btn-label mr-2"></span>로그인
 						</a>
 					</div>
+					<div class="form-group">
+						<a href="login" class="btn btn-primary btn-block">
+							<span class="btn-label mr-2"></span>회원가입
+						</a>
+					</div>
+					
 					<!-- 로그인 창 끝 -->
 					<!-- 로그인 한 후 시작 -->
 					<div class="user">
@@ -105,6 +111,11 @@
 									<li>
 										<a href="application">
 											<span class="sub-item">대출 신청</span>
+										</a>
+									</li>
+									<li>
+										<a href="fileuploadhome">
+											<span class="sub-item">서류 제출</span>
 										</a>
 									</li>
 									<li>

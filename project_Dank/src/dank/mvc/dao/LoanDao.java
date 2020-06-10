@@ -41,7 +41,17 @@ public class LoanDao {
 	public void fileupload(LoanFileVO vo) {
 		ss.insert("loan.fileupload", vo);
 	}
+	public void refileupload(LoanFileVO vo) {
+		ss.update("loan.refileupload", vo);
+	}
+	
 	public void stateupdate(int lc_num) {
 		ss.update("loan.stateupdate",lc_num);
+	}
+	public LoanFileVO fileuploadhome(int mem_code) {
+		return ss.selectOne("loan.fileuploadhome",mem_code);
+	}
+	public LoanFileVO filedetail(int lc_num) {
+		return ss.selectOne("loan.filedetail",lc_num);
 	}
 }
