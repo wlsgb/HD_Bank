@@ -113,7 +113,7 @@ public class SecurityCode {
 						if (securityCheckData[i - 1][j].equals(securityCheckData[i][j])) {
 							continue xx;
 						}
-
+ 
 						break;
 					case 1:
 						fronBack = (int) (Math.random() * 2 + 1);
