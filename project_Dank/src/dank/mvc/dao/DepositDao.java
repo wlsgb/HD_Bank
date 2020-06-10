@@ -35,8 +35,12 @@ public class DepositDao {
 		return ss.selectOne("deposit.insDetail",ins_code);
 	}
 	
-	public List<SavingVO> savinglist(){
+	public List<SavingVO> getSavlist(){
 		return ss.selectList("deposit.savlist");
+
+	}
+	public List<Installment_savingVO> getInslist(){
+		return ss.selectList("deposit.inslist");
 
 	}
 }
