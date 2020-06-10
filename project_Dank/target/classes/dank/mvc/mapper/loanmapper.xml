@@ -12,7 +12,7 @@
   	</select>
   	
   	<insert id="check" parameterType="int">
-  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.neqxtVal,'심사대기중',1,#{lp_num})
+  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.nextVal,'선정대기',1,#{lp_num})
   	</insert>
   	
   	<insert id="application" parameterType="lpvo">
@@ -41,23 +41,37 @@
   			<result property="lp_cancelfee" column="lp_cancelfee"/>
   			<result property="lp_maximum" column="lp_maximum"/>
   		</association>
+  		<association property="loanRepayVO" column="lc_num" javaType="lrvo">
+  			<id property="lc_num" column="lc_num"/>
+  			<result property="lr_amount" column="lr_amount"/>
+  			<result property="lr_balance" column="lr_balance"/>
+  			<result property="lr_interest" column="lr_interest"/>
+  			<result property="lr_repaydate" column="lr_repaydate"/>
+  			<result property="lr_firstdate" column="lr_firstdate"/>
+  			<result property="lr_reaccount" column="lr_reaccount"/>
+  			<result property="lr_startdate" column="lr_startdate"/>
+  		</association>
   	</resultMap>
   	
-
+  
+	
+	
   	<select id="checkdetaillist" resultMap="check">
   		select la.lc_num lc_num,la.la_hamount la_hamount,la.la_startdate la_startdate,la.la_livingterm la_livingterm,la.la_repayterm la_repayterm, la.lr_type lr_type, to_char(la.la_sysdate,'yyyy-mm-dd') la_sysdate,
 			lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num,
-			lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum
-		from loan_application la, loan_check lc,loan_product lp
-		where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1
+			lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum,
+            lr.lr_amount lr_amount,lr.lr_balance lr_balance, lr.lr_interest lr_interest, lr.lr_repaydate lr_repaydate, lr.lr_firstdate lr_firstdate, lr.lr_reaccount lr_reaccount,to_char(lr.lr_startdate,'yyyy-mm-dd') lr_startdate
+            from loan_application la, loan_check lc,loan_product lp,loan_repay lr
+		where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.lc_num=lr.lc_num(+) and lc.mem_code=1
   	</select>
   	
   	<select id="checkdetail" resultMap="check" parameterType="int">
   	select la.lc_num lc_num,la.la_hamount la_hamount,la.la_startdate la_startdate,la.la_livingterm la_livingterm,la.la_repayterm la_repayterm, la.lr_type lr_type, to_char(la.la_sysdate,'yyyy-mm-dd') la_sysdate,
-lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num, 
-lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum 
-from loan_application la, loan_check lc,loan_product lp 
-where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1 and lc.lc_num=#{lc_num}
+			lc.lc_num lc_num,lc.lc_state lc_state, lc.mem_code mem_code, lc.hd_code hd_code,lc.lp_num lp_num,
+			lp.lp_num lp_num,lp.lp_name lp_name,lp.lp_interestrate lp_interestrate,lp.lp_cancelfee lp_cancelfee,lp.lp_maximum,
+            lr.lr_amount lr_amount,lr.lr_balance lr_balance, lr.lr_interest lr_interest, lr.lr_repaydate lr_repaydate, lr.lr_firstdate lr_firstdate, lr.lr_reaccount lr_reaccount, to_char(lr.lr_startdate,'yyyy-mm-dd') lr_startdate
+            from loan_application la, loan_check lc,loan_product lp,loan_repay lr
+		where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.lc_num=lr.lc_num(+) and lc.mem_code=1 and lc.lc_num=#{lc_num}
   	</select>
   	
   	<insert id="fileupload" parameterType="lfvo">
@@ -128,9 +142,6 @@ where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1 and lc.lc_nu
   	<if test="file16 neq null">
   	,file16=#{file16}
   	</if>
-  	<if test="file16 neq null">
-  	,file16=#{file16}
-  	</if>
   	<if test="file17 neq null">
   	,file17=#{file17}
   	</if>
@@ -145,4 +156,18 @@ where la.lc_num=lc.lc_num and lp.lp_num=lc.lp_num and lc.mem_code=1 and lc.lc_nu
   	</if>
   	where lc_num=#{lc_num}
   	</update>
+  	
+  	<update id="loanstart" parameterType="int">
+  		update loan_check set lc_state = '실행완료' where lc_num = #{lc_num}
+  	</update>
+  	
+  	<insert id="loanrepay" parameterType="lrvo">
+  		insert into loan_repay values(#{lc_num},#{lr_amount},#{lr_balance},#{lr_interest},#{lr_repaydate},#{lr_firstdate},#{lr_reaccount},sysdate)
+  	</insert>
+  	
+  	<select id="selectaccount" resultType="acvo">
+  	select ac.ac_code, ac.ac_num from account  
+        ac, product pr where ac.pro_code=pr.pro_code and mem_code = 4 and sav_code is not null
+        
+    </select>
   </mapper>

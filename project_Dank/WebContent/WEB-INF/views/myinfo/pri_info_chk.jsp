@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <div class="content">
@@ -45,9 +46,13 @@
 									
 									
 										
-										
+										<c:forEach items="${list }" var="e" varStatus="i">
 										
 									<div class="card-body" style="">
+									
+									
+									
+							
 									
 									<table class="table mt-3">
 										<thead>
@@ -58,19 +63,26 @@
 												<th scope="col"></th>
 											</tr>
 										</thead>
+										
 										<tbody>
+										
+										
 											<tr>
-												<td>이름</td>
-												<td>홍길동</td>
+												<td> 이름 </td>
+												<td> ${e.mem_name}</td>
 												
 											</tr>
 											<tr>
 												<td>휴대폰번호</td>
-												<td>010-1234-5678</td>
+												<td>${e.mem_phn}</td>
 												
 											</tr>
 											
+											
+											
+										
 										</tbody>
+										
 									</table>
 									
 									<table class="table mt-3">
@@ -85,7 +97,7 @@
 										<tbody>
 											<tr>
 												<td>자택 주소</td>
-												<td>서울시 제주감귤</td>
+												<td> ${e.mem_loc} </td>
 												
 											</tr>
 											<tr>
@@ -142,7 +154,9 @@
 									</table>
 								</div>
 										
-										
+						
+						</c:forEach>
+						
 										
 										
 										<div id="buttons" style="text-align: center;">
