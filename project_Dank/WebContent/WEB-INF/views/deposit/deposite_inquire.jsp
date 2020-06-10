@@ -26,6 +26,18 @@
 				</div>
 				<div class="page-inner mt--5">
 
+					<div style="color: red;">
+					<span>계좌세션심기</span>
+						<form action="getsession" method="post">
+						<input type="text" placeholder="멤버코드입력" name="mem_code">
+						<input type="submit" value="ㄱㄱ">
+						</form>
+<!-- 						<br/> -->
+<!-- 						<br/> -->
+<!-- 						<input type="text" placeholder="입금액" id="dep_money"> -->
+<!-- 						<input type="text" placeholder="출금액" id="wit_money"> -->
+					
+					</div>
 					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
@@ -40,6 +52,9 @@
 									</div>
 
 
+								
+								</div>
+								<div class="card-body">
 								<table class="table">
 													<thead>
 														<tr>
@@ -62,7 +77,7 @@
 													
 														<tr>
 																<td>${e.saving.sav_name }</td>
-																<td>${e.ac_num }</td>
+																<td id="savac${i.index}">${e.ac_num }</td>
 																<td class="text-right">
 																	${e.ac_balance }
 																</td>
@@ -70,32 +85,13 @@
 																<td class="text-right">
 																	<a href="inquire_detail"><input type="button" value="조회"  /></a>
 																	<a href="transfer"><input type="button" value="이체" /></a>
+																	<a href="deposit?ac_num=${e.ac_num }"><input type="button" value="입금" id="depbtn${i.index}"  /></a>
+																	<a href="#"><input type="button" value="출금" /></a>
 																</td>
 														</tr>
 													</c:if>
 													</c:forEach>
-<!-- 														<tr> -->
-<!-- 															<td>저축예금</td> -->
-<!-- 															<td>110-111-45625</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																10,000,000 -->
-<!-- 															</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																<a href="inquire_detail"><input type="button" value="조회"  /></a> -->
-<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
-<!-- 															</td> -->
-<!-- 														</tr> -->
-<!-- 														<tr> -->
-<!-- 															<td>국민예금</td> -->
-<!-- 															<td>110-111-78966</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																30,000,000 -->
-<!-- 															</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																<a href="inquire_detail"><input type="button" value="조회"  /></a> -->
-<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
-<!-- 															</td> -->
-<!-- 														</tr> -->
+
 													
 													
 													</tbody>
@@ -119,6 +115,9 @@
 									</div>
 
 
+								
+								</div>
+								<div class="card-body">
 								<table class="table">
 													<thead>
 														<tr>
@@ -147,6 +146,8 @@
 															<td class="text-right">
 																<a href="inquire_detail"><input type="button" value="조회"  /></a>
 																<a href="transfer"><input type="button" value="이체" /></a>
+																<a href="#"><input type="button" value="입금" /></a>
+																<a href="#"><input type="button" value="출금" /></a>
 															</td>
 														</tr>
 														</c:if>
@@ -169,6 +170,19 @@
 			
 			
 			<script>
+// 			$('#savdeposit').click(function() {
+// 				console.log($('#savacnumid').val())
+//  				location="deposit"
+// 			})
+// 			$(document).ready(function() {
+// 				console.log("sss")
+// 				var getId =$(this).attr("id");
+// 				console.log(getId)
+// 			})
+			
+			
+			
+			
 		Circles.create({
 			id:'circles-1',
 			radius:45,
