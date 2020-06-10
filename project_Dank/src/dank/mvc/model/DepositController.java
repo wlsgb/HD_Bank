@@ -46,50 +46,54 @@ public class DepositController {
 
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
-		List<SavingVO> savlist= depositDao.savinglist();
-		m.addAttribute("savlist",savlist);
-		return "deposit/new";
+		return "deposit_new/new";
+	}
+	
+	@RequestMapping(value = "/saving_detail")
+	public String saving_detail(Model m, int sav_code) {
+		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		m.addAttribute("saving",saving);
+		return "deposit_new/saving_detail";
+	}
+	
+	@RequestMapping(value = "/installment_detail")
+	public String installment_detail(Model m, int ins_code) {
+		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
+		m.addAttribute("ins",ins);
+		return "deposit_new/installment_detail";
 	}
 	
 	@RequestMapping(value = "/saving_new")
-	public String saving_new(Model m, int sav_code) {
-		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-		m.addAttribute("saving",saving);
-		return "deposit/saving_new";
-	}
-	
-	@RequestMapping(value = "/installment_new")
-	public String installment_new(Model m, int ins_code) {
-		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
-		m.addAttribute("ins",ins);
-		return "deposit/installment_new";
+	public String saving_new(Model m) {
+		
+		return "deposit_new/saving_new";
 	}
 	 
 	
-	@RequestMapping(value = "/share_new_req")
-	public String share_new_req() {
-		return "deposit/share_new_req";
-	}
-
-	@RequestMapping(value = "/share_new_res")
-	public String share_new_res() {
-		return "deposit/share_new_res";
-	}
-
-	@RequestMapping(value = "/share_new_insert")
-	public String share_new_insert() {
-		return "deposit/share_new_insert";
-	}
-
-	@RequestMapping(value = "/share_new_complete")
-	public String share_new_complete() {
-		return "deposit/share_new_complete";
-	}
-
-	@RequestMapping(value = "/share_new_check")
-	public String share_new_check() {
-		return "deposit/share_new_check";
-	}
+//	@RequestMapping(value = "/share_new_req")
+//	public String share_new_req() {
+//		return "deposit/share_new_req";
+//	}
+//
+//	@RequestMapping(value = "/share_new_res")
+//	public String share_new_res() {
+//		return "deposit/share_new_res";
+//	}
+//
+//	@RequestMapping(value = "/share_new_insert")
+//	public String share_new_insert() {
+//		return "deposit/share_new_insert";
+//	}
+//
+//	@RequestMapping(value = "/share_new_complete")
+//	public String share_new_complete() {
+//		return "deposit/share_new_complete";
+//	}
+//
+//	@RequestMapping(value = "/share_new_check")
+//	public String share_new_check() {
+//		return "deposit/share_new_check";
+//	}
 
 //	@RequestMapping(value = { "/inquire" })
 //	public String inqurePage(

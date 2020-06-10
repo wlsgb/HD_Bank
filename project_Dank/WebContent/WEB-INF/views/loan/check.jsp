@@ -22,7 +22,6 @@
 					</div>
 				</div>
 				<!--대출 신청 조회  -->
-		<form action="" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -44,6 +43,8 @@
 												</thead>
 												<tbody>
 												<c:forEach items="${list }" var="e">
+												<c:if test="${e.lc_state ne '실행완료' }">
+												
 													<tr>
 													 <td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanApplicationVO.la_sysdate }</td>
@@ -51,23 +52,25 @@
 														<td>${e.lc_state }</td>
 														
 														<c:choose>
-															<c:when test="${e.lc_state eq '심사대기중'}">
-														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">심사대기</button></td>														
+															<c:when test="${e.lc_state eq '선정대기'}">
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">선정대기</button></td>														
 															</c:when>
 															<c:when test="${e.lc_state eq '서류제출대기' }">
 														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">서류제출</button></td>
 															</c:when>
-															<c:when test="${e.lc_state eq '승인완료' }">
-														<td><button type="button" class="btn btn-lg btn-primary">대출실행</button></td>
+															
+															<c:when test="${e.lc_state eq '대출승인' }">
+														<td><button type="button" class="btn btn-lg btn-primary loanstart" value="${e.lc_num}">대출실행</button></td>
 															
 															</c:when>
 															<c:otherwise>
-														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">대출실행</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary refile" value="${e.lc_num }">추가제출</button></td>
 															
 															</c:otherwise>
 														</c:choose>	
 														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
+													</c:if>
 												</c:forEach>
 													
 												</tbody>
@@ -81,7 +84,6 @@
 			
 						</div>
 		
-		</form>
 		
 		
 		<!--상환해야하는 대출  -->
@@ -98,30 +100,27 @@
 												<thead>
 													<tr>
 														<th>상품명</th>
-														<th>신청날짜</th>
-														<th>신청금액</th>
-														<th>총상환원액</th>
-														<th>이사상환액</th>
+														<th>대출날짜</th>
+														<th>대출원금</th>
+														<th>대출잔액</th>
+														<th>대출상환</th>
 														<th>상세보기</th>
 													</tr>
 												</thead>
 												<tbody>
+												 <c:forEach items="${list }" var="e">
+													<c:if test="${e.lc_state eq '실행완료'}">
 													<tr>
-														<td>코스모대출</td>
-														<td>2020.05.29</td>
-														<td>30,000,000</td>
-														<td>30,000,000</td>
-														<td>4,000,000</td>
-														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='checkdetail'">상세보기</button></td>
+														<td>${e.loanProductVO.lp_name}</td>
+														<td>${e.loanRepayVO.lr_startdate }</td>
+														<td>${e.loanRepayVO.lr_amount }</td>
+														<td>${e.loanRepayVO.lr_balance }</td>
+														<td><button type="button" class="btn btn-lg btn-primary" value="${e.lc_num }">상환하기</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
-														<tr>
-														<td>억만장자대출</td>
-														<td>2020.05.10</td>
-														<td>300,000,000</td>
-														<td>300,000,000</td>
-														<td>30,000,000</td>
-														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='checkdetail'">상세보기</button></td>
-													</tr>
+													
+													</c:if>
+												 </c:forEach>
 												</tbody>
 											</table>
 										
@@ -146,6 +145,13 @@
 		
 		$('.file').click(function() {
 			location='checkfile?lc_num='+$(this).val();
+		})
+		
+		$('.loanstart').click(function() {
+			location='repaymentstart?lc_num='+$(this).val();
+		})
+		$('.refile').click(function() {
+			location='checkfiledetail?lc_num='+$(this).val();
 		})
 	</script>
 

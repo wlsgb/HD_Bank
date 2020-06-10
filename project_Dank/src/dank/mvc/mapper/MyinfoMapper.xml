@@ -8,4 +8,10 @@
   	<select id="getemail" parameterType="mem" resultType="String">
   	select mem_email from member where mem_name=#{mem_name} and mem_birth=#{mem_birth}
   	</select>
+  	
+  	<select id="getmyinfo"  resultType="mem">
+  		select mem_email mem_email, mem_name mem_name, mem_phn mem_phn, mem_loc mem_loc from member where mem_code='1'
+  	</select> 
+  	
+  	
   </mapper>

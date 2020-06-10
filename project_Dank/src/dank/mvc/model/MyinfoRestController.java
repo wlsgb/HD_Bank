@@ -31,7 +31,6 @@ public class MyinfoRestController {
 			try {
 				deco = URLDecoder.decode(vo.getMem_name(),"UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			vo.setMem_name(deco);
