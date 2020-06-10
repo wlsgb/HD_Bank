@@ -25,12 +25,14 @@ public class SecurityService {
 	// OTP 코드 전송 : 3
 	@RequestMapping(value = "/emailsend")
 	public String emailSend(String email) {
+		
 		StringBuilder content = new StringBuilder();
 		content.append("HD-Bank 계정").append("\n");
 		String emailCode = securityCode.securityCodeMaking(4);
 		content.append("보안 코드 : ").append(emailCode);
 		String name = memberDao.nameChk(email);
 		mail.emailSend(email, name, "보안코드", content.toString());
+		
 		return emailCode;
 	}
 }

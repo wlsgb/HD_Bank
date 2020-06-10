@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import dank.mvc.dao.LoanDao;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanFileVO;
+import dank.mvc.vo.LoanRepayVO;
 
 
 @Service
@@ -23,6 +24,11 @@ public class LoanService {
 	public void fileupload(LoanFileVO vo) {
 		loanDao.fileupload(vo);
 		loanDao.stateupdate(vo.getLc_num());
+	}
+	
+	public void startrepay(LoanRepayVO vo) {
+		loanDao.loanstart(vo.getLc_num());
+		loanDao.loanrepaystart(vo);
 	}
 	
 }
