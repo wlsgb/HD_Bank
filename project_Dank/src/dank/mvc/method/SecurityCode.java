@@ -1,10 +1,15 @@
 package dank.mvc.method;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.vo.security.Security_CardVO;
+import dank.mvc.vo.security.Security_Card_RegVO;
 
 @Repository
 public class SecurityCode {
@@ -27,8 +32,14 @@ public class SecurityCode {
 			back = "";
 			// 앞 자리의 숫자를 랜덤으로 입력한다.
 			for (int i = 0; i < a; i++) {
-				random = (int) (Math.random() * 9);
-				front += random;
+				if (i==0) {
+					random = (int) (Math.random() * 9+1);
+					front += random;
+				}else {
+					random = (int) (Math.random() * 9);
+					front += random;
+				}
+				
 			}
 			// 뒷 자리의 숫자를 랜덤으로 입력한다.
 			for (int i = 0; i < a; i++) {
@@ -42,6 +53,17 @@ public class SecurityCode {
 		return emailSecuCode.toString();
 	}
 
+	public Map<String, String> cardNumControll(Security_CardVO vo) {
+		// 일련번호 2자리 , 상세번호 2가지 2자리씩
+		int randomNum = (int) (Math.random()+1*30);
+		
+		Map<String, String > map = new HashMap<String, String>();
+		
+		return map;
+		
+	}
+	
+	// 보안카드 제작
 	public Security_CardVO securityCardCreate() {
 		Security_CardVO vo = new Security_CardVO();
 		// 일련번호를 넣어준다.
@@ -87,5 +109,212 @@ public class SecurityCode {
 		vo.setSc_detcode_29(subCode[28]);
 		vo.setSc_detcode_30(subCode[29]);
 		return vo;
+	}
+	
+	
+	public String securityCardSend(Security_CardVO vo, String name) {
+		StringBuffer content = new StringBuffer();
+		content.append("<table class=\"__se_tbl\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\" _se2_tbl_template=\"1\" style=\"background-color: rgb(199, 199, 199);\">\r\n" + 
+				"	<tbody>\r\n" + 
+				"	<tr>\r\n" + 
+				"		<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 852px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\" colspan=\"8\" rowspan=\"1\">\r\n" + 
+				"			<p>&nbsp;<span style=\"font-size: 24pt;\">HD 보안카드<span style=\"font-size: 14pt;\"><i>");
+		content.append(name).append("님");
+		content.append("</i></span></span></p>\r\n" + 
+				"		</td>\r\n" + 
+				"		<td style=\"text-align: center; padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 284px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\" colspan=\"4\" rowspan=\"1\">\r\n" + 
+				"			<span style=\"font-size: 12pt;\"><b>&nbsp;일련번호 : ");
+		content.append(vo.getSc_code()).append("</b></span>\r\n" + 
+				"		</td>\r\n" + 
+				"	</tr>");
+		content.append("<tr>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("1");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_1());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("2");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_2());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("3");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_3());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("4");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_4());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("5");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_5());
+			content.append("</p></td>");
+		content.append("</tr><tr>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("6");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_6());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("7");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_7());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("8");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_8());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("9");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_9());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("10");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_10());
+			content.append("</p></td>");
+		content.append("</tr><tr>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("11");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_11());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("12");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_12());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("13");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_13());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("14");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_14());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("15");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_15());
+			content.append("</p></td>");
+		content.append("</tr><tr>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("16");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_16());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("17");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_17());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("18");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_18());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("19");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_19());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("20");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_20());
+			content.append("</p></td>");
+		content.append("</tr><tr>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("21");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_21());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("22");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_22());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("23");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_23());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("24");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_24());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("25");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_25());
+			content.append("</p></td>");
+		content.append("</tr><tr>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("26");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_26());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("27");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_27());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("28");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_28());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("29");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_29());
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(235, 235, 235);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append("30");
+			content.append("</p></td>");
+			content.append("<td style=\"padding: 3px 4px 2px; color: rgb(102, 102, 102); width: 113px; height: 25px; background-color: rgb(255, 255, 255);\" class=\"\"><p style=\"text-align: center; \">");
+			content.append(vo.getSc_detcode_30());
+			content.append("</p></td>");
+		content.append("</tr></tbody></table>");
+		
+		return content.toString();
 	}
 }

@@ -4,24 +4,101 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="deposit">
 	
-<!-- 	<resultMap type="savvo" id="savingqua"> -->
-<!-- 		<id property="sav_code" column="sav_code"/> -->
-<!-- 		<result property="sav_name" column=""/> -->
-<!-- 		<result property="sav_interestrate" column="sav_interestrate"/> -->
-		
-<!-- 		<association property="qualificationYNvo" column="qua_code" javaType="quavo"> -->
-<!-- 			<id property="qua_code" column="qua_code"/> -->
-<!-- 			<result property="qua_minperiod" column="qua_minperiod"/> -->
-<!-- 			<result property="qua_maxperiod" column="qua_maxperiod"/> -->
-<!-- 			<result property="qua_minage" column="qua_minage"/> -->
-<!-- 			<result property="qua_maxage" column="qua_maxage"/> -->
-<!-- 		</association> -->
+
+	<resultMap type="acvo" id="acinqueryResult">
+		<id property="ac_num" column="ac_num"/>
+		<result property="ac_balance" column="ac_balance"/>
+<!-- 		<collection property="product" resultMap="proResult"></collection> -->
+		<collection property="saving" resultMap="savResult"></collection>
+		<collection property="ins" resultMap="insResult"></collection>
+	
+	</resultMap>
+<!-- 	<resultMap type="provo" id="proResult"> -->
 <!-- 	</resultMap> -->
-<!-- 	<select id="savingDetail" parameterType="int" resultMap="savingqua"> -->
-<!-- 		select sav_code sav_code,s.sav_name sav_name,s.sav_interestrate sav_interestrate, -->
-<!-- 				q.qua_code qua_code,q.qua_minperiod qua_minperiod,q.qua_maxperiod qua_maxperiod, -->
-<!-- 				q.qua_minage qua_minage,q.qua_maxage qua_maxage -->
-<!-- 		from saving s, qualificationyn q -->
-<!-- 		where s.qua_code = q.qua_code and sav_code=#{sav_code} -->
-<!-- 	</select> -->
+	<resultMap type="savvo" id="savResult">
+		<result property="sav_name" column="sav_name"/>
+		<result property="shas_code" column="shas_code"/>
+	</resultMap>
+	<resultMap type="insvo" id="insResult">
+		<result property="ins_name" column="ins_name"/>
+		<result property="shac_code" column="shac_code"/>
+	</resultMap>
+
+	<select id="acinquery" resultMap="acinqueryResult" parameterType="int" >
+	select
+	 a.ac_num ac_num
+	 ,a.ac_balance ac_balance
+	 ,nvl(s.sav_name,0) sav_name
+	 ,nvl(s.shas_code,0) shas_code
+	 ,nvl(ins.ins_name,0) ins_name
+	 ,nvl(ins.shac_code,0) shac_code
+	from 
+	 account a
+	 ,product p
+	 ,saving s
+	 , installment_saving ins
+	where
+	 #{mem_code} = a.mem_code 
+	 and a.pro_code=p.pro_code 
+	 and p.sav_code=s.sav_code(+) 
+	 and p.ins_code=ins.ins_code(+)
+	</select>
+
+
+
+	<resultMap type="savvo" id="savingqua">
+		<id property="sav_code" column="sav_code"/>
+		<result property="sav_name" column="sav_name"/>
+		<result property="sav_interestrate" column="sav_interestrate"/>
+		<result property="sav_online" column="sav_online"/>
+		<association property="qualificationVO" column="qua_code" javaType="quavo">
+			<id property="qua_code" column="qua_code"/>
+			<result property="qua_name" column="qua_name"/>
+			<result property="qua_minperiod" column="qua_minperiod"/>
+			<result property="qua_maxperiod" column="qua_maxperiod"/>
+			<result property="qua_minage" column="qua_minage"/>
+			<result property="qua_maxage" column="qua_maxage"/>
+			<result property="qua_minmoney" column="qua_minmoney"/>
+			<result property="qua_maxmoney" column="qua_maxmoney"/>
+		</association>
+	</resultMap>
+	<select id="savingDetail" parameterType="int" resultMap="savingqua">
+		select s.sav_code,s.sav_name,s.sav_interestrate,s.sav_online,
+				q.qua_code,q.qua_name,q.qua_minperiod,q.qua_maxperiod,
+				q.qua_minage,q.qua_maxage,q.qua_minmoney,q.qua_maxmoney
+		from saving s, qualification q
+		where s.qua_code = q.qua_code and sav_code=#{sav_code}
+	</select>
+	
+	<resultMap type="insvo" id="insqua">
+		<id property="ins_code" column="ins_code"/>
+		<result property="ins_name" column="ins_name"/>
+		<result property="ins_online" column="ins_online"/>
+		<result property="ins_interestrate" column="ins_interestrate"/>
+		<result property="ins_monmoney" column="ins_monmoney"/>
+		<result property="ins_term" column="ins_term"/>
+		<result property="shac_code" column="shac_code"/>
+		
+		<association property="qualificationVO" column="qua_code" javaType="quavo">
+			<id property="qua_code" column="qua_code"/>
+			<result property="qua_name" column="qua_name"/>
+			<result property="qua_minperiod" column="qua_minperiod"/>
+			<result property="qua_maxperiod" column="qua_maxperiod"/>
+			<result property="qua_minage" column="qua_minage"/>
+			<result property="qua_maxage" column="qua_maxage"/>
+			<result property="qua_minmoney" column="qua_minmoney"/>
+			<result property="qua_maxmoney" column="qua_maxmoney"/>
+		</association>
+	</resultMap>
+	<select id="insDetail" parameterType="int" resultMap="insqua">
+		select i.ins_code, i.ins_name,i.ins_online,i.ins_interestrate,i.ins_monmoney,i.ins_term,i.shac_code,
+       		q.qua_code,q.qua_name,q.qua_maxage,q.qua_minage,q.qua_maxperiod,q.qua_minperiod,q.qua_maxmoney,q.qua_minmoney
+		from installment_saving i, qualification q
+		where i.qua_code = q.qua_code and ins_code=#{ins_code}
+	</select>
+	
+	<select id="savlist" resultType="savvo">
+		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving
+	</select>
+
 </mapper>

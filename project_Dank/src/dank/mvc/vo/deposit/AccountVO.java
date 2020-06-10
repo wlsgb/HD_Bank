@@ -13,6 +13,32 @@ public class AccountVO {
 //		);
 	private int ac_code,mem_code,ac_balance,pro_code;
 	private String ac_num,ac_pwd,ac_start_date,ac_end_date;
+	
+	private ProductVO product;
+	private SavingVO saving;
+	private Installment_savingVO ins;
+	
+	
+	
+	
+	public ProductVO getProduct() {
+		return product;
+	}
+	public void setProduct(ProductVO product) {
+		this.product = product;
+	}
+	public SavingVO getSaving() {
+		return saving;
+	}
+	public void setSaving(SavingVO saving) {
+		this.saving = saving;
+	}
+	public Installment_savingVO getIns() {
+		return ins;
+	}
+	public void setIns(Installment_savingVO ins) {
+		this.ins = ins;
+	}
 	public int getAc_code() {
 		return ac_code;
 	}
