@@ -11,7 +11,7 @@ public class QualificationVO {
 //			"QUA_MINCAL"	NUMBER		NULL,
 //			"QUA_MAXCAL"	NUMBER		NULL
 //		);
-	private int qua_code,qua_maxage,qua_minage,qua_minmoney,qua_maxmoney,qua_mincal,qua_maxcal;
+	private int qua_code,qua_maxage,qua_minage,qua_minmoney,qua_maxmoney,qua_minperiod,qua_maxperiod;
 	private String qua_name;
 	public int getQua_code() {
 		return qua_code;
@@ -43,17 +43,17 @@ public class QualificationVO {
 	public void setQua_maxmoney(int qua_maxmoney) {
 		this.qua_maxmoney = qua_maxmoney;
 	}
-	public int getQua_mincal() {
-		return qua_mincal;
+	public int getQua_minperiod() {
+		return qua_minperiod;
 	}
-	public void setQua_mincal(int qua_mincal) {
-		this.qua_mincal = qua_mincal;
+	public void setQua_minperiod(int qua_minperiod) {
+		this.qua_minperiod = qua_minperiod;
 	}
-	public int getQua_maxcal() {
-		return qua_maxcal;
+	public int getQua_maxperiod() {
+		return qua_maxperiod;
 	}
-	public void setQua_maxcal(int qua_maxcal) {
-		this.qua_maxcal = qua_maxcal;
+	public void setQua_maxperiod(int qua_maxperiod) {
+		this.qua_maxperiod = qua_maxperiod;
 	}
 	public String getQua_name() {
 		return qua_name;

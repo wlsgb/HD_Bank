@@ -1,14 +1,24 @@
 package dank.mvc.model;
 
+
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.DepositDao;
+
+import dank.mvc.vo.deposit.AccountVO;
+
+import dank.mvc.vo.deposit.Installment_savingVO;
+
+
 import dank.mvc.vo.deposit.SavingVO;
 
 
@@ -23,16 +33,25 @@ public class DepositController {
 	}
 
 	@RequestMapping(value = "/new")
-	public String newPage() {
+	public String newPage(Model m) {
+		List<SavingVO> savlist= depositDao.savinglist();
+		m.addAttribute("savlist",savlist);
 		return "deposit/new";
 	}
 	
-//	@RequestMapping(value = "/saving_new")
-//	public String saving_new(Model m, int sav_code) {
-//		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-//		m.addAttribute("saving",saving);
-//		return "deposit/saving_new";
-//	}
+	@RequestMapping(value = "/saving_new")
+	public String saving_new(Model m, int sav_code) {
+		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		m.addAttribute("saving",saving);
+		return "deposit/saving_new";
+	}
+	
+	@RequestMapping(value = "/installment_new")
+	public String installment_new(Model m, int ins_code) {
+		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
+		m.addAttribute("ins",ins);
+		return "deposit/installment_new";
+	}
 	 
 	
 	@RequestMapping(value = "/share_new_req")
@@ -73,7 +92,25 @@ public class DepositController {
 		ModelAndView mav = new ModelAndView();
 		
 		
+	
 		
+		
+		
+		List<AccountVO> aclist = depositDao.getaclist(1);
+		for(AccountVO e :aclist) {
+			
+			System.out.println(e.getAc_num());
+			System.out.println(e.getAc_balance());
+			System.out.println(e.getSaving().getSav_name());
+			System.out.println(e.getSaving().getShas_code());
+			System.out.println(e.getIns().getIns_name());
+			System.out.println(e.getIns().getShac_code());
+			System.out.println("*******************");
+			
+			
+			
+		}
+		mav.addObject("aclist",aclist);
 		mav.setViewName("deposit/deposite_inquire");
 		
 		return mav;

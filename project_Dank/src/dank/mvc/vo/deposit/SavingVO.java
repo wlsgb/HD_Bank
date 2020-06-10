@@ -11,6 +11,16 @@ public class SavingVO {
 //		);
 	private int sav_code,sav_interestrate,sav_online,shas_code,qua_code;
 	private String sav_name;
+	private QualificationVO qualificationVO;
+	
+	
+	public QualificationVO getQualificationVO() {
+		return qualificationVO;
+	}
+	public void setQualificationVO(QualificationVO qualificationVO) {
+		this.qualificationVO = qualificationVO;
+	}
+	
 	public int getSav_code() {
 		return sav_code;
 	}

@@ -28,7 +28,7 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-head-row card-tools-still-right">
-							<h4 class="card-title">슈퍼 정기예금</h4>
+							<h4 class="card-title">${saving.sav_name}</h4>
 							<div class="card-tools">
 								<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
 								<button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
@@ -58,7 +58,7 @@
 															<p class="card-category">기간</p>
 															<c:choose>
 																<c:when test="${saving.qua_code != 0}">
-																	<h4 class="card-title">${saving.qua_minperiod }~${saving.qua_maxperiod }개월<br/></h4>
+																	<h4 class="card-title">${saving.qualificationVO.qua_minperiod }~${saving.qualificationVO.qua_maxperiod }개월<br/></h4>
 																</c:when>
 																<c:when test="${saving.qua_code == 0}">
 																	<h4 class="card-title">제한없음</h4>
