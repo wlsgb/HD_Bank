@@ -42,12 +42,12 @@
 											<span class="blockquote blockquote-primary">보안카드 비밀번호 입력</span>
 											<form action="" method="post">
 												<div class="form-group">
-													<label for="email2">
+													<label for="">
 														<span class="h4 text-danger">
-															[일련번호]
+															[${scd[0][0]}]
 														</span>
 														<span class="h5" style="font-style: italic;">
-															${scd[0][1] }
+															${scd[0][1]}
 														</span>에서 두자리 </label>
 													<input type="password" class="form-control" id="email2" placeholder="[일련번호] - ${scd[0][1] }에서 두자리">
 												</div>

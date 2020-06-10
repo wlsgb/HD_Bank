@@ -69,7 +69,7 @@ public class SecurityCode {
 				if (i == 0) {
 					switch (j) {
 					case 0:
-						securityCheckData[i][j] = "sc_code";
+						securityCheckData[i][j] = "일련번호";
 						break;
 					case 1:
 						fronBack = (int) (Math.random() * 2 + 1);
