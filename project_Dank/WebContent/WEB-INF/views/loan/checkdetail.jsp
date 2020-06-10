@@ -48,7 +48,7 @@
 													<label class="col-2 control-label" >대출번호</label>
 													<div class="col-10">
 														${vo.lc_num }
-														<input type="hidden" name="lp_num" id="lp_num" value="${vo.lc_num }">
+														<input type="hidden" name="lc_num" id="lc_num" value="${vo.lc_num }">
 													</div>
 												</div>
 												
@@ -111,25 +111,7 @@
 												
 												
 												
-												<hr>
-												<h3>첨부 파일</h3>
-												<div class="form-group">
-												<label for="file1" >주민등록등본</label>
-												<input type="file" class="form-control-file" id="file1">
-											</div>
-											<div class="form-group">
-												<label for="file2" >주민등록초본</label>
-												<input type="file" class="form-control-file" id="file2">
-											</div>
-											<div class="form-group">
-												<label for="file3" >가족관계증명서</label>
-												<input type="file" class="form-control-file" id="file3">
-											</div>
-											<div class="form-group">
-												<label for="file4" >소득금액증명서</label>
-												<input type="file" class="form-control-file" id="file4">
-											</div>
-											
+												
 											
 											</div>
 											<div class="col-1"></div>
@@ -140,8 +122,12 @@
 		<div class="col-sm-6 col-md-2"></div>
 			
 						</div>
-					
-			<p class="text-center"><button type="button" class="btn btn-info" onclick="location='repaymentform'">상환 하기</button></p>
+					<div class="row">
+					<div class="col-3"></div>
+			<p class="text-center col-3"><button type="button" class="btn btn-info" onclick="location='repaymentform'">상환 하기</button></p>
+			<p class="text-center col-3"><button type="button" class="btn btn-info" id="file">제출 서류</button></p>
+					<div class="col-3"></div>
+					</div>
 		</form>
 			</div>
 		
@@ -150,7 +136,8 @@
 
 			
 			<script>
-			
-		console.log('')
+	$('#file').click(function() {
+		location = 'checkfiledetail?lc_num='+$('#lc_num').val();
+	})			
 	</script>
 
