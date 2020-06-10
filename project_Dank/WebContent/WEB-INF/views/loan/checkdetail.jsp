@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 			<div class="content">
 					<div class="panel-header bg-primary-gradient">
 					<div class="page-inner py-5">
@@ -110,6 +110,57 @@
 												</div>
 												
 												
+												<c:if test="${vo.lc_state eq '실행완료'}">
+												<hr>
+													<h3>상환 정보</h3>
+													
+													<div class="form-group row">
+													<label class="col-2 control-label">실행날짜</label>
+													<div class="col-10">
+														${vo.loanRepayVO.lr_startdate }
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-2 control-label">대출원금</label>
+													<div class="col-10">
+														${vo.loanRepayVO.lr_amount }원
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-2 control-label">대출잔액</label>
+													<div class="col-10">
+														${vo.loanRepayVO.lr_balance }원
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-2 control-label">대출이자액</label>
+													<div class="col-10">
+														${vo.loanRepayVO.lr_interest }원
+													</div>
+												</div>
+												
+												
+												<div class="form-group row">
+													<label class="col-2 control-label">상환시작일</label>
+													<div class="col-10">
+														${vo.loanRepayVO.lr_firstdate }
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-2 control-label">대출상환일</label>
+													<div class="col-10">
+														매월 ${vo.loanRepayVO.lr_repaydate }일
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-2 control-label">상환계좌</label>
+													<div class="col-10">
+														${vo.loanRepayVO.lr_reaccount }
+													</div>
+												</div>
+												
+												
+												</c:if>
 												
 												
 											
@@ -122,12 +173,23 @@
 		<div class="col-sm-6 col-md-2"></div>
 			
 						</div>
-					<div class="row">
-					<div class="col-3"></div>
-			<p class="text-center col-3"><button type="button" class="btn btn-info" onclick="location='repaymentform'">상환 하기</button></p>
-			<p class="text-center col-3"><button type="button" class="btn btn-info" id="file">제출 서류</button></p>
-					<div class="col-3"></div>
-					</div>
+					<c:choose>
+					<c:when test="${vo.lc_state eq '선정대기'}">
+					</c:when>
+					<c:when test="${vo.lc_state eq '서류제출대기'}">
+			<p class="text-center"><button type="button" class="btn btn-info" id="file">서류제출</button></p>
+					</c:when>
+					<c:when test="${vo.lc_state eq '대출승인'}">
+					<p class="text-center"><button type="button" class="btn btn-info" id="loanstart">추가서류</button></p>
+					</c:when>
+					<c:when test="${vo.lc_state eq '실행완료'}">
+					<p class="text-center"><button type="button" class="btn btn-info">상환하기</button></p>
+					</c:when>
+					<c:otherwise>
+					<p class="text-center"><button type="button" class="btn btn-info" id="refile">추가서류</button></p>
+					</c:otherwise>
+					
+					</c:choose>
 		</form>
 			</div>
 		
@@ -136,8 +198,17 @@
 
 			
 			<script>
+		
+	
 	$('#file').click(function() {
-		location = 'checkfiledetail?lc_num='+$('#lc_num').val();
-	})			
+			location='checkfile?lc_num='+$(this).val();
+		})
+		
+		$('#loanstart').click(function() {
+			location='repaymentstart?lc_num='+$(this).val();
+		})
+		$('#refile').click(function() {
+			location='checkfiledetail?lc_num='+$(this).val();
+		})
 	</script>
 

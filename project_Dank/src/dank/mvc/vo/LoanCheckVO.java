@@ -5,9 +5,17 @@ public class LoanCheckVO {
 	private String lc_state;
 	private LoanApplicationVO loanApplicationVO;
 	private LoanProductVO loanProductVO;
+	private LoanRepayVO loanRepayVO;
 	
 	
 	
+	
+	public LoanRepayVO getLoanRepayVO() {
+		return loanRepayVO;
+	}
+	public void setLoanRepayVO(LoanRepayVO loanRepayVO) {
+		this.loanRepayVO = loanRepayVO;
+	}
 	public LoanProductVO getLoanProductVO() {
 		return loanProductVO;
 	}
