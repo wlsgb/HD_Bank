@@ -10,7 +10,7 @@
 					<h5 class="text-white op-7 mb-2">
 					<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 					 <span class="h2 mr-1"> > </span>
-					 <a href="deposit_new_req" class="btn btn-white btn-sm btn-border mr-1">신규상품</a> 
+					 <a href="new" class="btn btn-white btn-sm btn-border mr-1">신규</a> 
 					 </h5>
 				</div>
 				<div class="ml-md-auto py-2 py-md-0">
@@ -28,13 +28,13 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-head-row card-tools-still-right">
-							<h4 class="card-title">${ins.ins_name}</h4>
+							<h4 class="card-title">${saving.sav_name}</h4>
 							<div class="card-tools">
 								<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
 								<button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
 							</div>
 						</div>
-						<p class="card-catrgory">적금 상품 / 가입</p>
+						<p class="card-catrgory">예금 상품 / 가입</p>
 					</div>
 					<!-- 카드 바디 시작 -->
 					<div class="card-body">
@@ -44,23 +44,23 @@
 							<div class="col-md-11 ml-auto mr-auto">
 								<div class="row row-card-no-pd">
 									<!-- 기간 파란 카드 시작 -->
-									<div class="col-4">
+									<div class="col-6">
 										<div class="card card-stats card-round">
 											<div class="card-body">
 												<div class="row">
 													<div class="col-5">
 														<div class="icon-big text-center">
-															<i class="fas fa-calendar-alt  text-primary"></i>
+															<i class="icon-user-following  text-primary"></i>
 														</div>
 													</div>
 													<div class="col-7 col-stats">
 														<div class="numbers">
-															<p class="card-category">기간</p>
+															<p class="card-category">대상</p>
 															<c:choose>
-																<c:when test="${ins.qua_code != 0}">
-																	<h4 class="card-title">${ins.qualificationVO.qua_minperiod }~${ins.qualificationVO.qua_maxperiod }개월<br/></h4>
+																<c:when test="${saving.qualificationVO.qua_code != 0}">
+																	<h4 class="card-title">만${saving.qualificationVO.qua_minage } ~ ${saving.qualificationVO.qua_maxage }세 개인<br/></h4>
 																</c:when>
-																<c:when test="${ins.qua_code == 0}">
+																<c:when test="${saving.qualificationVO.qua_code == 0}">
 																	<h4 class="card-title">제한없음</h4>
 																</c:when>
 															</c:choose>
@@ -74,19 +74,26 @@
 									<!-- 기간 파란 카드 끝 -->
 									
 									<!-- 금액 하늘색 카드 시작 -->
-									<div class="col-4">
+									<div class="col-6">
 										<div class="card card-stats card-round">
 											<div class="card-body">
 												<div class="row">
 													<div class="col-5">
 														<div class="icon-big text-center text-warning">
-															<i class="fas fa-donate"></i>
+															<i class="icon-present"></i>
 														</div>
 													</div>
 													<div class="col-7 col-stats">
 														<div class="numbers">
-															<p class="card-category">금액</p>
-															<h4 class="card-title">${ins.qualificationVO.qua_minmoney }원 이상<br/></h4>
+															<p class="card-category">혜택</p>
+															<c:choose>
+																<c:when test="${saving.sav_online != 0}">
+																	<h4 class="card-title">온라인 가입 가능, 수수료면제<br/></h4>
+																</c:when>
+																<c:when test="${saving.sav_online == 0}">
+																	<h4 class="card-title">수수료면제</h4>
+																</c:when>
+															</c:choose>
 														</div>
 													</div>
 												</div>
@@ -94,28 +101,7 @@
 										</div>
 									</div>
 									<!-- 금액 하늘색 카드 끝 -->
-									
-									<!-- 최고 초록색 카드 시작 -->
-									<div class="col-4">
-										<div class="card card-stats card-round">
-											<div class="card-body ">
-												<div class="row">
-													<div class="col-5">
-														<div class="icon-big text-center">
-															<i class="fas fa-external-link-square-alt text-success"></i>
-														</div>
-													</div>
-													<div class="col-7 col-stats">
-														<div class="numbers">
-															<p class="card-category">최고</p>
-															<h4 class="card-title">연 ${ins.ins_interestrate }% <span class="h6">(${ins.qualificationVO.qua_maxperiod}개월)</span></h4>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- 최고 초록색 카드 끝 -->										
+																		
 								</div>
 							</div>
 						</div>	
@@ -126,14 +112,14 @@
 									<div class="row">
 										<div class="col-md-4 ml-auto">
 										<!-- 취소 버튼 -->
-											<button class="btn btn-danger" onclick="">취소</button>
+											<button class="btn btn-danger" onclick="location='new'">취소</button>
 										</div>
-										<c:if test="${ins.ins_online != 0}">
-											<div class="col-3">
-											<!-- 신청 버튼 -->
+										<div class="col-3">
+										<!-- 신청 버튼 -->
+											<c:if test="${saving.sav_online != 0}">
 												<button class="btn btn-primary" onclick="">신청</button>
-											</div>
-										</c:if>
+											</c:if>
+										</div>
 									</div>
 									
 								</div>
