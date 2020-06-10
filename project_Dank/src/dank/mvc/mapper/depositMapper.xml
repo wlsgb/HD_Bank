@@ -100,5 +100,10 @@
 	<select id="savlist" resultType="savvo">
 		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving
 	</select>
+	
+	<select id="inslist" resultType="insvo">
+		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code
+		from installment_saving
+	</select>
 
 </mapper>
