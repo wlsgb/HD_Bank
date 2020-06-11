@@ -49,7 +49,8 @@
 														<span class="h5" style="font-style: italic;">
 															${scd[0][1]}
 														</span>에서 두자리 </label>
-													<input type="password" class="form-control" id="email2" placeholder="[일련번호] - ${scd[0][1] }에서 두자리">
+													<input type="password" class="form-control" id="email2" maxlength="2" 
+													placeholder="[일련번호] - ${scd[0][1] }에서 두자리">
 												</div>
 												<div class="form-group">
 													<label for="email2">
@@ -59,7 +60,8 @@
 														<span class="h5" style="font-style: italic;">
 															${scd[1][1] }
 														</span>에서 두자리 </label>
-													<input type="password" class="form-control" id="email2" placeholder="[${scd[1][0] }] - ${scd[1][1] }에서 두자리">
+													<input type="password" class="form-control" id="email2" maxlength="2" 
+													placeholder="[${scd[1][0] }] - ${scd[1][1] }에서 두자리">
 												</div>
 												<div class="form-group">
 													<label for="email2">
@@ -69,7 +71,8 @@
 														<span class="h5" style="font-style: italic;">
 															${scd[2][1] }
 														</span>에서 두자리 </label>
-													<input type="password" class="form-control" id="email2" placeholder="[${scd[2][0] }] - ${scd[2][1] }에서 두자리">
+													<input type="password" class="form-control" id="email2" maxlength="2"
+													placeholder="[${scd[2][0] }] - ${scd[2][1] }에서 두자리">
 												</div>
 												<div class="card-action">
 													<button type="button" class="btn btn-danger">취소</button>
@@ -131,7 +134,7 @@
 																		<div class="input-group">
 																<c:choose>
 																	<c:when test="${scd[1][1]=='앞'}">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" maxlength="2">
 																		<div class="input-group-append">
 																			<span class="input-group-text">**</span>
 																		</div>
@@ -140,7 +143,7 @@
 																		<div class="input-group-prepend">
 																			<span class="input-group-text">**</span>
 																		</div>
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" maxlength="2">
 																	</c:otherwise>
 																</c:choose>
 																		</div>
@@ -156,7 +159,7 @@
 																		<div class="input-group">
 																<c:choose>
 																	<c:when test="${scd[2][1]=='앞'}">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" maxlength="2">
 																		<div class="input-group-append">
 																			<span class="input-group-text">**</span>
 																		</div>
@@ -165,7 +168,7 @@
 																		<div class="input-group-prepend">
 																			<span class="input-group-text">**</span>
 																		</div>
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" maxlength="2">
 																	</c:otherwise>
 																</c:choose>
 																		</div>
