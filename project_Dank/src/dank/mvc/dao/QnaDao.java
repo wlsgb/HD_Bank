@@ -33,8 +33,8 @@ public class QnaDao {
 		return ss.selectList("qna.searchlist", pvo);
 	}
 	
-	public int getTotalCount(int categori) {
-		return ss.selectOne("qna.totalCount", categori);
+	public int getTotalCount(PageVO vo) {
+		return ss.selectOne("qna.totalCount", vo);
 	}
 	public List<QnaVO> getSearchList(PageVO svo){ // nowpage등으로 연산이 된 start , end
 		return ss.selectList("qna.searchlist",svo);

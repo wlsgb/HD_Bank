@@ -24,6 +24,8 @@
 						</div>
 					</div>
 				</div>
+
+				
 				
 				<!-- 상단의 푸른색 공간 끝 -->
 				<div class="page-inner mt--5">
@@ -31,6 +33,8 @@
 				<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
+								<input type="text"  placeholder="세션 회원 번호" id="mem_num" name="mem_num"/>
+								<input type="button" class="btn" id="sessionBtn" />
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
 										<h4 class="card-title">보안카드</h4>
@@ -162,6 +166,9 @@
 			$("#cancel").click(function() {
 				location = "security";
 			});
+			
+			$("#sessionBtn").click(function() {
+			})
 			
 			$("#codeCheck").click(function() {
 				console.log("emailCode : "+emailCode);
