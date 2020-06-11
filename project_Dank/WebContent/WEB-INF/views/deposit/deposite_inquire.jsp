@@ -145,9 +145,9 @@
 															
 															<td class="text-right">
 																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
-																<a href="#"><input type="button" value="입금" /></a>
-																<a href="#"><input type="button" value="출금" /></a>
+<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
+<!-- 																<a href="#"><input type="button" value="입금" /></a> -->
+<!-- 																<a href="#"><input type="button" value="출금" /></a> -->
 															</td>
 														</tr>
 														</c:if>
