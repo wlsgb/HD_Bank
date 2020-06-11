@@ -34,7 +34,7 @@ public class SecurityController {
 	private Mail mail;
 	
 	@RequestMapping(value = "/security")
-	public String viewSecurity(Model m, int mem_code) {
+	public String viewSecurity(Model m) {
 		
 		return "security/security";
 	}
@@ -49,6 +49,7 @@ public class SecurityController {
 		int code = 2;
 		Security_Card_RegVO vo = securityDao.securityCardDetail(code);
 		m.addAttribute("scrVo",vo);
+		m.addAttribute("scCardNum", vo.getSecCard().getSc_detcode());
 		MemberVO memberVO = memberDao.numToEmailName(code);
 		String name = memberVO.getMem_name();
 		m.addAttribute("name", name);
