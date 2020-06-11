@@ -10,7 +10,7 @@
 	</insert> -->
 
 	<select id="list" resultType="qnavo" parameterType="pvo">
-		select * from( 
+		<!-- select * from( 
 		select rownum r_num, a.* from
 		(
 		select * from qna
@@ -22,10 +22,43 @@
 		</if>
 		  order by 1 desc
 		) a
-		) where r_num between #{start} and #{end}
+		) where r_num between #{start} and #{end} -->
+
+	select * from (
+	select rownum r_num, a.* from
+	(
+	select * from qna
+	<if test="categori == 0">
+		where cat_num between 1 and 5 
+		</if>
+		<if test="categori != 0">
+		 where cat_num = #{categori}
+		</if>
+	<if test="searchValue != null">
+			<choose>
+				<when test="searchType==1">
+				and	cat_num Like '%'|| #{searchValue} ||'%'
+				</when>
+				<when test="searchType==2">
+				and	qna_num Like '%'|| #{searchValue} ||'%'
+				</when>
+				<when test="searchType==3">
+				and	qna_content Like '%'|| #{searchValue} ||'%'
+				</when>
+				<when test="searchType==4">
+				and	qna_date Like '%'|| #{searchValue} ||'%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+			
+	</if>
+
+	order by 1 desc
+	) a
+	) WHERE r_num between #{start} and #{end}
 	</select>
 	
-	<select id="totalCount" resultType="int" parameterType="int">
+	<select id="totalCount" resultType="int" parameterType="pvo">
 		select count(*) cnt from qna 
 		<if test="categori == 0">
 		where cat_num between 1 and 5 
@@ -33,22 +66,20 @@
 		<if test="categori != 0">
 		 where cat_num = #{categori}
 		</if>
-	</select>
-	
-	<select id="searchlist" resultType="qnavo" parameterType="pvo">
-	select * from qna
-	<if test="searchValue != null">
-	<where>
 		<choose>
-			<when test="searchType == 1">
-				qna_num like '%'|| #{searchValue} ||'%'
-			</when>
-			<when test="searchType == 2">
-				qna_title like '%'|| #{searchValue} ||'%'
-			</when>
-		</choose>
-	</where>
-	</if>
-	order by  asc
+				<when test="searchType==1">
+				and	cat_num Like '%'|| #{searchValue} ||'%'
+				</when>
+				<when test="searchType==2">
+				and	qna_num Like '%'|| #{searchValue} ||'%'
+				</when>
+				<when test="searchType==3">
+				and	qna_content Like '%'|| #{searchValue} ||'%'
+				</when>
+				<when test="searchType==4">
+				and	qna_date Like '%'|| #{searchValue} ||'%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
 	</select>
 </mapper>
