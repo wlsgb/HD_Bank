@@ -34,7 +34,9 @@ public class SecurityController {
 	private Mail mail;
 	
 	@RequestMapping(value = "/security")
-	public String viewSecurity() {
+	public String viewSecurity(Model m, int mem_code) {
+		
+		m.addAttribute("", );
 		return "security/security";
 	}
 	
