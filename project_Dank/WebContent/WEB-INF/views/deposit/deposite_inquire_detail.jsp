@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="content">
 				<div class="panel-header bg-primary-gradient">
@@ -126,45 +126,54 @@
 									<table class="table table-hover">
 										<thead>
 											<tr>
+												<th scope="col">숫자</th>
 												<th scope="col">거래일시</th>
-												<th scope="col">보낸분/받는분</th>
 												<th scope="col">입금액(원)</th>
 												<th scope="col">출금액(원)</th>
 												<th scope="col">잔액(원)</th>
 												<th scope="col">송금메모</th>
-												<th scope="col">거래점</th>
+												
 											</tr>
 										</thead>
 										<tbody>
+										
+	
+										
+										<c:forEach var="e" items="${history}">
 											<tr>
-												<td scope="col">2020.02.24</td>
-												<td scope="col">홍길동</td>
-												<td scope="col">120,000</td>
-												<td scope="col">0</td>
-												<td scope="col">5,000,000</td>
-												<td scope="col">없음</td>
-												<td scope="col">Dank</td>
-											</tr>
-											<tr>
-												<td scope="col">2020.02.25</td>
-												<td scope="col">임성윤</td>
-												<td scope="col">2,334,234,435</td>
-												<td scope="col">5,342,222</td>
-												<td scope="col">999,999,999,999</td>
-												<td scope="col">없음</td>
-												<td scope="col">Dank</td>
-											</tr>
+												<td scope="col">${e.r_num }</td>
+												<td scope="col">${e.dealdate }</td>
+												<td scope="col">${e.dep_money }</td>
+												<td scope="col">${e.wit_money }</td>
+												<td scope="col">${e.balance }</td>
+												<td scope="col">${e.name }</td>
 											
+											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>
 								
-								<div style="margin: auto;">
-								<button class="btn btn-default btn-xs" type="submit">1</button>
-								<button class="btn btn-default btn-xs" type="submit">2</button>
-								<button class="btn btn-default btn-xs" type="submit">3</button>
-								<button class="btn btn-default btn-xs" type="submit">4</button>
-								</div>
+											<div style="display: block; text-align: center;">
+												<c:if test="${paging.startPage != 1 }">
+											<!-- 	이전페이지 -->
+													<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"><</a>
+												</c:if>
+												<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+													var="p">
+													<c:choose>
+														<c:when test="${p == paging.nowPage }">
+															<b>${p }</b>
+														</c:when>
+														<c:when test="${p != paging.nowPage }">
+															<a href="inquire_detail?ac_num=${ac_num }&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+														</c:when>
+													</c:choose>
+												</c:forEach>
+												<c:if test="${paging.endPage != paging.lastPage}">
+													<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">></a>
+												</c:if>
+											</div>
 								<div style="margin:10px auto;">
 								<button type="button" class="btn btn-info btn-sm">엑셀 내리기</button>
 								</div>
