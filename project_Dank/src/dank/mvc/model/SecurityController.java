@@ -36,7 +36,6 @@ public class SecurityController {
 	@RequestMapping(value = "/security")
 	public String viewSecurity(Model m, int mem_code) {
 		
-		m.addAttribute("", );
 		return "security/security";
 	}
 	
