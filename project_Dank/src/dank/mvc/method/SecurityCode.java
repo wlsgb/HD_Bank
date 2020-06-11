@@ -69,7 +69,7 @@ public class SecurityCode {
 				if (i == 0) {
 					switch (j) {
 					case 0:
-						securityCheckData[i][j] = "sc_code";
+						securityCheckData[i][j] = "일련번호";
 						break;
 					case 1:
 						fronBack = (int) (Math.random() * 2 + 1);
@@ -108,12 +108,10 @@ public class SecurityCode {
 				} else if (i == 2) {
 					switch (j) {
 					case 0:
-						randomNum = (int) (Math.random() * 30 + 1);
-						securityCheckData[i][j] = String.valueOf(randomNum);
-						if (securityCheckData[i - 1][j].equals(securityCheckData[i][j])) {
-							continue xx;
-						}
-
+						do {
+							randomNum = (int) (Math.random() * 30 + 1);
+							securityCheckData[i][j] = String.valueOf(randomNum);
+						} while (securityCheckData[i - 1][j].equals(securityCheckData[i][j]));
 						break;
 					case 1:
 						fronBack = (int) (Math.random() * 2 + 1);
