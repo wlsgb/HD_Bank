@@ -144,7 +144,7 @@
 			var email = null;
 			var emailCode = null;
 			$("#cancel").click(function() {
-				location = "security";
+				location = "#";
 			});
 			
 			$("#codeCheck").click(function() {
