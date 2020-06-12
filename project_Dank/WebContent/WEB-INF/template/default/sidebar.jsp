@@ -11,11 +11,11 @@
 							<form method="post" action="login" >
 								<div class="form-group">
 									<label for="email2">이메일</label>
-									<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email">
+									<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email" value="wlsgb94@naver.com">
 								</div>
 								<div class="form-group">
 									<label for="password">패스워드</label>
-									<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password">
+									<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password" value="1234">
 								</div>
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block" value="로그인" />

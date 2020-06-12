@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!-- article 영역 시작 -->
-<div id="article">
-	<div id="header2">
-		<h1>SurveyClient 예제</h1>
-		<p id="time">Oct 1th, 2020</p>
-	</div>
-	<!-- 로그인 폼작업 s-->
-	<!-- 로그인 폼작업 e-->
 
 	<div class="content">
 		<!-- 상단의 푸른색 공간 시작 -->
@@ -16,7 +9,7 @@
 				<div
 					class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 					<div>
-						<h2 class="text-white pb-2 fw-bold">검색</h2>
+						<h2 class="text-white pb-2 fw-bold">계정</h2>
 						<h5 class="text-white op-7 mb-2">
 							<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span
 								class="flaticon-home"></span></a> <span class="h2 mr-1"> > </span>
@@ -47,11 +40,11 @@
 											<form method="post" action="login" >
 												<div class="form-group">
 													<label for="email2">이메일</label>
-													<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email">
+													<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email" value="wlsgb94@naver.com">
 												</div>
 												<div class="form-group">
 													<label for="password">패스워드</label>
-													<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password">
+													<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password" value="1234">
 												</div>
 												<div class="form-group">
 													<input type="submit" class="btn btn-primary btn-block" value="로그인" />
