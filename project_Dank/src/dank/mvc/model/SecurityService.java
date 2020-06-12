@@ -11,6 +11,7 @@ import dank.mvc.method.SecurityCode;
 @RestController
 public class SecurityService {
 
+	
 	@Autowired
 	private SecurityCode securityCode;
 
