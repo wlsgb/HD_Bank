@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="myinfo">
+  
+  
+  	<select id="getemail" parameterType="mem" resultType="String">
+  	select mem_email from member where mem_name=#{mem_name} and mem_birth=#{mem_birth}
+  	</select>
+  	
+  	<select id="getmyinfo"  resultType="mem">
+  		select mem_email mem_email, mem_name mem_name, mem_phn mem_phn, mem_loc mem_loc from member where mem_code='1'
+  	</select> 
+  	
+  	
+  	<update id="updatemyinfo" parameterType="mem" >
+  		update member set mem_name = #{mem_name}, mem_phn = #{mem_phn},
+		mem_loc = #{mem_loc} 
+		where mem_code=1
+  	</update>
+  	
+  </mapper>
