@@ -15,25 +15,11 @@ public class DepositDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 	
-<<<<<<< HEAD
-	public List<AccountVO> getaclist(int mem_code){
-		return ss.selectList("deposit.acinquery", mem_code);
-=======
-
-//	public SavingVO getSavingQuaDetail(int sav_code) {
-//		return ss.selectOne("deposit.savingDetail",sav_code);
-//	}
 	// 비밀번호 체크
 	public int pwdChk(int acNum) {
 		return ss.selectOne("deposit.accountPwChk",acNum);
->>>>>>> refs/remotes/origin/master
 	}
-<<<<<<< HEAD
 	//특정 예금상품 조회
-=======
-	
-	
->>>>>>> refs/remotes/origin/master
 	public SavingVO getSavingQuaDetail(int sav_code) {
 		return ss.selectOne("deposit.savingDetail",sav_code);
 	}

@@ -43,17 +43,7 @@ public class DepositController {
 	@Autowired
 	private BangkingService bangkingservice;
 	
-<<<<<<< HEAD
-	@Autowired
-	private DepositServicesy depositservicesy;
-	
 	//예금-신규페이지 이동
-=======
-	
-	
-	
-
->>>>>>> refs/remotes/origin/master
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
 		return "deposit_new/new";
