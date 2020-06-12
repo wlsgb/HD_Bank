@@ -45,26 +45,20 @@
 								<div class="col-md-4">
 									<div class="table-responsive table-hover table-sales">
 										<div style="margin: auto;">
-
-											<div id="loginbox" style="border: 1px solid gray;">
-												<div class="form-group has-success">
-													<label for="successInput">email</label><input type="email" id="mem_email" name="mem_email">
+											<form method="post" action="login" >
+												<div id="loginbox" style="border: 1px solid gray;">
+													<div class="form-group has-success">
+														<label for="successInput">email</label>
+														<input type="email" id="mem_email" name="mem_email">
+													</div>
+	
+													<div class="form-group has-success">
+														<label for="successInput">password</label>
+														<input type="password" id="mem_pwd" name="mem_pwd" class="form-control">
+													</div>
+													<input type="submit" value="로그인" >
 												</div>
-
-												<div class="form-group has-success">
-													<label for="successInput">password</label> <input
-														type="password" id="mem_pwd" placeholder="********"
-														class="form-control">
-												</div>
-
-												<div style="color: white; text-align: center;">
-													<a href="#">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<a href="#">취소</a>
-												</div>
-
-											</div>
-
+											</form>
 											<div id="abutton"
 												style="text-align: center; margin-top: 20px;">
 												<a href="memberForm"><button class="btn btn-primary btn-xs"

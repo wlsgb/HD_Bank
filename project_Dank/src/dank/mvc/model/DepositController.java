@@ -27,10 +27,6 @@ public class DepositController {
 	@Autowired
 	private DepositDao depositDao;
 	
-	@RequestMapping(value = "/analysis")
-	public String viewAnalysis() {
-		return "deposit/analysis";
-	}
 
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
@@ -53,10 +49,10 @@ public class DepositController {
 	
 	@RequestMapping(value = "/saving_new")
 	public String saving_new(Model m) {
-		
 		return "deposit_new/saving_new";
 	}
-	 
+	
+	
 	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
@@ -82,6 +78,8 @@ public class DepositController {
 //	public String share_new_check() {
 //		return "deposit/share_new_check";
 //	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
 
 //	@RequestMapping(value = { "/inquire" })
 //	public String inqurePage(
@@ -89,15 +87,12 @@ public class DepositController {
 //			) {
 //		return "deposit/deposite_inquire";
 //	}
+
 	@RequestMapping(value = { "/inquire" })
 	public ModelAndView inquirePage(
 			@RequestParam(value = "mem_code",defaultValue = "0") String mem_code
 			) {
 		ModelAndView mav = new ModelAndView();
-		
-		
-	
-		
 		
 		
 		List<AccountVO> aclist = depositDao.getaclist(1);
@@ -110,7 +105,6 @@ public class DepositController {
 			System.out.println(e.getIns().getIns_name());
 			System.out.println(e.getIns().getShac_code());
 			System.out.println("*******************");
-			
 			
 			
 		}
@@ -160,5 +154,10 @@ public class DepositController {
 	@RequestMapping(value = { "/deposite_cancle_check_select" })
 	public String depositecanclecheckselect() {
 		return "deposit/deposite_cancle_check_select";
+	}
+	
+	@RequestMapping(value = "/analysis")
+	public String viewAnalysis() {
+		return "deposit/analysis";
 	}
 }
