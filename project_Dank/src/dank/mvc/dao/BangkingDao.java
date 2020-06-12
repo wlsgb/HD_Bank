@@ -105,6 +105,12 @@ public class BangkingDao {
 	public int gettotalcnt(Map<String, String> historymap) {
 		return ss.selectOne("bangking.totalcnt", historymap);
 	}
+	public int getmemcodewhentr(int acnum) {
+		return ss.selectOne("bangking.getmemcodewhentr", acnum);
+	}
+	public List<Integer> getmyaclistwhentr(int mem_code) {
+		return ss.selectList("bangking.getmyaclistwhentr", mem_code);
+	}
 	///////////////////////////////////////////////////////////거래내역조회종료/@
 	
 }

@@ -56,6 +56,7 @@
 				<div class="row">
 				<div class="col-1"></div>
 					<div class="row row-card-no-pd col-10" id="target">
+					<input type="hidden" id="lp" value="0">
 						<div class="col-md-12">
 						<h1 class="text-center">대출 정보가 나올 곳입니다.</h1><br>
 						</div>
@@ -75,18 +76,26 @@
 		
 			
 			<script>
-				
 				$('.ajax').click(function() {
-					console.log($(this).find('input').val())
+					
+						
+					
 					$.ajax({
 						url:'productinfo?lp_num='+$(this).find('input').val(),
 						success: function(data) {
 							$('#target').html(data)
 						}
 					})
+					
+					
 				})
 				
 				$('#btn').click(function() {
+					if($('#lp').val()==0){
+						alert('상품을 선택해 주세요.')
+					}else{
+						
 					location='applicationform?lp_num='+$('#target').children('input').val();
+					}
 				})
 	</script>

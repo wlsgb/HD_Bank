@@ -37,24 +37,28 @@
 									<div class="row">
 										<div class="col-8">
 										<!-- 보안카드 신청 form 시작 -->
+										<c:if test="${error=='f'}">
+											<span class="h1 text-danger">다시입력 해주세요.</span>
+										</c:if>
 											<form action="securitycardinfoView" method="post">
 												<table class="table mt-1">
 												<tbody>
 													<tr>
 														<th scope="col">
 															본인 계좌 번호
+															
 														</th>
 														<td>
 															<div class="row">
 																<div class="col-8">
-																	<select class="form-control" id="ac_num" name="ac_num">
+																	<select class="form-control" id="acNameNum" name="acNameNum">
 																		<c:forEach var="e" items="${aclist}">
 																		<c:choose>
 																			<c:when test="${e.saving.sav_name=='0'}">
-																				<option value="${e.ac_num }"> ${e.ins.ins_name} - ${e.ac_num }</option>
+																				<option> ${e.ins.ins_name}-${e.ac_num }</option>
 																			</c:when>
 																			<c:otherwise>
-																				<option value="${e.ac_num }"> ${e.saving.sav_name} - ${e.ac_num }</option>
+																				<option> ${e.saving.sav_name}-${e.ac_num }</option>
 																			</c:otherwise>
 																		</c:choose>
 																		</c:forEach>
@@ -103,17 +107,6 @@
 															</div>
 														</td>
 													</tr>
-													<tr>
-														<th scope="col">주민등록번호</th>
-														<td>
-															<div class="row">
-																<div class="col-6">
-																	<input type="text" id="mem_birth" name="mem_birth" required="required"
-																	class="form-control input-full" placeholder="(앞 6자리)" maxlength="6">
-																</div>
-															</div>
-														</td>
-													</tr>
 												</tbody>
 												<tfoot>
 													<tr>
@@ -154,9 +147,6 @@
 			$("#cancel").click(function() {
 				location = "security";
 			});
-			
-			$("#sessionBtn").click(function() {
-			})
 			
 			$("#codeCheck").click(function() {
 				console.log("emailCode : "+emailCode);
