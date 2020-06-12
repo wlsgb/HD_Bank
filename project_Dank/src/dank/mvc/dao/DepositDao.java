@@ -19,6 +19,10 @@ public class DepositDao {
 //	public SavingVO getSavingQuaDetail(int sav_code) {
 //		return ss.selectOne("deposit.savingDetail",sav_code);
 //	}
+	// 비밀번호 체크
+	public int pwdChk(int acNum) {
+		return ss.selectOne("deposit.accountPwChk",acNum);
+	}
 	
 	
 	public SavingVO getSavingQuaDetail(int sav_code) {

@@ -35,49 +35,36 @@
 		<!-- 상단의 푸른색 공간 끝 -->
 		<div class="page-inner mt--5">
 			<!-- 페이지 레이아웃 시작 -->
-			<div class="row row-card-no-pd">
+			<div class="row col-md-6 ml-auto mr-auto">
 				<div class="col-md-12">
 					<div class="card">
-
-
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-12">
 									<div class="table-responsive table-hover table-sales">
 										<div style="margin: auto;">
-
-											<div id="loginbox" style="border: 1px solid gray;">
-												<div class="form-group has-success">
-													<label for="successInput">email</label><input type="email" id="mem_email" name="mem_email">
+											<!-- 로그인 기능 시작 -->
+											<form method="post" action="login" >
+												<div class="form-group">
+													<label for="email2">이메일</label>
+													<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email">
 												</div>
-
-												<div class="form-group has-success">
-													<label for="successInput">password</label> <input
-														type="password" id="mem_pwd" placeholder="********"
-														class="form-control">
+												<div class="form-group">
+													<label for="password">패스워드</label>
+													<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password">
 												</div>
-
-												<div style="color: white; text-align: center;">
-													<a href="#">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<a href="#">취소</a>
+												<div class="form-group">
+													<input type="submit" class="btn btn-primary btn-block" value="로그인" />
 												</div>
-
-											</div>
-
-											<div id="abutton"
-												style="text-align: center; margin-top: 20px;">
+											</form>
+											<!-- 로그인 기능 끝 -->
+											<div id="abutton" style="text-align: center; margin-top: 20px;">
 												<a href="memberForm"><button class="btn btn-primary btn-xs"
 														id="ab1">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp; <a
 													href="tap"><button class="btn btn-primary btn-xs"
 														id="ab2">아이디/비밀번호찾기</button></a>
 											</div>
 										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mapcontainer">
-										<div id="map-example" class="vmap"></div>
 									</div>
 								</div>
 							</div>

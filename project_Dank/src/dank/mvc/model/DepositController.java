@@ -46,11 +46,6 @@ public class DepositController {
 	
 	
 	
-	
-	@RequestMapping(value = "/analysis")
-	public String viewAnalysis() {
-		return "deposit/analysis";
-	}
 
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
@@ -73,10 +68,10 @@ public class DepositController {
 	
 	@RequestMapping(value = "/saving_new")
 	public String saving_new(Model m) {
-		
 		return "deposit_new/saving_new";
 	}
-	 
+	
+	
 	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
@@ -102,6 +97,8 @@ public class DepositController {
 //	public String share_new_check() {
 //		return "deposit/share_new_check";
 //	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
 
 //	@RequestMapping(value = { "/inquire" })
 //	public String inqurePage(
@@ -109,6 +106,7 @@ public class DepositController {
 //			) {
 //		return "deposit/deposite_inquire";
 //	}
+
 	@RequestMapping(value = { "/inquire" })
 	public ModelAndView inquirePage(
 			@RequestParam(value = "mem_code",defaultValue = "1") String mem_code
@@ -116,13 +114,14 @@ public class DepositController {
 			) {
 		session.setAttribute("mem_code", mem_code);
 		ModelAndView mav = new ModelAndView();
+
+		System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
 		
 		
-	System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
 		
-		
-		
+
 		List<AccountVO> aclist = bangkingdao.getaclist(Integer.parseInt(session.getAttribute("mem_code").toString()));
+
 		for(AccountVO e :aclist) {
 			
 			System.out.println(e.getAc_num());
@@ -132,7 +131,6 @@ public class DepositController {
 			System.out.println(e.getIns().getIns_name());
 			System.out.println(e.getIns().getShac_code());
 			System.out.println("*******************");
-			
 			
 			
 		}
@@ -169,6 +167,7 @@ public class DepositController {
 		return mav;
 	}
 	
+
 	@RequestMapping(value={ "/withdraw" })
 	public ModelAndView executewithdraw(HttpSession session,int ac_num) {
 		ModelAndView mav = new ModelAndView();
@@ -277,6 +276,7 @@ public class DepositController {
 	
 	
 	
+
 	@RequestMapping(value = { "/inquire_detail" })
 	public ModelAndView inqure_detailPage(
 			HttpSession session
@@ -352,5 +352,10 @@ public class DepositController {
 	@RequestMapping(value = { "/deposite_cancle_check_select" })
 	public String depositecanclecheckselect() {
 		return "deposit/deposite_cancle_check_select";
+	}
+	
+	@RequestMapping(value = "/analysis")
+	public String viewAnalysis() {
+		return "deposit/analysis";
 	}
 }

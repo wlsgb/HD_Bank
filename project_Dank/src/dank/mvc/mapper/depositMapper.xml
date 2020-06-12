@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="deposit">
+
 	<resultMap type="savvo" id="savingqua">
 		<id property="sav_code" column="sav_code"/>
 		<result property="sav_name" column="sav_name"/>
@@ -61,6 +62,10 @@
 	<select id="inslist" resultType="insvo">
 		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code
 		from installment_saving
+	</select>
+	
+	<select id="ac_num_list" resultType="String">
+		select ac_num from account
 	</select>
 
 </mapper>
