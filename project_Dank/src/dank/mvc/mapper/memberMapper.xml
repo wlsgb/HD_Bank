@@ -29,11 +29,14 @@
 		select 
 			mem_code,
 			mem_email,
-			mem_pwd,mem_name,
-			mem_phn,mem_in_date,
+			mem_name,
+			mem_phn,
+			mem_in_date,
 			mem_pri_chk,
 			mem_email_chk,
-			mem_birth,mem_gender,mem_loc
+			mem_birth,
+			mem_gender,
+			mem_loc
 		from member
 		where mem_email=#{mem_email} and mem_pwd=#{mem_pwd}
 	</select>
