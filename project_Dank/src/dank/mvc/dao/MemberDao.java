@@ -30,8 +30,6 @@ public class MemberDao {
 	}
 	
 	public MemberVO memLogin(UserVO user) {
-		System.out.println(user.getMem_email());
-		System.out.println(user.getMem_pwd());
 		return ss.selectOne("member.memlogin", user);
 	}
 
