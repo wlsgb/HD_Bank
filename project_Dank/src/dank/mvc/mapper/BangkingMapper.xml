@@ -254,6 +254,19 @@
 		    				 from account
 		    				  where ac_num=#{ac_num} and mem_code=#{mem_code})
 	  </select>
+	  <select id="getmemcodewhentr" parameterType="int" resultType="int">
+		 	select nvl(mem_code,0)
+				from(
+				select mem_code
+				from account
+				where ac_num=#{acnum} 
+				) right outer join dual on 1=1
+	  </select>
+	  <select id="getmyaclistwhentr" resultType="int" parameterType="int" >
+			select a.ac_num ac_num
+			from account a, product p
+			where a.mem_code=#{mem_code} and a.pro_code=p.pro_code and p.ins_code is null
+	  </select>
 <!--/@거래내역 가져오기 끝 -->
 
 

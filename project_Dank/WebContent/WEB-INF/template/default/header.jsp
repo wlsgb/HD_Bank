@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<div class="main-header">
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue">
@@ -45,21 +46,34 @@
 					
 					<!-- 로그인 후 연장 로그아웃 버튼 시작-->
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+					<c:choose>
+						<c:when test="${member ne null}">
 						<il>
-							<button type="button" class="btn btn-focus btn-xs" id="alert_demo_1"> 홍길동님 </button>	
+							<button type="button" class="btn btn-focus btn-xs" id="alert_demo_1"> ${member.mem_name } </button>	
+							<input type="hidden" id="name" value="${member.mem_name }">
 						</il>	
 						<il>
-							<button class="btn btn-info btn-xs">마이페이지</button>
+							<button class="btn btn-info btn-xs" onclick="location='pri_info_chk'" >마이페이지</button>
 						</il>
 						<il>
-							<button type="button" class="btn btn-focus btn-xs" id="alert_demo_2"> Time : 09:49 </button>		
+							<button type="button" class="btn btn-focus btn-xs" id="counter">0:10:00</button>		
 						</il>
 						<il>
-							<button class="btn btn-info btn-xs">연장</button>
+							<button class="btn btn-info btn-xs" onclick="counter_reset()">연장</button>
 						</il>
 						<il>
-							<button class="btn btn-info btn-xs">로그아웃</button>
+							<button class="btn btn-info btn-xs" onclick="location='logout'">로그아웃</button>
 						</il>
+						</c:when>
+						<c:otherwise>
+						<il>
+							<button class="btn btn-info btn-xs" onclick="location='loginPage'">로그인</button>
+						</il>
+						<il>
+							<button class="btn btn-info btn-xs" onclick="location='memberForm'">회원가입</button>
+						</il>
+						</c:otherwise>
+					</c:choose>
 					</ul>
 					<!-- 로그인 후 연장 로그아웃 버튼 끝-->
 				</div>
@@ -68,6 +82,55 @@
 		</div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+
+$(function() {
+	if($('#name').val()!=null){
+		
+	counter_init()
+	}
+})
+
+var tid;
+var cnt = parseInt(600);//초기값(초단위)
+function counter_init() {
+	tid = setInterval("counter_run()", 1000);
+}
+
+function counter_reset() {
+	clearInterval(tid);
+	cnt = parseInt(600);
+	counter_init();
+}
+
+function counter_run() {
+	document.all.counter.innerText = time_format(cnt);
+	cnt--;
+	if(cnt < 0) {
+		clearInterval(tid);
+		self.location = "logout";
+	}
+}
+function time_format(s) {
+	var nHour=0;
+	var nMin=0;
+	var nSec=0;
+	if(s>0) {
+		nMin = parseInt(s/60);
+		nSec = s%60;
+
+		if(nMin>60) {
+			nHour = parseInt(nMin/60);
+			nMin = nMin%60;
+		}
+	} 
+	if(nSec<10) nSec = "0"+nSec;
+	if(nMin<10) nMin = "0"+nMin;
+
+	return ""+nHour+":"+nMin+":"+nSec;
+}
+
+
+
 		//== Class definition
 		
 		$("#serBtn").click(function() {
@@ -79,7 +142,7 @@
 			var initDemos = function() {
 				//== Sweetalert Demo 1
 				$('#alert_demo_1').click(function(e) {
-					swal('홍길동님 안녕하세요!', {
+					swal($('#name').val()+'님 안녕하세요!', {
 						buttons: {        			
 							confirm: {
 								className : 'btn btn-success'

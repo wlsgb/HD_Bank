@@ -83,10 +83,19 @@
 																</td>
 																
 																<td class="text-right">
-																	<a href="inquire_detail?ac_num=${e.ac_num }"><input type="button" value="조회"  /></a>
+																	<form action="inquire_detail" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="조회"  style="display: inline-block;" />
+																	</form>
 																	<a href="transfer"><input type="button" value="이체" /></a>
-																	<a href="deposit?ac_num=${e.ac_num }"><input type="button" value="입금" id="depbtn${i.index}"  /></a>
-																	<a href="withdraw?ac_num=${e.ac_num }" ><input type="button" value="출금" /></a>
+																	<form action="deposit" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="입금" id="depbtn${i.index}"  />
+																	</form>
+																	<form action="withdraw" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="출금" />
+																	</form>
 																</td>
 														</tr>
 													</c:if>

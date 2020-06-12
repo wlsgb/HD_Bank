@@ -18,17 +18,13 @@ public class MyinfoDao {
 	}
 	
 	
-	 public List<MemberVO> myinfoList(){ 
-		 return ss.selectList("myinfo.getmyinfo");
+	 public List<MemberVO> myinfoList(int mem_code){ 
+		 return ss.selectList("myinfo.getmyinfo",mem_code);
 	 
 	 }
 	 
-	 public void myinfoUpdate(MemberVO vo) {
-		 System.out.println(vo.getMem_name());
-		 System.out.println(vo.getMem_loc());
-		 System.out.println(vo.getMem_phn());
-			ss.update("myinfo.updatemyinfo", vo);
-			
+	 public int myinfoUpdate(MemberVO vo) {
+			return ss.update("myinfo.updatemyinfo", vo);
 		}
 	
 	

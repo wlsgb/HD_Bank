@@ -44,10 +44,24 @@ input[type="number"]::-webkit-inner-spin-button {
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">이름</label>
 													<div class="col-10">
-   														<input type="text" class="form-control"  id="name" readonly="readonly" value="신청자 이름">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_name }">
+   													</div>
+												</div>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">이메일</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_email }">
+   													</div>
+												</div>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">생년월일</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_birth }">
    													</div>
 												</div>
 												
+   														<input type="hidden" class="form-control"  id="mem_code" name="mem_code"  value="${member.mem_code }">
+   												
 												<hr>
 												<h3>대출 정보</h3>
 												<div class="form-group row">
@@ -75,7 +89,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<label for="amount" class="col-2">대출 희망 금액</label>
 												<div class="col-10">
 												<input type="hidden" id="maximum" value="${vo.lp_maximum }">
-												<input type="number" class="form-control" name="la_hamount" id="la_hamount"  placeholder="희망금액">
+												<input type="number" class="form-control" name="la_hamount" id="la_hamount"  placeholder="희망금액" value="0">
 												</div>
 											</div>
 												
@@ -93,6 +107,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<label for="period" class="col-2">거치기간</label>
 												<div class="col-4">
 												<select class="form-control" id="la_livingterm" name="la_livingterm">
+													<option>없음</option>
 													<option>1년</option>
 													<option>2년</option>
 													<option>3년</option>
@@ -101,6 +116,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<label for="period" class="col-2">상환기간</label>
 												<div class="col-4">
 												<select class="form-control" id="la_repayterm" name="la_repayterm">
+													<option>1년</option>
 													<option>2년</option>
 													<option>3년</option>
 													<option>5년</option>
@@ -160,8 +176,9 @@ input[type="number"]::-webkit-inner-spin-button {
 				console.log(date)
 				var dateSplit = date.split("-");
 				var sysdate = new Date(dateSplit[0]+'/'+dateSplit[1]+'/'+dateSplit[2]);
-				sysdate.setDate(sysdate.getDate()+8);
-				var defaultdate = sysdate.toISOString().slice(0,10);
+				var startdate = new Date(dateSplit[0]+'/'+dateSplit[1]+'/'+dateSplit[2]);
+				startdate.setDate(sysdate.getDate()+8);
+				var defaultdate = startdate.toISOString().slice(0,10);
 				$('#la_startdate').attr("value", defaultdate);
 			
 				$('#la_startdate').change(function() {
