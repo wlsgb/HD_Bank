@@ -392,6 +392,7 @@ public class loanController {
 		int day= cal.get(Calendar.DAY_OF_MONTH);
 		vo.setLr_firstdate(year+"/"+month+"/"+day);
 		vo.setLr_reaccount(ac_num);
+		
 		loanService.startrepay(vo);
 		return mav;
 	}

@@ -84,7 +84,10 @@
 <script>
 
 $(function() {
+	if($('#name').val()!=null){
+		
 	counter_init()
+	}
 })
 
 var tid;
