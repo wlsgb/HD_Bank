@@ -18,8 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.MemberDao;
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.PageVO;
 import dank.mvc.vo.UserVO;
+
+
 @Controller
 public class MemberController {
 	@Autowired

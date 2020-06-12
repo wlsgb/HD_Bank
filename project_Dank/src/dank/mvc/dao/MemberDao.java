@@ -8,6 +8,7 @@ import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.UserVO;
 
 
+
 @Repository
 public class MemberDao {
 

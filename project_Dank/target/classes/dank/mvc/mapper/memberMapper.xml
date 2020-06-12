@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="member">
+  	<insert id="add" parameterType="mem">
+		insert into member
+		values(member_seq.nextVal,#{mem_email},#{mem_pwd},#{mem_name},
+		#{mem_phn},sysdate,#{mem_pri_chk},#{mem_email_chk},#{mem_birth},
+		#{mem_gender},#{mem_loc})
+	</insert>
+	<select id="idchk" resultType="int" parameterType="String">
+		select count(*) from member where mem_email =#{mem_email}
+	</select>
+	<insert id="memberjoin" parameterType="mem">
+		insert into member values (member_seq.nextVal,#{mem_email},#{mem_pwd},#{mem_name},#{mem_phn},sysdate,#{mem_pri_chk},#{mem_email_chk},#{mem_birth},#{mem_gender},#{mem_loc})
+	</insert>
+	
+  	<select id="namechk" parameterType="String" resultType="String">
+  		select mem_name from member where mem_email=#{email}
+  	</select>
+
+
+	<select id="serNameEmail" parameterType="int" resultType="mem">
+		select mem_email,mem_name from member where mem_code=#{num}
+	</select>
+	
+	<select id="memlogin" parameterType="user" resultType="mem">
+		select 
+			mem_code,
+			mem_email,
+			mem_name,
+			mem_phn,
+			mem_in_date,
+			mem_pri_chk,
+			mem_email_chk,
+			mem_birth,
+			mem_gender,
+			mem_loc
+		from member
+		where mem_email=#{mem_email} and mem_pwd=#{mem_pwd}
+	</select>
+	
+</mapper>
