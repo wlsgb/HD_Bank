@@ -14,6 +14,8 @@
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								 <span class="h2 mr-1"> > </span>
 								 <a href="pri_info_chk" class="btn btn-white btn-sm btn-border mr-1">고객정보 조회</a>
+								  <span class="h2 mr-1"> > </span>
+								 <a href="pri_info_chk" class="btn btn-white btn-sm btn-border mr-1">고객정보 수정</a>
 								 </h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
@@ -46,13 +48,13 @@
 									
 									
 										
-										<c:forEach items="${list }" var="e" varStatus="i">
+										<form action="updatemyinfo" method="post">
 										
 									<div class="card-body" style="">
 									
 									
 									
-							
+								
 									
 									<table class="table mt-3">
 										<thead>
@@ -64,17 +66,21 @@
 											</tr>
 										</thead>
 										
+									
+										
 										<tbody>
+										
+										
 										
 										
 											<tr>
 												<td> 이름 </td>
-												<td> ${e.mem_name}</td>
+												<td><input type="text" value="${list.mem_name }" class="form-control input-full" id="setname" placeholder="" name="mem_name"></td>
 												
 											</tr>
 											<tr>
 												<td>휴대폰번호</td>
-												<td>${e.mem_phn}</td>
+												<td><input type="text" value="${list.mem_phn }" class="form-control input-full" id="setphn" placeholder="" name="mem_phn"></td>
 												
 											</tr>
 											
@@ -97,7 +103,7 @@
 										<tbody>
 											<tr>
 												<td>자택 주소</td>
-												<td> ${e.mem_loc} </td>
+												<td><input type="text" value="${list.mem_loc }" class="form-control input-full" id="setloc" placeholder="" name="mem_loc"></td>
 												
 											</tr>
 											<tr>
@@ -105,6 +111,8 @@
 												<td>010-1234-5678</td>
 												
 											</tr>
+											
+											
 											
 										</tbody>
 									</table>
@@ -154,17 +162,18 @@
 									</table>
 								</div>
 										
+				
 						
-						</c:forEach>
 						
 										
 										
 										<div id="buttons" style="text-align: center;">
-									<a href="pri_info_chk2"><button class="btn btn-primary btn-round">수정</button></a>
-									<button class="btn btn-primary btn-round">확인</button>
+								
+									<input type="submit" class="btn btn-primary btn-round" value="확인">
+									
 									</div>
 										
-										
+										</form>
 									
 									
 									
