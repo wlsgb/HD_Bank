@@ -29,14 +29,11 @@ public class MemberDao {
 		return ss.selectOne("member.serNameEmail", num);
 	}
 	
-<<<<<<< HEAD
 	public MemberVO memLogin(UserVO user) {
 		System.out.println(user.getMem_email());
 		System.out.println(user.getMem_pwd());
 		return ss.selectOne("member.memlogin", user);
 	}
-=======
->>>>>>> refs/remotes/origin/master
 
 }
 

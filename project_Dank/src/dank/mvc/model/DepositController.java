@@ -36,8 +36,6 @@ public class DepositController {
 	@Autowired
 	private DepositDao depositDao;
 	
-<<<<<<< HEAD
-=======
 	@Autowired
 	private DepositDaosy depositDaosy;
 	
@@ -47,12 +45,6 @@ public class DepositController {
 	@Autowired
 	private DepositServicesy depositservicesy;
 	
-	
-	@RequestMapping(value = "/analysis")
-	public String viewAnalysis() {
-		return "deposit/analysis";
-	}
->>>>>>> refs/remotes/origin/master
 
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
@@ -121,17 +113,13 @@ public class DepositController {
 			) {
 		session.setAttribute("mem_code", mem_code);
 		ModelAndView mav = new ModelAndView();
-		
-		
-<<<<<<< HEAD
-		List<AccountVO> aclist = depositDao.getaclist(1);
-=======
-	System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
+
+		System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
 		
 		
 		
 		List<AccountVO> aclist = depositDao.getaclist(Integer.parseInt(session.getAttribute("mem_code").toString()));
->>>>>>> refs/remotes/origin/master
+
 		for(AccountVO e :aclist) {
 			
 			System.out.println(e.getAc_num());
