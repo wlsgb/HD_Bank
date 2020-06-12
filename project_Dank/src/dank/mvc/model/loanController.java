@@ -1,6 +1,7 @@
 package dank.mvc.model;
 
 
+import java.awt.Checkbox;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayVO;
+import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.AccountVO;
 
 @Controller
@@ -71,33 +73,51 @@ public class loanController {
 	}
 
 	@RequestMapping(value = "/applicationform")
-	public String applicationform(Model model,int lp_num) {
+	public String applicationform(Model model,int lp_num,HttpSession session) {
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			return "login/login";
+		}		
 		LoanProductVO vo = loanDao.getProductInfo(lp_num);
-		System.out.println(vo.getLp_num());
 		model.addAttribute("vo", vo);
 		return "loan/applicationform";
 	}
 
 	@RequestMapping(value = "/applicationsuccess",method = RequestMethod.POST)
-	public String applicationsuccess(int lp_num,LoanApplicationVO avo) {
-		loanService.addloanaplication(avo, lp_num);
+	public String applicationsuccess(LoanCheckVO vo,LoanApplicationVO avo) {
+		System.out.println("memcode:"+vo.getMem_code());
+		loanService.addloanaplication(avo, vo);
 		return "loan/applicationsuccess";
 	}
 
 	@RequestMapping(value = "/check")
-	public ModelAndView check() {
+	public ModelAndView check(HttpSession session) {
 		ModelAndView mav = new ModelAndView("loan/check");
-		List<LoanCheckVO> list =loanDao.checkdetailList();
+
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			mav.setViewName("login/login");
+			return mav;
+		}	
+		
+		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
+		System.out.println(mem_code);
+		List<LoanCheckVO> list =loanDao.checkdetailList(mem_code);
 		System.out.println(list.size());
 		mav.addObject("list", list);
 		return mav;
 	}
 
 	@RequestMapping(value = "/checkdetail")
-	public ModelAndView checkdetail(int lc_num) {
+	public ModelAndView checkdetail(int lc_num,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("loan/checkdetail");
-		mav.addObject("vo",loanDao.checkdetail(lc_num));
+		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
+		LoanCheckVO vo = new LoanCheckVO();
+		vo.setLc_num(lc_num);
+		vo.setMem_code(mem_code);
+		mav.addObject("vo",loanDao.checkdetail(vo));
 		return mav;
 	}
 	@RequestMapping(value = "/checkfile")
@@ -324,9 +344,17 @@ public class loanController {
 	}
 	
 	@RequestMapping(value = "/fileuploadhome")
-	public ModelAndView fileuploadhome() {
+	public ModelAndView fileuploadhome(HttpSession session) {
 		ModelAndView mav = new ModelAndView("loan/fileuploadhome");
-		List<LoanCheckVO> list =loanDao.checkdetailList();
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			mav.setViewName("login/login");
+			return mav;
+		}	
+		
+		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
+		List<LoanCheckVO> list =loanDao.checkdetailList(mem_code);
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -343,13 +371,15 @@ public class loanController {
 		return mav;
 	}
 	@RequestMapping(value = "/loanstart")
-	public  ModelAndView loanstart(int lc_num,int ac_num) {
+	public  ModelAndView loanstart(int lc_num,int ac_num,HttpSession session) {
 		System.out.println(lc_num);
 		ModelAndView mav = new ModelAndView("redirect:check");
+		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
+		LoanCheckVO v = new LoanCheckVO();
+		v.setMem_code(mem_code);
+		v.setLc_num(lc_num);
+		LoanCheckVO check = loanDao.checkdetail(v);
 		LoanRepayVO vo = new LoanRepayVO();
-		LoanCheckVO check = loanDao.checkdetail(lc_num);
-		System.out.println(check.getLp_num());
-		System.out.println(check.getLc_state());
 		vo.setLc_num(check.getLc_num());
 		vo.setLr_amount(check.getLoanApplicationVO().getLa_hamount());
 		vo.setLr_balance(vo.getLr_amount());
@@ -366,11 +396,18 @@ public class loanController {
 		return mav;
 	}
 	@RequestMapping(value = "/repaymentstart")
-	public ModelAndView repaymentstart(int lc_num) {
+	public ModelAndView repaymentstart(int lc_num,HttpSession session) {
 		ModelAndView mav = new ModelAndView("loan/repaymentstart");
-		LoanCheckVO vo = loanDao.checkdetail(lc_num);
+		LoanCheckVO v = new LoanCheckVO();
+		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
+		v.setLc_num(lc_num);
+		v.setMem_code(mem_code);
+		
+		LoanCheckVO vo = loanDao.checkdetail(v);
 		mav.addObject("vo", vo);
-		List<AccountVO> list = loanDao.repayaccount();
+		
+		
+		List<AccountVO> list = loanDao.repayaccount(mem_code);
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -610,8 +647,22 @@ public class loanController {
 	
 	
 	@RequestMapping(value = "/repayment")
-	public String repayment() {
-		return "loan/repayment";
+	public ModelAndView repayment(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView("loan/repayment");
+
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			mav.setViewName("login/login");
+			return mav;
+		}	
+		
+		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
+		System.out.println(mem_code);
+		List<LoanCheckVO> list =loanDao.checkdetailList(mem_code);
+		System.out.println(list.size());
+		mav.addObject("list", list);
+		return mav;		
 	}
 
 	@RequestMapping(value = "/repaymentdetail")

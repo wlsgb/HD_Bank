@@ -6,22 +6,21 @@
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">ëŒ€ì¶œ</h2>
+								<h2 class="text-white pb-2 fw-bold">´ëÃâ</h2>
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								 <span class="h2 mr-1"> > </span>
-								 <a href="check" class="btn btn-white btn-sm btn-border mr-1">ëŒ€ì¶œí˜„í™©ì¡°íšŒ</a>
+								 <a href="check" class="btn btn-white btn-sm btn-border mr-1">´ëÃâÇöÈ²Á¶È¸</a>
 								 </h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
-								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">ë¹ ë¥¸ í˜ì´ì§€</a>
-								<a href="qna" class="btn btn-secondary btn-round">ê³ ê°ì„¼í„°</a>
+								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">ºü¸¥ÆäÀÌÁö</a>
+								<a href="qna" class="btn btn-secondary btn-round">°í°´¼¾ÅÍ</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!--ëŒ€ì¶œ ì‹ ì²­   -->
-		<form action="" class="form-horizontal">
+				
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -32,20 +31,34 @@
 											<div class="col-1"></div>
 											<div class="col-10">
 												
-												<h1>ëŒ€ì¶œ ì‹ ì²­ ì •ë³´</h1>
+												<h1>´ëÃâ Á¤º¸</h1>
 												<hr>
-												<h3>ëŒ€ì¶œì ì •ë³´</h3>
-												<div class="form-group">
-													<label for="name" class="col-sd-2 control-label">ì´ë¦„</label>
-													<div class="col-sd-10">
-   														<input type="email" class="form-control" id="name" readonly="readonly" value="ì‹ ì²­ì ì´ë¦„">
+												<h3>½ÅÃ»ÀÚ Á¤º¸</h3>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">ÀÌ¸§</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_name }">
+   													</div>
+												</div>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">ÀÌ¸ŞÀÏ</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_email }">
+   													</div>
+												</div>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">»ı³â¿ùÀÏ</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_birth }">
    													</div>
 												</div>
 												
+   														<input type="hidden" class="form-control"  id="mem_code" name="mem_code"  value="${member.mem_code }">
+   												
 												<hr>
-												<h3>ëŒ€ì¶œ ì •ë³´</h3>
+												<h3>´ëÃâÁ¤º¸</h3>
 												<div class="form-group row">
-													<label class="col-2 control-label" >ëŒ€ì¶œë²ˆí˜¸</label>
+													<label class="col-2 control-label" >´ëÃâ¹øÈ£</label>
 													<div class="col-10">
 														${vo.lc_num }
 														<input type="hidden" name="lc_num" id="lc_num" value="${vo.lc_num }">
@@ -53,14 +66,14 @@
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >ëŒ€ì¶œìƒíƒœ</label>
+													<label class="col-2 control-label" >´ëÃâ»óÅÂ</label>
 													<div class="col-10">
 														${vo.lc_state }
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >ì‹ ì²­ë‚ ì§œ</label>
+													<label class="col-2 control-label" >´ëÃâ½ÅÃ»ÀÏ</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.la_sysdate }
 													</div>
@@ -68,92 +81,92 @@
 												
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >ëŒ€ì¶œëª…</label>
+													<label class="col-2 control-label" >´ëÃâ¸í</label>
 													<div class="col-10">
 														${vo.loanProductVO.lp_name }
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >í¬ë§ëŒ€ì¶œê¸ˆì•¡</label>
+													<label class="col-2 control-label" >Èñ¸Á´ëÃâ¾×</label>
 													<div class="col-10">
-														${vo.loanApplicationVO.la_hamount }ì›
+														${vo.loanApplicationVO.la_hamount }¿ø
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >í¬ë§ëŒ€ì¶œì¼</label>
+													<label class="col-2 control-label" >Èñ¸Á´ëÃâÀÏ</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.la_startdate }
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >ìƒí™˜ë°©ì‹</label>
+													<label class="col-2 control-label" >»óÈ¯¹æ¹ı</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.lr_type }
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >ê±°ì¹˜ê¸°ê°„</label>
+													<label class="col-2 control-label" >°ÅÄ¡±â°£</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.la_livingterm }
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >ìƒí™˜ê¸°ê°„</label>
+													<label class="col-2 control-label" >»óÈ¯±â°£</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.la_repayterm }
 													</div>
 												</div>
 												
 												
-												<c:if test="${vo.lc_state eq 'ì‹¤í–‰ì™„ë£Œ'}">
+												<c:if test="${vo.lc_state eq '½ÇÇà¿Ï·á'}">
 												<hr>
-													<h3>ìƒí™˜ ì •ë³´</h3>
+													<h3>»óÈ¯Á¤º¸</h3>
 													
 													<div class="form-group row">
-													<label class="col-2 control-label">ì‹¤í–‰ë‚ ì§œ</label>
+													<label class="col-2 control-label">´ëÃâ½ÇÇàÀÏ</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_startdate }
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">ëŒ€ì¶œì›ê¸ˆ</label>
+													<label class="col-2 control-label">´ëÃâ¿ø±İ</label>
 													<div class="col-10">
-														${vo.loanRepayVO.lr_amount }ì›
+														${vo.loanRepayVO.lr_amount }¿ø
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">ëŒ€ì¶œì”ì•¡</label>
+													<label class="col-2 control-label">´ëÃâ</label>
 													<div class="col-10">
-														${vo.loanRepayVO.lr_balance }ì›
+														${vo.loanRepayVO.lr_balance }¿ø
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">ëŒ€ì¶œì´ìì•¡</label>
+													<label class="col-2 control-label">ÀÌÀÚ»óÈ¯¾×</label>
 													<div class="col-10">
-														${vo.loanRepayVO.lr_interest }ì›
+														${vo.loanRepayVO.lr_interest }¿ø
 													</div>
 												</div>
 												
 												
 												<div class="form-group row">
-													<label class="col-2 control-label">ìƒí™˜ì‹œì‘ì¼</label>
+													<label class="col-2 control-label">»óÈ¯½ÃÀÛÀÏ</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_firstdate }
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">ëŒ€ì¶œìƒí™˜ì¼</label>
+													<label class="col-2 control-label">»óÈ¯ÀÏ</label>
 													<div class="col-10">
-														ë§¤ì›” ${vo.loanRepayVO.lr_repaydate }ì¼
+														¸Å¿ù ${vo.loanRepayVO.lr_repaydate }ÀÏ
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">ìƒí™˜ê³„ì¢Œ</label>
+													<label class="col-2 control-label">´ëÃâ°èÁÂ</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_reaccount }
 													</div>
@@ -174,23 +187,22 @@
 			
 						</div>
 					<c:choose>
-					<c:when test="${vo.lc_state eq 'ì„ ì •ëŒ€ê¸°'}">
+					<c:when test="${vo.lc_state eq '¼±Á¤´ë±â'}">
 					</c:when>
-					<c:when test="${vo.lc_state eq 'ì„œë¥˜ì œì¶œëŒ€ê¸°'}">
-			<p class="text-center"><button type="button" class="btn btn-info" id="file">ì„œë¥˜ì œì¶œ</button></p>
+					<c:when test="${vo.lc_state eq '¼­·ùÁ¦Ãâ´ë±â'}">
+			<p class="text-center"><button type="button" class="btn btn-info" id="file" value="${vo.lc_num }">¼­·ùÁ¦Ãâ</button></p>
 					</c:when>
-					<c:when test="${vo.lc_state eq 'ëŒ€ì¶œìŠ¹ì¸'}">
-					<p class="text-center"><button type="button" class="btn btn-info" id="loanstart">ì¶”ê°€ì„œë¥˜</button></p>
+					<c:when test="${vo.lc_state eq '½ÂÀÎ¿Ï·á'}">
+					<p class="text-center"><button type="button" class="btn btn-info" id="loanstart" value="${vo.lc_num }">½ÇÇàÇÏ±â</button></p>
 					</c:when>
-					<c:when test="${vo.lc_state eq 'ì‹¤í–‰ì™„ë£Œ'}">
-					<p class="text-center"><button type="button" class="btn btn-info">ìƒí™˜í•˜ê¸°</button></p>
+					<c:when test="${vo.lc_state eq '½ÇÇà¿Ï·á'}">
+					<p class="text-center"><button type="button" class="btn btn-info" value="${vo.lc_num }">»óÈ¯ÇÏ±â</button></p>
 					</c:when>
 					<c:otherwise>
-					<p class="text-center"><button type="button" class="btn btn-info" id="refile">ì¶”ê°€ì„œë¥˜</button></p>
+					<p class="text-center"><button type="button" class="btn btn-info" id="refile" value="${vo.lc_num }">¼­·ùº¸¿Ï</button></p>
 					</c:otherwise>
 					
 					</c:choose>
-		</form>
 			</div>
 		
 			

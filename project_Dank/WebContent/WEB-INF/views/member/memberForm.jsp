@@ -16,11 +16,11 @@ input[type="number"]::-webkit-inner-spin-button {
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">대출</h2>
+								<h2 class="text-white pb-2 fw-bold">회원가입</h2>
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								 <span class="h2 mr-1"> > </span>
-								 <a href="application" class="btn btn-white btn-sm btn-border mr-1">대출신청</a>
+								 <a href="memberform" class="btn btn-white btn-sm btn-border mr-1">회원가입</a>
 								 </h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
@@ -38,13 +38,13 @@ input[type="number"]::-webkit-inner-spin-button {
 								<div class="card card-stats card-round">
 								
 									<div class="card-body ">
-												<h1>대출 신청</h1>
+												<h1>회원가입</h1>
 												<hr>
 												<h3>신청자 정보</h3>
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">이메일</label>
 													<div class="col-6">
-   														<input type="email" class="form-control"  id="mem_email" name="mem_email">
+   														<input type="email" class="form-control"  id="mem_email1" name="mem_email">
    													<div id="target">
    													<input type='hidden' id='chk' value='0'>
    													</div>
@@ -56,7 +56,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">비밀번호</label>
 													<div class="col-10">
-   														<input type="password" class="form-control"  id="mem_pwd" name="mem_pwd">
+   														<input type="password" class="form-control"  id="mem_pwd1" name="mem_pwd">
    													</div>
 												</div>
 												<div class="form-group row">
@@ -74,7 +74,11 @@ input[type="number"]::-webkit-inner-spin-button {
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">전화번호</label>
 													<div class="col-10 row">
-   														<input type="number" class="form-control col-3"  id="mem_phn1" name="mem_phn1">
+														<select id="mem_phn1" name="mem_phn1" class="col-3">
+															<option>010</option>
+															<option>016</option>
+															<option>010</option>
+														</select>
    														<p class="col-1 text-center">ㅡ</p>
    														<input type="number" class="form-control col-3"  id="mem_phn2" name="mem_phn2">
    														<p class="col-1 text-center">ㅡ</p>
@@ -136,7 +140,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			
 			<script>
-
+		$(function() {
+			
+		
 			$('#check1').click(function() {
 				$.ajax({
 					url:'radio?radio='+$('#check1').val(),
@@ -156,12 +162,8 @@ input[type="number"]::-webkit-inner-spin-button {
 			
 		
 			$("form").submit(function(event) {
-				var id = $('#mem_email').val();
-				var pw = $('#mem_pwd').val();
-				var pw2 = $('#mem_pwd2').val();
 				
-				
-				if ( $('#mem_email') == "") {
+				if ( $('#mem_email1') == "") {
 					alert("id를 입력해주세요.");
 					event.preventDefault(); return; 
 					} 
@@ -169,11 +171,11 @@ input[type="number"]::-webkit-inner-spin-button {
 					alert("email 중복확인을 해주세요.");
 					event.preventDefault(); return; 
 				}
-				if ($('#mem_pwd').val() == "") { 
+				if ($('#mem_pwd1').val() == "") { 
 					alert("pw를 입력해주세요.");
 					event.preventDefault(); return; }
-				if($('#mem_pwd2').val() != pw){
-					alert("pw를 확인해주세요.");
+				if($('#mem_pwd2').val() != $('#mem_pwd1').val()){
+					alert("pw가 일치하지 않습니다.");
 					event.preventDefault(); return; 
 					
 				}
@@ -215,11 +217,10 @@ input[type="number"]::-webkit-inner-spin-button {
 				
 			}); 
 			
+			
 			$('#idchk').click(function() {
-				console.log('123')
-				console.log($('#mem_email'))
 				$.ajax({
-					url:'idchk?mem_email='+$('#mem_email').val(),
+					url:'idchk?mem_email='+$('#mem_email1').val(),
 					success: function(data) {
 						$('#target').html(data)
 					}
@@ -227,11 +228,15 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			})
 			
-			$('#mem_email').keydown(function() {
+			
+			$('#mem_email1').keydown(function() {
 				var idchk="<p style='color:red'>중복검사를 해주세요</p>";
 				idchk+="<input type='hidden' id='chk' value='0'>";
 				$('#target').html(idchk)
 			})
+			
+			
+		})
 	</script>
 
 
