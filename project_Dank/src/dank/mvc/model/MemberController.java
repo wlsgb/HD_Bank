@@ -103,7 +103,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value= "/loginPage")
-	public String goLoginPage(HttpSession session) {
+	public String goLoginPage(HttpSession session, Model m) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user != null) { //세션 정보가 존재한다면 home 으로 
@@ -114,7 +114,6 @@ public class MemberController {
 	}
 	//로그인 페이지로 이동을함 	
 	
-	@ResponseBody
     @RequestMapping(value = "/login" ,method = RequestMethod.POST ,produces = "application/json")
 	public String loginPage(@ModelAttribute UserVO user , HttpServletRequest req, Model m) throws Exception {
 		System.out.println("로그인Cont");
