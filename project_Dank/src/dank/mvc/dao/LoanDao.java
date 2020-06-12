@@ -26,18 +26,18 @@ public class LoanDao {
 		return ss.selectOne("loan.productinfo", lp_num);
 	}
 	
-	public void insertLoanCheck(int lp_num) {
-		ss.insert("loan.check", lp_num);
+	public void insertLoanCheck(LoanCheckVO vo) {
+		ss.insert("loan.check", vo);
 	}
 	public void insertLoanApllication(LoanApplicationVO avo) {
 		ss.insert("loan.application", avo);
 	}
-	public List<LoanCheckVO> checkdetailList() {
-		return ss.selectList("loan.checkdetaillist");
+	public List<LoanCheckVO> checkdetailList(int mem_code) {
+		return ss.selectList("loan.checkdetaillist",mem_code);
 	}
 	
-	public LoanCheckVO checkdetail(int lc_num) {
-		return ss.selectOne("loan.checkdetail",lc_num);
+	public LoanCheckVO checkdetail(LoanCheckVO vo) {
+		return ss.selectOne("loan.checkdetail",vo);
 	}
 	
 	public void fileupload(LoanFileVO vo) {
@@ -62,7 +62,7 @@ public class LoanDao {
 	public void loanrepaystart(LoanRepayVO vo) {
 		ss.insert("loan.loanrepay", vo);
 	}
-	public List<AccountVO> repayaccount() {
-		return ss.selectList("loan.selectaccount");
+	public List<AccountVO> repayaccount(int mem_code) {
+		return ss.selectList("loan.selectaccount",mem_code);
 	}
 }

@@ -33,7 +33,7 @@
 												
 												<h1>제출서류 확인</h1>
 												<hr>
-												
+												 
 												<h3>첨부 파일</h3>
 												
 												<input type="hidden" value="${vo.lc_num }" name="lc_num" id="lc_num"> 
