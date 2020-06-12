@@ -117,7 +117,7 @@
 										<div class="col-3">
 										<!-- 신청 버튼 -->
 											<c:if test="${saving.sav_online != 0}">
-												<button class="btn btn-primary" onclick="">신청</button>
+												<button class="btn btn-primary">신청</button>
 											</c:if>
 										</div>
 									</div>
@@ -134,5 +134,21 @@
 	<!-- 하단 컨텐츠 끝 -->
 </div>
 <script>
+$(function() {
+	$('#depval').html("");
+	$.ajax({
+		url:'savlist',
+		dataType:'JSON',
+		success:function(data){
+			var savlist=data;
+			$('#depname').html("예금상품");
+			//console.log(savlist);
+			for(var e in savlist){
+				//console.log(savlist[e].sav_name);
+				$('#depval').append("<tr><th scope='col'>"+savlist[e].sav_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='saving_detail?sav_code="+savlist[e].sav_code+"'\"></div></div></td></tr>")
+			};
+		}
+	});
+});
 </script>
 

@@ -33,25 +33,11 @@
 				<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
-								<input type="text"  placeholder="세션 회원 번호" id="mem_num" name="mem_num"/>
-								<input type="button" class="btn" id="sessionBtn" />
-								<div class="card-header">
-									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">보안카드</h4>
-									</div>
-									<p class="card-category">
-									신청</p>
-								</div>
-								
 								<div class="card-body">
 									<div class="row">
 										<div class="col-8">
-										
-										
-										
 										<!-- 보안카드 신청 form 시작 -->
 											<form action="securitycardinfoView" method="post">
-											<input type="hidden" value="${mem_num}" />
 												<table class="table mt-1">
 												<tbody>
 													<tr>
@@ -61,9 +47,17 @@
 														<td>
 															<div class="row">
 																<div class="col-8">
-																	<select class="form-control" id="accSel" name="ac_num">
-																		<option>주거래 통장 - 110-12356</option>
-																		<option>슈퍼거래통장 - 120-12556</option>
+																	<select class="form-control" id="ac_num" name="ac_num">
+																		<c:forEach var="e" items="${aclist}">
+																		<c:choose>
+																			<c:when test="${e.saving.sav_name=='0'}">
+																				<option value="${e.ac_num }"> ${e.ins.ins_name} - ${e.ac_num }</option>
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${e.ac_num }"> ${e.saving.sav_name} - ${e.ac_num }</option>
+																			</c:otherwise>
+																		</c:choose>
+																		</c:forEach>
 																	</select>
 																</div>
 															</div>
@@ -84,15 +78,9 @@
 														<th scope="col">이메일</th>
 														<td>
 															<div class="row">
-																<div class="col-4">
-																	<input type="text" id="emailId" name="emailId" required="required"
-																	class="form-control input-full" placeholder="Email">
-																</div>
-																<div class="col-4">
-																	<select class="form-control" id="emailBack" name="emailBack">
-																		<option>@naver.com</option>
-																		<option>@gmail.com</option>
-																	</select>
+																<div class="col-8">
+																	<input type="email" id="mem_email" name="mem_email" readonly="readonly"
+																	class="form-control input-full" value="${memberVO.mem_email }">
 																</div>
 																<div class="col-4">
 																	<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
@@ -105,7 +93,7 @@
 														<td>
 															<div class="row">
 																<div class="col-8">
-																	<input type="text" id="codenum" name="codenum"
+																	<input type="text" id="codenum" name="codenum" required="required"
 																	class="form-control input-full">                                      
 																</div>
 																<div class="col-4 mt-1" id="codeTarget">
@@ -120,7 +108,7 @@
 														<td>
 															<div class="row">
 																<div class="col-6">
-																	<input type="text" id="cnn" name="cnn" re
+																	<input type="text" id="mem_birth" name="mem_birth" required="required"
 																	class="form-control input-full" placeholder="(앞 6자리)" maxlength="6">
 																</div>
 															</div>
@@ -174,14 +162,17 @@
 				console.log("emailCode : "+emailCode);
 				console.log("codenum : "+$("#codenum").val());
 				if ($("#codenum").val() == emailCode) {
+					$("#codenum").attr("readonly", true);
 					$("#codeTarget").html('<button class="btn btn-success btn-sm" disabled="disabled">Success</button>');
 					$("#codeTarget").append('<input type="hidden" value="success" name="successData" />')
+				}else {
+					$("#codeTarget").append('<input type="hidden" value="fail" name="successData" />')
 				}
 				
 			})
 			
 			$('#emailBtn').click(function(e) {
-				email = $("#emailId").val()+ $("#emailBack").val();
+				email = $("#mem_email").val();
 				swal({
 					title: '이메일을 전송 하시겠습니까?',
 					text: "이메일을 확인해주세요. \n"+email,
