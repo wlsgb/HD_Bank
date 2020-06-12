@@ -26,8 +26,23 @@ public class MyInfoController {
 		mav.addObject("list", list);
 		return mav;
 		
+		
+		
 	}
-	
+	@RequestMapping(value="/pri_info_chk2")
+	public ModelAndView momo8(MemberVO vo) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myinfo/pri_info_chk2");
+		return mav;
+	}
+	@RequestMapping(value="/updatemyinfo")
+	public ModelAndView myinfoUpadte2(MemberVO vo) {
+		//myinfoDao.myinfoUpdate(vo);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:pri_info_chk");
+		return mav;
+	}
 	
 	
 	/*
@@ -60,6 +75,6 @@ public class MyInfoController {
 	public String tap() {
 		return "myinfo/tap";
 	}
-
+	
 	
 }

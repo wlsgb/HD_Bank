@@ -9,6 +9,13 @@
 		#{mem_phn},sysdate,#{mem_pri_chk},#{mem_email_chk},#{mem_birth},
 		#{mem_gender},#{mem_loc})
 	</insert>
+	<select id="idchk" resultType="int" parameterType="String">
+		select count(*) from member where mem_email =#{mem_email}
+	</select>
+	<insert id="memberjoin" parameterType="mem">
+		insert into member values (member_seq.nextVal,#{mem_email},#{mem_pwd},#{mem_name},#{mem_phn},sysdate,#{mem_pri_chk},#{mem_email_chk},#{mem_birth},#{mem_gender},#{mem_loc})
+	</insert>
+	
   	<select id="namechk" parameterType="String" resultType="String">
   		select mem_name from member where mem_email=#{email}
   	</select>

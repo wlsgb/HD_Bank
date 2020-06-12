@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="transfer">
+  
+<!--   if1.출금계좌A체크 -->
+	<select id="acchk" parameterType="int" resultType="int">
+	select count(*)
+    from account
+    where ac_num=#{ac_num}
+	</select>
+<!--   if2.입금계좌B체크 -->
+		<!-- 	1과동일 -->
+<!--   if3.출금계좌A잔고체크 -->
+	<select id="balchk" parameterType="hashMap" resultType="int">
+	select ac_balance
+    from account
+    where ac_num=#{ac_num} and mem_code=#{mem_code}
+	</select>
+<!--   tr4.출금계좌A이체증,출금도(출금이랑95%비슷)작성 -->
+	<insert id="pluswit" parameterType="int">
+	insert into withdraw values(WITHDRAW_SEQ.nextval,#{wit_money},sysdate)
+    </insert>
+    <insert id="pluswittr" parameterType="hashMap">
+    insert into transfer values(transfer_seq.nextval,#{at_dps_ac},#{at_set_mony},sysdate)
+    </insert>
+<!--   tr5.출금계좌A입출내역작성,(내통장에표시할거표시) -->
+	<insert id="plusspwit" parameterType="hashMap">
+		  insert into sav_process values(sav_process_seq.nextval
+        ,(select ac_code
+        from account
+        where ac_num=#{ac_num} and mem_code=#{mem_code})
+        ,#{sp_name}
+        ,null
+        ,(select max(WIT_CODE)
+                    from withdraw)
+        ,(select max(AT_CODE)
+                    from transfer)
+        ,(select ac_balance from account where ac_num=#{ac_num} and mem_code=#{mem_code})-(select wit_money 
+                                                                                            from withdraw
+                                                                                            where wit_code=(select max(wit_code) 
+                                                                                                               from withdraw))
+        )
+	</insert>
+<!--   tr6.출금계좌A통장잔고 업데이트 -->
+	<update id="trwitupbal" parameterType="hashMap">
+	 update account 
+        set ac_balance=(select sp_balance 
+                        from sav_process 
+                        where sp_code=(select max(sp_code) 
+                                        from sav_process))
+        where ac_code=
+            (select ac_code
+            from account
+            where ac_num=#{ac_num} and mem_code=#{mem_code})
+	</update>
+
+<!--   tr7.입금계좌B 입금증,이체증작성 -->
+	<select id="plusdep" parameterType="int">
+	insert into deposit values(deposit_seq.nextval,#{dep_money},sysdate)
+	</select>
+	<select id="plusdeptr" parameterType="hashMap">
+	insert into transfer values(transfer_seq.nextval,#{at_dps_ac},#{at_set_mony},sysdate)
+	</select>
+
+<!--   tr8.입금계좌B 입출내역작성(받는분통장에 표시할거 표시) -->
+
+	<insert id="plusspdep" parameterType="hashMap">
+	insert into sav_process values(sav_process_seq.nextval
+    ,(select ac_code
+    from account
+    where ac_num=#{ac_num} and mem_code=#{mem_code})
+    ,#{sp_name}
+    ,(select max(dep_code)
+                from deposit)
+    ,null
+    ,(select max(at_code)
+                from transfer)
+    ,(select ac_balance from account where ac_num=#{ac_num} and mem_code=#{mem_code})+(select dep_money 
+                                                                                        from deposit 
+                                                                                        where dep_code=(select max(dep_code) 
+                                                                                                           from deposit))
+    )
+	</insert>
+
+<!--   tr9.입금계좌B 통장잔고 업데이트 -->
+  	<update id="trdepupbal" parameterType="hashMap">
+  	update account 
+		set ac_balance=(select sp_balance 
+		                from sav_process 
+		                where sp_code=(select max(sp_code) 
+		                                from sav_process))
+		where ac_code=
+		    (select ac_code
+		    from account
+		    where ac_num=#{ac_num} and mem_code=#{mem_code})
+  	</update>
+  
+  
+  </mapper>

@@ -42,16 +42,17 @@
 									<div class="row">
 									<div class="col-md-2 col-lg-2"></div>
 										<div class="col-md-8 col-lg-8">
+										<form action="transfer_process" method="post">
 											<div class="form-group">
 												<label for="email2">출금계좌번호</label>
-<!-- 												<input type="text" class="form-control" style="width: 400px; margin-left: 10%;" id="email2" placeholder="110-111-12345 : 보통예금"> -->
-														<select class="form-control" style="width: 400px; margin-left: 10%;" >
-														  <option>국민 : 1111-2555-7444</option>
-														  <option>기업 : 11188584-547-445</option>
-														  <option>신한 : 116-56-54456-45</option>
-														  <option selected="selected">제주 : 11155-99-88775</option>
+												<input type="text" name="myac" class="form-control" style="width: 400px; margin-left: 10%;" id="email2" placeholder="110-111-12345 : 보통예금">
+<!-- 														<select class="form-control" style="width: 400px; margin-left: 10%;" > -->
+<!-- 														  <option>국민 : 1111-2555-7444</option> -->
+<!-- 														  <option>기업 : 11188584-547-445</option> -->
+<!-- 														  <option>신한 : 116-56-54456-45</option> -->
+<!-- 														  <option selected="selected">제주 : 11155-99-88775</option> -->
 														  
-														</select>
+<!-- 														</select> -->
 											</div>
 											<hr class="my-0">
 											
@@ -60,11 +61,11 @@
 												<br />
 												  <div class="selectgroup w-40 " style="margin-left: 10%;" >
 													<label class="selectgroup-item"  >
-														<input type="radio" name="value" value="50" class="selectgroup-input" >
+														<input type="radio"  value="50" class="selectgroup-input" >
 														<span class="selectgroup-button" style="width: 200px;">+100만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio" name="value" value="200" class="selectgroup-input">
+														<input type="radio"  value="200" class="selectgroup-input">
 														<span class="selectgroup-button" style="width: 200px;">+50만</span>
 													</label>
 													
@@ -72,7 +73,8 @@
 												</div>
 												<div class="form-inline" style="margin-left: 10%;" >
 												<input type="text" placeholder="국민" class="form-control" style=" text-align:center; width: 100px;" />
-												<input type="text" placeholder="입금 계좌 번호" class="form-control" style=" text-align:center; width: 300px;"/>
+												<input type="text" name="yourac" placeholder="입금 계좌 번호" class="form-control" style=" text-align:center; width: 300px;"/>
+												<input type="text" name="youracmem" placeholder="멤버코드" class="form-control" style=" text-align:center; background-color:red; width: 300px;"/>
 												    </div>
 												 </div>
 												 <hr class="my-0">
@@ -81,30 +83,30 @@
 												<br />
 												  <div class="selectgroup w-30 " style="margin-left: 11%;" >
 													<label class="selectgroup-item"  >
-														<input type="radio" name="value" value="50" class="selectgroup-input" >
+														<input type="radio"  value="50" class="selectgroup-input" >
 														<span class="selectgroup-button">+100만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio" name="value" value="200" class="selectgroup-input">
+														<input type="radio"  value="200" class="selectgroup-input">
 														<span class="selectgroup-button">+50만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio" name="value" value="200" class="selectgroup-input">
+														<input type="radio"  value="200" class="selectgroup-input">
 														<span class="selectgroup-button">+10만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio" name="value" value="200" class="selectgroup-input">
+														<input type="radio"  value="200" class="selectgroup-input">
 														<span class="selectgroup-button">+5만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio" name="value" value="200" class="selectgroup-input">
+														<input type="radio"  value="200" class="selectgroup-input">
 														<span class="selectgroup-button">전액</span>
 													</label>
 											
 												</div>
 												<div class="form-inline" style="margin-left: 10%;" >
 												
-												<input type="text" placeholder="이체 금액" class="form-control" style=" text-align:center; width: 360px;"/>
+												<input type="text" name="trmoney" placeholder="이체 금액" class="form-control" style=" text-align:center; width: 360px;"/>
 												    </div>
 												 </div>
 												 <hr class="my-0">
@@ -114,7 +116,7 @@
 												  
 												<div class="form-inline" style="margin-left: 10%;" >
 												
-												<input type="text" placeholder="홍길동" class="form-control" style=" text-align:center; width: 360px;"/>
+												<input type="text" name="youracwrite" placeholder="홍길동" class="form-control" style=" text-align:center; width: 360px;"/>
 												    </div>
 												 </div>
 											
@@ -124,17 +126,17 @@
 												  
 												<div class="form-inline" style="margin-left: 10%;" >
 												
-												<input type="text" placeholder="14자 이내" class="form-control" style=" text-align:center; width: 360px;"/>
+												<input type="text" name="myacwrite" placeholder="14자 이내" class="form-control" style=" text-align:center; width: 360px;"/>
 												    </div>
 												 </div>
 												 
 												 <div class="form-group "  >
 												 <a href="transfer_auto"><button type="button" class="btn btn-success  btn-lg" style="margin-left: 2%; width: 25%; ">자동이체</button></a>
-												 <a href=""><button type="button" class="btn btn-success  btn-lg" style="margin-left: 20%; width: 25%; ">확인</button></a>
+												 <input type="submit" value="확인" class="btn btn-success  btn-lg" style="margin-left: 20%; width: 25%; "/>
 												
 												 </div>
 											
-											
+											</form>
 											
 											
 											
