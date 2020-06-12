@@ -165,24 +165,6 @@ public class DepositController {
 		return mav;
 	}
 	
-	
-	
-	
-	@RequestMapping(value={ "/getsession" })
-	public ModelAndView getsession(HttpServletRequest req,@RequestParam(value = "mem_code") String mem_code) {
-		System.out.println("糕滚内靛绰 : "+mem_code);
-		HttpSession session =req.getSession();
-		//session.invalidate();
-		session.setAttribute("mem_code", mem_code);
-		ModelAndView mav = new ModelAndView();
-		System.out.println("技记持扁 己傍");
-		System.out.println("泅だ 技记 : "+session.getAttribute("mem_code"));
-		mav.setViewName("redirect:inquire?mem_code="+session.getAttribute("mem_code"));
-		return mav;
-	}
-	
-	
-	
 	@RequestMapping(value = { "/inquire_detail" })
 	public ModelAndView inqure_detailPage(
 			HttpSession session

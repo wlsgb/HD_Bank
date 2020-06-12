@@ -1,10 +1,16 @@
 package dank.mvc.model;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import dank.mvc.dao.DepositDao;
 import dank.mvc.dao.MemberDao;
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.method.Mail;
@@ -21,6 +27,10 @@ import dank.mvc.vo.deposit.AccountVO;
 @Controller
 public class SecurityController {
 
+	
+	@Autowired
+	private DepositDao depositDao;
+	
 	@Autowired
 	private SecurityCode securityCode;
 
@@ -34,7 +44,7 @@ public class SecurityController {
 	private Mail mail;
 	
 	@RequestMapping(value = "/security")
-	public String viewSecurity(Model m) {
+	public String viewSecurity(Model m, HttpSession session) {
 		
 		return "security/security";
 	}
@@ -44,13 +54,11 @@ public class SecurityController {
 	public String viewSecuritySertify(Model m) {
 		
 		
-		
-		
-		int code = 2;
-		Security_Card_RegVO vo = securityDao.securityCardDetail(code);
+		int mem_code = 2;
+		Security_Card_RegVO vo = securityDao.securityCardDetail(mem_code);
 		m.addAttribute("scrVo",vo);
 		m.addAttribute("scCardNum", vo.getSecCard().getSc_detcode());
-		MemberVO memberVO = memberDao.numToEmailName(code);
+		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		String name = memberVO.getMem_name();
 		m.addAttribute("name", name);
 		
@@ -61,13 +69,23 @@ public class SecurityController {
 
 	@RequestMapping(value = "/securitycard")
 	public String viewSecurity_card(Model m) {
-		// 보안카드에 멤버 번호를 넘긴다.
-		//m.addAttribute("mem_num", 3);
+		int mem_code = 4;
+		List<AccountVO> aclist = depositDao.getaclist(mem_code);
+		MemberVO memberVO = memberDao.numToEmailName(mem_code);
+		m.addAttribute("aclist", aclist);
+		m.addAttribute("memberVO", memberVO);
 		return "security/securityCard";
 	}
 
 	@RequestMapping(value = "/securitycardinfoView")
-	public String viewSecurityCardInfoView(Model m/* , AccountVO accountVO, MemberVO memberVO */) {
+	public String viewSecurityCardInfoView(Model m , AccountVO accountVO, MemberVO memberVO, @RequestParam(value = "successData", defaultValue = "fail") String successData) {
+		int mem_code = 4;
+		System.out.println(successData);
+		int pwd = depositDao.pwdChk(mem_code);
+		if (accountVO.getAc_pwd().equals(pwd)) {
+			System.out.println("패스워드가 틀렸습니다.");
+			return "redirect:securitycard";
+		}
 		return "security/securityCardInfoView";
 	}
 
