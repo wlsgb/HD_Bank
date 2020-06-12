@@ -20,7 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.DepositDao;
 import dank.mvc.dao.DepositDaosy;
+import dank.mvc.dao.DeposithitoryDao;
 import dank.mvc.service.DepositServicesy;
+import dank.mvc.vo.deposit.PageVO;
+import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
 
 import dank.mvc.vo.deposit.Installment_savingVO;
@@ -37,12 +40,11 @@ public class DepositController {
 	private DepositDaosy depositDaosy;
 	
 	@Autowired
+	private DeposithitoryDao deposithistory;
+	
+	@Autowired
 	private DepositServicesy depositservicesy;
 	
-	@RequestMapping(value = "/analysis")
-	public String viewAnalysis() {
-		return "deposit/analysis";
-	}
 
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
@@ -65,10 +67,10 @@ public class DepositController {
 	
 	@RequestMapping(value = "/saving_new")
 	public String saving_new(Model m) {
-		
 		return "deposit_new/saving_new";
 	}
-	 
+	
+	
 	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
@@ -94,6 +96,8 @@ public class DepositController {
 //	public String share_new_check() {
 //		return "deposit/share_new_check";
 //	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
 
 //	@RequestMapping(value = { "/inquire" })
 //	public String inqurePage(
@@ -101,6 +105,7 @@ public class DepositController {
 //			) {
 //		return "deposit/deposite_inquire";
 //	}
+
 	@RequestMapping(value = { "/inquire" })
 	public ModelAndView inquirePage(
 			@RequestParam(value = "mem_code",defaultValue = "1") String mem_code
@@ -108,13 +113,13 @@ public class DepositController {
 			) {
 		session.setAttribute("mem_code", mem_code);
 		ModelAndView mav = new ModelAndView();
-		
-		
-	System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
+
+		System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
 		
 		
 		
 		List<AccountVO> aclist = depositDao.getaclist(Integer.parseInt(session.getAttribute("mem_code").toString()));
+
 		for(AccountVO e :aclist) {
 			
 			System.out.println(e.getAc_num());
@@ -124,7 +129,6 @@ public class DepositController {
 			System.out.println(e.getIns().getIns_name());
 			System.out.println(e.getIns().getShac_code());
 			System.out.println("*******************");
-			
 			
 			
 		}
@@ -161,27 +165,40 @@ public class DepositController {
 		return mav;
 	}
 	
-	
-	
-	
-	@RequestMapping(value={ "/getsession" })
-	public ModelAndView getsession(HttpServletRequest req,@RequestParam(value = "mem_code") String mem_code) {
-		System.out.println("멤버코드는 : "+mem_code);
-		HttpSession session =req.getSession();
-		//session.invalidate();
-		session.setAttribute("mem_code", mem_code);
-		ModelAndView mav = new ModelAndView();
-		System.out.println("세션넣기 성공");
-		System.out.println("현ㅐ 세션 : "+session.getAttribute("mem_code"));
-		mav.setViewName("redirect:inquire?mem_code="+session.getAttribute("mem_code"));
-		return mav;
-	}
-	
-	
-	
 	@RequestMapping(value = { "/inquire_detail" })
-	public String inqure_detailPage() {
-		return "deposit/deposite_inquire_detail";
+	public ModelAndView inqure_detailPage(
+			HttpSession session
+			,PageVO pvo
+			,@RequestParam(value = "ac_num") int ac_num
+			,@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage
+			,@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage
+			) {
+		System.out.println("ac_num : "+ac_num);
+		System.out.println("session ? : "+session.getAttribute("mem_code"));
+		Map<String, String> historymap = new HashMap<String, String>();
+		historymap.put("ac_num", String.valueOf(ac_num));
+		historymap.put("mem_code", session.getAttribute("mem_code").toString());
+		
+		int total = deposithistory.gettotalcnt(historymap);
+		pvo = new PageVO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		System.out.println("Start : "+pvo.getStartPage());
+		System.out.println("End : "+pvo.getEnd());
+		
+		historymap.put("start", String.valueOf(pvo.getStart()));
+		historymap.put("end", String.valueOf(pvo.getEnd()));
+		
+		
+		
+		List<AccountHistoryVO> history =deposithistory.gethistory(historymap);
+		System.out.println("히스토리 리스트 크기 : "+history.size());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_inquire_detail");
+		mav.addObject("history",history);
+		mav.addObject("paging",pvo);
+		mav.addObject("ac_num",ac_num);
+		return mav;
 	}
 
 	@RequestMapping(value = { "/transfer" })
@@ -217,5 +234,10 @@ public class DepositController {
 	@RequestMapping(value = { "/deposite_cancle_check_select" })
 	public String depositecanclecheckselect() {
 		return "deposit/deposite_cancle_check_select";
+	}
+	
+	@RequestMapping(value = "/analysis")
+	public String viewAnalysis() {
+		return "deposit/analysis";
 	}
 }

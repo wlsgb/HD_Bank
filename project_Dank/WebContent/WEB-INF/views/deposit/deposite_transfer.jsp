@@ -74,6 +74,7 @@
 												<div class="form-inline" style="margin-left: 10%;" >
 												<input type="text" placeholder="±¹¹Î" class="form-control" style=" text-align:center; width: 100px;" />
 												<input type="text" name="yourac" placeholder="ÀÔ±Ý °èÁÂ ¹øÈ£" class="form-control" style=" text-align:center; width: 300px;"/>
+												<input type="text" name="youracmem" placeholder="¸â¹öÄÚµå" class="form-control" style=" text-align:center; background-color:red; width: 300px;"/>
 												    </div>
 												 </div>
 												 <hr class="my-0">

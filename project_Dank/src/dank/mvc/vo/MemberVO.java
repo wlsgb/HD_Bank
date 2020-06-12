@@ -6,8 +6,6 @@ public class MemberVO {
 	private int mem_code,mem_pri_chk,mem_email_chk;
 	private String mem_email, mem_pwd, mem_name, mem_phn, mem_in_date, mem_birth, mem_gender, mem_loc;
 
-	 
-
 	public int getMem_email_chk() {
 		return mem_email_chk;
 	}

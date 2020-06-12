@@ -14,4 +14,10 @@
   	</select> 
   	
   	
+  	<update id="updatemyinfo" parameterType="mem" >
+  		update member set mem_name = #{mem_name}, mem_phn = #{mem_phn},
+		mem_loc = #{mem_loc} 
+		where mem_code=1
+  	</update>
+  	
   </mapper>

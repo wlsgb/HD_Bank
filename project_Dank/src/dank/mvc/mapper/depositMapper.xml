@@ -3,8 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="deposit">
+	<!-- 계좌번호 체크하는 기능 시작 -->
+		<select id="accountPwChk" parameterType="int" resultType="int">
+			select ac_pwd from account where ac_num=#{acNum}
+		</select>
+	<!-- 계좌번호 체크하는 기능 끝 -->
 	
-
 	<resultMap type="acvo" id="acinqueryResult">
 		<id property="ac_num" column="ac_num"/>
 		<result property="ac_balance" column="ac_balance"/>
@@ -104,6 +108,10 @@
 	<select id="inslist" resultType="insvo">
 		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code
 		from installment_saving
+	</select>
+	
+	<select id="ac_num_list" resultType="String">
+		select ac_num from account
 	</select>
 
 </mapper>

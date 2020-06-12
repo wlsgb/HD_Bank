@@ -25,4 +25,20 @@
 		select mem_email,mem_name from member where mem_code=#{num}
 	</select>
 	
+	<select id="memlogin" parameterType="user" resultType="mem">
+		select 
+			mem_code,
+			mem_email,
+			mem_name,
+			mem_phn,
+			mem_in_date,
+			mem_pri_chk,
+			mem_email_chk,
+			mem_birth,
+			mem_gender,
+			mem_loc
+		from member
+		where mem_email=#{mem_email} and mem_pwd=#{mem_pwd}
+	</select>
+	
 </mapper>
