@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
 import dank.mvc.dao.MemberDao;
 import dank.mvc.dao.SecurityDao;
@@ -30,6 +31,9 @@ public class SecurityController {
 	
 	@Autowired
 	private DepositDao depositDao;
+	
+	@Autowired
+	private BangkingDao bangkingdao;
 	
 	@Autowired
 	private SecurityCode securityCode;
@@ -70,7 +74,7 @@ public class SecurityController {
 	@RequestMapping(value = "/securitycard")
 	public String viewSecurity_card(Model m) {
 		int mem_code = 4;
-		List<AccountVO> aclist = depositDao.getaclist(mem_code);
+		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
