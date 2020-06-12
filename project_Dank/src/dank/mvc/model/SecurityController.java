@@ -78,6 +78,11 @@ public class SecurityController {
 		String fir_code = securitySertufyVO.getFir_code();
 		String sec_code = securitySertufyVO.getSec_code();
 		// 정답데이터
+		String[][] realData = (String[][]) session.getAttribute("securityCheckData");
+		
+		if (main_code.equals(realData[0][2])&&fir_code.equals(realData[1][2])&&sec_code.equals(realData[2][2])) {
+			
+		}
 		return page;
 	}
 
