@@ -414,9 +414,9 @@ public class loanController {
 			}
 			
 			if(i==0) {
-				memt[i]=(int) (m+mrer[i]-mrem[i]);
+				memt[i]=(m+mrer[i]-mrem[i]);
 			}else {
-				memt[i] = (int) (memt[i-1]+mrer[i]-mrem[i]);
+				memt[i] = (memt[i-1]+mrer[i]-mrem[i]);
 			}
 			System.out.println(i+1+"달");
 			System.out.println("매월 원금"+mrew[i]);
