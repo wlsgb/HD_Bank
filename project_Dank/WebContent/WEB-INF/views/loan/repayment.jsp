@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 			<div class="content">
 					<div class="panel-header bg-primary-gradient">
@@ -23,8 +23,7 @@
 				</div>
 		
 		<!--상환해야하는 대출  -->
-		<form action="" class="form-horizontal">
-				<div class="row mt--4">
+		<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
 								<div class="card card-stats card-round">
@@ -36,30 +35,27 @@
 												<thead>
 													<tr>
 														<th>상품명</th>
-														<th>신청날짜</th>
-														<th>신청금액</th>
-														<th>총상환원액</th>
-														<th>이사상환액</th>
+														<th>대출날짜</th>
+														<th>대출원금</th>
+														<th>대출잔액</th>
+														<th>대출상환</th>
 														<th>상세보기</th>
 													</tr>
 												</thead>
 												<tbody>
+												 <c:forEach items="${list }" var="e">
+													<c:if test="${e.lc_state eq '실행완료'}">
 													<tr>
-														<td>코스모대출</td>
-														<td>2020.05.29</td>
-														<td>30,000,000</td>
-														<td>30,000,000</td>
-														<td>4,000,000</td>
-														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='repaymentdetail'">상세보기</button></td>
+														<td>${e.loanProductVO.lp_name}</td>
+														<td>${e.loanRepayVO.lr_startdate }</td>
+														<td>${e.loanRepayVO.lr_amount }</td>
+														<td>${e.loanRepayVO.lr_balance }</td>
+														<td><button type="button" class="btn btn-lg btn-primary" value="${e.lc_num }">상환하기</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
-														<tr>
-														<td>억만장자대출</td>
-														<td>2020.05.10</td>
-														<td>300,000,000</td>
-														<td>300,000,000</td>
-														<td>30,000,000</td>
-														<td><button type="button" class="btn btn-lg btn-primary" onclick="location='repaymentdetail'">상세보기</button></td>
-													</tr>
+													
+													</c:if>
+												 </c:forEach>
 												</tbody>
 											</table>
 										
@@ -70,7 +66,6 @@
 		<div class="col-sm-6 col-md-2"></div>
 			
 						</div>
-		</form>
 			</div>
 		
 			
@@ -81,98 +76,8 @@
 			
 			<script>
 			
-			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+			$('.checkdetail').click(function() {
+				location='checkdetail?lc_num='+$(this).val();
+			})
 	</script>
 

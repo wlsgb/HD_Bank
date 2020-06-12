@@ -87,7 +87,6 @@
 		
 		
 		<!--상환해야하는 대출  -->
-		<form action="" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -131,7 +130,6 @@
 		<div class="col-sm-6 col-md-2"></div>
 			
 						</div>
-		</form>
 			</div>
 		
 			

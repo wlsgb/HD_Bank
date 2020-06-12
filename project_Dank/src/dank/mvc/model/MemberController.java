@@ -18,8 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.MemberDao;
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.PageVO;
 import dank.mvc.vo.UserVO;
+
+
 @Controller
 public class MemberController {
 	@Autowired
@@ -32,6 +33,7 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/idchk")
 	public ModelAndView idchk(String mem_email) {
+		System.out.println("33"+mem_email);
 		ModelAndView mav = new ModelAndView("member/server/idchkserver");
 		int chk=memberDao.idchk(mem_email);
 		String idchk ="";
@@ -55,14 +57,6 @@ public class MemberController {
 	@RequestMapping(value = "/memberjoin")
 	public String memberjoin(MemberVO vo,String mem_phn1,String mem_phn2,String mem_phn3) {
 		vo.setMem_phn(mem_phn1+"-"+mem_phn2+"-"+mem_phn3);
-		System.out.println(vo.getMem_birth());
-		System.out.println(vo.getMem_code());
-		System.out.println(vo.getMem_email());
-		System.out.println(vo.getMem_gender());
-		System.out.println(vo.getMem_in_date());
-		System.out.println();
-		System.out.println();
-		System.out.println();
 		memberDao.memberjoin(vo);
 		return "login/login";
 	}
