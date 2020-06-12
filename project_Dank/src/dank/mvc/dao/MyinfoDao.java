@@ -22,6 +22,14 @@ public class MyinfoDao {
 		 return ss.selectList("myinfo.getmyinfo");
 	 
 	 }
+	 
+	 public void myinfoUpdate(MemberVO vo) {
+		 System.out.println(vo.getMem_name());
+		 System.out.println(vo.getMem_loc());
+		 System.out.println(vo.getMem_phn());
+			ss.update("myinfo.updatemyinfo", vo);
+			
+		}
 	
 	
 }

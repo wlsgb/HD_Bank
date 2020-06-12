@@ -14,6 +14,8 @@ public class PageVO {
 		private int cntPage = 5;
 		private String searchType,searchValue;
 		private int categori;
+		
+		
 		public int getCategori() {
 			return categori;
 		}
@@ -159,6 +161,7 @@ public class PageVO {
 		public void getCntPage(int cntPage) {
 			this.cntPage = cntPage;
 		}
+		
 
 		@Override
 		public String toString() {

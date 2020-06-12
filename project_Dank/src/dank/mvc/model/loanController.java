@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -373,14 +374,60 @@ public class loanController {
 	}
 	
 	public static void main(String[] args) {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.YEAR, 2);
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH)+1;
-		int day= cal.get(Calendar.DAY_OF_MONTH);
-		System.out.println(year);
-		System.out.println(month);
-		System.out.println(day);
+		Scanner sc = new Scanner(System.in);
+		System.out.println("기간");
+		int n = Integer.parseInt(sc.nextLine())*12;
+		System.out.println("원금");
+		int m = Integer.parseInt(sc.nextLine());
+		System.out.println("이자율");
+		float r = Float.parseFloat(sc.nextLine())/100;
+		System.out.println("거치기간");
+		int g = Integer.parseInt(sc.nextLine())*12;
+		System.out.println("상환방식");
+		int type = Integer.parseInt(sc.nextLine());
+		int totalterm = n+g;
+		System.out.println("대출기간"+totalterm);
+		//납입원금
+		float[] mrew = new float[totalterm];
+		//월상납금
+		float[] mrem = new float[totalterm];
+		//이자
+		float[] mrer = new float[totalterm];
+		//대출잔금
+		float[] memt = new float[totalterm];
+		//거치기간
+		memt[0] = m;
+		
+		
+		if(type==1) {
+		//원금 균등	
+		
+		for(int i =0;i<totalterm;i++) {
+			if(i<g) {
+				mrew[i] =  0;
+				mrer[i] =  (m*(r/12));//이자 
+				mrem[i] =  (mrew[i]+mrer[i]);//월 상환액
+			}else {
+				mrew[i] =  m/n;
+				mrer[i] =  (m-((i-g)*m/n))*r/n;
+				mrem[i] =  ((m/n)+mrer[i]);
+			}
+			
+			if(i==0) {
+				memt[i]=(int) (m+mrer[i]-mrem[i]);
+			}else {
+				memt[i] = (int) (memt[i-1]+mrer[i]-mrem[i]);
+			}
+			System.out.println(i+1+"달");
+			System.out.println("매월 원금"+mrew[i]);
+			System.out.println("매월 이자"+mrer[i]);
+			System.out.println("매월 납입금"+mrem[i]);
+			System.out.println("대출잔금"+memt[i]);
+		}
+		}else if(type==2) {
+			//원리금균등
+			
+		}
 	}
 	
 	
