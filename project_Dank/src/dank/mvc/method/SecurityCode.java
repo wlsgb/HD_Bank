@@ -1,15 +1,11 @@
 package dank.mvc.method;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.vo.security.Security_CardVO;
-import dank.mvc.vo.security.Security_Card_RegVO;
 
 @Repository
 public class SecurityCode {

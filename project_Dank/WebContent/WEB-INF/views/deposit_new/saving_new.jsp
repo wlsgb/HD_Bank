@@ -86,7 +86,7 @@
 														<td>
 															<div class="row">
 																<div class="col-6">
-																	<input type="text" id="" name="" re
+																	<input type="password" id="ac_pwd" name="ac_pwd"
 																	class="form-control input-full" placeholder="(4자리)" maxlength="4">
 																</div>
 															</div>
@@ -97,7 +97,7 @@
 														<td>
 															<div class="row">
 																<div class="col-6">
-																	<input type="text" id="" name="" re
+																	<input type="password" id="ac_repwd" name="ac_repwd"
 																	class="form-control input-full" placeholder="(4자리)" maxlength="4">
 																</div>
 															</div>
@@ -144,7 +144,7 @@
 			var email = null;
 			var emailCode = null;
 			$("#cancel").click(function() {
-				location = "security";
+				location = "#";
 			});
 			
 			$("#codeCheck").click(function() {
