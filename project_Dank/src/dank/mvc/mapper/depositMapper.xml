@@ -64,6 +64,13 @@
 		from installment_saving
 	</select>
 	
+	<select id="psviewlist" parameterType="int" resultMap="psidto">
+		select pro_code,sav_code,ins_code,shas_code,shac_code from pro_sav_ins where sav_code=#{sav_code}
+	</select>
+	<select id="piviewlist" parameterType="int" resultMap="psidto">
+		select pro_code,sav_code,ins_code,shas_code,shac_code from pro_sav_ins where ins_code=#{ins_code}
+	</select>
+	
 	<select id="ac_num_list" resultType="String">
 		select ac_num from account
 	</select>

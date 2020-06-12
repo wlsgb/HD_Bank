@@ -121,12 +121,14 @@ public class MemberController {
 		//UserVO userVO = registerService.selectUser(user);
 		HttpSession session = req.getSession();
 		if(memberVO != null) {
+			//System.out.println("로그인성공!");
 			session.setAttribute("member", memberVO);
 			return "index/index";
 		}
+		//System.out.println("로그인실패!");
 		return "login/login";
 	}
-	
+    
     //로그아웃
     @RequestMapping(value= "/logout")
 	public String logout(HttpSession session) {
