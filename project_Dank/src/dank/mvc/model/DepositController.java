@@ -223,8 +223,14 @@ public class DepositController {
 	}
 
 	@RequestMapping(value = { "/transfer" })
-	public String transferPage() {
-		return "deposit/deposite_transfer";
+	public ModelAndView transferPage(HttpSession session) {
+		
+		
+		System.out.println("이체 세션은 "+session.getAttribute("mem_code"));
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_transfer");
+		
+		return mav;
 	}
 
 	@RequestMapping(value = { "/transfer_auto" })
