@@ -3,6 +3,7 @@ package dank.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dank.mvc.dao.LoanDao;
 import dank.mvc.service.LoanService;
 import dank.mvc.vo.LoanApplicationVO;
+import dank.mvc.vo.LoanCaculatorVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
@@ -372,6 +374,123 @@ public class loanController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	@RequestMapping(value = "/caculator", method = RequestMethod.POST)
+	public ModelAndView caculator(LoanCaculatorVO vo) {
+		ModelAndView mav = new ModelAndView("loan/server/caculatorserver");
+		List<LoanCaculatorVO> list = new ArrayList<LoanCaculatorVO>();
+		
+		int m = vo.getM();
+		int g = vo.getG();
+		float r = vo.getR()/100;
+		int n = vo.getN();
+		if(vo.getTerm()==1) {
+			n *=12;
+		}
+		if(vo.getTerm2()==1) {
+			g*=12;
+		}
+		int totalterm = n+g;
+		
+		if(vo.getType()==1) {
+			for (int i = 0; i < totalterm; i++) {
+				LoanCaculatorVO v = new LoanCaculatorVO();
+				if(i<g) {
+					v.setRepayM(0);
+					v.setRepayR((int)Math.ceil((m*(r/12))));
+					v.setRepayMR(v.getRepayM()+v.getRepayR());
+				}else {
+					v.setRepayM(m/n);
+					v.setRepayR((int) Math.ceil((m-((i-g)*m/n))*r/n));
+					v.setRepayMR(v.getRepayM()+v.getRepayR());
+					if(i==totalterm-1) {
+						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
+					}
+				}
+				
+				if(i==0) {
+					v.setBalance(m+v.getRepayR()-v.getRepayMR());
+				}else {
+					v.setBalance(list.get(list.size()-1).getBalance()+v.getRepayR()-v.getRepayMR());
+				}
+				
+				list.add(v);
+			
+			}
+			for(LoanCaculatorVO e : list) {
+				System.out.println("-----------------------");
+				System.out.println("매월 원금"+e.getRepayM());
+				System.out.println("매월 이자"+e.getRepayR());
+				System.out.println("매월 납입금"+e.getRepayMR());
+				System.out.println("대출잔금"+e.getBalance());
+			}
+			
+		}else if(vo.getType()==2) {
+			
+			for(int i =0;i<totalterm;i++) {
+				LoanCaculatorVO v = new LoanCaculatorVO();
+				if(i<g) {
+					v.setRepayR((int) Math.ceil((m*(r/12))));
+					v.setRepayMR(v.getRepayR());
+					v.setRepayM(0);
+				}else {
+					if(i==0) {
+						v.setRepayR((int) Math.ceil((m*(r/12))));
+					}else {	
+						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));
+					}	
+					
+					v.setRepayMR((int) (((m*r/12)*(Math.pow((1+r/12), n)))/((Math.pow((1+r/12), n))-1)));
+					v.setRepayM(v.getRepayMR()-v.getRepayR());
+					if(i==totalterm-1) {
+						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
+					}
+				}
+				
+				if(i==0) {
+					v.setBalance(m+v.getRepayR()-v.getRepayMR());
+				}else {
+					v.setBalance(list.get(list.size()-1).getBalance()+v.getRepayR()-v.getRepayMR());
+				}
+				list.add(v);
+			}
+			for(LoanCaculatorVO e : list) {
+				System.out.println("-----------------------");
+				System.out.println("매월 원금"+e.getRepayM());
+				System.out.println("매월 이자"+e.getRepayR());
+				System.out.println("매월 납입금"+e.getRepayMR());
+				System.out.println("대출잔금"+e.getBalance());
+			}
+		}else if(vo.getType()==3) {
+			for (int i = 0; i < totalterm; i++) {
+				LoanCaculatorVO v = new LoanCaculatorVO();
+				v.setRepayR((int) (m*r/12));
+				if(i!=totalterm-1) {
+					v.setRepayM(0);
+					v.setRepayMR(v.getRepayR());
+				}else {
+					v.setRepayM(m);
+					v.setRepayMR(v.getRepayR()+v.getRepayM());
+				}
+				
+				if(i==0) {
+					v.setBalance(m+v.getRepayR()-v.getRepayMR());
+				}else {
+					v.setBalance(list.get(list.size()-1).getBalance()+v.getRepayR()-v.getRepayMR());
+				}
+				
+				list.add(v);
+			}
+			for(LoanCaculatorVO e : list) {
+				System.out.println("-----------------------");
+				System.out.println("매월 원금"+e.getRepayM());
+				System.out.println("매월 이자"+e.getRepayR());
+				System.out.println("매월 납입금"+e.getRepayMR());
+				System.out.println("대출잔금"+e.getBalance());
+			}
+		}
+		mav.addObject("list", list);
+		return mav;
+	}
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -388,13 +507,13 @@ public class loanController {
 		int totalterm = n+g;
 		System.out.println("대출기간"+totalterm);
 		//납입원금
-		float[] mrew = new float[totalterm];
+		int[] mrew = new int[totalterm];
 		//월상납금
-		float[] mrem = new float[totalterm];
+		int[] mrem = new int[totalterm];
 		//이자
-		float[] mrer = new float[totalterm];
+		int[] mrer = new int[totalterm];
 		//대출잔금
-		float[] memt = new float[totalterm];
+		int[] memt = new int[totalterm];
 		//거치기간
 		memt[0] = m;
 		
@@ -405,12 +524,16 @@ public class loanController {
 		for(int i =0;i<totalterm;i++) {
 			if(i<g) {
 				mrew[i] =  0;
-				mrer[i] =  (m*(r/12));//이자 
+				mrer[i] =  (int) Math.ceil((m*(r/12)));//이자 
 				mrem[i] =  (mrew[i]+mrer[i]);//월 상환액
 			}else {
+				
 				mrew[i] =  m/n;
-				mrer[i] =  (m-((i-g)*m/n))*r/n;
-				mrem[i] =  ((m/n)+mrer[i]);
+				mrer[i] =   (int) Math.ceil((m-((i-g)*m/n))*r/n);
+				mrem[i] =  (mrew[i]+mrer[i]);
+				if(i==totalterm-1) {
+					mrem[i] = memt[i-1]+mrer[i];
+				}
 			}
 			
 			if(i==0) {
@@ -426,7 +549,59 @@ public class loanController {
 		}
 		}else if(type==2) {
 			//원리금균등
+			for(int i =0;i<totalterm;i++) {
+				if(i<g) {
+					mrer[i] =   (int) Math.ceil((m*(r/12)));//이자 
+					mrem[i] = 	mrer[i];
+					mrew[i] =  0;
+				}else {
+					if(i==0) {
+						mrer[i] =   (int) Math.ceil((m*(r/12)));//이자
+					}else {	
+						mrer[i] =   (int) Math.ceil(memt[i-1]*(r/12));
+					}					
+					mrem[i] =  (int) (((m*r/12)*(Math.pow((1+r/12), n)))/((Math.pow((1+r/12), n))-1));
+					mrew[i] =  mrem[i]-mrer[i];
+					if(i==totalterm-1) {
+						mrem[i] = memt[i-1]+mrer[i];
+					}
+				}
+				
+				if(i==0) {
+					memt[i]=(m+mrer[i]-mrem[i]);
+				}else {
+					memt[i] = (memt[i-1]+mrer[i]-mrem[i]);
+				}
+				System.out.println(i+1+"달");
+				System.out.println("매월 원금"+mrew[i]);
+				System.out.println("매월 이자"+mrer[i]);
+				System.out.println("매월 납입금"+mrem[i]);
+				System.out.println("대출잔금"+memt[i]);
+			}
 			
+		}else if(type==3) {
+			for (int i = 0; i < totalterm; i++) {
+				mrer[i]=(int) (m*r/12);
+				if(i!=totalterm-1) {
+					mrew[i]=0;
+					mrem[i]=mrer[i];
+				}else {
+					mrew[i]=m;
+					mrem[i]=mrer[i]+mrew[i];
+				}
+				
+				if(i==0) {
+					memt[i]=m+mrer[i]-mrem[i];
+				}else {
+					memt[i]=memt[i-1]+mrer[i]-mrem[i];
+				}
+				
+				System.out.println(i+1+"달");
+				System.out.println("매월 원금"+mrew[i]);
+				System.out.println("매월 이자"+mrer[i]);
+				System.out.println("매월 납입금"+mrem[i]);
+				System.out.println("대출잔금"+memt[i]);
+			}
 		}
 	}
 	
