@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DepositDaosy {
 
-	
 	@Autowired
 	private SqlSessionTemplate ss;
+	
 	
 	public int checkac(int ac_num) {
 		System.out.println("checkac");

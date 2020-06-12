@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="deposithistory">
   
-  
   <select id="achistory" parameterType="hashMap" resultType="achvo">
   select r_num,dealdate,dep_money,wit_money,balance,name
 	from(

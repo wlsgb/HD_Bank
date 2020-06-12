@@ -121,25 +121,15 @@ public class MemberController {
 		//UserVO userVO = registerService.selectUser(user);
 		HttpSession session = req.getSession();
 		if(memberVO != null) {
-			System.out.println("로그인성공!");
+			//System.out.println("로그인성공!");
 			session.setAttribute("member", memberVO);
 			return "index/index";
 		}
-		System.out.println("로그인실패!");
+		//System.out.println("로그인실패!");
 		return "login/login";
 	}
     //로그인 시 로그인 한 사람의 정보를 세션에 삽입 
 	
-    @RequestMapping(value= "/getSession")
-	@ResponseBody
-	public String getSession(HttpSession session) {
-		
-    	MemberVO member = (MemberVO)session.getAttribute("member");
-		String mem_email = member.getMem_email();
-		
-		return mem_email;
-	}
-	//세션을 가져옴 
 	
     @RequestMapping(value= "/logout")
 	public String logout(HttpSession session) {
