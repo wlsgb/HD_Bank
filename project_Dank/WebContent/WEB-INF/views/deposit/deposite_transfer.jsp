@@ -116,7 +116,7 @@
 												  
 												<div class="form-inline" style="margin-left: 10%;" >
 												
-												<input type="text" name="youracwrite" placeholder="홍길동" class="form-control" style=" text-align:center; width: 360px;"/>
+												<input type="text" name="youracwrite" placeholder="10자 이내" maxlength="10" class="form-control" style=" text-align:center; width: 360px;"/>
 												    </div>
 												 </div>
 											
@@ -126,7 +126,7 @@
 												  
 												<div class="form-inline" style="margin-left: 10%;" >
 												
-												<input type="text" name="myacwrite" placeholder="14자 이내" class="form-control" style=" text-align:center; width: 360px;"/>
+												<input type="text" name="myacwrite" placeholder="10자 이내"  maxlength="10" class="form-control" style=" text-align:center; width: 360px;"/>
 												    </div>
 												 </div>
 												 
