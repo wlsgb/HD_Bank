@@ -109,5 +109,9 @@
 		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code
 		from installment_saving
 	</select>
+	
+	<select id="ac_num_list" resultType="String">
+		select ac_num from account
+	</select>
 
 </mapper>
