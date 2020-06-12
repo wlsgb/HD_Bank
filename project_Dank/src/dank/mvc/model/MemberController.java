@@ -102,41 +102,49 @@ public class MemberController {
 		return "member/1on1question";
 	}
 	
+	//로그인 페이지로 이동을함 	
 	@RequestMapping(value= "/loginPage")
 	public String goLoginPage(HttpSession session, Model m) {
 		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user != null) { //세션 정보가 존재한다면 home 으로 
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member != null) { //세션 정보가 존재한다면 home 으로 
 			return "index/index";
 		}
 		
 		return "login/login"; //존재하지 않는다면 로그인 페이지로 
 	}
-	//로그인 페이지로 이동을함 	
 	
+	//로그인 시 로그인 한 사람의 정보를 세션에 삽입 
     @RequestMapping(value = "/login" ,method = RequestMethod.POST ,produces = "application/json")
 	public String loginPage(@ModelAttribute UserVO user , HttpServletRequest req, Model m) throws Exception {
-		System.out.println("로그인Cont");
 		MemberVO memberVO =  memberDao.memLogin(user);
 		//UserVO userVO = registerService.selectUser(user);
 		HttpSession session = req.getSession();
 		if(memberVO != null) {
+<<<<<<< HEAD
 			//System.out.println("로그인성공!");
+=======
+>>>>>>> refs/remotes/origin/master
 			session.setAttribute("member", memberVO);
 			return "index/index";
 		}
+<<<<<<< HEAD
 		//System.out.println("로그인실패!");
+=======
+>>>>>>> refs/remotes/origin/master
 		return "login/login";
 	}
-    //로그인 시 로그인 한 사람의 정보를 세션에 삽입 
 	
+<<<<<<< HEAD
 	
+=======
+    //로그아웃
+>>>>>>> refs/remotes/origin/master
     @RequestMapping(value= "/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "login/login";
 	}
-	//로그아웃
 
 	
 }
