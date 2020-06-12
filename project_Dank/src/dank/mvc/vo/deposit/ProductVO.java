@@ -7,6 +7,25 @@ public class ProductVO {
 //			"SAV_CODE"	number		NOT NULL
 //		);
 	private int pro_code,ins_code,sav_code;
+	private SavingVO savingVO;
+	private Installment_savingVO installment_savingVO;
+	
+	
+	public SavingVO getSavingVO() {
+		return savingVO;
+	}
+
+	public void setSavingVO(SavingVO savingVO) {
+		this.savingVO = savingVO;
+	}
+
+	public Installment_savingVO getInstallment_savingVO() {
+		return installment_savingVO;
+	}
+
+	public void setInstallment_savingVO(Installment_savingVO installment_savingVO) {
+		this.installment_savingVO = installment_savingVO;
+	}
 
 	public int getPro_code() {
 		return pro_code;

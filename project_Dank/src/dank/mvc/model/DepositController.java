@@ -24,14 +24,16 @@ import dank.mvc.dao.DepositDao;
 
 import dank.mvc.service.BangkingService;
 
+
 import dank.mvc.vo.deposit.PageVO;
 import dank.mvc.vo.MemberVO;
+
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
-
 import dank.mvc.vo.deposit.Installment_savingVO;
 
 import dank.mvc.vo.deposit.SavingVO;
+
 
 
 @Controller
@@ -44,29 +46,26 @@ public class DepositController {
 	@Autowired
 	private BangkingService bangkingservice;
 	
-	
-	
-	
-
+	//예금-신규페이지 이동
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
 		return "deposit_new/new";
 	}
-	
+	//예금-신규-특정 예금 상품 페이지 이동
 	@RequestMapping(value = "/saving_detail")
 	public String saving_detail(Model m, int sav_code) {
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
 		m.addAttribute("saving",saving);
 		return "deposit_new/saving_detail";
 	}
-	
+	//예금-신규-특정 적금 상품 페이지 이동
 	@RequestMapping(value = "/installment_detail")
 	public String installment_detail(Model m, int ins_code) {
 		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
 		m.addAttribute("ins",ins);
 		return "deposit_new/installment_detail";
 	}
-	
+	//예금-신규-예금 신청 페이지 이동
 	@RequestMapping(value = "/saving_new")
 	public String saving_new(Model m) {
 		return "deposit_new/saving_new";
@@ -133,7 +132,6 @@ public class DepositController {
 			System.out.println(e.getIns().getIns_name());
 			System.out.println(e.getIns().getShac_code());
 			System.out.println("*******************");
-			
 			
 		}
 		mav.addObject("aclist",aclist);

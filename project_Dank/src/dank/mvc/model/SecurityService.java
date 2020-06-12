@@ -8,6 +8,7 @@ import dank.mvc.dao.MemberDao;
 import dank.mvc.method.Mail;
 import dank.mvc.method.SecurityCode;
 
+
 @RestController
 public class SecurityService {
 
