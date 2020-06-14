@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="deposit">
 
+	<!-- 계좌번호를 넣으면 비밀번호값이 나온다. -->
+	<select id="accountPwChk" parameterType="int" resultType="int">
+		select ac_pwd from account where ac_num=#{num}
+	</select>
+
 	<resultMap type="savvo" id="savingqua">
 		<id property="sav_code" column="sav_code"/>
 		<result property="sav_name" column="sav_name"/>
@@ -56,18 +61,40 @@
 	</select>
 	
 	<select id="savlist" resultType="savvo">
-		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving
+		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving order by sav_code
 	</select>
 	
 	<select id="inslist" resultType="insvo">
-		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code
+		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code 
 		from installment_saving
+		order by ins_code
 	</select>
 	
-	<!-- <select id="psviewlist" parameterType="int" resultMap="psidto">
-		select pro_code,sav_code,ins_code,shas_code,shac_code from pro_sav_ins where sav_code=#{sav_code}
-	</select> -->
-
+	<select id="pro_codeNum" parameterType="psidto" resultType="int">
+		select pro_code from pro_sav_ins
+		<if test="deptype != null">
+			<where>
+				<choose>
+					<when test="deptype == 100">
+						sav_code=#{sav_code}
+					</when>
+					<when test="deptype == 300">
+						ins_code=#{ins_code}
+					</when>
+					<when test="deptype == 500">
+						sav_code=#{sav_code}
+					</when>
+					<when test="deptype == 700">
+						ins_code=#{ins_code}
+					</when>
+				</choose>
+			</where>
+		</if>
+	</select>
+	
+	<insert id="newAccount" parameterType="acvo">
+		insert into account values(account_seq.nextVal,#{mem_code},#{ac_num},#{ac_pwd},sysdate,null,0,#{pro_code})
+	</insert>
 	
 	<select id="ac_num_list" resultType="String">
 		select ac_num from account

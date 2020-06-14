@@ -52,7 +52,9 @@ public class SecurityController {
 	// 보안카드 인증 페이지로
 	@RequestMapping(value = "/securitysertify")
 	public String viewSecuritySertify(Model m, HttpSession session) {
-
+		if (session.getAttribute("member") == null) {
+			return "login/login";
+		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
 		Security_Card_RegVO vo = securityDao.securityCardDetail(mem_code);
 		m.addAttribute("scrVo", vo);
@@ -76,7 +78,13 @@ public class SecurityController {
 		String fir_code = securitySertufyVO.getFir_code();
 		String sec_code = securitySertufyVO.getSec_code();
 		// 정답데이터
-		return page;
+		String[][] realData = (String[][]) session.getAttribute("securityCheckData");
+		if (main_code.equals(realData[0][2])&&fir_code.equals(realData[1][2])&&sec_code.equals(realData[2][2])) {
+			System.out.println("모두 정답입니다.");
+			return page;
+		}else {
+			return "redirect:securityCardSertify";
+		}
 	}
 
 	// 보안카드 신청 폼 페이지

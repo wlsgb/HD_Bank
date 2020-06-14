@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="bangking">
+  
 <!--  @계좌조회(처음 조회눌렀을때 세션에서 멤버코드를 가지고 그멤버가 가진 계좌 리스트를 뽑아온다) -->
 						  <resultMap type="acvo" id="acinqueryResult">
 								<id property="ac_num" column="ac_num"/>
@@ -42,6 +43,7 @@
 			 and p.ins_code=ins.ins_code(+)
 			</select>
 <!--  /@계좌조회 끝(처음 조회눌렀을때 작동) -->
+
 <!-- @입금 시작(입금 누르면 돈이 들어온다. 지점에서 현금을 받는다는 가정) -->
 		<!--1계좌유효성검사 적힌 계좌가 DB에 담겨있는지 count 를 반환한다 -->
 		<select id="depcheckac" parameterType="int" resultType="int">
@@ -49,6 +51,14 @@
 			from account
 			where ac_num=#{ac_num}
 	  	</select>
+	  	
+	  	<!-- 계좌번호를 넣으면 멤버코드를 가져온다. -->
+	  	<select id="actomemnum" parameterType="int" resultType="int">
+			select mem_code
+			from account
+			where ac_num=#{acnum}
+	  	</select>
+	  	
 		<!--2입금테이블을 작성한다. -->
 	  	<insert id="depplusdep" parameterType="int">
 	  		insert into deposit values(deposit_seq.nextval,#{dep_money},sysdate)
