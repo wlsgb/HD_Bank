@@ -25,19 +25,6 @@
 					</div>
 				</div>
 				<div class="page-inner mt--5">
-
-					<div style="color: red;">
-					<span>계좌세션심기</span>
-						<form action="getsession" method="post">
-						<input type="text" placeholder="멤버코드입력" name="mem_code">
-						<input type="submit" value="ㄱㄱ">
-						</form>
-<!-- 						<br/> -->
-<!-- 						<br/> -->
-<!-- 						<input type="text" placeholder="입금액" id="dep_money"> -->
-<!-- 						<input type="text" placeholder="출금액" id="wit_money"> -->
-					
-					</div>
 					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
@@ -87,7 +74,10 @@
 																	<input type="hidden" value="${e.ac_num }" name="ac_num">
 																	<input type="submit" value="조회"  style="display: inline-block;" />
 																	</form>
-																	<a href="transfer"><input type="button" value="이체" /></a>
+																	<form action="transfer" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="이체" />
+																	</form>
 																	<form action="deposit" method="post" style="display: inline-block;">
 																	<input type="hidden" value="${e.ac_num }" name="ac_num">
 																	<input type="submit" value="입금" id="depbtn${i.index}"  />

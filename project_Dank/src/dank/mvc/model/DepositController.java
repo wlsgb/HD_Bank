@@ -41,10 +41,7 @@ public class DepositController {
 	@Autowired
 	private DepositDao depositDao;
 	
-	@Autowired
-	private BangkingDao bangkingdao;
-	@Autowired
-	private BangkingService bangkingservice;
+	
 	
 	//예금-신규페이지 이동
 	@RequestMapping(value = "/new")
@@ -99,14 +96,13 @@ public class DepositController {
 //	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
-
-//	@RequestMapping(value = { "/inquire" })
-//	public String inqurePage(
-//			@RequestParam(value = "gonum", required = true, defaultValue = "0") String gonum
-//			) {
-//		return "deposit/deposite_inquire";
-//	}
-
+	///////////////////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private BangkingDao bangkingdao;
+	@Autowired
+	private BangkingService bangkingservice;
+	//조회-계좌조회
 	@RequestMapping(value = { "/inquire" })
 	public ModelAndView inquirePage(
 			HttpSession session
@@ -139,7 +135,7 @@ public class DepositController {
 		
 		return mav;
 	}
-	
+	//입금하기 (임시기능)
 	@RequestMapping(value={ "/deposit" })
 	public ModelAndView executedeposit(HttpSession session,int ac_num) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
@@ -168,7 +164,7 @@ public class DepositController {
 		return mav;
 	}
 	
-
+	//출금하기(임시기능)
 	@RequestMapping(value={ "/withdraw" })
 	public ModelAndView executewithdraw(HttpSession session,String ac_num) {
 		int acnum = Integer.parseInt(ac_num);
@@ -205,6 +201,7 @@ public class DepositController {
 		mav.setViewName("redirect:inquire");
 		return mav;
 	}
+	//자동이체 진행
 	@RequestMapping(value = "/transfer_process")
 	public ModelAndView transferprocess(HttpSession session
 			,@RequestParam(value = "myac") int myac
@@ -269,22 +266,22 @@ public class DepositController {
 		return mav;
 	}
 	
-	@RequestMapping(value={ "/getsession" })
-	public ModelAndView getsession(HttpServletRequest req,@RequestParam(value = "mem_code") String mem_code) {
-		System.out.println("멤버코드는 : "+mem_code);
-		HttpSession session =req.getSession();
-		//session.invalidate();
-		session.setAttribute("mem_code", mem_code);
-		ModelAndView mav = new ModelAndView();
-		System.out.println("세션넣기 성공");
-		System.out.println("현ㅐ 세션 : "+session.getAttribute("mem_code"));
-		mav.setViewName("redirect:inquire");
-		return mav;
-	}
+//	@RequestMapping(value={ "/getsession" })
+//	public ModelAndView getsession(HttpServletRequest req,@RequestParam(value = "mem_code") String mem_code) {
+//		System.out.println("멤버코드는 : "+mem_code);
+//		HttpSession session =req.getSession();
+//		//session.invalidate();
+//		session.setAttribute("mem_code", mem_code);
+//		ModelAndView mav = new ModelAndView();
+//		System.out.println("세션넣기 성공");
+//		System.out.println("현ㅐ 세션 : "+session.getAttribute("mem_code"));
+//		mav.setViewName("redirect:inquire");
+//		return mav;
+//	}
 	
 	
 	
-
+	//계좌내역상세조회페이지
 	@RequestMapping(value = { "/inquire_detail" })
 	public ModelAndView inqure_detailPage(
 			HttpSession session
@@ -321,13 +318,18 @@ public class DepositController {
 		mav.addObject("ac_num",ac_num);
 		return mav;
 	}
-
+	//이체 페이지로 이동
 	@RequestMapping(value = { "/transfer" })
-	public ModelAndView transferPage(HttpSession session) {
+	public ModelAndView transferPage(HttpSession session,@RequestParam(value = "ac_num",defaultValue = "0") int ac_num) {
 		
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		System.out.println("이체 세션은 "+sessionmem.getMem_code());
-		List<Integer> myaclist = bangkingdao.getmyaclistwhentr(sessionmem.getMem_code());
+		Map<String, Integer> getmyaclistwhentr =new  HashMap<String, Integer>();
+		getmyaclistwhentr.put("mem_code", sessionmem.getMem_code());
+		getmyaclistwhentr.put("ac_num", ac_num);
+		
+		
+		List<Integer> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 		for(Integer e : myaclist) {
 			System.out.println(e);
 		}
