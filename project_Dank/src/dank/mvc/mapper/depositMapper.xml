@@ -56,23 +56,48 @@
 	</select>
 	
 	<select id="savlist" resultType="savvo">
-		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving
+		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving order by sav_code
 	</select>
 	
 	<select id="inslist" resultType="insvo">
-		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code
+		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code 
 		from installment_saving
+		order by ins_code
 	</select>
 	
-	<select id="psviewlist" parameterType="int" resultMap="psidto">
+	<select id="pro_codeNum" parameterType="psidto" resultType="int">
+		select pro_code from pro_sav_ins
+		<if test="deptype != null">
+			<where>
+				<choose>
+					<when test="deptype == 100">
+						sav_code=#{sav_code}
+					</when>
+					<when test="deptype == 300">
+						ins_code=#{ins_code}
+					</when>
+					<when test="deptype == 500">
+						sav_code=#{sav_code}
+					</when>
+					<when test="deptype == 700">
+						ins_code=#{ins_code}
+					</when>
+				</choose>
+			</where>
+		</if>
+	</select>
+	
+	<insert id="newAccount" parameterType="acvo">
+		insert into account values(account_seq.nextVal,#{mem_code},#{ac_num},#{ac_pwd},sysdate,null,0,#{pro_code})
+	</insert>
+	
+	
+	<select id="psviewlist" parameterType="int" resultType="psidto">
 		select pro_code,sav_code,ins_code,shas_code,shac_code from pro_sav_ins where sav_code=#{sav_code}
 	</select>
-	<select id="piviewlist" parameterType="int" resultMap="psidto">
+	<select id="piviewlist" parameterType="int" resultType="psidto">
 		select pro_code,sav_code,ins_code,shas_code,shac_code from pro_sav_ins where ins_code=#{ins_code}
 	</select>
-	
-	<select id="ac_num_list" resultType="String">
-		select ac_num from account
-	</select>
+
 
 </mapper>
