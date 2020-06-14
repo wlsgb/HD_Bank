@@ -42,7 +42,7 @@ public class DepositController {
 	private DepositDao depositDao;
 	
 	@Autowired
-	private BangkingDao bangkingdao;
+	private BangkingDao bangkingDao;
 	@Autowired
 	private BangkingService bangkingservice;
 	
@@ -121,7 +121,7 @@ public class DepositController {
 		
 		
 
-		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		List<AccountVO> aclist = bangkingDao.getaclist(sessionmem.getMem_code());
 
 		for(AccountVO e :aclist) {
 			
@@ -148,9 +148,9 @@ public class DepositController {
 		
 		int money =10000;
 		
-		System.out.println("존재유무"+bangkingdao.depcheckac(ac_num));
+		System.out.println("존재유무"+bangkingDao.depcheckac(ac_num));
 		
-		if(bangkingdao.depcheckac(ac_num)>=1) {
+		if(bangkingDao.depcheckac(ac_num)>=1) {
 		Map<String, String> paramapsp = new HashMap<String, String>();
 		paramapsp.put("ac_num", String.valueOf(ac_num));
 		paramapsp.put("sp_name", "입금테스트용");
@@ -178,13 +178,13 @@ public class DepositController {
 		
 		int money =10000;
 		
-		System.out.println("존재유무"+bangkingdao.witcheckac(acnum));
+		System.out.println("존재유무"+bangkingDao.witcheckac(acnum));
 		
-		if(bangkingdao.witcheckac(acnum)>=1) {
+		if(bangkingDao.witcheckac(acnum)>=1) {
 			Map<String, Integer> paramckbal = new HashMap<String, Integer>();
 			paramckbal.put("ac_num", acnum);
 			paramckbal.put("mem_code", sessionmem.getMem_code());
-			if(bangkingdao.witcheckbal(paramckbal) >= money) {
+			if(bangkingDao.witcheckbal(paramckbal) >= money) {
 				Map<String, String> paramapsp = new HashMap<String, String>();
 				paramapsp.put("ac_num", String.valueOf(ac_num));
 				paramapsp.put("mem_code", String.valueOf(sessionmem.getMem_code()));
@@ -251,13 +251,13 @@ public class DepositController {
 		
 		
 		
-		if(bangkingdao.trtrAcChk(myac) >=1) {
+		if(bangkingDao.trtrAcChk(myac) >=1) {
 			System.out.println("1");
-			if(bangkingdao.trtrAcChk(yourac) >=1) {
+			if(bangkingDao.trtrAcChk(yourac) >=1) {
 
 				System.out.println("2");
 				
-				if(bangkingdao.trbalChk(mapmy) >=trmoney) {
+				if(bangkingDao.trbalChk(mapmy) >=trmoney) {
 					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
 					System.out.println("이체실행댐");
 				}
@@ -300,7 +300,7 @@ public class DepositController {
 		historymap.put("ac_num", String.valueOf(ac_num));
 		historymap.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		
-		int total = bangkingdao.gettotalcnt(historymap);
+		int total = bangkingDao.gettotalcnt(historymap);
 		pvo = new PageVO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		System.out.println("Start : "+pvo.getStartPage());
 		System.out.println("End : "+pvo.getEnd());
@@ -310,7 +310,7 @@ public class DepositController {
 		
 		
 		
-		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
+		List<AccountHistoryVO> history =bangkingDao.gethistory(historymap);
 		System.out.println("히스토리 리스트 크기 : "+history.size());
 		
 		
@@ -327,7 +327,7 @@ public class DepositController {
 		
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		System.out.println("이체 세션은 "+sessionmem.getMem_code());
-		List<Integer> myaclist = bangkingdao.getmyaclistwhentr(sessionmem.getMem_code());
+		List<Integer> myaclist = bangkingDao.getmyaclistwhentr(sessionmem.getMem_code());
 		for(Integer e : myaclist) {
 			System.out.println(e);
 		}

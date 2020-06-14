@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="deposit">
 
+	<!-- 계좌번호를 넣으면 비밀번호값이 나온다. -->
+	<select id="accountPwChk" parameterType="int" resultType="int">
+		select ac_pwd from account where ac_num=#{num}
+	</select>
+
 	<resultMap type="savvo" id="savingqua">
 		<id property="sav_code" column="sav_code"/>
 		<result property="sav_name" column="sav_name"/>

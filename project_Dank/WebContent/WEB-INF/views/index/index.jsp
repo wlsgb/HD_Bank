@@ -37,13 +37,7 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-6">
-											<div class="table-responsive table-hover table-sales">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="mapcontainer">
-												<div id="map-example" class="vmap"></div>
-											</div>
+											<iframe width="560" height="315" src="//www.youtu.be/GVzE92CMWTA" frameborder="0" allowfullscreen></iframe>
 										</div>
 									</div>
 								</div>
