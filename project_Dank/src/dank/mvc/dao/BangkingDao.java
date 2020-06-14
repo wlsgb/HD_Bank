@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.At_applicationVO;
 
 @Repository
 public class BangkingDao {
@@ -110,12 +111,22 @@ public class BangkingDao {
 	public int gettotalcnt(Map<String, String> historymap) {
 		return ss.selectOne("bangking.totalcnt", historymap);
 	}
-	public int getmemcodewhentr(int acnum) {
-		return ss.selectOne("bangking.getmemcodewhentr", acnum);
+	//계좌이체할때 레스트컨트롤러에서 값받아옴
+	public List<Map<String, String>> getmemcodewhentr(String ac_num) {
+		return ss.selectList("bangking.getmemcodewhentr", ac_num);
 	}
-	public List<Integer> getmyaclistwhentr(int mem_code) {
-		return ss.selectList("bangking.getmyaclistwhentr", mem_code);
+	public List<Integer> getmyaclistwhentr(Map<String, Integer> getmyaclistwhentr) {
+		return ss.selectList("bangking.getmyaclistwhentr", getmyaclistwhentr);
+	} 
+	public int getmybalwhentr(Map<String, String> getmybalwhentr) {
+		return ss.selectOne("bangking.getmybalwhentr", getmybalwhentr);
 	}
 	///////////////////////////////////////////////////////////거래내역조회종료/@
+	///////////////////////////////////////////////////////////자동이체시작@
+	public void insertatapply(At_applicationVO atapplyvo) {
+		ss.insert("bangking.atapply", atapplyvo);
+	}
+	
+	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

@@ -25,19 +25,6 @@
 					</div>
 				</div>
 				<div class="page-inner mt--5">
-
-					<div style="color: red;">
-					<span>계좌세션심기</span>
-						<form action="getsession" method="post">
-						<input type="text" placeholder="멤버코드입력" name="mem_code">
-						<input type="submit" value="ㄱㄱ">
-						</form>
-<!-- 						<br/> -->
-<!-- 						<br/> -->
-<!-- 						<input type="text" placeholder="입금액" id="dep_money"> -->
-<!-- 						<input type="text" placeholder="출금액" id="wit_money"> -->
-					
-					</div>
 					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
@@ -87,7 +74,10 @@
 																	<input type="hidden" value="${e.ac_num }" name="ac_num">
 																	<input type="submit" value="조회"  style="display: inline-block;" />
 																	</form>
-																	<a href="transfer"><input type="button" value="이체" /></a>
+																	<form action="transfer" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="이체" />
+																	</form>
 																	<form action="deposit" method="post" style="display: inline-block;">
 																	<input type="hidden" value="${e.ac_num }" name="ac_num">
 																	<input type="submit" value="입금" id="depbtn${i.index}"  />
@@ -154,7 +144,7 @@
 															
 															<td class="text-right">
 																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
+<!-- 																<input type="button" value="두섬팅" id="dosomething" /> -->
 <!-- 																<a href="#"><input type="button" value="입금" /></a> -->
 <!-- 																<a href="#"><input type="button" value="출금" /></a> -->
 															</td>
@@ -179,110 +169,24 @@
 			
 			
 			<script>
-// 			$('#savdeposit').click(function() {
-// 				console.log($('#savacnumid').val())
-//  				location="deposit"
-// 			})
-// 			$(document).ready(function() {
-// 				console.log("sss")
-// 				var getId =$(this).attr("id");
-// 				console.log(getId)
-// 			})
+// $(document).ready(function() {
+// 	setInterval(function() {
+// 		$.ajax({
+// 			url:'dosomething',
+// 			success:function(data){
+// 				console.log("두섭튕")
+// 				$.ajax({
+// 					url:'dosomething2',
+// 					success:function(data){
+// 						console.log("두솜팅 22");
+// 					}
+// 				})
+// 			}		
+// 		})
+// 	}, 1000)
+// })
 			
 			
-			
-			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+		
 	</script>
 

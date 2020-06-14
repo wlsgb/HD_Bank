@@ -42,8 +42,10 @@
 								<div class="row">
 									<div class="col-md-2 col-lg-2"></div>
 									<div class="col-md-8 col-lg-8">
+									<form action="transfer_auto_apply_process" method="post">
 										<div class="form-group">
-											<label for="email2">계좌번호</label> <input type="text"
+											<label for="email2">계좌번호</label> 
+											<input type="text" name="ac_num"
 												class="form-control" id="email2"
 												style="width: 400px; margin-left: 10%;"
 												placeholder="110-111-12345 : 보통예금">
@@ -54,79 +56,78 @@
 											<label for="email2">입금계좌번호</label>
 
 											<div class="form-inline" style="margin-left: 10%;">
-												<input type="text" placeholder="국민" class="form-control"
-													style="text-align: center; width: 100px;" /> <input
+												<input type="text" placeholder="HD" class="form-control"
+													style="text-align: center; width: 60px;" />
+												 <input name="ata_opac"
 													type="text" placeholder="입금 계좌 번호" class="form-control"
 													style="text-align: center; width: 300px;" />
 											</div>
 										</div>
 										<hr class="my-0">
 										<div class="form-group ">
-											<label for="email2">자동이체설정</label> <br />
-											<div class="selectgroup w-30 " style="margin-left: 11%;">
-												<label class="selectgroup-item"> <input
-													type="radio" name="value" value="50"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+100만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+50만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+10만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+5만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">전액</span>
-												</label>
-
-											</div>
+											<label for="email2">자동이체금액설정</label> <br />
+						
 											<div class="form-inline" style="margin-left: 10%;">
 
-												<input type="text" placeholder="이체 금액" class="form-control"
+												<input type="text" name="ata_setmny" placeholder="이체 금액" class="form-control"
 													style="text-align: center; width: 360px;" />
 											</div>
 										</div>
 										<hr class="my-0">
+										
+										
 										<div class="form-group ">
-											<label for="email2">이체주기</label> <br />
-
+											<label for="email2">시작일/이체시간 설정</label> <br />
+												
 											<div class="form-inline" style="margin-left: 10%;">
-
-												<input type="text" placeholder="매월 19일" class="form-control"
-													style="text-align: center; width: 360px;" />
+														<input type="date" class="form-control" name="ata_startdate" />
+														<input type="time" name="ata_time"  class="form-control">
 											</div>
 										</div>
+										
+										
+													  
+													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/>
+			
+			
+			
+														<!--// 숨겨지는 영역 -->
+														
+														<div id="demo" class="collapse">
+															<div class="form-group ">
+															<label for="email2">이체주기</label> <br />
+				
+															<div class="form-inline" style="margin-left: 10%;">
+				
+																<input type="text" placeholder="매월 19일" class="form-control"
+																	style="text-align: center; width: 360px;" name="atadterm" />
+															</div>
+															</div>
+															<div class="form-group ">
+															<label for="email2">종료일</label> <br />
+				
+															<div class="form-inline" style="margin-left: 10%;">
+																<input type="date" class="form-control"  name="atastopdate"/>
+															</div>
+															</div>
+																		    
+														
+														  </div>
+														<!-- 숨겨지는 영역 //-->
+										
+										
+										
 
-										<div class="form-group ">
-											<label for="email2">시작일/종료일</label> <br />
-
-											<div class="form-inline" style="margin-left: 10%;">
-
-												<input type="text" placeholder="2020.02.04"
-													class="form-control"
-													style="text-align: center; width: 165px;" /> <span
-													style="font-size: 20px; margin-left: 10px; margin-right: 10px;">~</span>
-												<input type="text" placeholder="2020.08.09"
-													class="form-control"
-													style="text-align: center; width: 165px;" />
-											</div>
-										</div>
+										
 
 										<div class="form-group ">
 											<div class="form-inline">
 											
 										
-								<a href="transfer_auto"><button type="button" class="btn btn-danger "
+												<a href="transfer_auto"><button type="button" class="btn btn-danger "
 													style="margin-left: 10%; width: 200px;">취소</button></a>
-												<button type="button" class="btn btn-success "
-													style="margin-left: 10%; width: 200px;">신청</button>
+											
+													<input type="submit" class="btn btn-success " value="신청" style="margin-left: 10%; width: 200px;" />
 											</div>
 										</div>
 
@@ -134,7 +135,7 @@
 
 
 
-
+										</form>
 									</div>
 
 
@@ -162,99 +163,6 @@
 
 
 <script>
-	Circles.create({
-		id : 'circles-1',
-		radius : 45,
-		value : 60,
-		maxValue : 100,
-		width : 7,
-		text : 5,
-		colors : [ '#f1f1f1', '#FF9E27' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
 
-	Circles.create({
-		id : 'circles-2',
-		radius : 45,
-		value : 70,
-		maxValue : 100,
-		width : 7,
-		text : 36,
-		colors : [ '#f1f1f1', '#2BB930' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	Circles.create({
-		id : 'circles-3',
-		radius : 45,
-		value : 40,
-		maxValue : 100,
-		width : 7,
-		text : 12,
-		colors : [ '#f1f1f1', '#F25961' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	var totalIncomeChart = document.getElementById('totalIncomeChart')
-			.getContext('2d');
-
-	var mytotalIncomeChart = new Chart(totalIncomeChart, {
-		type : 'bar',
-		data : {
-			labels : [ "S", "M", "T", "W", "T", "F", "S", "S", "M", "T" ],
-			datasets : [ {
-				label : "Total Income",
-				backgroundColor : '#ff9e27',
-				borderColor : 'rgb(23, 125, 255)',
-				data : [ 6, 4, 9, 5, 4, 6, 4, 3, 8, 10 ],
-			} ],
-		},
-		options : {
-			responsive : true,
-			maintainAspectRatio : false,
-			legend : {
-				display : false,
-			},
-			scales : {
-				yAxes : [ {
-					ticks : {
-						display : false
-					//this will remove only the label
-					},
-					gridLines : {
-						drawBorder : false,
-						display : false
-					}
-				} ],
-				xAxes : [ {
-					gridLines : {
-						drawBorder : false,
-						display : false
-					}
-				} ]
-			},
-		}
-	});
-
-	$('#lineChart').sparkline([ 105, 103, 123, 100, 95, 105, 115 ], {
-		type : 'line',
-		height : '70',
-		width : '100%',
-		lineWidth : '2',
-		lineColor : '#ffa534',
-		fillColor : 'rgba(255, 165, 52, .14)'
-	});
 </script>
 
