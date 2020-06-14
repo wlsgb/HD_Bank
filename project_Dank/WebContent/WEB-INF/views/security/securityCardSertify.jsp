@@ -40,7 +40,8 @@
 									
 										<div class="col-md-3">
 											<span class="blockquote blockquote-primary">보안카드 비밀번호 입력</span>
-											<form action="" method="post">
+											<!-- 보안카드 form 시작 -->
+											<form action="ssc" method="post">
 												<div class="form-group">
 													<label for="">
 														<span class="h4 text-danger">
@@ -49,7 +50,7 @@
 														<span class="h5" style="font-style: italic;">
 															${scd[0][1]}
 														</span>에서 두자리 </label>
-													<input type="password" class="form-control" id="email2" maxlength="2" 
+													<input type="password" class="form-control" id="main_left" maxlength="2" name="main_code"
 													placeholder="[일련번호] - ${scd[0][1] }에서 두자리">
 												</div>
 												<div class="form-group">
@@ -60,7 +61,7 @@
 														<span class="h5" style="font-style: italic;">
 															${scd[1][1] }
 														</span>에서 두자리 </label>
-													<input type="password" class="form-control" id="email2" maxlength="2" 
+													<input type="password" class="form-control" id="fir_left" maxlength="2"  name="fir_code"
 													placeholder="[${scd[1][0] }] - ${scd[1][1] }에서 두자리">
 												</div>
 												<div class="form-group">
@@ -71,7 +72,7 @@
 														<span class="h5" style="font-style: italic;">
 															${scd[2][1] }
 														</span>에서 두자리 </label>
-													<input type="password" class="form-control" id="email2" maxlength="2"
+													<input type="password" class="form-control" id="sec_left" maxlength="2" name="sec_code"
 													placeholder="[${scd[2][0] }] - ${scd[2][1] }에서 두자리">
 												</div>
 												<div class="card-action">
@@ -79,17 +80,18 @@
 													<input type="submit" class="btn btn-success" value="확인" />
 												</div>
 											</form>
+											<!-- 보안카드 form 끝 -->
 										</div>
 											
 										<div class="col-md-9" style="text-align: center;">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
-															<th colspan="6" style="text-align: left;">
+															<th colspan="5" style="text-align: left;">
 																<span class="h1">보안카드</span>
 																<span class="h6" style="font-style: italic;">${name}님</span>
 															</th>
-															<th colspan="4" style="text-align: right;">
+															<th colspan="5" style="text-align: right;">
 																<div class="form-group">
 																	<div class="input-group mb-3">
 																		<div class="input-group-prepend">
@@ -98,18 +100,20 @@
 																		</div>
 																		<c:choose>
 																			<c:when test="${scd[0][1]=='앞'}">
-																				<input type="text" class="form-control" maxlength="2">
+																				<input type="password" class="form-control" maxlength="2" 
+																				name="main_code" id="main_right" placeholder="**">
 																				<div class="input-group-append">
 																					<span class="input-group-text"
-																					style="font-size: 24px;">**</span>
+																					style="font-size: 20px;">******</span>
 																				</div>
 																			</c:when>
 																			<c:otherwise>
 																				<div class="input-group-append">
 																					<span class="input-group-text" 
-																					style="font-size: 24px;">**</span>
+																					style="font-size: 20px;">******</span>
 																				</div>
-																				<input type="text" class="form-control" maxlength="2">
+																				<input type="password" class="form-control" maxlength="2"
+																				name="main_code" id="main_right" placeholder="**">
 																			</c:otherwise>
 																		</c:choose>
 																	</div>
@@ -134,7 +138,8 @@
 																		<div class="input-group">
 																<c:choose>
 																	<c:when test="${scd[1][1]=='앞'}">
-																		<input type="text" class="form-control" maxlength="2">
+																		<input type="password" class="form-control" maxlength="2" 
+																		id="fir_right" name="fir_code">
 																		<div class="input-group-append">
 																			<span class="input-group-text">**</span>
 																		</div>
@@ -143,7 +148,8 @@
 																		<div class="input-group-prepend">
 																			<span class="input-group-text">**</span>
 																		</div>
-																		<input type="text" class="form-control" maxlength="2">
+																		<input type="password" class="form-control" maxlength="2"
+																		id="fir_right" name="fir_code">
 																	</c:otherwise>
 																</c:choose>
 																		</div>
@@ -159,7 +165,8 @@
 																		<div class="input-group">
 																<c:choose>
 																	<c:when test="${scd[2][1]=='앞'}">
-																		<input type="text" class="form-control" maxlength="2">
+																		<input type="password" class="form-control" maxlength="2"
+																		id="sec_right" name="sec_code">
 																		<div class="input-group-append">
 																			<span class="input-group-text">**</span>
 																		</div>
@@ -168,7 +175,8 @@
 																		<div class="input-group-prepend">
 																			<span class="input-group-text">**</span>
 																		</div>
-																		<input type="text" class="form-control" maxlength="2">
+																		<input type="password" class="form-control" maxlength="2"
+																		id="sec_right" name="sec_code">
 																	</c:otherwise>
 																</c:choose>
 																		</div>
@@ -202,6 +210,64 @@
 			
 			
 	<script>
-			
+	$(function() {
+		var oldVal = null;
+		/* 왼쪽 입력했을때 */
+		$("#main_left").on("propertychange change keyup paste input", function() {
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#main_right").val($("#main_left").val());
+		});
+		
+		$("#fir_left").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#fir_right").val($("#fir_left").val());
+		});
+		$("#sec_left").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#sec_right").val($("#sec_left").val());
+		});
+		/* 오른쪽 입력했을때 */
+		$("#main_right").on("propertychange change keyup paste input", function() {
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#main_left").val($("#main_right").val());
+		});
+		$("#fir_right").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#fir_left").val($("#fir_right").val());
+		});
+		$("#sec_right").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#sec_left").val($("#sec_right").val());
+		});
+		
+	})
 	</script>
 

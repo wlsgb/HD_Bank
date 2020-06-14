@@ -18,6 +18,11 @@ public class BangkingDao {
 	public List<AccountVO> getaclist(int mem_code){
 		return ss.selectList("bangking.acinquery", mem_code);
 	}
+	
+	// 계좌번호를 넣으면 멤버 번호를 가져온다.
+	public int acnumToMemcode(int acnum) {
+		return ss.selectOne("bangking.actomemnum",acnum);
+	}
 	///////////////////////////////////////////////////////////입금시작@
 	public int depcheckac(int ac_num) {
 		System.out.println("checkac");
@@ -104,6 +109,12 @@ public class BangkingDao {
 	}
 	public int gettotalcnt(Map<String, String> historymap) {
 		return ss.selectOne("bangking.totalcnt", historymap);
+	}
+	public int getmemcodewhentr(int acnum) {
+		return ss.selectOne("bangking.getmemcodewhentr", acnum);
+	}
+	public List<Integer> getmyaclistwhentr(int mem_code) {
+		return ss.selectList("bangking.getmyaclistwhentr", mem_code);
 	}
 	///////////////////////////////////////////////////////////거래내역조회종료/@
 	

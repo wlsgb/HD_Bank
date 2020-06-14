@@ -47,7 +47,6 @@
 										
 										<!-- 보안카드 신청 form 시작 -->
 											<form action="securitycardcreate" method="post">
-											<input type="text" name="mem_code"  />
 												<table class="table mt-1">
 												<tbody>
 													<tr>
@@ -57,7 +56,7 @@
 														<td>
 															<div class="row">
 																<div class="col-12">
-																	<input type="text" value="주거래 통장- 110-12356" readonly="readonly"
+																	<input type="text" value="${acNameNum }" readonly="readonly"
 																	class="form-control input-full"/>
 																</div>
 															</div>
@@ -68,18 +67,7 @@
 														<td>
 															<div class="row">
 																<div class="col-12">
-																	<input type="text" name="emailId" value="wlsgb94@naver.com"
-																	class="form-control input-full" readonly="readonly">
-																</div>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<th scope="col">주민등록번호</th>
-														<td>
-															<div class="row">
-																<div class="col-12">
-																	<input type="text" id="cnn" name="cnn" value="940210"
+																	<input type="text" name="emailId" value="${mem_email }"
 																	class="form-control input-full" readonly="readonly">
 																</div>
 															</div>

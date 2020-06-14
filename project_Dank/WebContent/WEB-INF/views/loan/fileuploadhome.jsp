@@ -22,7 +22,6 @@
 					</div>
 				</div>
 				<!--대출 신청 조회  -->
-		<form action="" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -44,6 +43,7 @@
 												</thead>
 												<tbody>
 												<c:forEach items="${list }" var="e">
+												<c:if test="${e.lc_state ne '실행완료' }">
 													<tr>
 													 <td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanApplicationVO.la_sysdate }</td>
@@ -51,8 +51,8 @@
 														<td>${e.lc_state }</td>
 														
 														<c:choose>
-															<c:when test="${e.lc_state eq '심사대기중'}">
-														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">심사대기</button></td>														
+															<c:when test="${e.lc_state eq '선정대기'}">
+														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">선정대기</button></td>														
 															</c:when>
 															<c:when test="${e.lc_state eq '서류제출대기' }">
 														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">서류제출하기</button></td>
@@ -67,6 +67,7 @@
 															</c:otherwise>
 														</c:choose>	
 													</tr>
+													</c:if>
 												</c:forEach>
 													
 												</tbody>
@@ -80,7 +81,6 @@
 			
 						</div>
 		
-		</form>
 		
 		
 			</div>
