@@ -211,13 +211,19 @@
 			$("input:radio[name=mselect]").click(function() {
 				$('#trmoney').val($(this).val())
 				var radioval =$(this).val()
+				var radiovalint =parseInt($(this).val())
 				console.log("¶óµğ¿À°©"+radioval)
 				
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#myac').val(),
 					success: function (data) {
-						if(radioval>data || radioval==='all'){
-							$('#trmoney').val(data)
+						console.log(data)
+						console.log(typeof(data))
+						console.log(typeof(radiovalint))
+						let money = parseInt(data)
+						
+						if(radiovalint > money || radioval==='all'){
+							$('#trmoney').val(money)
 						}else{
 							$('#trmoney').val(radioval)
 						}
@@ -233,9 +239,9 @@
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#myac').val(),
 					success: function (data) {
-						console.log(data)
-						console.log($('#trmoney').val())
-						if($('#trmoney').val()>data){
+// 						console.log(data)
+// 						console.log($('#trmoney').val())
+						if(parseInt($('#trmoney').val()) > parseInt(data)){
 							$('#trmoney').val(data)
 						}
 						

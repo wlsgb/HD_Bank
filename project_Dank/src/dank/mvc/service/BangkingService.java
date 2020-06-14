@@ -15,19 +15,19 @@ public class BangkingService {
 	@Autowired
 	private BangkingDao bangkingdao;
 	
-	public void depositprocess(int money,Map<String, String> paramapsp,Map<String, Integer> paramapbal) {
+	public void depositprocess(String money,Map<String, String> paramapsp,Map<String, String> paramapbal) {
 		bangkingdao.depplusdep(money);
 		bangkingdao.depplussp(paramapsp);
 		bangkingdao.depdepupbalance(paramapbal);
 	}
-	public void withdrawprocess(int money,Map<String, String> paramapsp,Map<String, Integer> paramapbal) {
+	public void withdrawprocess(String money,Map<String, String> paramapsp,Map<String, String> paramapbal) {
 		bangkingdao.witpluswit(money);
 		bangkingdao.witplussp(paramapsp);
 		bangkingdao.witwitupbalance(paramapbal);
 	}
 
-	public void transferprocess(int trmoney,Map<String, Integer> mapmy,Map<String, String> mapmysp,
-		Map<String, Integer> mapyour,Map<String, String> mapyoursp) {
+	public void transferprocess(String trmoney,Map<String, String> mapmy,Map<String, String> mapmysp,
+		Map<String, String> mapyour,Map<String, String> mapyoursp) {
 		bangkingdao.trpluswit(trmoney);
 		bangkingdao.trpluswittr(mapmy);
 		bangkingdao.trplusspwit(mapmysp);

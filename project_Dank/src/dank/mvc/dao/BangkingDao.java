@@ -21,15 +21,15 @@ public class BangkingDao {
 	}
 	
 	// 계좌번호를 넣으면 멤버 번호를 가져온다.
-	public int acnumToMemcode(int acnum) {
+	public int acnumToMemcode(String acnum) {
 		return ss.selectOne("bangking.actomemnum",acnum);
 	}
 	///////////////////////////////////////////////////////////입금시작@
-	public int depcheckac(int ac_num) {
+	public int depcheckac(String ac_num) {
 		System.out.println("checkac");
 		return ss.selectOne("bangking.depcheckac", ac_num);
 	}
-	public void depplusdep(int dep_money) {
+	public void depplusdep(String dep_money) {
 		System.out.println("plusdep");
 		ss.insert("bangking.depplusdep", dep_money);
 	}
@@ -37,24 +37,24 @@ public class BangkingDao {
 		System.out.println("plussp");
 		ss.insert("bangking.depplussp", paramapsp );
 	}
-	public void depdepupbalance(Map<String, Integer> paramapbal) {
+	public void depdepupbalance(Map<String, String> paramapbal) {
 		System.out.println("depupbalance");
 		ss.update("bangking.depdepupbalance", paramapbal);
 	}
 	///////////////////////////////////////////////////////////입금종료/@
 	
 	///////////////////////////////////////////////////////////출금시작@
-	public int witcheckac(int ac_num) {
+	public int witcheckac(String ac_num) {
 		System.out.println("checkac");
 		return ss.selectOne("bangking.witcheckac", ac_num);
 	}
 	
-	public int witcheckbal(Map<String, Integer> paramckbal) {
+	public String witcheckbal(Map<String, String> paramckbal) {
 		System.out.println("checkbalance");
 		return ss.selectOne("bangking.witcheckbalance", paramckbal);
 	}
 	
-	public void witpluswit(int wit_money) {
+	public void witpluswit(String wit_money) {
 		System.out.println("pluswit");
 		ss.insert("bangking.witpluswit", wit_money);
 	}
@@ -62,44 +62,44 @@ public class BangkingDao {
 		System.out.println("plussp");
 		ss.insert("bangking.witplussp", paramapsp );
 	}
-	public void witwitupbalance(Map<String, Integer> paramapbal) {
+	public void witwitupbalance(Map<String, String> paramapbal) {
 		System.out.println("witupbalance");
 		ss.update("bangking.witwitupbalance", paramapbal);
 	}
 	///////////////////////////////////////////////////////////출금종료/@
 	///////////////////////////////////////////////////////////계좌이체시작@
-	public int trtrAcChk(int ac_num) {
+	public int trtrAcChk(String ac_num) {
 		return ss.selectOne("bangking.tracchk", ac_num);
 	}
-	public int trbalChk(Map<String, Integer> mapmy) {
+	public String trbalChk(Map<String, String> mapmy) {
 		return ss.selectOne("bangking.trbalchk", mapmy);
 	}
 	
 	
-	public void trpluswit(int wit_money) {
+	public void trpluswit(String wit_money) {
 		ss.insert("bangking.trpluswit", wit_money);
 	}
-	public void trpluswittr(Map<String, Integer> mapmy) {
+	public void trpluswittr(Map<String, String> mapmy) {
 		ss.insert("bangking.trpluswittr", mapmy);
 	}
 	public void trplusspwit(Map<String, String> mapmysp) {
 		ss.insert("bangking.trplusspwit", mapmysp);
 	}
-	public void trtrwitupbal(Map<String, Integer> mapmy) {
+	public void trtrwitupbal(Map<String, String> mapmy) {
 		ss.update("bangking.trtrwitupbal", mapmy);
 	}
 	
 	
-	public void trplusdep(int dep_money) {
+	public void trplusdep(String dep_money) {
 		ss.insert("bangking.trplusdep", dep_money);
 	}
-	public void trplusdeptr(Map<String, Integer> mapyour) {
+	public void trplusdeptr(Map<String, String> mapyour) {
 		ss.insert("bangking.trplusdeptr", mapyour);
 	}
 	public void trplusspdep(Map<String, String> mapyoursp) {
 		ss.insert("bangking.trplusspdep", mapyoursp);
 	}
-	public void trtrdepupbal(Map<String, Integer> mapyour) {
+	public void trtrdepupbal(Map<String, String> mapyour) {
 		ss.update("bangking.trtrdepupbal", mapyour);
 	}
 	///////////////////////////////////////////////////////////계좌이체종료/@
@@ -115,10 +115,10 @@ public class BangkingDao {
 	public List<Map<String, String>> getmemcodewhentr(String ac_num) {
 		return ss.selectList("bangking.getmemcodewhentr", ac_num);
 	}
-	public List<Integer> getmyaclistwhentr(Map<String, Integer> getmyaclistwhentr) {
+	public List<String> getmyaclistwhentr(Map<String, String> getmyaclistwhentr) {
 		return ss.selectList("bangking.getmyaclistwhentr", getmyaclistwhentr);
 	} 
-	public int getmybalwhentr(Map<String, String> getmybalwhentr) {
+	public String getmybalwhentr(Map<String, String> getmybalwhentr) {
 		return ss.selectOne("bangking.getmybalwhentr", getmybalwhentr);
 	}
 	///////////////////////////////////////////////////////////거래내역조회종료/@

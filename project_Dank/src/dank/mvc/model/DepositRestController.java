@@ -44,7 +44,7 @@ public class DepositRestController {
 		return val;
 	}
 	@RequestMapping(value = "/getmybalwhentr")
-	public int getmybalwhentr(HttpSession session,String ac_num) {
+	public String getmybalwhentr(HttpSession session,String ac_num) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		Map<String, String> getmybalwhentr = new HashMap<String, String>();
 		getmybalwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
