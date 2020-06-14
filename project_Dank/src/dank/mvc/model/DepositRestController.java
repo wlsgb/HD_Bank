@@ -51,4 +51,14 @@ public class DepositRestController {
 		getmybalwhentr.put("ac_num", ac_num);
 		return bangkingdao.getmybalwhentr(getmybalwhentr);
 	}
+	
+	@RequestMapping(value = "/dosomething")
+	public void dosomething() {
+		System.out.println("gdgdgd im do something");
+	}
+	
+	@RequestMapping(value = "/dosomething2")
+	public void dosomething2() {
+		System.out.println("gdgdgd im do something2");
+	}
 }

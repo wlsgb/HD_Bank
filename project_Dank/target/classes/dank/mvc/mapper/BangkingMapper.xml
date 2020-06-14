@@ -283,7 +283,19 @@
 		select ac_balance from account where mem_code=#{mem_code} and ac_num=#{ac_num}
 	</select>
 <!--/@거래내역 가져오기 끝 -->
-
+<!-- @자동이체 시작 -->
+	<insert id="atapply" parameterType="atapplyvo">
+	insert into at_application
+	 values(at_application_seq.nextval
+	 		,(select ac_code from account where mem_code=#{mem_code} and ac_num=#{ac_num})
+	 		,#{ata_opac}
+	 		,#{ata_setmny}
+	 		,#{ata_dterm}
+	 		,#{ata_startdate}
+	 		,#{ata_stopdate}
+	 		,#{ata_time})
+	</insert>
+<!-- /@자동이체 종료 -->
 
 
 

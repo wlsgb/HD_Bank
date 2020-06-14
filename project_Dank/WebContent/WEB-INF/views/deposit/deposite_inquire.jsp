@@ -144,7 +144,7 @@
 															
 															<td class="text-right">
 																<a href="inquire_detail"><input type="button" value="Á¶È¸"  /></a>
-<!-- 																<a href="transfer"><input type="button" value="ÀÌÃ¼" /></a> -->
+<!-- 																<input type="button" value="µÎ¼¶ÆÃ" id="dosomething" /> -->
 <!-- 																<a href="#"><input type="button" value="ÀÔ±Ý" /></a> -->
 <!-- 																<a href="#"><input type="button" value="Ãâ±Ý" /></a> -->
 															</td>
@@ -169,110 +169,24 @@
 			
 			
 			<script>
-// 			$('#savdeposit').click(function() {
-// 				console.log($('#savacnumid').val())
-//  				location="deposit"
-// 			})
-// 			$(document).ready(function() {
-// 				console.log("sss")
-// 				var getId =$(this).attr("id");
-// 				console.log(getId)
-// 			})
+// $(document).ready(function() {
+// 	setInterval(function() {
+// 		$.ajax({
+// 			url:'dosomething',
+// 			success:function(data){
+// 				console.log("µÎ¼·Æ¨")
+// 				$.ajax({
+// 					url:'dosomething2',
+// 					success:function(data){
+// 						console.log("µÎ¼ØÆÃ 22");
+// 					}
+// 				})
+// 			}		
+// 		})
+// 	}, 1000)
+// })
 			
 			
-			
-			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+		
 	</script>
 

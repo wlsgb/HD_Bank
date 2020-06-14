@@ -30,6 +30,7 @@ import dank.mvc.vo.MemberVO;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 
 import dank.mvc.vo.deposit.SavingVO;
@@ -348,6 +349,36 @@ public class DepositController {
 	@RequestMapping(value = { "/transfer_auto_apply" })
 	public String transferautoapplyPage() {
 		return "deposit/deposite_transfer_auto_apply";
+	}
+	
+	@RequestMapping(value = { "/transfer_auto_apply_process" })
+	public ModelAndView transferautoapplyprocess(
+			HttpSession session
+			,At_applicationVO atapplyvo
+			,@RequestParam( defaultValue = "-1", required = false) String atastopdate
+			,@RequestParam( defaultValue = "-1", required = false) String atadterm
+			//파라미터 디폴트값 받기위해서 언더바 지운거로 보내고
+			//셋터로 vo값에 넣어주었다.
+			) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		atapplyvo.setMem_code(String.valueOf(sessionmem.getMem_code()));
+		atapplyvo.setAta_stopdate(atastopdate);
+		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
+		
+//		System.out.println(atapplyvo.getAc_num());
+//		System.out.println(atapplyvo.getMem_code());
+//		System.out.println(atapplyvo.getAta_opac());
+//		System.out.println(atapplyvo.getAta_setmny());
+//		System.out.println(atapplyvo.getAta_dterm());
+//		System.out.println(atapplyvo.getAta_startdate());
+//		System.out.println(atapplyvo.getAta_stopdate());
+//		System.out.println(atapplyvo.getAta_time());
+		bangkingdao.insertatapply(atapplyvo);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:transfer_auto");
+		return mav;
 	}
 
 	@RequestMapping(value = { "/deposite_cancle" })

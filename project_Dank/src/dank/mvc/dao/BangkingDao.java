@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.At_applicationVO;
 
 @Repository
 public class BangkingDao {
@@ -116,5 +117,11 @@ public class BangkingDao {
 		return ss.selectOne("bangking.getmybalwhentr", getmybalwhentr);
 	}
 	///////////////////////////////////////////////////////////거래내역조회종료/@
+	///////////////////////////////////////////////////////////자동이체시작@
+	public void insertatapply(At_applicationVO atapplyvo) {
+		ss.insert("bangking.atapply", atapplyvo);
+	}
+	
+	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }
