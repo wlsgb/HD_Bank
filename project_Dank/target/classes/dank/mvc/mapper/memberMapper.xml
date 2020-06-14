@@ -25,6 +25,10 @@
 		select mem_email,mem_name from member where mem_code=#{num}
 	</select>
 	
+	<select id="forBirth" parameterType="int" resultType="String">
+		select mem_birth from member where mem_code=#{num}
+	</select>
+	
 	<select id="memlogin" parameterType="user" resultType="mem">
 		select 
 			mem_code,
