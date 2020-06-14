@@ -2,22 +2,8 @@ package dank.mvc.vo.deposit;
 
 public class At_applicationVO {
 
-	private int ata_code,ac_code,ata_opac,ata_setmny,ata_dterm;
-	private String ata_startdate,ata_stopdate,ata_time,ac_num,mem_code;
-	
-	
-	public String getAc_num() {
-		return ac_num;
-	}
-	public void setAc_num(String ac_num) {
-		this.ac_num = ac_num;
-	}
-	public String getMem_code() {
-		return mem_code;
-	}
-	public void setMem_code(String mem_code) {
-		this.mem_code = mem_code;
-	}
+	private int ata_code,ac_code,ata_setmny,ata_dterm;
+	private String ata_startdate,ata_stopdate,ata_time,ac_num,mem_code,ata_opac;
 	public int getAta_code() {
 		return ata_code;
 	}
@@ -29,12 +15,6 @@ public class At_applicationVO {
 	}
 	public void setAc_code(int ac_code) {
 		this.ac_code = ac_code;
-	}
-	public int getAta_opac() {
-		return ata_opac;
-	}
-	public void setAta_opac(int ata_opac) {
-		this.ata_opac = ata_opac;
 	}
 	public int getAta_setmny() {
 		return ata_setmny;
@@ -66,5 +46,25 @@ public class At_applicationVO {
 	public void setAta_time(String ata_time) {
 		this.ata_time = ata_time;
 	}
+	public String getAc_num() {
+		return ac_num;
+	}
+	public void setAc_num(String ac_num) {
+		this.ac_num = ac_num;
+	}
+	public String getMem_code() {
+		return mem_code;
+	}
+	public void setMem_code(String mem_code) {
+		this.mem_code = mem_code;
+	}
+	public String getAta_opac() {
+		return ata_opac;
+	}
+	public void setAta_opac(String ata_opac) {
+		this.ata_opac = ata_opac;
+	}
+	
+	
 	
 }

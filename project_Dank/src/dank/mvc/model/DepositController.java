@@ -389,8 +389,8 @@ public class DepositController {
 	public ModelAndView transferautoapplyprocess(
 			HttpSession session
 			,At_applicationVO atapplyvo
-			,@RequestParam( defaultValue = "-1", required = false) String atastopdate
-			,@RequestParam( defaultValue = "-1", required = false) String atadterm
+			,@RequestParam(value = "atastopdate", defaultValue = "-1") String atastopdate
+			,@RequestParam(value = "atadterm", defaultValue = "-1") String atadterm
 			//파라미터 디폴트값 받기위해서 언더바 지운거로 보내고
 			//셋터로 vo값에 넣어주었다.
 			) {
@@ -399,14 +399,14 @@ public class DepositController {
 		atapplyvo.setAta_stopdate(atastopdate);
 		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
 		
-//		System.out.println(atapplyvo.getAc_num());
-//		System.out.println(atapplyvo.getMem_code());
-//		System.out.println(atapplyvo.getAta_opac());
-//		System.out.println(atapplyvo.getAta_setmny());
-//		System.out.println(atapplyvo.getAta_dterm());
-//		System.out.println(atapplyvo.getAta_startdate());
-//		System.out.println(atapplyvo.getAta_stopdate());
-//		System.out.println(atapplyvo.getAta_time());
+		System.out.println(atapplyvo.getAc_num());
+		System.out.println(atapplyvo.getMem_code());
+		System.out.println(atapplyvo.getAta_opac());
+		System.out.println(atapplyvo.getAta_setmny());
+		System.out.println(atapplyvo.getAta_dterm());
+		System.out.println(atapplyvo.getAta_startdate());
+		System.out.println(atapplyvo.getAta_stopdate());
+		System.out.println(atapplyvo.getAta_time());
 		bangkingdao.insertatapply(atapplyvo);
 		
 		
