@@ -115,10 +115,14 @@
 											<button class="btn btn-danger" onclick="location='new'">취소</button>
 										</div>
 										<div class="col-3">
+										<form method="post" action="saving_new">
+										<input type="hidden" id="sav_code" name="sav_code" value="${saving.sav_code }">
+										<input type="hidden" id="deptype" name="deptype" value="100">
 										<!-- 신청 버튼 -->
 											<c:if test="${saving.sav_online != 0}">
-												<button class="btn btn-primary">신청</button>
+												<input type="submit" class="btn btn-primary" value="신청">
 											</c:if>
+										</form>
 										</div>
 									</div>
 									
@@ -133,22 +137,4 @@
 	</div>
 	<!-- 하단 컨텐츠 끝 -->
 </div>
-<script>
-$(function() {
-	$('#depval').html("");
-	$.ajax({
-		url:'savlist',
-		dataType:'JSON',
-		success:function(data){
-			var savlist=data;
-			$('#depname').html("예금상품");
-			//console.log(savlist);
-			for(var e in savlist){
-				//console.log(savlist[e].sav_name);
-				$('#depval').append("<tr><th scope='col'>"+savlist[e].sav_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='saving_detail?sav_code="+savlist[e].sav_code+"'\"></div></div></td></tr>")
-			};
-		}
-	});
-});
-</script>
 

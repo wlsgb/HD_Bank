@@ -1,7 +1,5 @@
 package dank.mvc.model;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
-
-
+import dank.mvc.method.AccountNum;
 import dank.mvc.service.BangkingService;
 
 
 import dank.mvc.vo.deposit.PageVO;
+import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.MemberVO;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
@@ -35,12 +33,12 @@ import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
 
 
-
 @Controller
 public class DepositController {
 	@Autowired
 	private DepositDao depositDao;
-	
+	@Autowired
+	private AccountNum accountNum;
 	@Autowired
 	private BangkingDao bangkingDao;
 	@Autowired
@@ -67,11 +65,42 @@ public class DepositController {
 	}
 	//예금-신규-예금 신청 페이지 이동
 	@RequestMapping(value = "/saving_new")
-	public String saving_new(Model m) {
-		return "deposit_new/saving_new";
+	public String saving_new(Model m, int sav_code, int deptype) {
+		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		m.addAttribute("saving", saving);
+		m.addAttribute("deptype", deptype);
+		return "deposit_new/deposit_new";
 	}
-	
-	
+	//insert into account values(#{ac_code},#{mem_code},#{ac_num},#{ac_pwd},sysdate,#{ac_end_date},#{ac_balance},#{pro_code})
+	//예금-신규-예금 신청
+	@RequestMapping(value = "/deposit_newComplete")
+	public String deposit_new(HttpSession session,Model m,AccountVO account,int deptype,
+			@RequestParam(value = "sav_code",defaultValue = "0") int sav_code,
+			@RequestParam(value = "ins_code",defaultValue = "0") int ins_code) {
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			return "login/login";
+		}
+		
+		ProSavInsDto psid = new ProSavInsDto();
+		psid.setDeptype(deptype);
+		psid.setSav_code(sav_code);
+		psid.setIns_code(ins_code);
+		
+		//ac_code,mem_code,ac_num,ac_pwd,ac_start_date,ac_end_date,ac_balance,pro_code
+		int mem_code = member.getMem_code();
+		String ac_num = accountNum.createAcNum(deptype);
+		int pro_code = accountNum.getPro_codeNum(psid);		
+		
+		account.setMem_code(mem_code);
+		account.setAc_num(ac_num);
+		account.setPro_code(pro_code);
+		
+		depositDao.createAccount(account);
+		
+		return "deposit_new/success";
+	}
 	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
