@@ -49,7 +49,7 @@ public class SecurityController {
 
 	@RequestMapping(value = "/security")
 	public String viewSecurity(Model m, HttpSession session) {
-		session.setAttribute("page", "pageSession");
+		session.setAttribute("pageName", "security");
 		return "security/security";
 	}
 
@@ -57,7 +57,7 @@ public class SecurityController {
 	@RequestMapping(value = "/securitysertify")
 	public String viewSecuritySertify(Model m, HttpSession session,String page) {
 		if (session.getAttribute("member") == null) {
-			session.setAttribute("pageName", "securitysertify");
+			session.setAttribute("pageName", "index");
 			return "login/login";
 		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
 			return "security/security";
@@ -80,7 +80,10 @@ public class SecurityController {
 	@RequestMapping(value = "/ssc")
 	public String securitySertifyChk(Model m, HttpSession session, SecuritySertufyVO securitySertufyVO) {
 		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "index");
 			return "login/login";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			return "security/security";
 		}
 		// 다음 페이지를 <input type="hidden"> 으로 입력 받아온다.
 		// 입력받은 데이터
@@ -125,6 +128,7 @@ public class SecurityController {
 	public String viewSecurityCardInfoView(Model m, AccountVO_backup accountVO, MemberVO memberVO, String acNameNum,
 			@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
 		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
 			return "login/login";
 		}
 		String acNum = acNameNum.split("-")[1];
@@ -144,8 +148,10 @@ public class SecurityController {
 	@RequestMapping(value = "/securitycardcreate")
 	public String viewSecurity_card_success(Model m, HttpSession session) {
 		if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) == 1) {
+			session.setAttribute("pageName", "security");
 			return "index/index";
 		} else if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
 			return "login/login";
 		}
 		Security_CardVO security_CardVO = securityCode.securityCardCreate();
