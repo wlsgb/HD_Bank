@@ -60,22 +60,13 @@
 											<div class="form-group " >
 												<label for="email2" >입금계좌번호</label>
 												<br />
-												  <div class="selectgroup w-40 " style="margin-left: 10%;" >
-													<label class="selectgroup-item"  >
-														<input type="radio"  value="50" class="selectgroup-input" >
-														<span class="selectgroup-button" style="width: 200px;">+100만</span>
-													</label>
-													<label class="selectgroup-item">
-														<input type="radio"  value="200" class="selectgroup-input">
-														<span class="selectgroup-button" style="width: 200px;">+50만</span>
-													</label>
-													
-											
-												</div>
+												  
 												<div class="form-inline" style="margin-left: 10%;" >
-												<input type="text" placeholder="국민" class="form-control" style=" text-align:center; width: 100px;" />
-												<input type="text" name="yourac" placeholder="입금 계좌 번호" id="inputacval" maxlength="10" class="form-control" style=" text-align:center; width: 300px;"/>
-												<input type="button" id="inputac" value="계좌유효체크"  />
+												<input type="text" placeholder="HD" class="form-control" style=" text-align:center; width: 60px;" />
+												<input type="text" name="yourac" placeholder="입금 계좌 번호" id="inputacval" maxlength="10" class="form-control" style=" text-align:center; width: 200px;"/>
+												<select class='form-control' style='width: 140px; margin-left: 0%; ' id='selectyourname'>
+													<option>대상이름</option>
+												</select>
 												<input type="hidden" name="youracmem" placeholder="멤버코드" id="trmem" class="form-control" style=" text-align:center; background-color:red; width: 300px;"/>
 												<div id="ajaxtarget"></div>
 												    </div>
@@ -84,32 +75,32 @@
 												 <div class="form-group " >
 												<label for="email2" >이체금액</label>
 												<br />
-												  <div class="selectgroup w-30 " style="margin-left: 11%;" >
-													<label class="selectgroup-item"  >
-														<input type="radio"  value="50" class="selectgroup-input" >
-														<span class="selectgroup-button">+100만</span>
+												 
+												<div class="selectgroup w-30" style="margin-left: 11%;" id="moneyselect">
+													<label class="selectgroup-item">
+														<input type="radio" name="mselect" value="100000" class="selectgroup-input">
+														<span class="selectgroup-button">10만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio"  value="200" class="selectgroup-input">
-														<span class="selectgroup-button">+50만</span>
+														<input type="radio" name="mselect" value="50000" class="selectgroup-input">
+														<span class="selectgroup-button">5만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio"  value="200" class="selectgroup-input">
-														<span class="selectgroup-button">+10만</span>
+														<input type="radio" name="mselect" value="30000" class="selectgroup-input">
+														<span class="selectgroup-button">3만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio"  value="200" class="selectgroup-input">
-														<span class="selectgroup-button">+5만</span>
+														<input type="radio" name="mselect" value="10000" class="selectgroup-input">
+														<span class="selectgroup-button">1만</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio"  value="200" class="selectgroup-input">
+														<input type="radio" name="mselect" value="all" class="selectgroup-input">
 														<span class="selectgroup-button">전액</span>
 													</label>
-											
 												</div>
 												<div class="form-inline" style="margin-left: 10%;" >
 												
-												<input type="text" name="trmoney" placeholder="이체 금액" class="form-control" style=" text-align:center; width: 360px;"/>
+												<input type="text" name="trmoney" id="trmoney" placeholder="이체 금액" class="form-control" style=" text-align:center; width: 360px;"/>
 												    </div>
 												 </div>
 												 <hr class="my-0">
@@ -171,35 +162,36 @@
 			
 			
 	<script>
+		var getarr =null;
+		 
+		
+		
+		
 		$(document).ready(function() {
-			$('#inputac').click(function() {
-				$('#ajaxtarget').html('?')
-				$('#trmem').val(' ')
-				//alert($('#myac').val())
+			$('#inputacval').keyup(function() {
 				
-				//alert("ss");
+				document.getElementById('ajaxtarget').innerHTML ="";
+				var add = "";
 				$.ajax({
 					url:'getmemcodewhentr?acnum='+$('#inputacval').val(),
 					success: function (data) {
-					console.log(data)
-						if(data === 0){
-							console.log(data)
-						}else{
-							$('#trmem').val(data)
-							console.log($('#trmem').val())
-							$('#ajaxtarget').html('확인댐 이체 누르세요')
-						}
-						
-						
-						
-						
+								getarr=data;
+								console.log(typeof(data))
+								
+								data.forEach(function(item, index) {
+									add +="<option value="+item.mem_code+">";
+									if(item.mem_code==='0'){
+										add +="대상이름";
+									}else{
+										add +=item.mem_name
+									}
+									
+									add +="</option>";
+								})
+								document.getElementById('selectyourname').innerHTML = add;
+								
+								$('#trmem').val($('#selectyourname').val())
 					}
-					//error : function(xhr, textStatus, errorThrown){
-				        // Error시, 처리
-// 				        console.log(xhr);
-// 				        console.log(textStatus);
-// 				        console.log(errorThrown);
-				    //}
 
 				})
 				
@@ -207,6 +199,62 @@
 				
 				
 			})
+			
+			$('#selectyourname').change(function() {
+				$('#trmem').val("0");
+				var youracvar =$('#selectyourname').val();
+				console.log(typeof(youracvar))
+				$('#trmem').val(youracvar);
+				console.log("히드값은"+$('#trmem').val());
+			})
+			
+			$("input:radio[name=mselect]").click(function() {
+				$('#trmoney').val($(this).val())
+				var radioval =$(this).val()
+				var radiovalint =parseInt($(this).val())
+				console.log("라디오갑"+radioval)
+				
+				$.ajax({
+					url:'getmybalwhentr?ac_num='+$('#myac').val(),
+					success: function (data) {
+						console.log(data)
+						console.log(typeof(data))
+						console.log(typeof(radiovalint))
+						let money = parseInt(data)
+						
+						if(radiovalint > money || radioval==='all'){
+							$('#trmoney').val(money)
+						}else{
+							$('#trmoney').val(radioval)
+						}
+						
+					}
+				})
+				
+			})
+			
+			$('#trmoney').keyup(function() {
+				console.log($(this).val())
+				
+				$.ajax({
+					url:'getmybalwhentr?ac_num='+$('#myac').val(),
+					success: function (data) {
+// 						console.log(data)
+// 						console.log($('#trmoney').val())
+						if(parseInt($('#trmoney').val()) > parseInt(data)){
+							$('#trmoney').val(data)
+						}
+						
+					}
+				})
+							
+					
+
+			})
+				
+			
+		
+			
 		})
 	</script>
 

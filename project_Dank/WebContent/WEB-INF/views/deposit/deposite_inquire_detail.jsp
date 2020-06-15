@@ -147,6 +147,7 @@
 												<td scope="col">${e.wit_money }</td>
 												<td scope="col">${e.balance }</td>
 												<td scope="col">${e.name }</td>
+												
 											
 											</tr>
 										</c:forEach>
@@ -176,6 +177,9 @@
 											</div>
 								<div style="margin:10px auto;">
 								<button type="button" class="btn btn-info btn-sm">엑셀 내리기</button>
+<!-- 								<div id="result" style="position: absolute; background: #000; width: 30px; height: 30px; opacity: 0.4; border-radius: 100%;"> </div> -->
+
+
 								</div>
 							</div>
 							</div>
@@ -190,97 +194,31 @@
 			
 			
 			<script>
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+// 			function resultFun(x) {
+// 				 var positionLeft = x.clientX;
+// 				  var positionTop = x.clientY;
+// 				   document.getElementById('result').style.left = positionLeft - 10 + "px";
+// 				    document.getElementById('result').style.top = positionTop - 10 +"px"; 
+// 				    }
+// 		     if (document.addEventListener) {
+// 			      document.addEventListener("mousemove", resultFun); 
+// 			      } else if (document.attachEvent) {
+// 				       document.attachEvent("onmousemove", resultFun);
+// 				        //attachEvent는 IE8이하와 오페라에서 사용하는 명령어이다
+// 				         };
 
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+$(document).ready(function() {
+	$('tbody').children().children().mouseover(function() {
+// 		console.log($(this).text())
+	})
 
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+})
 
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
+	
 
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+			
+
+		
 	</script>
 

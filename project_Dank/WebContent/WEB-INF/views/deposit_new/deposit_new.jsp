@@ -41,8 +41,11 @@
 									<div class="row">
 										<div class="col-8">
 										
-										<!-- 보안카드 신청 form 시작 -->
-											<form action="<!--  -->" method="post">
+										<!--  form 시작 -->
+											<form action="deposit_newComplete" method="post" name="f">
+												<input type="hidden" id="deptype" name="deptype" value="${deptype }">
+												<input type="hidden" id="sav_code" name="sav_code" value="${saving.sav_code }">
+												<input type="hidden" id="ins_code" name="ins_code" value="${ins.ins_code }">
 												<table class="table mt-1">
 												
 												<tbody>
@@ -76,7 +79,6 @@
 																</div>
 																<div class="col-4 mt-1" id="codeTarget">
 																	<button type="button" class="btn btn-primary" id="codeCheck">확인</button>
-																	
 																</div>
 															</div>
 														</td>
@@ -100,7 +102,9 @@
 																	<input type="password" id="ac_repwd" name="ac_repwd"
 																	class="form-control input-full" placeholder="(4자리)" maxlength="4">
 																</div>
+																<div class="col-6" id="target"></div>
 															</div>
+															
 														</td>
 													</tr>
 												</tbody>
@@ -113,7 +117,7 @@
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
 																	<button class="btn btn-danger" id="cancel">취소</button>
-																	<input type="submit" class="btn btn-success" value="확인">
+																	<input type="button" class="btn btn-success" value="확인" onclick="chk()">
 																</div>
 															</div>
 														</th>
@@ -140,6 +144,7 @@
 			
 			
 	<script>
+	
 		$(function() {
 			var email = null;
 			var emailCode = null;
@@ -151,8 +156,11 @@
 				console.log("emailCode : "+emailCode);
 				console.log("codenum : "+$("#codenum").val());
 				if ($("#codenum").val() == emailCode) {
+					$("#codenum").attr("readonly", true);
 					$("#codeTarget").html('<button class="btn btn-success btn-sm" disabled="disabled">Success</button>');
-					$("#codeTarget").append('<input type="hidden" value="success" name="successData" />')
+					$("#codeTarget").append('<input type="hidden" value="success" id="successData" />')
+				}else {
+					$("#codeTarget").append('<input type="hidden" value="fail" id="successData" />')
 				}
 				
 			})
@@ -199,6 +207,51 @@
 					}
 				});
 			});
-		})
 			
+			
+			
+		})
+		var oldVal = null;
+		$("#ac_repwd").on("propertychange change keyup paste input", function() {
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		   	if($('#ac_repwd').val() !== $("#ac_pwd").val()){
+			   $('#target').html("입력하신 비밀번호와 다릅니다.").addClass('text-danger');
+		   }else {
+			   $('#target').removeClass('text-danger');
+			   $('#target').html("입력하신 비밀번호와 일치합니다.").addClass('text-primary');;
+			}
+		});
+		
+		$("#ac_pwd").on("propertychange change keyup paste input", function() {
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    console.log("반응");
+		   	if($('#ac_pwd').val() !== $("#ac_repwd").val()){
+			   $('#target').html("입력하신 비밀번호와 다릅니다.").addClass('text-danger');
+		   }else {
+			   $('#target').removeClass('text-danger');
+			   $('#target').html("입력하신 비밀번호와 일치합니다.").addClass('text-primary');;
+			}
+		});
+		
+		function chk() {
+			if($("#ac_pwd").val().length !== 4){
+				alert("비밀번호는 4자리로 입력해주세요");
+			}else if($("#ac_pwd").val() === null){
+				alert("비밀번호를 입력해주세요");
+			}else if($("#ac_repwd").val() === null){
+				alert("비밀번호 재입력을 입력해주세요");
+			}else if($("#successData").val() !== 'success'){
+				alert("이메일 인증을 해주세요.");
+			}else{
+				f.submit();
+			}
+		}
 	</script>
