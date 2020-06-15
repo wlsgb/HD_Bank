@@ -8,8 +8,8 @@
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">Dank</h2>
-								<h5 class="text-white op-7 mb-2">어서오세요. Dank 빠른페이지입니다.</h5>
+								<h2 class="text-white pb-2 fw-bold">HD Bank</h2>
+								<h5 class="text-white op-7 mb-2">어서오세요. HD Bank 메인 페이지입니다.</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
