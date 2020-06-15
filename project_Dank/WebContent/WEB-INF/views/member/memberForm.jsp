@@ -88,7 +88,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<div class="form-group row">
 													<label for="mem_birth" class="col-2 control-label">생년월일</label>
 													<div class="col-10">
-   														<input type="date" class="form-control"  id="mem_birth" name="mem_birth">
+   														<input type="number" class="form-control" max="999999" id="mem_birth" name="mem_birth" placeholder="예)951201">
    													</div>
 												</div>
 													<div class="form-group row">
@@ -131,7 +131,7 @@ input[type="number"]::-webkit-inner-spin-button {
 			
 						</div>
 					
-			<p class="text-center"><button type="submit" class="btn btn-info" id="btn">대출 신청</button></p>
+			<p class="text-center"><button type="submit" class="btn btn-info" id="btn">가입하기</button></p>
 		</form>
 			</div>
 		
