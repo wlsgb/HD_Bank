@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
+import dank.mvc.dao.MemberDao;
 import dank.mvc.method.AccountNum;
 import dank.mvc.service.BangkingService;
 
@@ -44,6 +45,8 @@ public class DepositController {
 	@Autowired
 	private DepositService depositService;
 	
+	@Autowired
+	private MemberDao memberDao;
 	//예금-신규페이지 이동
 	@RequestMapping(value = "/new")
 	public String newPage(Model m) {
@@ -52,7 +55,11 @@ public class DepositController {
 	//예금-신규-특정 예금 상품 페이지 이동
 	@RequestMapping(value = "/saving_detail")
 	public String saving_detail(Model m, int sav_code) {
+		System.out.println(sav_code);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+//		System.out.println(saving);
+//		System.out.println(saving.getQua_code());
+//		System.out.println(saving.getSav_name());
 		m.addAttribute("saving",saving);
 		return "deposit_new/saving_detail";
 	}
@@ -65,7 +72,16 @@ public class DepositController {
 	}
 	//예금-신규-예금 신청 페이지 이동
 	@RequestMapping(value = "/saving_new")
-	public String saving_new(Model m, int sav_code, int deptype) {
+	public String saving_new(HttpSession session,Model m, int sav_code, int deptype) {
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "new");
+			return "login/login";
+		}
+		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		MemberVO memberVO = memberDao.numToEmailName(mem_code);
+		m.addAttribute("memberVO", memberVO);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
 		m.addAttribute("saving", saving);
 		m.addAttribute("deptype", deptype);
@@ -79,6 +95,7 @@ public class DepositController {
 		
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "new");
 			return "login/login";
 		}
 		
@@ -91,8 +108,7 @@ public class DepositController {
 		account.setAc_num(ac_num);
 		
 		int mem_code = member.getMem_code();
-		int pro_code = accountNum.getPro_codeNum(psid);		
-		
+		int pro_code = accountNum.getPro_codeNum(psid);
 		Account_ClientVO clientVO = new Account_ClientVO();
 		
 		clientVO.setMem_code(mem_code);
@@ -101,7 +117,6 @@ public class DepositController {
 		//ac_code,ac_num,ac_pwd,ac_balance,ac_name,ac_start_date,ac_end_date
 		//ac_code,mem_code,pro_code
 		depositService.newAccount(account,clientVO);
-		
 		return "deposit_new/success";
 	}
 	
