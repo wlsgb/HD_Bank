@@ -139,9 +139,15 @@ public class DepositController {
 	public ModelAndView inquirePage(
 			HttpSession session
 			) {
+		ModelAndView mav = new ModelAndView();
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "inquire");
+			mav.setViewName("login/login");
+			return mav;
+		}
 		//session.setAttribute("mem_code", mem_code);
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		ModelAndView mav = new ModelAndView();
+		
 
 		//System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
 		System.out.println("계좌조회에서 있는 세션은="+sessionmem.getMem_code());
@@ -354,6 +360,12 @@ public class DepositController {
 	//이체 페이지로 이동
 	@RequestMapping(value = { "/transfer" })
 	public ModelAndView transferPage(HttpSession session,@RequestParam(value = "ac_num",defaultValue = "0") String ac_num) {
+		ModelAndView mav = new ModelAndView();
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "transfer");
+			mav.setViewName("login/login");
+			return mav;
+		}
 		
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		System.out.println("이체 세션은 "+sessionmem.getMem_code());
@@ -370,7 +382,7 @@ public class DepositController {
 		for(String e : myaclist) {
 			System.out.println(e);
 		}
-		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("deposit/deposite_transfer");
 		mav.addObject("myaclist",myaclist);
 		
