@@ -43,7 +43,7 @@
   		<typeAlias type="dank.mvc.vo.deposit.AccountHistoryVO" alias="achvo"/>
   		<typeAlias type="dank.mvc.vo.deposit.PageVO" alias="deppvo"/>
   		<typeAlias type="dank.mvc.vo.deposit.At_applicationVO" alias="atapplyvo"/>
-
+		
 		<typeAlias type="dank.mvc.vo.deposit.ProSavInsDto" alias="psidto"/>
   		<!-- 예금 영역 끝 -->
 
