@@ -1,4 +1,4 @@
-package dank.mvc.vo.deposit;
+package dank.mvc.vo;
 
 public class EmployeeVO {
 	private int hd_code;

@@ -102,14 +102,11 @@
 														<td>
 															<div class="row">
 																<div class="col-8">
-																<c:set value="${page }" scope="session" var="pagename"/>
-																${pagename }
 																	<input type="text" id="codenum" name="codenum" required="required"
 																	class="form-control input-full">                                      
 																</div>
 																<div class="col-4 mt-1" id="codeTarget">
 																	<button type="button" class="btn btn-primary" id="codeCheck">»Æ¿Œ</button>
-																	
 																</div>
 															</div>
 														</td>

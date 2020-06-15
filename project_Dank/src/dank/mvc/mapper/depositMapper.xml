@@ -93,11 +93,10 @@
 	</select>
 	
 	<insert id="newAccount" parameterType="acvo">
-		insert into account values(account_seq.nextVal,#{mem_code},#{ac_num},#{ac_pwd},sysdate,null,0,#{pro_code})
+		insert into account values(account_seq.nextVal,#{ac_num},#{ac_pwd},#{ac_balance},#{ac_name},sysdate,null)
 	</insert>
+	<insert id="newAcClient" parameterType="">
 	
-	<select id="ac_num_list" resultType="String">
-		select ac_num from account
-	</select>
+	</insert>
 
 </mapper>
