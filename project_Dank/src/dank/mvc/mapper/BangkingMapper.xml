@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="bangking">
+  
 <!--  @계좌조회(처음 조회눌렀을때 세션에서 멤버코드를 가지고 그멤버가 가진 계좌 리스트를 뽑아온다) -->
 						  <resultMap type="acvo" id="acinqueryResult">
 								<id property="ac_num" column="ac_num"/>
@@ -42,15 +43,24 @@
 			 and p.ins_code=ins.ins_code(+)
 			</select>
 <!--  /@계좌조회 끝(처음 조회눌렀을때 작동) -->
+
 <!-- @입금 시작(입금 누르면 돈이 들어온다. 지점에서 현금을 받는다는 가정) -->
 		<!--1계좌유효성검사 적힌 계좌가 DB에 담겨있는지 count 를 반환한다 -->
-		<select id="depcheckac" parameterType="int" resultType="int">
+		<select id="depcheckac" parameterType="String" resultType="int">
 			select count(*)
 			from account
 			where ac_num=#{ac_num}
 	  	</select>
+	  	
+	  	<!-- 계좌번호를 넣으면 멤버코드를 가져온다. -->
+	  	<select id="actomemnum" parameterType="String" resultType="int">
+			select mem_code
+			from account
+			where ac_num=#{acnum}
+	  	</select>
+	  	
 		<!--2입금테이블을 작성한다. -->
-	  	<insert id="depplusdep" parameterType="int">
+	  	<insert id="depplusdep" parameterType="String">
 	  		insert into deposit values(deposit_seq.nextval,#{dep_money},sysdate)
 	  	</insert>
 		<!--3.입출금처리 테이블작성 -->
@@ -88,19 +98,19 @@
 <!-- /@입금 끝 -->
 <!-- @출금시작 -->
 		<!--1계좌가 DB에 있는지검사 -->
-	  	<select id="witcheckac" parameterType="int" resultType="int">
+	  	<select id="witcheckac" parameterType="String" resultType="int">
 			select count(*)
 			from account
 			where ac_num=#{ac_num}
 	  	</select>
 		<!--2계좌에 출금할수있는 잔액이 있는지 검사 -->
-		<select id="witcheckbalance" parameterType="hashMap" resultType="int">
+		<select id="witcheckbalance" parameterType="hashMap" resultType="String">
 			select ac_balance
 			from account
 			where ac_num=#{ac_num} and mem_code=#{mem_code}
 		</select>
 		<!--3출금표 작성 -->
-	  	<insert id="witpluswit" parameterType="int"> 		
+	  	<insert id="witpluswit" parameterType="String"> 		
 	  		insert into withdraw values(WITHDRAW_SEQ.nextval,#{wit_money},sysdate)
 	  	</insert>
 		<!--4입출금내역 작성 -->
@@ -136,7 +146,7 @@
 <!-- /@출금 끝 -->
 <!-- @계좌이체 시작 -->
 		<!--if1.출금계좌A체크 -->
-		<select id="tracchk" parameterType="int" resultType="int">
+		<select id="tracchk" parameterType="String" resultType="int">
 			select count(*)
 		    from account
 		    where ac_num=#{ac_num}
@@ -144,13 +154,13 @@
 		<!--if2.입금계좌B체크 -->
 			<!-- 	1과동일 -->
 		<!--if3.출금계좌A잔고체크 -->
-		<select id="trbalchk" parameterType="hashMap" resultType="int">
+		<select id="trbalchk" parameterType="hashMap" resultType="String">
 			select ac_balance
 		    from account
 		    where ac_num=#{ac_num} and mem_code=#{mem_code}
 		</select>
 		<!--tr4.출금계좌A이체증,출금도(출금이랑95%비슷)작성 -->
-		<insert id="trpluswit" parameterType="int">
+		<insert id="trpluswit" parameterType="String">
 			insert into withdraw values(WITHDRAW_SEQ.nextval,#{wit_money},sysdate)
 	    </insert>
 	    <insert id="trpluswittr" parameterType="hashMap">
@@ -187,7 +197,7 @@
 	            where ac_num=#{ac_num} and mem_code=#{mem_code})
 		</update>
 		<!--tr7.입금계좌B 입금증,이체증작성 -->
-		<select id="trplusdep" parameterType="int">
+		<select id="trplusdep" parameterType="String">
 			insert into deposit values(deposit_seq.nextval,#{dep_money},sysdate)
 		</select>
 		<select id="trplusdeptr" parameterType="hashMap">
@@ -254,21 +264,48 @@
 		    				 from account
 		    				  where ac_num=#{ac_num} and mem_code=#{mem_code})
 	  </select>
-	  <select id="getmemcodewhentr" parameterType="int" resultType="int">
-		 	select nvl(mem_code,0)
+		<!--이체에서 계좌확인 눌렀을때 그계좌의 멤버코드를 들고온다 -->
+		<resultMap type="hashMap" id="getmemwhentrResult">
+			<result javaType="String" column="mem_code" property="mem_code"/>
+			<result javaType="String" column="mem_name" property="mem_name" />
+		</resultMap> <!-- 궁금해서 해봄 -->
+	  <select id="getmemcodewhentr" parameterType="String" resultMap="getmemwhentrResult">
+		 	select  nvl(mem_name,0) mem_name, nvl(mem_code,0) mem_code
 				from(
-				select mem_code
-				from account
-				where ac_num=#{acnum} 
+				select a.mem_code, m.mem_name mem_name
+				from account a,member m
+				where ac_num=#{ac_num} and a.mem_code=m.mem_code 
 				) right outer join dual on 1=1
 	  </select>
-	  <select id="getmyaclistwhentr" resultType="int" parameterType="int" >
-			select a.ac_num ac_num
+	<!--이체하기 로 이동하면 자동으로 내 세션의 계좌리스트를 뽑아온다 -->
+	  <select id="getmyaclistwhentr" resultType="String" parameterType="hashMap" >
+			select ac_num
+            from(
+            select a.ac_num ac_num, case when ac_num =#{ac_num} then '1' else '0' end doghell
 			from account a, product p
 			where a.mem_code=#{mem_code} and a.pro_code=p.pro_code and p.ins_code is null
+            order by doghell desc, a.ac_num asc
+            )
 	  </select>
+	  
+	<!-- 계좌이체할때 금액입력할때 키업으로 금액 가져옴 -->
+	<select id="getmybalwhentr" resultType="String" parameterType="hashMap">
+		select ac_balance from account where mem_code=#{mem_code} and ac_num=#{ac_num}
+	</select>
 <!--/@거래내역 가져오기 끝 -->
-
+<!-- @자동이체 시작 -->
+	<insert id="atapply" parameterType="atapplyvo">
+	insert into at_application
+	 values(at_application_seq.nextval
+	 		,(select ac_code from account where mem_code=#{mem_code} and ac_num=#{ac_num})
+	 		,#{ata_opac}
+	 		,#{ata_setmny}
+	 		,#{ata_dterm}
+	 		,#{ata_startdate}
+	 		,#{ata_stopdate}
+	 		,#{ata_time})
+	</insert>
+<!-- /@자동이체 종료 -->
 
 
 

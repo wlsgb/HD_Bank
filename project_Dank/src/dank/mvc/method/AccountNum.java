@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
 import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.deposit.ProductVO;
@@ -11,11 +12,11 @@ import dank.mvc.vo.deposit.ProductVO;
 @Repository
 public class AccountNum {
 	@Autowired
-	private DepositDao depositDao;
+	private BangkingDao bangkingDao;
 	@Autowired
 	private SqlSessionTemplate ss;
 	
-	//7자리 계좌번호 생성
+	//7자리 랜덤숫자 생성
 	public String randomNum() {
 		String randomNum="";
 		for(int i=0;i<7;i++) {
@@ -24,40 +25,30 @@ public class AccountNum {
 		}
 		return randomNum;
 	}
-	public String AcNum(ProSavInsDto psi) {
-		StringBuffer acNum = new StringBuffer();
-		if(psi.getSav_code() != 0) {
-			if(psi.getShas_code() == 0) {
-				acNum.append("100");
-				acNum.append(randomNum());
-				return acNum.toString();
-			}else {
-				acNum.append("500");
-				acNum.append(randomNum());
-				return acNum.toString();
-			}
-			
-		}else if(psi.getIns_code() != 0) {
-			if(psi.getShac_code() == 0) {
-				acNum.append("300");
-				acNum.append(randomNum());
-				return acNum.toString();
-			}else {
-				acNum.append("700");
-				acNum.append(randomNum());
-				return acNum.toString();
-			}
-		}else {
-			return "계좌를 만들수 없음";
-		}
-		
-	}
-	public String createAcNum(ProductVO product) {
-		
-		int acNumCnt = ss.selectOne(".");
-		
-		
-		return "";
+	//10자리 계좌번호 생성
+	public String createAcNum(int deptype) {
+		String acNum = "";
+		int acCnt=0;
+		do{
+			acNum = "";
+			acNum+=deptype;
+			acNum+=randomNum();
+			acCnt=bangkingDao.depcheckac(acNum);
+		}while(acCnt != 0) ;
+		return acNum;
 	}
 	
+	public int getPro_codeNum(ProSavInsDto psi) {
+		int deptype = psi.getDeptype();
+		switch (deptype) {
+		case 100:
+		case 500:
+			return ss.selectOne("deposit.pro_codeNum", psi.getSav_code());
+		case 300:
+		case 700:
+			return ss.selectOne("deposit.pro_codeNum", psi.getIns_code());
+		default:
+			return 0;
+		}
+	}
 }
