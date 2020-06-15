@@ -42,6 +42,7 @@
 											<span class="blockquote blockquote-primary">보안카드 비밀번호 입력</span>
 											<!-- 보안카드 form 시작 -->
 											<form action="ssc" method="post">
+												<input type="hidden" value="${nextPage }" />
 												<div class="form-group">
 													<label for="">
 														<span class="h4 text-danger">

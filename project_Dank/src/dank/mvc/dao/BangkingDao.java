@@ -24,6 +24,7 @@ public class BangkingDao {
 	public int acnumToMemcode(String acnum) {
 		return ss.selectOne("bangking.actomemnum",acnum);
 	}
+	
 	///////////////////////////////////////////////////////////입금시작@
 	public int depcheckac(String ac_num) {
 		System.out.println("checkac");
