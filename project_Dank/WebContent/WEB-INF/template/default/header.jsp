@@ -6,7 +6,7 @@
 			<div class="logo-header" data-background-color="blue">
 				
 				<a href="index" class="logo">
-					<img src="resources/img/Dlogo.svg" alt="navbar brand" class="navbar-brand">
+					<img src="resources/img/HDlogo.svg" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -27,7 +27,7 @@
 				
 				<div class="container-fluid">
 					<!-- 검색창 시작 -->
-					<div class="collapse" id="search-nav">
+					<!-- <div class="collapse" id="search-nav">
 						<form class="navbar-left navbar-form nav-search mr-md-3">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -41,7 +41,7 @@
 					</div>
 					<div class="col-2">
 						<button class="btn btn-focus" id="serBtn">검색</button>
-					</div>
+					</div> -->
 					<!-- 검색창 끝 -->
 					
 					<!-- 로그인 후 연장 로그아웃 버튼 시작-->
