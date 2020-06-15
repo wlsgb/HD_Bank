@@ -61,16 +61,23 @@
 														</c:forEach>
 														</select>
 														</td>
-													</tr>		
-											
+													</tr>	
+													<tr>
+														<td colspan="2">
+											<p class="text-center"><button type="button" class="btn btn-lg btn-primary loanstart" value="${vo.lc_num }">대출실행</button></p>
+														
+														</td>
+													</tr>	
+												
 											</table>
-											<button type="button" class="btn btn-lg btn-primary loanstart" value="${vo.lc_num }">대출실행</button>
+
 										
 										</div>
 									</div>
 								</div>
 							</div>
-		<div class="col-sm-6 col-md-2"></div>
+		<div class="col-sm-6 col-md-2">
+		</div>
 			
 						</div>
 		
