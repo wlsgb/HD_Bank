@@ -19,6 +19,7 @@ import dank.mvc.method.SecurityCode;
 import dank.mvc.service.SecurityService;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.SecuritySertufyVO;
+import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.security.Security_CardVO;
 import dank.mvc.vo.security.Security_Card_RegVO;
@@ -112,7 +113,7 @@ public class SecurityController {
 		}
 		session.setAttribute("error", "t");
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
-		List<AccountVO_backup> aclist = bangkingdao.getaclist(mem_code);
+		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
@@ -202,7 +203,11 @@ public class SecurityController {
 			return "security/security";
 		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+
+		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
+
 //		List<AccountVO_backup> aclist = bangkingdao.getaclist(mem_code);
+
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		session.setAttribute("pageName", "redirect:securityotp");
 //		m.addAttribute("aclist", aclist);
