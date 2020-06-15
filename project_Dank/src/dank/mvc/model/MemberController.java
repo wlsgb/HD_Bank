@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.MemberDao;
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.UserVO;
 
 
 @Controller
@@ -110,14 +109,17 @@ public class MemberController {
 	
 	//로그인 시 로그인 한 사람의 정보를 세션에 삽입 
     @RequestMapping(value = "/login" ,method = RequestMethod.POST ,produces = "application/json")
-	public String loginPage(@ModelAttribute UserVO user , HttpServletRequest req, Model m) throws Exception {
+	public String loginPage(@ModelAttribute MemberVO user , HttpServletRequest req, Model m,HttpSession session) throws Exception {
 		MemberVO memberVO =  memberDao.memLogin(user);
 		//UserVO userVO = registerService.selectUser(user);
-		HttpSession session = req.getSession();
+		session = req.getSession();
 		if(memberVO != null) {
 			//System.out.println("로그인성공!");
 			session.setAttribute("member", memberVO);
-			return "index/index";
+			System.out.println(((String) session.getAttribute("pageName"))!=null);
+			String pageName= ((String) session.getAttribute("pageName"))!=null ? "redirect:"+((String) session.getAttribute("pageName")) : "index/index";
+			System.out.println(pageName);
+			return pageName;
 		}
 		//System.out.println("로그인실패!");
 		return "login/login";

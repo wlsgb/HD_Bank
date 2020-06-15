@@ -1,5 +1,7 @@
 package dank.mvc.vo.deposit;
 
+import dank.mvc.vo.EmployeeVO;
+
 public class Account_AdminVO {
 	private int ac_code, hd_code;
 	private EmployeeVO employeeVO;
