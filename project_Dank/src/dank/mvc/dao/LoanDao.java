@@ -67,4 +67,10 @@ public class LoanDao {
 	public List<AccountVO_backup> repayaccount(int mem_code) {
 		return ss.selectList("loan.selectaccount",mem_code);
 	}
+	public void loanmoneyexport(int lr_amount) {
+		ss.update("loan.loanmoneyexport", lr_amount);
+	}
+	public void loanmoneyimport(LoanRepayVO vo) {
+		ss.update("loan.loanmoneyimport", vo);
+	}
 }

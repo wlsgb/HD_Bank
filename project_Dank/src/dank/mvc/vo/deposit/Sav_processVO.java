@@ -9,7 +9,13 @@ public class Sav_processVO {
 //			"WIT_CODE"	number		NULL,
 //			"AT_CODE"	number		NULL
 //		);
-	private int sp_code,ac_code,dep_code,wit_code,at_code;
+	private int sp_code,ac_code,dep_code,wit_code,at_code,sp_balance;
+	public int getSp_balance() {
+		return sp_balance;
+	}
+	public void setSp_balance(int sp_balance) {
+		this.sp_balance = sp_balance;
+	}
 	private String sp_name;
 	public int getSp_code() {
 		return sp_code;
