@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <div class="content">
@@ -44,78 +45,87 @@
 										<div class="col-md-10 col-lg-10">
 										
 							<div class="card">
+							<form action="transfer_auto_apply" method="post">
 								<div class="card-header">
 <!-- 									<div class="card-title">Hoverable Table</div> -->
 									<table style="margin: auto; width: 400px; height: 30px;"  >
 									<tr>
-									<td>계좌번호</td><td><input type="text" placeholder="110-111-12345 : 보통예금" style="width: 300px; margin-left: 20%;"/></td>
+									<td>계좌번호</td>
+									<td>
+<!-- 									<input type="text" placeholder="110-111-12345 : 보통예금" style="width: 300px; margin-left: 20%;"/> -->
+										<select name="ac_num" id="ac_num" class="form-control">
+										<c:forEach var="e" items="${aclist }">
+										<c:if test="${e.saving.sav_name != '0'}">
+											<option>${e.ac_num }</option>
+											</c:if>
+											</c:forEach>
+										</select>
+									</td>
 									</tr>
 									</table>
 								</div>
 								<div class="card-body">
-									<table class="table table-hover">
+									<table class="table table-bordered">
 										
 										
 										
 										
-										<tbody>
-									
+										<tbody style="border: 2px solid black;">
+											
 											<tr>
-												<td>
-													<table>
-													<tr  >
-														<td style="border-style: none;">▶</td ><td colspan="2"  style="border-style: none;">슈퍼 정기 예금</td>
-														
-													</tr>
-													<tr>
-														<td style="border-style: none;"></td><td style="border-style: none;" colspan="2">카카오 123-12-1558-52</td>
-														
-													</tr>
-													<tr >
-														<td style="border-style: none;"></td><td style="border-style: none;">매월 10일 </td><td>| 홍길동</td>
-														
-													</tr>
-													</table>
-												
-											</tr>
-											<tr>
-												<td>
-													<table>
-													<tr  >
-														<td style="border-style: none;">▶</td ><td colspan="2"  style="border-style: none;">주택청약적금</td>
-														
-													</tr>
-													<tr>
-														<td style="border-style: none;"></td><td style="border-style: none;" colspan="2">국민 123-12-1558-52</td>
-														
-													</tr>
-													<tr >
-														<td style="border-style: none;"></td><td style="border-style: none;">매월 20일 </td><td>| 임성</td>
-														
-													</tr>
-													</table>
-												</td>
+												<td colspan="5">num</td>
 											</tr>
 											
+											<tr>
+												<td rowspan="2" >출금정보</td><td>출금계좌정보</td><td>{출금계좌정보}</td><td>보내는분</td><td>{보내는분}</td>
+											</tr>
+											<tr>
+												<td>출금통장표시내역</td><td>{출금통장표시내역}</td><td>HD</td><td>HD</td>
+											</tr>
+											
+											<tr>
+												<td rowspan="2" >입금정보</td><td>입금계좌정보</td><td>{입금계좌정보}</td><td>받는분</td><td>{받는분}</td>
+											</tr>
+											<tr>
+												<td>입금통장표시내역</td><td>{입금통장표시내역}</td><td>HD</td><td>HD</td>
+											</tr>
+											<tr>
+												<td rowspan="4" >자동이체정보</td><td>시작일</td><td>{시작일}</td><td>종료일</td><td>{종료일}</td>
+											</tr>
+											<tr>
+												<td>이체금액</td><td>{이체금액}</td><td>이체일자</td><td>{이체일자}</td>
+											</tr>
+											<tr>
+												<td>이체시간</td><td>{이체시간}</td><td>진행상황</td><td>{진행상황}</td>
+											</tr>
+											<tr>
+												<td>종료여부</td><td>{종료여부}</td><td>HD</td><td>HD</td>
+											</tr>
+											
+											
 										</tbody>
+										
+								
+										
 									</table>
-										<div style="margin-left: 40%; margin-bottom: 20px;">
-											<button class="btn btn-default btn-xs" type="submit">1</button>
-											<button class="btn btn-default btn-xs" type="submit">2</button>
-											<button class="btn btn-default btn-xs" type="submit">3</button>
-											<button class="btn btn-default btn-xs" type="submit">4</button>
-										</div>
+<!-- 										<div style="margin-left: 40%; margin-bottom: 20px;"> -->
+<!-- 											<button class="btn btn-default btn-xs" type="submit">1</button> -->
+<!-- 											<button class="btn btn-default btn-xs" type="submit">2</button> -->
+<!-- 											<button class="btn btn-default btn-xs" type="submit">3</button> -->
+<!-- 											<button class="btn btn-default btn-xs" type="submit">4</button> -->
+<!-- 										</div> -->
 										
 										
 								<div style="margin-left: 35%;">
 								<button type="button" class="btn btn-info ">확인</button>
 								
-								<a href="transfer_auto_apply"><button type="button" class="btn btn-info ">자동이체 신청</button></a>
+								<button type="submit" class="btn btn-info ">자동이체 신청</button>
 								
 								</div>
 								
 								
 								</div>
+								</form>
 							</div>
 							
 							
@@ -148,96 +158,106 @@
 			
 			
 			<script>
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+			
+// 		$(document).ready(function() {
+			
+			
+// 			setInterval(function() {
+				
+// 				$.ajax({
+// 					url:"atloadval",
+// 					success:function(data){
+// 						$.each(data, function(index, item) {
+							
+// 							var nowtimehour =String(new Date().getHours());
+// 							var nowtimeminute = String(new Date().getMinutes());
+							
+// 							if (nowtimehour.length < 2) nowtimehour = '0' + nowtimehour;
+// 							if (nowtimeminute.length < 2) nowtimeminute = '0' + nowtimeminute;
+							
+// 							var nowtimeyear = String(new Date().getFullYear());
+// 							var nowtimemonth = String(new Date().getMonth()+1);
+// 							var nowtimedate = String(new Date().getDate());
+							
+// 							if (nowtimemonth.length < 2) nowtimemonth = '0' + nowtimemonth;
+// 							if (nowtimedate.length < 2) nowtimedate = '0' + nowtimedate;
+							
+							
+							
+							
+							
+// 							let ajaxtimearr = String(item.ata_time).split(":");
+// 							let ajaxdatearr = String(item.ata_startdate).split("-");
+							
+// 							console.log(nowtimemonth)
+// 							console.log(item.ata_myacmemo)
+// 							console.log(nowtimeyear+"vs"+ajaxdatearr[0])
+// 							console.log(nowtimemonth+"vs"+ajaxdatearr[1])
+// 							console.log(nowtimedate+"vs"+ajaxdatearr[2])
+// 							console.log(nowtimehour+"vs"+ajaxtimearr[0])
+// 							console.log(nowtimeminute+"vs"+ajaxdatearr[1])
+							
+							
+// 							if(parseInt(ajaxdatearr[0]) <= parseInt(nowtimeyear)){
+// 								console.log('오케이 년 통과')
+// 								if(parseInt(ajaxdatearr[1]) <= parseInt(nowtimemonth)){
+// 									console.log('오케이 월 통과')
+									
+// 									if(parseInt(ajaxdatearr[2]) < parseInt(nowtimedate)){
+// 										console.log('해당달의 오늘이전')
+// 										console.log('자동이체 되야함 (대충자동이체메서드)')
+// 									}else if(parseInt(ajaxdatearr[2]) === parseInt(nowtimedate)){
+// 										console.log('오늘')
+// 										console.log('시간이되면 자동이체해야댐')
+										
+										
+// 										if(parseInt(ajaxtimearr[0]) < parseInt(nowtimehour)){
+// 											console.log('시간 지남 자동이체 해야 했어야함')
+// 										}else if(parseInt(ajaxtimearr[0]) === parseInt(nowtimehour)){
+// 											console.log('시간이 같네? 이제 분 비교하자')
+// 											if(parseInt(ajaxtimearr[1]) < parseInt(nowtimeminute)){
+// 												console.log('분이 지남 자동이체 해야 했엇음')
+// 											}else if(parseInt(ajaxtimearr[1]) === parseInt(nowtimeminute)){
+// 												console.log('time is 자동이체')
+// 											}
+											
+// 										}
+										
+										
+										
+										
+										
+										
+										
+										
+										
+// 									}else if(parseInt(ajaxdatearr[2]) >= parseInt(nowtimedate)){
+// 										console.log('해당달의오늘이후')
+// 										console.log('자동이체 하면 안댐')
+// 									}
+									
+									
+									
+// 								}else {
+// 									console.log("나가뤼")
+// 								}
+// 							}else {
+// 								console.log("나가뤼")
+								
+// 							}
+							
+							
+							
+// 							console.log("현재시각"+nowtimehour+":"+nowtimeminute)
+// 							console.log(ajaxdatearr[0]+"//"+ajaxdatearr[1]+"//"+ajaxdatearr[2]+"//"+ajaxtimearr[0]+"//"+ajaxtimearr[1]+"//")
+// 						})
+// 					}
+// 				})
+				
+// 			}, 10000)
+// 		})
 	</script>
+	
+	
+	
+	
