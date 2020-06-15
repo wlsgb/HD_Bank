@@ -109,11 +109,7 @@ public class MemberController {
 	
 	//로그인 시 로그인 한 사람의 정보를 세션에 삽입 
     @RequestMapping(value = "/login" ,method = RequestMethod.POST ,produces = "application/json")
-<<<<<<< HEAD
-	public String loginPage(@ModelAttribute UserVO user , HttpServletRequest req, Model m,HttpSession session) throws Exception {
-=======
-	public String loginPage(@ModelAttribute MemberVO user , HttpServletRequest req, Model m) throws Exception {
->>>>>>> refs/remotes/origin/master
+	public String loginPage(@ModelAttribute MemberVO user , HttpServletRequest req, Model m,HttpSession session) throws Exception {
 		MemberVO memberVO =  memberDao.memLogin(user);
 		//UserVO userVO = registerService.selectUser(user);
 		session = req.getSession();
