@@ -107,6 +107,16 @@
 															
 														</td>
 													</tr>
+													<tr>
+														<th scope="col">°èÁÂ º°Äª</th>
+														<td>
+															<div class="row">
+																<div class="col-6">
+																	<input type="text" id="ac_name" name="ac_name" class="form-control input-full">
+																</div>
+															</div>
+														</td>
+													</tr>
 												</tbody>
 												<tfoot>
 													<tr>

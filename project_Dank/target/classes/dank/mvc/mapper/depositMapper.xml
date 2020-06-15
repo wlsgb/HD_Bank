@@ -92,11 +92,11 @@
 		</if>
 	</select>
 	
-	<insert id="newAccount" parameterType="acvo">
-		insert into account values(account_seq.nextVal,#{ac_num},#{ac_pwd},#{ac_balance},#{ac_name},sysdate,null)
+	<insert id="addAccount" parameterType="acvo">
+		insert into account values(account_seq.nextVal,#{ac_num},#{ac_pwd},0,#{ac_name},sysdate,null)
 	</insert>
-	<insert id="newAcClient" parameterType="">
-	
+	<insert id="addAcClient" parameterType="clientvo">
+		insert into account_client values(account_seq.currval,#{mem_code},#{pro_code})
 	</insert>
 
 </mapper>
