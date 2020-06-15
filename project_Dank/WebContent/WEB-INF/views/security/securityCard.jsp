@@ -12,6 +12,8 @@
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								 <span class="h2 mr-1"> > </span>
+								 <a href="security" class="btn btn-white btn-sm btn-border mr-1">보안카드 / OTP</a>
+								 <span class="h2 mr-1"> > </span>
 								 <a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">보안카드</a>
 								 <span class="h2 mr-1"> > </span>
 								 <a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">신청</a>
