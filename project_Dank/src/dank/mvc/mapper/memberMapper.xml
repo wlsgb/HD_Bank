@@ -29,7 +29,7 @@
 		select mem_birth from member where mem_code=#{num}
 	</select>
 	
-	<select id="memlogin" parameterType="user" resultType="mem">
+	<select id="memlogin" parameterType="mem" resultType="mem">
 		select 
 			mem_code,
 			mem_email,
