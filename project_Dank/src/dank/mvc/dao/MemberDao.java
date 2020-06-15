@@ -5,9 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.UserVO;
-
-
 
 @Repository
 public class MemberDao {
@@ -34,7 +31,7 @@ public class MemberDao {
 		ss.insert("member.memberjoin",vo);
 	}
 	
-	public MemberVO memLogin(UserVO user) {
+	public MemberVO memLogin(MemberVO user) {
 		return ss.selectOne("member.memlogin", user);
 	}
 
