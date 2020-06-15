@@ -192,7 +192,7 @@
 					<c:when test="${vo.lc_state eq '서류제출대기'}">
 			<p class="text-center"><button type="button" class="btn btn-info" id="file" value="${vo.lc_num }">서류제출</button></p>
 					</c:when>
-					<c:when test="${vo.lc_state eq '승인완료'}">
+					<c:when test="${vo.lc_state eq '대출승인'}">
 					<p class="text-center"><button type="button" class="btn btn-info" id="loanstart" value="${vo.lc_num }">실행하기</button></p>
 					</c:when>
 					<c:when test="${vo.lc_state eq '실행완료'}">
@@ -222,5 +222,7 @@
 		$('#refile').click(function() {
 			location='checkfiledetail?lc_num='+$(this).val();
 		})
+		
+		
 	</script>
 

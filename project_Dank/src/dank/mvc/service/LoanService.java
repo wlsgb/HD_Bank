@@ -28,6 +28,8 @@ public class LoanService {
 	}
 	
 	public void startrepay(LoanRepayVO vo) {
+		loanDao.loanmoneyexport(vo.getLr_amount());
+		loanDao.loanmoneyimport(vo);
 		loanDao.loanstart(vo.getLc_num());
 		loanDao.loanrepaystart(vo);
 	}

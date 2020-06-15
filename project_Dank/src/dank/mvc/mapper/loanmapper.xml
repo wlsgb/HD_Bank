@@ -164,23 +164,18 @@
   	<insert id="loanrepay" parameterType="lrvo">
   		insert into loan_repay values(#{lc_num},#{lr_amount},#{lr_balance},#{lr_interest},#{lr_repaydate},#{lr_firstdate},#{lr_reaccount},sysdate)
   	</insert>
-  	<select id="total">
-  	select sum(ac_balance) from account
-  	</select>
-  	<select id="realtotal">
-  	select * from total_balance where rownum = 1 order by tb_code
-  	</select>
-  	<insert id="loaninsert">
   	
-  	</insert>
-  	<insert id="">
+  	<update id="loanmoneyexport" parameterType="int">
+  		update account set ac_balance = ac_balance - #{lr_amount} where ac_code = 2
+  	</update>
   	
-  	</insert>
-  	
+  	<update id="loanmoneyimport" parameterType="lrvo">
+  		update account set ac_balance = ac_balance + #{lr_amount} where ac_num = #{lr_reaccount}
+  	</update>
   	
   	<select id="selectaccount" resultType="acvo" parameterType="int">
   	select ac.ac_code, ac.ac_num from account  
-        ac, product pr where ac.pro_code=pr.pro_code and mem_code = #{mem_code} and sav_code is not null
+        ac, product pr,account_client acc where ac.ac_code=acc.ac_code and acc.pro_code=pr.pro_code and mem_code = #{mem_code} and sav_code is not null
         
     </select>
   </mapper>

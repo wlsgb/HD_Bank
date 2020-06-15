@@ -1,8 +1,8 @@
 package dank.mvc.vo;
 
 public class LoanRepayVO {
-	private int lc_num,lr_amount,lr_balance,lr_interest,lr_repaydate,lr_reaccount;
-	private String lr_firstdate,lr_startdate;
+	private int lc_num,lr_amount,lr_balance,lr_interest,lr_repaydate;
+	private String lr_firstdate,lr_startdate,lr_reaccount;
 	public int getLc_num() {
 		return lc_num;
 	}
@@ -33,10 +33,11 @@ public class LoanRepayVO {
 	public void setLr_repaydate(int lr_repaydate) {
 		this.lr_repaydate = lr_repaydate;
 	}
-	public int getLr_reaccount() {
+	
+	public String getLr_reaccount() {
 		return lr_reaccount;
 	}
-	public void setLr_reaccount(int lr_reaccount) {
+	public void setLr_reaccount(String lr_reaccount) {
 		this.lr_reaccount = lr_reaccount;
 	}
 	public String getLr_firstdate() {
