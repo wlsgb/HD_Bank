@@ -27,7 +27,7 @@ import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.MemberVO;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
-import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 
@@ -73,7 +73,7 @@ public class DepositController {
 	//insert into account values(#{ac_code},#{mem_code},#{ac_num},#{ac_pwd},sysdate,#{ac_end_date},#{ac_balance},#{pro_code})
 	//예금-신규-예금 신청
 	@RequestMapping(value = "/deposit_newComplete")
-	public String deposit_new(HttpSession session,Model m,AccountVO account,int deptype,
+	public String deposit_new(HttpSession session,Model m,AccountVO_backup account,int deptype,
 			@RequestParam(value = "sav_code",defaultValue = "0") int sav_code,
 			@RequestParam(value = "ins_code",defaultValue = "0") int ins_code) {
 		
@@ -148,9 +148,9 @@ public class DepositController {
 		
 		
 
-		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		List<AccountVO_backup> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
 
-		for(AccountVO e :aclist) {
+		for(AccountVO_backup e :aclist) {
 			
 			System.out.println(e.getAc_num());
 			System.out.println(e.getAc_balance());
