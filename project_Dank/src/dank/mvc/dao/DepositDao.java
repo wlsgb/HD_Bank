@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
 
@@ -36,7 +36,7 @@ public class DepositDao {
 		return ss.selectList("deposit.inslist");
 	}
 	//°èÁÂ »ý¼º
-	public void createAccount(AccountVO accountVO) {
+	public void createAccount(AccountVO_backup accountVO) {
 		ss.insert("deposit.newAccount",accountVO);
 	}
 }
