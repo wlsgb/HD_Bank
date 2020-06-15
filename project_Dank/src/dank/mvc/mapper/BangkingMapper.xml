@@ -371,13 +371,26 @@
 	<insert id="atapply" parameterType="atapplyvo">
 	insert into at_application
 	 values(at_application_seq.nextval
-	 		,(select a.ac_code from account a, account_client ac where ac.mem_code=#{mem_code} and a.ac_num=#{ac_num} and a.ac_code = ac.ac_code)
-	 		,#{ata_opac}
-	 		,#{ata_setmny}
-	 		,#{ata_dterm}
+	 		,(select a.ac_code 
+	 			from account a, account_client ac
+	 			 where ac.mem_code=#{mem_code}
+	 			 	 and a.ac_num=#{ac_num}
+	 			 	 and a.ac_code = ac.ac_code)
+	 		,#{ata_yourac}
+	 		,#{ata_setmoney}
 	 		,#{ata_startdate}
+	 		,#{ata_time}
 	 		,#{ata_stopdate}
-	 		,#{ata_time})
+	 		,#{ata_dterm}
+	 		,#{ata_myacmemo}
+	 		,#{ata_check}
+	 		,#{ata_ing}
+	 		,#{ata_youracmemo}
+	 		
+	 		
+	 		
+	 		)
+	 		
 	</insert>
 <!-- /@자동이체 종료 -->
 

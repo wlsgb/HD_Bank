@@ -4,6 +4,23 @@ public class At_applicationVO {
 
 	private int ata_code,ac_code,ata_setmoney,ata_dterm,ata_check,ata_ing;
 	private String ata_yourac,ata_startdate,ata_time,ata_stopdate,ata_myacmemo,ata_youracmemo;
+	
+	private int mem_code;//필요해서 추가함
+	private String ac_num;//필요해서 추가함
+	
+	
+	public String getAc_num() {
+		return ac_num;
+	}
+	public void setAc_num(String ac_num) {
+		this.ac_num = ac_num;
+	}
+	public int getMem_code() {
+		return mem_code;
+	}
+	public void setMem_code(int mem_code) {
+		this.mem_code = mem_code;
+	}
 	public int getAta_code() {
 		return ata_code;
 	}

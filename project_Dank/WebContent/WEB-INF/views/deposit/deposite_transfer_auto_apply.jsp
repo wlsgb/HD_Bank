@@ -58,7 +58,7 @@
 											<div class="form-inline" style="margin-left: 10%;">
 												<input type="text" placeholder="HD" class="form-control"
 													style="text-align: center; width: 60px;" />
-												 <input name="ata_opac"
+												 <input name="ata_yourac"
 													type="text" placeholder="입금 계좌 번호" class="form-control"
 													style="text-align: center; width: 300px;" />
 											</div>
@@ -69,7 +69,7 @@
 						
 											<div class="form-inline" style="margin-left: 10%;">
 
-												<input type="text" name="ata_setmny" placeholder="이체 금액" class="form-control"
+												<input type="text" name="ata_setmoney" placeholder="이체 금액" class="form-control"
 													style="text-align: center; width: 360px;" />
 											</div>
 										</div>
@@ -84,7 +84,19 @@
 														<input type="time" name="ata_time"  class="form-control">
 											</div>
 										</div>
-										
+										<div class="form-group ">
+											
+											<div class="form-inline" >
+													<label for="email2">받는분통장에 쓸 내용</label> <br />
+													<input type="text" name="atayouracmemo" class="form-control"  placeholder="받는분통장에 쓸 내용" style="text-align: center; width: 300px;"/>
+											</div>
+											<div class="form-inline">
+													<label for="email2">보내는분통장에 쓸 내용</label> <br />
+													<input type="text" name="atamyacmemo" class="form-control" placeholder="보내는분통장에 쓸 내용" style="text-align: center; width: 300px;" />
+											</div>
+										</div>
+										<input type="hidden" name="atacheck" value="0" />
+										<input type="hidden" name="ataing" value="0" />
 										
 													  
 													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/>
