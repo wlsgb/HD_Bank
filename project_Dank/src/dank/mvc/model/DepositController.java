@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -28,7 +27,7 @@ import dank.mvc.vo.MemberVO;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
-import dank.mvc.vo.deposit.AccountVO_backup;
+import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 
@@ -42,7 +41,8 @@ public class DepositController {
 
 	@Autowired
 	private AccountNum accountNum;
-
+	@Autowired
+	private DepositService depositService;
 	
 	//예금-신규페이지 이동
 	@RequestMapping(value = "/new")
@@ -71,10 +71,9 @@ public class DepositController {
 		m.addAttribute("deptype", deptype);
 		return "deposit_new/deposit_new";
 	}
-	//insert into account values(#{ac_code},#{mem_code},#{ac_num},#{ac_pwd},sysdate,#{ac_end_date},#{ac_balance},#{pro_code})
 	//예금-신규-예금 신청
 	@RequestMapping(value = "/deposit_newComplete")
-	public String deposit_new(HttpSession session,Model m,AccountVO_backup account,int deptype,
+	public String deposit_new(HttpSession session,Model m,AccountVO account,int deptype,
 			@RequestParam(value = "sav_code",defaultValue = "0") int sav_code,
 			@RequestParam(value = "ins_code",defaultValue = "0") int ins_code) {
 		
@@ -88,16 +87,20 @@ public class DepositController {
 		psid.setSav_code(sav_code);
 		psid.setIns_code(ins_code);
 		
-		//ac_code,mem_code,ac_num,ac_pwd,ac_start_date,ac_end_date,ac_balance,pro_code
-		int mem_code = member.getMem_code();
 		String ac_num = accountNum.createAcNum(deptype);
+		account.setAc_num(ac_num);
+		
+		int mem_code = member.getMem_code();
 		int pro_code = accountNum.getPro_codeNum(psid);		
 		
-		account.setMem_code(mem_code);
-		account.setAc_num(ac_num);
-		account.setPro_code(pro_code);
+		Account_ClientVO clientVO = new Account_ClientVO();
 		
-		depositDao.createAccount(account);
+		clientVO.setMem_code(mem_code);
+		clientVO.setPro_code(pro_code);
+		
+		//ac_code,ac_num,ac_pwd,ac_balance,ac_name,ac_start_date,ac_end_date
+		//ac_code,mem_code,pro_code
+		depositService.newAccount(account,clientVO);
 		
 		return "deposit_new/success";
 	}
