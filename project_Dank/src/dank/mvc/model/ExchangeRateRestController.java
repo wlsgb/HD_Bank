@@ -15,7 +15,6 @@ public class ExchangeRateRestController {
 	@RequestMapping(value = "exchangeRateJson",produces = "application/text; charset=euc-kr")
 	public String exchangeRateJson() {
 		String erj = exchangeRate.exchangeRateJson();
-		System.out.println(erj);
 		return erj;
 	}
 }
