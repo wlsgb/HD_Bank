@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -42,6 +42,7 @@
   		<typeAlias type="dank.mvc.vo.deposit.WithdrawVO" alias="witvo"/>
   		<typeAlias type="dank.mvc.vo.deposit.AccountHistoryVO" alias="achvo"/>
   		<typeAlias type="dank.mvc.vo.deposit.PageVO" alias="deppvo"/>
+  		<typeAlias type="dank.mvc.vo.deposit.At_applicationVO" alias="atapplyvo"/>
 
 		<typeAlias type="dank.mvc.vo.deposit.ProSavInsDto" alias="psidto"/>
   		<!-- 예금 영역 끝 -->

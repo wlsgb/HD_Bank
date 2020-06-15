@@ -78,8 +78,8 @@
 													<th scope="col">계좌 번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" 
-															id="accountNumber" name="accountNumber" placeholder="(-없이 입력)" maxlength="10">
+															<input type="text" class="form-control input-full" required="required"
+															id="ac_num" name="ac_num" placeholder="(-없이 입력)" maxlength="10">
 														</div>
 													</td>
 												</tr>
@@ -87,8 +87,8 @@
 													<th scope="col">계좌 암호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="password" class="form-control input-full" 
-															id="accountPassword" name="accountPassword" placeholder="(4자리)" maxlength="4">
+															<input type="password" class="form-control input-full"  required="required"
+															id="ac_pwd" name="ac_pwd" placeholder="(4자리)" maxlength="4">
 														</div>
 													</td>
 												</tr>
@@ -96,8 +96,8 @@
 													<th scope="col">주민번호</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input type="text" class="form-control input-full" 
-															id="cnn" name="cnn" placeholder="(앞 6자리)" maxlength="6">
+															<input type="text" class="form-control input-full"  required="required"
+															id="membirth" name="membirth" placeholder="(앞 6자리)" maxlength="6">
 														</div>
 													</td>
 												</tr>
@@ -106,15 +106,15 @@
 													<td>
 														<div class="col-md-12 p-0">
 															<label class="form-radio-label">
-																<input class="form-radio-input" type="radio" name="type" checked="checked" value="0">
+																<input class="form-radio-input" type="radio" name="type" checked="checked" value="1">
 																<span class="form-radio-sign">전체</span>
 															</label>
 															<label class="form-radio-label ml-12">
-																<input class="form-radio-input" type="radio" name="type" value="1">
+																<input class="form-radio-input" type="radio" name="type" value="2">
 																<span class="form-radio-sign">입금</span>
 															</label>
 															<label class="form-radio-label ml-12">
-																<input class="form-radio-input" type="radio" name="type" value="2">
+																<input class="form-radio-input" type="radio" name="type" value="3">
 																<span class="form-radio-sign">출금</span>
 															</label>
 														</div>
@@ -124,7 +124,7 @@
 													<th scope="col">조회 날짜</th>
 													<td>
 														<div class="col-md-12 p-0">
-															<input class="form-control" type="date" id="searchDate" name="searchDate">
+															<input class="form-control" type="date" id="searchDate" name="searchDate" required="required">
 														</div>
 													</td>
 												</tr>
@@ -134,6 +134,7 @@
 													<th colspan="2">
 														<div class="row">
 															<div class="col-md-6 ml-auto mr-auto">
+																<input type="hidden" id="check" value="${check }" />
 																<input type="submit" value="조회" class="btn btn-success"/>
 															</div>
 														</div>
@@ -143,32 +144,71 @@
 										</table>
 										</form>
 									</div>
-									
+									<!-- 우측 테이블 시작 -->
+									<c:if test="${history !=null}">
 									<div class="col-md-7">
 										<table class="table mt-1">
 											<thead>
 												<tr>
+													<th scope="col" colspan="4" style="text-align: center;">계좌번호 : ${ac_num }</th>
+													
+												</tr>
+												<tr>
 													<th scope="col">날짜</th>
+													<th scope="col">사용</th>
+													<th scope="col">잔액</th>
 													<th scope="col">비고</th>
-													<th scope="col">사용금액</th>
 												</tr>
 											</thead>
 											
 											<tbody>
 												<tr>
-													<c:if test="${type!=null}">
-														<td>2020.05.22</td>
-														<td>안양고용부</td>
-														<td>
-															<p class="blockquote blockquote-primary">284,000원</p>
-															<span class="h6" style="text-align: left;">620,520원</span>
-														</td>
-													</c:if>
+													<c:forEach var="e" items="${history}">
+														<tr>
+															<%-- <td scope="col">${e.r_num }</td> --%>
+															<td scope="col">${e.dealdate }</td>
+															<c:choose>
+																<c:when test="${e.dep_money!=null }">
+																<td scope="col"><span class="text-primary">+ ${e.dep_money }</span></td>
+																</c:when>
+																<c:when test="${e.wit_money!=null }">
+																<td scope="col"><span class="text-danger">- ${e.wit_money }</span></td>
+																</c:when>
+															</c:choose>
+															<td scope="col">${e.balance }</td>
+															<td scope="col">${e.name }</td>
+														
+														</tr>
+													</c:forEach>
 												</tr>
 												
 											</tbody>
 										</table>
+										<!-- 페이지번호 시작 -->
+										<div style="display: block; text-align: center;">
+										<c:if test="${paging.startPage != 1 }">
+										<!--이전페이지 -->
+											<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"><</a>
+										</c:if>
+										<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+											var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<b>${p }</b>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<a href="inquire_detail?ac_num=${ac_num }&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${paging.endPage != paging.lastPage}">
+											<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">></a>
+										</c:if>
 									</div>
+									<!-- 페이지번호 끝 -->
+									</div>
+									</c:if>
+									
 								</div>
 										<canvas id="statisticsChart"></canvas>
 									</div>
@@ -185,113 +225,41 @@
 
 
 			
-			<script>
-			/* 페이지 이동 자바스크립트 시작 */
-			$("#checkBalance").click(function() {
-				location = "checkbalance";
-			});
-			$("#transfer").click(function() {
-				location = "transfer";
-			});
-			$("#analysis").click(function() {
-				location = "analysis";
-			});
-			$("#exchangeRate").click(function() {
-				location = "exchangerate";
-			});
-			/* 페이지 이동 자바스크립트 끝 */
-			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
+	<script>
+		/* 페이지 이동 자바스크립트 시작 */
+		$("#checkBalance").click(function() {
+			location = "checkbalance";
+		});
+		$("#transfer").click(function() {
+			location = "transfer";
+		});
+		$("#analysis").click(function() {
+			location = "analysis";
+		});
+		$("#exchangeRate").click(function() {
+			location = "exchangerate";
+		});
+		/* 페이지 이동 자바스크립트 끝 */
+		
+		$(function() {
+			if ($("#check").val()=="no") {
+				chk();
 			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+		})
+			
+		function chk() {
+			email = $("#mem_email").val();
+			swal({
+				title: '입력한 값이 틀렸습니다.',
+				type: 'warning',
+				buttons:{
+					confirm: {
+						text : '확인',
+						className : 'btn btn-success'
+					}
+					
+				}
+			})
+		}
 	</script>
 

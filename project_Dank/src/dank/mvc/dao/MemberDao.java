@@ -23,11 +23,15 @@ public class MemberDao {
 		return ss.selectOne("member.idchk",mem_email);
 	}
 	
-	public void memberjoin(MemberVO vo) {
-		ss.insert("member.memberjoin",vo);
-	}
 	public MemberVO numToEmailName(int num) {
 		return ss.selectOne("member.serNameEmail", num);
+	}
+	
+	public String forBirth(int num) {
+		return ss.selectOne("member.forBirth", num);
+	}
+	public void memberjoin(MemberVO vo) {
+		ss.insert("member.memberjoin",vo);
 	}
 	
 	public MemberVO memLogin(UserVO user) {
