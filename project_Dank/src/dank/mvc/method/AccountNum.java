@@ -33,7 +33,7 @@ public class AccountNum {
 			acNum = "";
 			acNum+=deptype;
 			acNum+=randomNum();
-			acCnt=bangkingDao.depcheckac(Integer.parseInt(acNum));
+			acCnt=bangkingDao.depcheckac(acNum);
 		}while(acCnt != 0) ;
 		return acNum;
 	}
