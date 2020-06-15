@@ -37,7 +37,7 @@ public class loanController {
 	private LoanDao loanDao;
 	@Autowired
 	private LoanService loanService;
-	
+
 	@RequestMapping(value = "/product")
 	public String product(Model model) {
 		List<LoanProductVO> list = loanDao.getLoanProductList();
@@ -87,6 +87,10 @@ public class loanController {
 	@RequestMapping(value = "/applicationsuccess",method = RequestMethod.POST)
 	public String applicationsuccess(LoanCheckVO vo,LoanApplicationVO avo) {
 		loanService.addloanaplication(avo, vo);
+		return "redirect:success";
+	}
+	@RequestMapping(value = "/success")
+	public String success() {
 		return "loan/applicationsuccess";
 	}
 
