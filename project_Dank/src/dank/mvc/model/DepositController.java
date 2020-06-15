@@ -27,6 +27,7 @@ import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.MemberVO;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
+import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
@@ -148,12 +149,13 @@ public class DepositController {
 		
 		
 
-		List<AccountVO_backup> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
 
-		for(AccountVO_backup e :aclist) {
+		for(AccountVO e :aclist) {
 			
 			System.out.println(e.getAc_num());
 			System.out.println(e.getAc_balance());
+			System.out.println(e.getAc_name());
 			System.out.println(e.getSaving().getSav_name());
 			System.out.println(e.getSaving().getShas_code());
 			System.out.println(e.getIns().getIns_name());
@@ -395,18 +397,18 @@ public class DepositController {
 			//셋터로 vo값에 넣어주었다.
 			) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		atapplyvo.setMem_code(String.valueOf(sessionmem.getMem_code()));
-		atapplyvo.setAta_stopdate(atastopdate);
-		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
-		
-		System.out.println(atapplyvo.getAc_num());
-		System.out.println(atapplyvo.getMem_code());
-		System.out.println(atapplyvo.getAta_opac());
-		System.out.println(atapplyvo.getAta_setmny());
-		System.out.println(atapplyvo.getAta_dterm());
-		System.out.println(atapplyvo.getAta_startdate());
-		System.out.println(atapplyvo.getAta_stopdate());
-		System.out.println(atapplyvo.getAta_time());
+//		atapplyvo.setMem_code(String.valueOf(sessionmem.getMem_code()));
+//		atapplyvo.setAta_stopdate(atastopdate);
+//		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
+//		
+//		System.out.println(atapplyvo.getAc_num());
+//		System.out.println(atapplyvo.getMem_code());
+//		System.out.println(atapplyvo.getAta_opac());
+//		System.out.println(atapplyvo.getAta_setmny());
+//		System.out.println(atapplyvo.getAta_dterm());
+//		System.out.println(atapplyvo.getAta_startdate());
+//		System.out.println(atapplyvo.getAta_stopdate());
+//		System.out.println(atapplyvo.getAta_time());
 		bangkingdao.insertatapply(atapplyvo);
 		
 		

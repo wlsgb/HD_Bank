@@ -4,6 +4,34 @@ public class AccountVO {
 	private int ac_code, ac_balance;
 	private String ac_num, ac_pwd, ac_name, ac_start_date, ac, end_date;
 
+	///sy
+	//<collection property="saving" resultMap="savResult"></collection>
+	//<collection property="ins" resultMap="insResult"></collection>
+	
+	private SavingVO saving;
+	private Installment_savingVO ins;
+	
+	///\sy
+	
+	
+	
+	
+	public SavingVO getSaving() {
+		return saving;
+	}
+
+	public void setSaving(SavingVO saving) {
+		this.saving = saving;
+	}
+
+	public Installment_savingVO getIns() {
+		return ins;
+	}
+
+	public void setIns(Installment_savingVO ins) {
+		this.ins = ins;
+	}
+
 	public int getAc_code() {
 		return ac_code;
 	}
