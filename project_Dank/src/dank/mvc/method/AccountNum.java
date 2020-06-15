@@ -43,10 +43,10 @@ public class AccountNum {
 		switch (deptype) {
 		case 100:
 		case 500:
-			return ss.selectOne("deposit.pro_codeNum", psi.getSav_code());
+			return ss.selectOne("deposit.pro_codeNum", psi);
 		case 300:
 		case 700:
-			return ss.selectOne("deposit.pro_codeNum", psi.getIns_code());
+			return ss.selectOne("deposit.pro_codeNum", psi);
 		default:
 			return 0;
 		}
