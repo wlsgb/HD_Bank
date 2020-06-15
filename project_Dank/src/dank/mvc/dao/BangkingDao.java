@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.vo.deposit.AccountHistoryVO;
-import dank.mvc.vo.deposit.AccountVO_backup;
+import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.At_applicationVO;
 
 @Repository
@@ -16,13 +16,13 @@ public class BangkingDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 	//계좌조회를 처음 누를때 세션의 멤코드를 이용하여 가진 계좌 전체 출력
-	public List<AccountVO_backup> getaclist(int mem_code){
+	public List<AccountVO> getaclist(int mem_code){
 		return ss.selectList("bangking.acinquery", mem_code);
 	}
 	
 	// 계좌번호를 넣으면 멤버 번호를 가져온다.
-	public int acnumToMemcode(String acnum) {
-		return ss.selectOne("bangking.actomemnum",acnum);
+	public int acnumToMemcode(String ac_num) {
+		return ss.selectOne("bangking.actomemnum",ac_num);
 	}
 	
 	///////////////////////////////////////////////////////////입금시작@

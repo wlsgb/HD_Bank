@@ -46,6 +46,7 @@
 													<thead>
 														<tr>
 															<th>상품명</th>
+															<th>별명</th>
 															<th>계좌번호</th>
 															<th class="text-right">
 																잔액
@@ -64,6 +65,7 @@
 													
 														<tr>
 																<td>${e.saving.sav_name }</td>
+																<td>${e.ac_name }</td>
 																<td id="savac${i.index}">${e.ac_num }</td>
 																<td class="text-right">
 																	${e.ac_balance }
@@ -121,6 +123,7 @@
 													<thead>
 														<tr>
 															<th>상품명</th>
+															<th>별명</th>
 															<th>계좌번호</th>
 															<th class="text-right">
 																잔액
@@ -137,6 +140,7 @@
 													<c:if test="${e.ins.ins_name != '0'}">
 													<tr>
 															<td>${e.ins.ins_name }</td>
+															<td>${e.ac_name}</td>
 															<td>${e.ac_num }</td>
 															<td class="text-right">
 																${e.ac_balance }
