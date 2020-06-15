@@ -76,6 +76,7 @@ public class loanController {
 		
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			session.setAttribute("pageName", "application");
 			return "login/login";
 		}		
 		LoanProductVO vo = loanDao.getProductInfo(lp_num);
@@ -85,7 +86,6 @@ public class loanController {
 
 	@RequestMapping(value = "/applicationsuccess",method = RequestMethod.POST)
 	public String applicationsuccess(LoanCheckVO vo,LoanApplicationVO avo) {
-		System.out.println("memcode:"+vo.getMem_code());
 		loanService.addloanaplication(avo, vo);
 		return "loan/applicationsuccess";
 	}
@@ -96,14 +96,13 @@ public class loanController {
 
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			session.setAttribute("pageName", "check");
 			mav.setViewName("login/login");
 			return mav;
 		}	
 		
 		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
-		System.out.println(mem_code);
 		List<LoanCheckVO> list =loanDao.checkdetailList(mem_code);
-		System.out.println(list.size());
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -153,7 +152,6 @@ public class loanController {
 			 String ext = vo.getMfile1().getOriginalFilename().substring(file1);
 			 StringBuffer path1 = new StringBuffer();
 			 path1.append(r_path).append(img_path).append(vo.getLc_num()).append("\\").append(vo.getMfile1().getOriginalFilename());
-			 System.out.println(path1.toString());
 			 ff = new File(path1.toString());
 			 vo.getMfile1().transferTo(ff);
 			 vo.setFile1(vo.getMfile1().getOriginalFilename());
@@ -348,6 +346,7 @@ public class loanController {
 		
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) { //세션 정보가 존재한다면 home 으로 
+			session.setAttribute("pageName", "fileuploadhome");
 			mav.setViewName("login/login");
 			return mav;
 		}	
@@ -362,7 +361,6 @@ public class loanController {
 	public ModelAndView checkfiledetail(int lc_num) {
 		ModelAndView mav = new ModelAndView("loan/checkfiledetail");
 		LoanFileVO vo = loanDao.filedetail(lc_num);
-		System.out.println(vo.getFile2());
 		String[] arr = new String[20];
 		mav.addObject("vo", vo);
 		mav.addObject("arr", arr);
@@ -370,8 +368,7 @@ public class loanController {
 		return mav;
 	}
 	@RequestMapping(value = "/loanstart")
-	public  ModelAndView loanstart(int lc_num,int ac_num,HttpSession session) {
-		System.out.println(lc_num);
+	public  ModelAndView loanstart(int lc_num,String ac_num,HttpSession session) {
 		ModelAndView mav = new ModelAndView("redirect:check");
 		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
 		LoanCheckVO v = new LoanCheckVO();
@@ -453,13 +450,6 @@ public class loanController {
 				list.add(v);
 			
 			}
-			for(LoanCaculatorVO e : list) {
-				System.out.println("-----------------------");
-				System.out.println("매월 원금"+e.getRepayM());
-				System.out.println("매월 이자"+e.getRepayR());
-				System.out.println("매월 납입금"+e.getRepayMR());
-				System.out.println("대출잔금"+e.getBalance());
-			}
 			
 		}else if(vo.getType()==2) {
 			
@@ -490,13 +480,6 @@ public class loanController {
 				}
 				list.add(v);
 			}
-			for(LoanCaculatorVO e : list) {
-				System.out.println("-----------------------");
-				System.out.println("매월 원금"+e.getRepayM());
-				System.out.println("매월 이자"+e.getRepayR());
-				System.out.println("매월 납입금"+e.getRepayMR());
-				System.out.println("대출잔금"+e.getBalance());
-			}
 		}else if(vo.getType()==3) {
 			for (int i = 0; i < totalterm; i++) {
 				LoanCaculatorVO v = new LoanCaculatorVO();
@@ -517,129 +500,9 @@ public class loanController {
 				
 				list.add(v);
 			}
-			for(LoanCaculatorVO e : list) {
-				System.out.println("-----------------------");
-				System.out.println("매월 원금"+e.getRepayM());
-				System.out.println("매월 이자"+e.getRepayR());
-				System.out.println("매월 납입금"+e.getRepayMR());
-				System.out.println("대출잔금"+e.getBalance());
-			}
 		}
 		mav.addObject("list", list);
 		return mav;
-	}
-	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("기간");
-		int n = Integer.parseInt(sc.nextLine())*12;
-		System.out.println("원금");
-		int m = Integer.parseInt(sc.nextLine());
-		System.out.println("이자율");
-		float r = Float.parseFloat(sc.nextLine())/100;
-		System.out.println("거치기간");
-		int g = Integer.parseInt(sc.nextLine())*12;
-		System.out.println("상환방식");
-		int type = Integer.parseInt(sc.nextLine());
-		int totalterm = n+g;
-		System.out.println("대출기간"+totalterm);
-		//납입원금
-		int[] mrew = new int[totalterm];
-		//월상납금
-		int[] mrem = new int[totalterm];
-		//이자
-		int[] mrer = new int[totalterm];
-		//대출잔금
-		int[] memt = new int[totalterm];
-		//거치기간
-		memt[0] = m;
-		
-		
-		if(type==1) {
-		//원금 균등	
-		
-		for(int i =0;i<totalterm;i++) {
-			if(i<g) {
-				mrew[i] =  0;
-				mrer[i] =  (int) Math.ceil((m*(r/12)));//이자 
-				mrem[i] =  (mrew[i]+mrer[i]);//월 상환액
-			}else {
-				
-				mrew[i] =  m/n;
-				mrer[i] =   (int) Math.ceil((m-((i-g)*m/n))*r/n);
-				mrem[i] =  (mrew[i]+mrer[i]);
-				if(i==totalterm-1) {
-					mrem[i] = memt[i-1]+mrer[i];
-				}
-			}
-			
-			if(i==0) {
-				memt[i]=(m+mrer[i]-mrem[i]);
-			}else {
-				memt[i] = (memt[i-1]+mrer[i]-mrem[i]);
-			}
-			System.out.println(i+1+"달");
-			System.out.println("매월 원금"+mrew[i]);
-			System.out.println("매월 이자"+mrer[i]);
-			System.out.println("매월 납입금"+mrem[i]);
-			System.out.println("대출잔금"+memt[i]);
-		}
-		}else if(type==2) {
-			//원리금균등
-			for(int i =0;i<totalterm;i++) {
-				if(i<g) {
-					mrer[i] =   (int) Math.ceil((m*(r/12)));//이자 
-					mrem[i] = 	mrer[i];
-					mrew[i] =  0;
-				}else {
-					if(i==0) {
-						mrer[i] =   (int) Math.ceil((m*(r/12)));//이자
-					}else {	
-						mrer[i] =   (int) Math.ceil(memt[i-1]*(r/12));
-					}					
-					mrem[i] =  (int) (((m*r/12)*(Math.pow((1+r/12), n)))/((Math.pow((1+r/12), n))-1));
-					mrew[i] =  mrem[i]-mrer[i];
-					if(i==totalterm-1) {
-						mrem[i] = memt[i-1]+mrer[i];
-					}
-				}
-				
-				if(i==0) {
-					memt[i]=(m+mrer[i]-mrem[i]);
-				}else {
-					memt[i] = (memt[i-1]+mrer[i]-mrem[i]);
-				}
-				System.out.println(i+1+"달");
-				System.out.println("매월 원금"+mrew[i]);
-				System.out.println("매월 이자"+mrer[i]);
-				System.out.println("매월 납입금"+mrem[i]);
-				System.out.println("대출잔금"+memt[i]);
-			}
-			
-		}else if(type==3) {
-			for (int i = 0; i < totalterm; i++) {
-				mrer[i]=(int) (m*r/12);
-				if(i!=totalterm-1) {
-					mrew[i]=0;
-					mrem[i]=mrer[i];
-				}else {
-					mrew[i]=m;
-					mrem[i]=mrer[i]+mrew[i];
-				}
-				
-				if(i==0) {
-					memt[i]=m+mrer[i]-mrem[i];
-				}else {
-					memt[i]=memt[i-1]+mrer[i]-mrem[i];
-				}
-				
-				System.out.println(i+1+"달");
-				System.out.println("매월 원금"+mrew[i]);
-				System.out.println("매월 이자"+mrer[i]);
-				System.out.println("매월 납입금"+mrem[i]);
-				System.out.println("대출잔금"+memt[i]);
-			}
-		}
 	}
 	
 	
@@ -658,9 +521,7 @@ public class loanController {
 		}	
 		
 		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
-		System.out.println(mem_code);
 		List<LoanCheckVO> list =loanDao.checkdetailList(mem_code);
-		System.out.println(list.size());
 		mav.addObject("list", list);
 		return mav;		
 	}
@@ -696,7 +557,6 @@ public class loanController {
 			HttpSession session = request.getSession();
 			String r_path = session.getServletContext().getRealPath("/");
 			String img_path ="resources\\upload\\";
-			System.out.println("lcnum"+vo.getLc_num());
 			 try {
 				 File ff = null; 
 				 ff = new File(r_path+img_path+vo.getLc_num());
@@ -709,7 +569,6 @@ public class loanController {
 				 String ext = vo.getMfile1().getOriginalFilename().substring(file1);
 				 StringBuffer path1 = new StringBuffer();
 				 path1.append(r_path).append(img_path).append(vo.getLc_num()).append("\\").append(vo.getMfile1().getOriginalFilename());
-				 System.out.println(path1.toString());
 				 ff = new File(path1.toString());
 				 vo.getMfile1().transferTo(ff);
 				 vo.setFile1(vo.getMfile1().getOriginalFilename());

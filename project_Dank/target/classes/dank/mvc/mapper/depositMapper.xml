@@ -95,6 +95,6 @@
 	<insert id="newAccount" parameterType="acvo">
 		insert into account values(account_seq.nextVal,#{ac_num},#{ac_pwd},#{ac_balance},#{ac_name},sysdate,null)
 	</insert>
-	
+
 
 </mapper>

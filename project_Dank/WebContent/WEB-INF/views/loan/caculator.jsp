@@ -167,10 +167,8 @@ input[type="number"]::-webkit-inner-spin-button {
 				$.each(radio, function (key, value) { // input radio의 name 값을 가져옵니다.
 				radio_name.push($(value).attr('name'));
 				});
-				console.log(radio_name);
 				//(9) ["school", "school", "school", "school", "sex", "sex", "grade", "grade", "grade"] log값
 				radio_name = $.unique(radio_name.sort()).sort(); //중복요소 이름을 제거
-				console.log(radio_name);
 				//(3) ["grade", "school", "sex"] log 값
 				for (var i = 0; i < radio_name.length; i++) {
 				$('input[name="' + radio_name[i] + '"]').removeAttr('checked');
