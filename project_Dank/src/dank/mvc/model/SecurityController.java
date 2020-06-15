@@ -16,9 +16,10 @@ import dank.mvc.dao.MemberDao;
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.method.Mail;
 import dank.mvc.method.SecurityCode;
+import dank.mvc.service.SecurityService;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.SecuritySertufyVO;
-import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.security.Security_CardVO;
 import dank.mvc.vo.security.Security_Card_RegVO;
 
@@ -36,6 +37,9 @@ public class SecurityController {
 
 	@Autowired
 	private SecurityDao securityDao;
+	
+	@Autowired
+	private SecurityService securityService;
 
 	@Autowired
 	private MemberDao memberDao;
@@ -45,15 +49,17 @@ public class SecurityController {
 
 	@RequestMapping(value = "/security")
 	public String viewSecurity(Model m, HttpSession session) {
-
+		session.setAttribute("page", "pageSession");
 		return "security/security";
 	}
 
 	// 보안카드 인증 페이지로
 	@RequestMapping(value = "/securitysertify")
-	public String viewSecuritySertify(Model m, HttpSession session) {
+	public String viewSecuritySertify(Model m, HttpSession session,String page) {
 		if (session.getAttribute("member") == null) {
 			return "login/login";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			return "security/security";
 		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
 		Security_Card_RegVO vo = securityDao.securityCardDetail(mem_code);
@@ -80,9 +86,10 @@ public class SecurityController {
 		// 정답데이터
 		String[][] realData = (String[][]) session.getAttribute("securityCheckData");
 		if (main_code.equals(realData[0][2])&&fir_code.equals(realData[1][2])&&sec_code.equals(realData[2][2])) {
-			System.out.println("모두 정답입니다.");
+			session.setAttribute("scChk", true);
 			return page;
 		}else {
+			session.setAttribute("scChk", false);
 			return "redirect:securityCardSertify";
 		}
 	}
@@ -97,9 +104,8 @@ public class SecurityController {
 			session.setAttribute("error", "f");
 			return "security/security";
 		}
-		System.out.println(session.getAttribute("member"));
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
-		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
+		List<AccountVO_backup> aclist = bangkingdao.getaclist(mem_code);
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
@@ -109,12 +115,11 @@ public class SecurityController {
 
 	// 보안카드 입력 확인 페이지
 	@RequestMapping(value = "/securitycardinfoView")
-	public String viewSecurityCardInfoView(Model m, AccountVO accountVO, MemberVO memberVO, String acNameNum,
+	public String viewSecurityCardInfoView(Model m, AccountVO_backup accountVO, MemberVO memberVO, String acNameNum,
 			@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			return "login/login";
 		}
-		System.out.println("acNameNum : " + acNameNum);
 		String acNum = acNameNum.split("-")[1];
 		String pwd = String.valueOf(depositDao.pwdChk(Integer.parseInt(acNum)));
 		// 패스워드 성공시
@@ -136,19 +141,17 @@ public class SecurityController {
 		} else if (session.getAttribute("member") == null) {
 			return "login/login";
 		}
-		Security_CardVO security_Cardvo = securityCode.securityCardCreate();
-		securityDao.cardCreate(security_Cardvo);
-		Security_Card_RegVO vo = new Security_Card_RegVO();
-		vo.setMem_code(((MemberVO) session.getAttribute("member")).getMem_code());
-		vo.setSc_code(security_Cardvo.getSc_code());
-		securityDao.securityCardReq(vo);
+		Security_CardVO security_CardVO = securityCode.securityCardCreate();
+		Security_Card_RegVO security_Card_RegVO = new Security_Card_RegVO();
+		security_Card_RegVO.setMem_code(((MemberVO) session.getAttribute("member")).getMem_code());
+		securityService.createSecurityCard(security_CardVO, security_Card_RegVO);
 		// 메일로 만들어진 보안카드를 보내준다.
-		MemberVO memberVO = memberDao.numToEmailName(vo.getMem_code());
-		session.setAttribute("scrVO", vo);
-		session.setAttribute("security_Cardvo", security_Cardvo);
+		MemberVO memberVO = memberDao.numToEmailName(security_Card_RegVO.getMem_code());
+		session.setAttribute("scrVO", security_Card_RegVO);
+		session.setAttribute("security_Cardvo", security_CardVO);
 		String name = memberVO.getMem_name();
 		String email = memberVO.getMem_email();
-		String content = securityCode.securityCardSend(security_Cardvo, name);
+		String content = securityCode.securityCardSend(security_CardVO, name);
 		mail.emailSend(email, name, name + "님의 보안카드", content);
 		m.addAttribute("memberVO", memberVO);
 		return "security/securityCardSuccess";
@@ -176,8 +179,22 @@ public class SecurityController {
 		return "redirect:index";
 	}
 
+	// OTP 신청 폼
 	@RequestMapping(value = "/securityotp")
-	public String viewSecurity_otp() {
+	public String viewSecurity_otp(Model m, HttpSession session,
+			@RequestParam(value = "error", defaultValue = "t") String error) {
+//		if (session.getAttribute("member") == null) {
+//			return "login/login";
+//		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+//			session.setAttribute("error", "f");
+//			return "security/security";
+//		}
+		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+//		List<AccountVO_backup> aclist = bangkingdao.getaclist(mem_code);
+		MemberVO memberVO = memberDao.numToEmailName(mem_code);
+//		m.addAttribute("aclist", aclist);
+		m.addAttribute("memberVO", memberVO);
+		m.addAttribute("error", error);
 		return "security/securityOtp";
 	}
 
