@@ -12,6 +12,8 @@
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								 <span class="h2 mr-1"> > </span>
+								 <a href="security" class="btn btn-white btn-sm btn-border mr-1">보안카드 / OTP</a>
+								 <span class="h2 mr-1"> > </span>
 								 <a href="securityotp" class="btn btn-white btn-sm btn-border mr-1">OTP</a>
 								 <span class="h2 mr-1"> > </span>
 								 <a href="securityotp" class="btn btn-white btn-sm btn-border mr-1">신청</a>
@@ -45,7 +47,7 @@
 										<c:if test="${error=='f'}">
 											<span class="h1 text-danger">다시입력 해주세요.</span>
 										</c:if>
-											<form action="securitysertify" method="post">
+											<form action="otpInfoView" method="post">
 												<table class="table mt-1">
 												<tbody>
 													<tr>
