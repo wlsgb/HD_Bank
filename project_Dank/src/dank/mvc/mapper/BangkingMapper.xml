@@ -25,25 +25,6 @@
 								<result property="shac_code" column="shac_code"/>
 							</resultMap>
 			<select id="acinquery" resultMap="acinqueryResult" parameterType="int" >
-<!-- 			select -->
-<!-- 			 a.ac_num ac_num -->
-<!-- 			 ,a.ac_balance ac_balance -->
-<!-- 			 ,nvl(s.sav_name,0) sav_name -->
-<!-- 			 ,nvl(s.shas_code,0) shas_code -->
-<!-- 			 ,nvl(ins.ins_name,0) ins_name -->
-<!-- 			 ,nvl(ins.shac_code,0) shac_code -->
-<!-- 			from  -->
-<!-- 			 account a -->
-<!-- 			 ,product p -->
-<!-- 			 ,saving s -->
-<!-- 			 , installment_saving ins -->
-<!-- 			where -->
-<!-- 			 #{mem_code} = a.mem_code  -->
-<!-- 			 and a.pro_code=p.pro_code  -->
-<!-- 			 and p.sav_code=s.sav_code(+)  -->
-<!-- 			 and p.ins_code=ins.ins_code(+) -->
-			 
-<!-- 			 변경테이블 쿼리 -->
 			select a.ac_num ac_num
 				 ,a.ac_balance ac_balance
 				 ,nvl(a.ac_name,'HD') ac_name
@@ -62,12 +43,6 @@
 			 and ac.pro_code=p.pro_code 
 			 and p.sav_code =s.sav_code(+) 
 			 and p.ins_code = ins.ins_code(+)
-			 
-			 
-			 
-			 
-			 
-			 
 			</select>
 <!--  /@계좌조회 끝(처음 조회눌렀을때 작동) -->
 
@@ -85,8 +60,10 @@
 <!-- 			from account -->
 <!-- 			where ac_num=#{acnum} -->
 			select ac.mem_code mem_code
-			from account a, account_client ac
-			where a.ac_num=#{ac_num} and a.ac_code=ac.ac_code
+			from account a
+				, account_client ac
+			where a.ac_num=#{ac_num} 
+				and a.ac_code=ac.ac_code
 	  	</select>
 	  	
 		<!--2입금테이블을 작성한다. -->
@@ -97,16 +74,22 @@
 	  	<insert id="depplussp" parameterType="hashMap">
 		insert into sav_process values(sav_process_seq.nextval
 			,(select a.ac_code ac_code
-			from account a, account_client ac
-			where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+				from account a
+					, account_client ac
+			where a.ac_num=#{ac_num}
+				 and ac.mem_code=#{mem_code}
+				  and a.ac_code=ac.ac_code)
 			,#{sp_name}
 			,(select max(dep_code)
 			            from deposit)
 			,null
 			,null
 			,( select a.ac_balance ac_balance
-					from account a, account_client ac
-					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+					from account a
+						, account_client ac
+					where a.ac_num=#{ac_num}
+						 and ac.mem_code=#{mem_code} 
+						 and a.ac_code=ac.ac_code)
 			+(select dep_money 
 		            from deposit 
 		            where dep_code=(select max(dep_code) 
@@ -122,8 +105,11 @@
 			                                from sav_process))
 			where ac_code=
 			    (select a.ac_code ac_code
-			from account a, account_client ac
-			where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+				from account a
+					, account_client ac
+				where a.ac_num=#{ac_num}
+					 and ac.mem_code=#{mem_code}
+					  and a.ac_code=ac.ac_code)
 	  	</update>
 <!-- /@입금 끝 -->
 <!-- @출금시작 -->
@@ -136,8 +122,11 @@
 		<!--2계좌에 출금할수있는 잔액이 있는지 검사 -->
 		<select id="witcheckbalance" parameterType="hashMap" resultType="String">
 			select a.ac_balance ac_balance
-			from account a, account_client ac
-			where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code
+			from account a
+				, account_client ac
+			where a.ac_num=#{ac_num}
+				 and ac.mem_code=#{mem_code} 
+				 and a.ac_code=ac.ac_code
 		</select>
 		<!--3출금표 작성 -->
 	  	<insert id="witpluswit" parameterType="String"> 		
@@ -147,19 +136,25 @@
 	  	<insert id="witplussp" parameterType="hashMap">
 		  	insert into sav_process values(sav_process_seq.nextval
 				,(select a.ac_code ac_code
-				from account a, account_client ac
-				where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code )
+				from account a
+					, account_client ac
+				where a.ac_num=#{ac_num}
+					 and ac.mem_code=#{mem_code}
+					  and a.ac_code=ac.ac_code )
 				,#{sp_name}
 				,null
 				,(select max(WIT_CODE)
 				            from withdraw)
 				,null
-				,(select a.ac_balance ac_balance from account a, account_client ac
-						 where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
-						 -(select wit_money 
-                          from withdraw
-                          where wit_code=(select max(wit_code) 
-                                             from withdraw))
+				,(select a.ac_balance ac_balance
+				 from account a
+				 	, account_client ac
+				where a.ac_num=#{ac_num}
+					 and ac.mem_code=#{mem_code}
+					  and a.ac_code=ac.ac_code)-(select wit_money 
+							                       from withdraw
+							                       where wit_code=(select max(wit_code) 
+							                                          from withdraw))
 			)
 	  	
 	  	</insert>
@@ -172,8 +167,11 @@
 			                                from sav_process))
 			where ac_code=
 			    (select a.ac_code ac_code
-			    from account a, account_client ac
-			    where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+			    from account a
+			    	, account_client ac
+			    where a.ac_num=#{ac_num}
+			    	 and ac.mem_code=#{mem_code}
+			    	  and a.ac_code=ac.ac_code)
 		</update>
 <!-- /@출금 끝 -->
 <!-- @계좌이체 시작 -->
@@ -188,8 +186,11 @@
 		<!--if3.출금계좌A잔고체크 -->
 		<select id="trbalchk" parameterType="hashMap" resultType="String">
 			select a.ac_balance ac_balance
-		    from account a, account_client ac
-		    where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code
+		    from account a
+		    	, account_client ac
+		    where a.ac_num=#{ac_num}
+		    	 and ac.mem_code=#{mem_code} 
+		    	 and a.ac_code=ac.ac_code
 		</select>
 		<!--tr4.출금계좌A이체증,출금도(출금이랑95%비슷)작성 -->
 		<insert id="trpluswit" parameterType="String">
@@ -202,19 +203,26 @@
 		<insert id="trplusspwit" parameterType="hashMap">
 			insert into sav_process values(sav_process_seq.nextval
 	        ,(select a.ac_code ac_code
-	        from account a, account_client ac
-	        where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+	        from account a
+	        	, account_client ac
+	        where a.ac_num=#{ac_num} 
+	        	and ac.mem_code=#{mem_code}
+	        	 and a.ac_code=ac.ac_code)
 	        ,#{sp_name}
 	        ,null
 	        ,(select max(WIT_CODE)
 	                    from withdraw)
 	        ,(select max(AT_CODE)
 	                    from transfer)
-	        ,(select a.ac_balance ac_balance from account a,account_client ac where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
-	        -(select wit_money 
-               from withdraw
-               where wit_code=(select max(wit_code) 
-                                  from withdraw))
+	        ,(select a.ac_balance ac_balance
+	         from account a
+	         		,account_client ac
+	          where a.ac_num=#{ac_num}
+	          		 and ac.mem_code=#{mem_code}
+	          		  and a.ac_code=ac.ac_code)-(select wit_money 
+									               from withdraw
+									               where wit_code=(select max(wit_code) 
+									                                  from withdraw))
 	        )
 		</insert>
 		<!--tr6.출금계좌A통장잔고 업데이트 -->
@@ -226,8 +234,11 @@
 	                                        from sav_process))
 	        where ac_code=
 	            (select a.ac_code ac_code
-	            from account a, account_client ac
-	            where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+	            from account a
+	            	, account_client ac
+	            where a.ac_num=#{ac_num}
+	            	 and ac.mem_code=#{mem_code}
+	            	  and a.ac_code=ac.ac_code)
 		</update>
 		<!--tr7.입금계좌B 입금증,이체증작성 -->
 		<select id="trplusdep" parameterType="String">
@@ -240,15 +251,23 @@
 		<insert id="trplusspdep" parameterType="hashMap">
 			insert into sav_process values(sav_process_seq.nextval
 		    ,(select a.ac_code ac_code
-		    from account a, account_client ac
-		    where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+		    from account a
+		    	, account_client ac
+		    where a.ac_num=#{ac_num}
+		    	 and ac.mem_code=#{mem_code}
+		    	  and a.ac_code=ac.ac_code)
 		    ,#{sp_name}
 		    ,(select max(dep_code)
 		                from deposit)
 		    ,null
 		    ,(select max(at_code)
 		                from transfer)
-		    ,(select a.ac_balance from account a, account_client ac where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code)
+		    ,(select a.ac_balance 
+		      from account a
+		      		, account_client ac 
+		      where a.ac_num=#{ac_num}
+		      		 and ac.mem_code=#{mem_code} 
+		      		 and a.ac_code=ac.ac_code)
 		    +(select dep_money 
 		           from deposit 
 		           where dep_code=(select max(dep_code) 
@@ -282,9 +301,30 @@
 			from(
 			select rownum r_num, dealdate, dep_money, wit_money, balance, name
 			from(
-			select COALESCE(to_char(d.dep_date,'YY-MM-DD HH24:MI'),to_char(w.wit_date,'YY-MM-DD HH24:MI')) dealdate, d.dep_money dep_money,w.wit_money wit_money,sp.sp_balance balance, sp.sp_name name
-			from account a,account_client ac ,sav_process sp, deposit d, withdraw w
-			where ac.mem_code=#{mem_code} and a.ac_code=ac.ac_code and a.ac_code=(select a.ac_code from account a, account_client ac where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and ac.ac_code=a.ac_code) and sp.ac_code=(select a.ac_code from account a, account ac where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} and a.ac_code = ac.ac_code) and d.dep_code(+)=sp.dep_code and w.wit_code(+) = sp.wit_code
+			select COALESCE(to_char(d.dep_date,'YY-MM-DD HH24:MI')
+			,to_char(w.wit_date,'YY-MM-DD HH24:MI')) dealdate
+			, d.dep_money dep_money
+			,w.wit_money wit_money
+			,sp.sp_balance balance
+			, sp.sp_name name
+			from account a
+			,account_client ac 
+			,sav_process sp
+			, deposit d
+			, withdraw w
+			where ac.mem_code=#{mem_code}
+			 and a.ac_code=ac.ac_code 
+			 and a.ac_code=(select a.ac_code
+			 				 from account a, account_client ac
+			 				  where a.ac_num=#{ac_num}
+									  and ac.mem_code=#{mem_code}
+									   and ac.ac_code=a.ac_code) 
+			  and sp.ac_code=(select a.ac_code 
+			  					from account a, account ac 
+			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} 
+			  							and a.ac_code = ac.ac_code) 
+			  and d.dep_code(+)=sp.dep_code
+			   and w.wit_code(+) = sp.wit_code
 			order by sp_code desc
 			)
 			)
@@ -331,13 +371,26 @@
 	<insert id="atapply" parameterType="atapplyvo">
 	insert into at_application
 	 values(at_application_seq.nextval
-	 		,(select a.ac_code from account a, account_client ac where ac.mem_code=#{mem_code} and a.ac_num=#{ac_num} and a.ac_code = ac.ac_code)
-	 		,#{ata_opac}
-	 		,#{ata_setmny}
-	 		,#{ata_dterm}
+	 		,(select a.ac_code 
+	 			from account a, account_client ac
+	 			 where ac.mem_code=#{mem_code}
+	 			 	 and a.ac_num=#{ac_num}
+	 			 	 and a.ac_code = ac.ac_code)
+	 		,#{ata_yourac}
+	 		,#{ata_setmoney}
 	 		,#{ata_startdate}
+	 		,#{ata_time}
 	 		,#{ata_stopdate}
-	 		,#{ata_time})
+	 		,#{ata_dterm}
+	 		,#{ata_myacmemo}
+	 		,#{ata_check}
+	 		,#{ata_ing}
+	 		,#{ata_youracmemo}
+	 		
+	 		
+	 		
+	 		)
+	 		
 	</insert>
 <!-- /@자동이체 종료 -->
 

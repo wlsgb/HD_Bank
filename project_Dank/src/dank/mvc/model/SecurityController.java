@@ -20,7 +20,6 @@ import dank.mvc.service.SecurityService;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.SecuritySertufyVO;
 import dank.mvc.vo.deposit.AccountVO;
-import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.security.Security_CardVO;
 import dank.mvc.vo.security.Security_Card_RegVO;
 
@@ -50,7 +49,7 @@ public class SecurityController {
 
 	@RequestMapping(value = "/security")
 	public String viewSecurity(Model m, HttpSession session) {
-		session.setAttribute("page", "pageSession");
+		session.setAttribute("pageName", "security");
 		return "security/security";
 	}
 
@@ -58,7 +57,7 @@ public class SecurityController {
 	@RequestMapping(value = "/securitysertify")
 	public String viewSecuritySertify(Model m, HttpSession session,String page) {
 		if (session.getAttribute("member") == null) {
-			session.setAttribute("pageName", "securitysertify");
+			session.setAttribute("pageName", "index");
 			return "login/login";
 		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
 			return "security/security";
@@ -81,7 +80,10 @@ public class SecurityController {
 	@RequestMapping(value = "/ssc")
 	public String securitySertifyChk(Model m, HttpSession session, SecuritySertufyVO securitySertufyVO) {
 		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "index");
 			return "login/login";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			return "security/security";
 		}
 		// 다음 페이지를 <input type="hidden"> 으로 입력 받아온다.
 		// 입력받은 데이터
@@ -123,10 +125,14 @@ public class SecurityController {
 
 	// 보안카드 입력 확인 페이지
 	@RequestMapping(value = "/securitycardinfoView")
-	public String viewSecurityCardInfoView(Model m, AccountVO_backup accountVO, MemberVO memberVO, String acNameNum,
+	public String viewSecurityCardInfoView(Model m, AccountVO accountVO, MemberVO memberVO, String acNameNum,
 			@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
 		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
 			return "login/login";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+			session.setAttribute("error", "f");
+			return "security/security";
 		}
 		String acNum = acNameNum.split("-")[1];
 		String pwd = String.valueOf(depositDao.pwdChk(Integer.parseInt(acNum)));
@@ -144,9 +150,10 @@ public class SecurityController {
 	// 보안카드 만드는 장소
 	@RequestMapping(value = "/securitycardcreate")
 	public String viewSecurity_card_success(Model m, HttpSession session) {
-		if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) == 1) {
+		if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
 			return "index/index";
 		} else if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
 			return "login/login";
 		}
 		Security_CardVO security_CardVO = securityCode.securityCardCreate();
@@ -168,7 +175,11 @@ public class SecurityController {
 	@RequestMapping(value = "/reMail")
 	public String reMail(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
 			return "login/login";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+			session.setAttribute("error", "f");
+			return "security/security";
 		}
 		Security_Card_RegVO vo = (Security_Card_RegVO) session.getAttribute("scrVO");
 		MemberVO memberVO = memberDao.numToEmailName(vo.getMem_code());
@@ -182,6 +193,13 @@ public class SecurityController {
 
 	@RequestMapping(value = "/scsuccess")
 	public String securityCardSuccess(Model m, HttpSession session) {
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
+			return "login/login";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+			session.setAttribute("error", "f");
+			return "security/security";
+		}
 		session.removeAttribute("scrVO");
 		session.removeAttribute("security_Cardvo");
 		return "redirect:index";
@@ -192,30 +210,41 @@ public class SecurityController {
 	public String viewSecurity_otp(Model m, HttpSession session,
 			@RequestParam(value = "error", defaultValue = "t") String error) {
 		if (session.getAttribute("member") == null) {
-			session.setAttribute("pageName", "redirect:securit");
+			session.setAttribute("pageName", "securityotp");
 			return "login/login";
-		}
-		
-		
-		
-		else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
-			session.setAttribute("error", "f");
-			return "security/security";
 		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
 
 		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
-
-//		List<AccountVO_backup> aclist = bangkingdao.getaclist(mem_code);
-
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
-		session.setAttribute("pageName", "redirect:securityotp");
-//		m.addAttribute("aclist", aclist);
+		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
 		m.addAttribute("error", error);
+		
+		session.setAttribute("scSuccess", true);
 		return "security/securityOtp";
 	}
 
+	// OTP 입력 확인 페이지
+	@RequestMapping(value = "/otpInfoView")
+	public String viewOTPInfoView(Model m, AccountVO accountVO, MemberVO memberVO, String acNameNum,
+			@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
+			return "login/login";
+		}
+		String acNum = acNameNum.split("-")[1];
+		String pwd = String.valueOf(depositDao.pwdChk(Integer.parseInt(acNum)));
+		// 패스워드 성공시
+		if (accountVO.getAc_pwd().equals(pwd) && successData.equals("success")) {
+			m.addAttribute("acNameNum", acNameNum);
+			m.addAttribute("mem_email", memberVO.getMem_email());
+			return "security/securityOTPInfoView";
+		} else {
+			return "redirect:securityotp?error=f";
+		}
+	}
+	
 	@RequestMapping(value = "/securityotpsuccess")
 	public String viewCheckBalance() {
 		return "security/securityOtpSuccess";
