@@ -406,9 +406,14 @@
                   ,atapply.ata_time ata_time
                   ,atapply.ata_yourmemcode ata_yourmemcode
                   ,atapply.ata_mymemcode ata_mymemcode
+                  ,atapply.ata_code ata_code
                   from account a, at_application atapply
                   where a.ac_code = atapply.ac_code and atapply.ata_check=0
 	</select>
+	
+	<update id="afterchkup" parameterType="String">
+	update at_application set ata_check = 1 where ata_code=#{ata_code}
+	</update>
 <!-- /@자동이체 종료 -->
 
 

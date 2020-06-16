@@ -130,6 +130,9 @@ public class BangkingDao {
 	public List<At_applicationVO> atloadval() {
 		return ss.selectList("bangking.atloadval");
 	}
+	public void afterchkup(String ata_code) {
+		ss.update("bangking.afterchkup", ata_code);
+	}
 	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

@@ -193,6 +193,7 @@
 							let youracwrite =item.ata_youracmemo;
 							let myacwrite = item.ata_myacmemo;
 							let memcode = item.ata_mymemcode;
+							let atacode = item.ata_code;
 							
 							var ajax2param = new Object();
 							ajax2param.myac = myac;
@@ -202,6 +203,7 @@
 							ajax2param.youracwrite = youracwrite;
 							ajax2param.myacwrite = myacwrite;
 							ajax2param.memcode = memcode;
+							ajax2param.atacode = atacode;
 							
 							
 							console.log(JSON.stringify(ajax2param));

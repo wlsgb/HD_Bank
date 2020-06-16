@@ -62,6 +62,10 @@ public class DepositRestController {
 	
 	@RequestMapping(value = "/atloadval")
 	public List<At_applicationVO> atloadval(){
+		for(At_applicationVO e :bangkingdao.atloadval()) {
+			System.out.println(e.getAta_code());
+		}
+		
 		return bangkingdao.atloadval();
 	}
 	
@@ -72,8 +76,9 @@ public class DepositRestController {
 			,@RequestParam(value = "yourac") String yourac
 			,@RequestParam(value = "youracmem") String youracmem
 			,@RequestParam(value = "trmoney") String trmoney
-			,@RequestParam(value = "youracwrite", defaultValue = "이체로들어옴") String youracwrite
-			,@RequestParam(value = "myacwrite", defaultValue = "이체로빠짐") String myacwrite
+			,@RequestParam(value = "youracwrite", defaultValue = "자동이체로들어옴") String youracwrite
+			,@RequestParam(value = "myacwrite", defaultValue = "자동이체로빠짐") String myacwrite
+			,@RequestParam(value = "atacode") String atacode
 			
 			){
 		System.out.println("자동이체파람값");
@@ -84,6 +89,7 @@ public class DepositRestController {
 		System.out.println(youracwrite);
 		System.out.println(myacwrite);
 		System.out.println(memcode);
+		System.out.println("자동이체코드"+atacode);
 		Map<String, String> mapmy = new HashMap<String, String>();
 		mapmy.put("ac_num", myac);
 		mapmy.put("mem_code", memcode);
@@ -118,8 +124,10 @@ public class DepositRestController {
 				System.out.println("2");
 				
 				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
-					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
-					System.out.println("이체실행댐");
+					bangkingservice.autotransferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp,atacode);
+					System.out.println("자동이체실행댐");
+				}else {
+					System.out.println("잔액부족으로인한 미루기 처리");
 				}
 			}
 		}
