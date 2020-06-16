@@ -19,4 +19,10 @@
 		where mem_code=#{mem_code}
   	</update>
   	
+  	<update id="updatemypwd" parameterType="mem">
+  		update member set mem_pwd = #{mem_pwd}, 
+		where mem_code=#{mem_code}
+  	</update>
+  	
+  	
   </mapper>
