@@ -53,15 +53,9 @@
 														<th scope="col">이메일</th>
 														<td>
 															<div class="row">
-																<div class="col-4">
-																	<input type="text" id="emailId" name="emailId" required="required"
-																	class="form-control input-full" placeholder="Email">
-																</div>
-																<div class="col-4">
-																	<select class="form-control" id="emailBack" name="emailBack">
-																		<option>@naver.com</option>
-																		<option>@gmail.com</option>
-																	</select>
+																<div class="col-8">
+																	<input type="email" id="mem_email" name="mem_email" readonly="readonly"
+																	class="form-control input-full" value="${memberVO.mem_email }">
 																</div>
 																<div class="col-4">
 																	<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
@@ -105,6 +99,16 @@
 																<div class="col-6" id="target"></div>
 															</div>
 															
+														</td>
+													</tr>
+													<tr>
+														<th scope="col">계좌 별칭</th>
+														<td>
+															<div class="row">
+																<div class="col-6">
+																	<input type="text" id="ac_name" name="ac_name" class="form-control input-full">
+																</div>
+															</div>
 														</td>
 													</tr>
 												</tbody>
@@ -166,7 +170,7 @@
 			})
 			
 			$('#emailBtn').click(function(e) {
-				email = $("#emailId").val()+ $("#emailBack").val();
+				email = $("#mem_email").val();
 				swal({
 					title: '이메일을 전송 하시겠습니까?',
 					text: "이메일을 확인해주세요. \n"+email,
