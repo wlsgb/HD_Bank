@@ -17,7 +17,7 @@ import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
 import dank.mvc.dao.MemberDao;
 import dank.mvc.vo.deposit.AccountHistoryVO;
-import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.AccountVO_backup;
 import dank.mvc.vo.deposit.PageVO;
 
 @Controller
@@ -39,7 +39,7 @@ public class DirectServiceController {
 	}
 
 	@RequestMapping(value = "/chkvalue")
-	public String cheValue(Model m, AccountVO accountVO,String membirth, String type, String searchDate, PageVO pvo,
+	public String cheValue(Model m, AccountVO_backup accountVO,String membirth, String type, String searchDate, PageVO pvo,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage) {
 		// 입력받은 계좌번호를 가져옴

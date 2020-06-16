@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
 
@@ -36,7 +37,11 @@ public class DepositDao {
 		return ss.selectList("deposit.inslist");
 	}
 	//拌谅 积己
-	public void createAccount(AccountVO accountVO) {
-		ss.insert("deposit.newAccount",accountVO);
+	public void addAccount(AccountVO accountVO) {
+		ss.insert("deposit.addAccount",accountVO);
+	}
+	//拌谅 积己
+	public void addAcClient(Account_ClientVO clientVO) {
+		ss.insert("deposit.addAcClient",clientVO);
 	}
 }

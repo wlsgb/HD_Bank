@@ -21,9 +21,10 @@ public class BangkingDao {
 	}
 	
 	// 계좌번호를 넣으면 멤버 번호를 가져온다.
-	public int acnumToMemcode(String acnum) {
-		return ss.selectOne("bangking.actomemnum",acnum);
+	public int acnumToMemcode(String ac_num) {
+		return ss.selectOne("bangking.actomemnum",ac_num);
 	}
+	
 	///////////////////////////////////////////////////////////입금시작@
 	public int depcheckac(String ac_num) {
 		System.out.println("checkac");
@@ -126,7 +127,9 @@ public class BangkingDao {
 	public void insertatapply(At_applicationVO atapplyvo) {
 		ss.insert("bangking.atapply", atapplyvo);
 	}
-	
+	public List<At_applicationVO> atloadval() {
+		return ss.selectList("bangking.atloadval");
+	}
 	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

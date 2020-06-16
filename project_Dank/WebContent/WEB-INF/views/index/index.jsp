@@ -6,8 +6,8 @@
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">Dank</h2>
-								<h5 class="text-white op-7 mb-2">어서오세요. Dank 메인 페이지입니다.</h5>
+								<h2 class="text-white pb-2 fw-bold">HD Bank</h2>
+								<h5 class="text-white op-7 mb-2">어서오세요. HD Bank 메인 페이지입니다.</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
@@ -19,54 +19,7 @@
 				<!-- 상단의 푸른색 공간 끝 -->
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
-				<div class="row row-card-no-pd">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">이벤트 페이지</h4>
-										<div class="card-tools">
-											<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
-											<button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
-											<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
-										</div>
-									</div>
-									<p class="card-category"> 당사에서 진행하는 여러가지 이벤트를 즐겨주세요. </p>
-								</div>
-								
-								<div class="card-body">
-									<div class="row">
-										<div class="col-md-6">
-											<iframe width="560" height="315" src="//www.youtu.be/GVzE92CMWTA" frameborder="0" allowfullscreen></iframe>
-										</div>
-									</div>
-								</div>
-								
-								<div class="card-body">
-									<div class="demo">
-										<ul class="pagination pg-primary">
-											<li class="page-item">
-												<a class="page-link" href="#" aria-label="Previous">
-													<span aria-hidden="true">&laquo;</span>
-													<span class="sr-only">Previous</span>
-												</a>
-											</li>
-											<li class="page-item active"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item">
-												<a class="page-link" href="#" aria-label="Next">
-													<span aria-hidden="true">&raquo;</span>
-													<span class="sr-only">Next</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
+				<div class="row">
 						<div class="col-sm-6 col-md-3" id="checkBalance">
 							<div class="card card-stats card-primary card-round">
 								<div class="card-body">
@@ -144,6 +97,33 @@
 							</div>
 						</div>
 					</div>
+				
+				<div class="row row-card-no-pd">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-head-row card-tools-still-right">
+										<h4 class="card-title">이벤트 페이지</h4>
+										<div class="card-tools">
+											<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
+											<button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
+											<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
+										</div>
+									</div>
+									<p class="card-category"> 당사에서 진행하는 여러가지 이벤트를 즐겨주세요. </p>
+								</div>
+								
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-6">
+											<iframe width="1120;" height="600" src="//www.youtube.com/embed/GVzE92CMWTA?&amp;autoplay=1&amp;loop=1 frameborder="></iframe>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<!-- 페이지 레이아웃 끝 -->
 				</div>
 			</div>

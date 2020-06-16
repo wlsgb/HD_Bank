@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
-  <!--   	Null반환값 받기위한 설정 -->
+  <!--   	Null반환값 받기위한 설정 --> 
   	<settings>
   		<setting name="cacheEnabled" value="false"/>
   		<setting name="jdbcTypeForNull" value="NULL"/>
@@ -43,14 +43,16 @@
   		<typeAlias type="dank.mvc.vo.deposit.AccountHistoryVO" alias="achvo"/>
   		<typeAlias type="dank.mvc.vo.deposit.PageVO" alias="deppvo"/>
   		<typeAlias type="dank.mvc.vo.deposit.At_applicationVO" alias="atapplyvo"/>
-
+		<typeAlias type="dank.mvc.vo.deposit.Account_AdminVO" alias="adminvo"/>
+		<typeAlias type="dank.mvc.vo.deposit.Account_ClientVO" alias="clientvo"/>
+		
 		<typeAlias type="dank.mvc.vo.deposit.ProSavInsDto" alias="psidto"/>
   		<!-- 예금 영역 끝 -->
 
   		<typeAlias type="dank.mvc.vo.PageVO" alias="pvo"/>
   		<typeAlias type="dank.mvc.vo.QnaVO" alias="qnavo"/>
   		<typeAlias type="dank.mvc.vo.MemberVO" alias="mem"/>
-  		<typeAlias type="dank.mvc.vo.UserVO" alias="user"/>
+  		<typeAlias type="dank.mvc.vo.EmployeeVO" alias="emp"/>
 
   	</typeAliases>
 

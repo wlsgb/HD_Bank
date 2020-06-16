@@ -82,13 +82,13 @@ input[type="number"]::-webkit-inner-spin-button {
    														<p class="col-1 text-center">ㅡ</p>
    														<input type="number" class="form-control col-3"  id="mem_phn2" name="mem_phn2">
    														<p class="col-1 text-center">ㅡ</p>
-   														<input type="number" class="form-control col-3"  id="mem_phn3" name="mem_phn3">
+   														<input type="number" class="form-control col-3" id="mem_phn3" name="mem_phn3">
    													</div>
 												</div>
 												<div class="form-group row">
 													<label for="mem_birth" class="col-2 control-label">생년월일</label>
 													<div class="col-10">
-   														<input type="date" class="form-control"  id="mem_birth" name="mem_birth">
+   														<input type="number" class="form-control" id="mem_birth" name="mem_birth" placeholder="예)951201">
    													</div>
 												</div>
 													<div class="form-group row">
@@ -131,7 +131,7 @@ input[type="number"]::-webkit-inner-spin-button {
 			
 						</div>
 					
-			<p class="text-center"><button type="submit" class="btn btn-info" id="btn">대출 신청</button></p>
+			<p class="text-center"><button type="submit" class="btn btn-info" id="btn">가입하기</button></p>
 		</form>
 			</div>
 		
@@ -194,13 +194,33 @@ input[type="number"]::-webkit-inner-spin-button {
 					event.preventDefault(); return; 
 					
 				}
+				if(parseInt($('#mem_phn2').val()) < 100 ||parseInt($('#mem_phn2').val()) >10000){
+					alert("전화번호 중간자리를 확인해주세요.");
+					event.preventDefault(); return; 
+					
+				}
 				if($('#mem_phn3').val() == ""){
 					alert("전화번호 뒷자리를 확인해주세요.");
 					event.preventDefault(); return; 
 					
 				}
+				if(parseInt($('#mem_phn3').val()) < 100 ||parseInt($('#mem_phn3').val()) >10000){
+					alert("전화번호 뒷자리를 확인해주세요.");
+					event.preventDefault(); return; 
+					
+				}
 				if($('#mem_birth').val() == ""){
-					alert("생년월일를 확인해주세요.");
+					alert("생년월일을 확인해주세요 예)950101");
+					event.preventDefault(); return; 
+					
+				}
+				if($('#mem_birth').val().length !=6){
+					alert("생년월일을 확인해주세요 예)950101");
+					event.preventDefault(); return; 
+					
+				}
+				if(parseInt($('#mem_birth').val()) <= 0 ||parseInt($('#mem_birth').val()) >999999){
+					alert("생년월일을 확인해주세요 예)950101");
 					event.preventDefault(); return; 
 					
 				}

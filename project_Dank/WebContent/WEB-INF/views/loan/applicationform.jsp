@@ -83,14 +83,18 @@ input[type="number"]::-webkit-inner-spin-button {
 													<div class="col-10">
    														<input type="text" class="form-control" readonly="readonly" value="${vo.lp_maximum }원">
    													</div>
+   													
 												</div>
 												
 												<div class="form-group row">
 												<label for="amount" class="col-2">대출 희망 금액</label>
-												<div class="col-10">
+												<div class="col-6">
 												<input type="hidden" id="maximum" value="${vo.lp_maximum }">
 												<input type="number" class="form-control" name="la_hamount" id="la_hamount"  placeholder="희망금액" value="0">
 												</div>
+												<div class="col-4">
+   														<p id="target"></p>
+   													</div>
 											</div>
 												
 												<div class="form-group row">
@@ -107,7 +111,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<label for="period" class="col-2">거치기간</label>
 												<div class="col-4">
 												<select class="form-control" id="la_livingterm" name="la_livingterm">
-													<option>없음</option>
+													<option value="0">없음</option>
 													<option>1년</option>
 													<option>2년</option>
 													<option>3년</option>
@@ -161,10 +165,12 @@ input[type="number"]::-webkit-inner-spin-button {
 			  });
 			  $("input").keyup(function () {
 			    // Check correct, else revert back to old value.
-			    if (!$(this).val() || (parseInt($(this).val()) <= $('#maximum').val() && parseInt($(this).val()) >= 0))
-			     ;
-			   
-			    else{
+			    if (!$(this).val() || (parseInt($(this).val()) <= $('#maximum').val() && parseInt($(this).val()) >= 0)){
+			    	
+			    }else if(parseInt($(this).val()) < 0){
+			    	alert('희망대출액은 음수가 될 수 없습니다.')
+			    	$(this).val(0);
+			    }else{
 				  	alert('대출 가능 최대 금액을 초과해서 입력하셨습니다.')			    	
 			    	$(this).val($(this).data("old"));
 			    }
@@ -172,8 +178,40 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			  });
 			  
+			  $('#la_hamount').change(function() {
+				  var amount = parseInt($('#la_hamount').val());
+				  var result = '';
+				  if(amount<10000){
+					  result = amount+'원';
+					  $('#target').html(result); 
+				  }else if(amount<100000000){
+					 console.log(result/10000)
+					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
+					  $('#target').html(result);
+				  }else if(amount<1000000000000){
+					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원'
+					  $('#target').html(result); 
+				  }
+			  })
+			  
+			  $('#la_hamount').keyup(function() {
+				  var amount = parseInt($('#la_hamount').val());
+				  var result = '';
+				  if(amount<10000){
+					  result = amount+'원';
+					  $('#target').html(result); 
+				  }else if(amount<100000000){
+					 console.log(result/10000)
+					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
+					  $('#target').html(result);
+				  }else if(amount<1000000000000){
+					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원'
+					  $('#target').html(result); 
+				  }
+			  })
+			  
+			  
 				var date = new Date().toISOString().slice(0, 10);
-				console.log(date)
 				var dateSplit = date.split("-");
 				var sysdate = new Date(dateSplit[0]+'/'+dateSplit[1]+'/'+dateSplit[2]);
 				var startdate = new Date(dateSplit[0]+'/'+dateSplit[1]+'/'+dateSplit[2]);
@@ -192,7 +230,6 @@ input[type="number"]::-webkit-inner-spin-button {
 				}	
 			})
 			
-			console.log($('#lp_num').val())
 				
 	</script>
 
