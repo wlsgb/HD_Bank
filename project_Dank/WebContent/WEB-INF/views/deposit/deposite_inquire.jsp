@@ -25,7 +25,6 @@
 					</div>
 				</div>
 				<div class="page-inner mt--5">
-
 					<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
@@ -40,10 +39,14 @@
 									</div>
 
 
+								
+								</div>
+								<div class="card-body">
 								<table class="table">
 													<thead>
 														<tr>
 															<th>상품명</th>
+															<th>별명</th>
 															<th>계좌번호</th>
 															<th class="text-right">
 																잔액
@@ -62,40 +65,34 @@
 													
 														<tr>
 																<td>${e.saving.sav_name }</td>
-																<td>${e.ac_num }</td>
+																<td>${e.ac_name }</td>
+																<td id="savac${i.index}">${e.ac_num }</td>
 																<td class="text-right">
 																	${e.ac_balance }
 																</td>
 																
 																<td class="text-right">
-																	<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																	<a href="transfer"><input type="button" value="이체" /></a>
+																	<form action="inquire_detail" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="조회"  style="display: inline-block;" />
+																	</form>
+																	<form action="transfer" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="이체" />
+																	</form>
+																	<form action="deposit" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="입금" id="depbtn${i.index}"  />
+																	</form>
+																	<form action="withdraw" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="출금" />
+																	</form>
 																</td>
 														</tr>
 													</c:if>
 													</c:forEach>
-<!-- 														<tr> -->
-<!-- 															<td>저축예금</td> -->
-<!-- 															<td>110-111-45625</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																10,000,000 -->
-<!-- 															</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																<a href="inquire_detail"><input type="button" value="조회"  /></a> -->
-<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
-<!-- 															</td> -->
-<!-- 														</tr> -->
-<!-- 														<tr> -->
-<!-- 															<td>국민예금</td> -->
-<!-- 															<td>110-111-78966</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																30,000,000 -->
-<!-- 															</td> -->
-<!-- 															<td class="text-right"> -->
-<!-- 																<a href="inquire_detail"><input type="button" value="조회"  /></a> -->
-<!-- 																<a href="transfer"><input type="button" value="이체" /></a> -->
-<!-- 															</td> -->
-<!-- 														</tr> -->
+
 													
 													
 													</tbody>
@@ -119,10 +116,14 @@
 									</div>
 
 
+								
+								</div>
+								<div class="card-body">
 								<table class="table">
 													<thead>
 														<tr>
 															<th>상품명</th>
+															<th>별명</th>
 															<th>계좌번호</th>
 															<th class="text-right">
 																잔액
@@ -139,6 +140,7 @@
 													<c:if test="${e.ins.ins_name != '0'}">
 													<tr>
 															<td>${e.ins.ins_name }</td>
+															<td>${e.ac_name}</td>
 															<td>${e.ac_num }</td>
 															<td class="text-right">
 																${e.ac_balance }
@@ -146,7 +148,9 @@
 															
 															<td class="text-right">
 																<a href="inquire_detail"><input type="button" value="조회"  /></a>
-																<a href="transfer"><input type="button" value="이체" /></a>
+<!-- 																<input type="button" value="두섬팅" id="dosomething" /> -->
+<!-- 																<a href="#"><input type="button" value="입금" /></a> -->
+<!-- 																<a href="#"><input type="button" value="출금" /></a> -->
 															</td>
 														</tr>
 														</c:if>
@@ -169,97 +173,24 @@
 			
 			
 			<script>
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+// $(document).ready(function() {
+// 	setInterval(function() {
+// 		$.ajax({
+// 			url:'dosomething',
+// 			success:function(data){
+// 				console.log("두섭튕")
+// 				$.ajax({
+// 					url:'dosomething2',
+// 					success:function(data){
+// 						console.log("두솜팅 22");
+// 					}
+// 				})
+// 			}		
+// 		})
+// 	}, 1000)
+// })
+			
+			
+		
 	</script>
 

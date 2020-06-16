@@ -14,14 +14,13 @@
 								 </h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
-								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
+								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른페이지</a>
 								<a href="qna" class="btn btn-secondary btn-round">고객센터</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!--대출 신청   -->
-		<form action="" class="form-horizontal">
+				
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -32,18 +31,32 @@
 											<div class="col-1"></div>
 											<div class="col-10">
 												
-												<h1>대출 신청 정보</h1>
+												<h1>대출 정보</h1>
 												<hr>
-												<h3>대출자 정보</h3>
-												<div class="form-group">
-													<label for="name" class="col-sd-2 control-label">이름</label>
-													<div class="col-sd-10">
-   														<input type="email" class="form-control" id="name" readonly="readonly" value="신청자 이름">
+												<h3>신청자 정보</h3>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">이름</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_name }">
+   													</div>
+												</div>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">이메일</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_email }">
+   													</div>
+												</div>
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">생년월일</label>
+													<div class="col-10">
+   														<input type="text" class="form-control"  id="name" readonly="readonly" value="${member.mem_birth }">
    													</div>
 												</div>
 												
+   														<input type="hidden" class="form-control"  id="mem_code" name="mem_code"  value="${member.mem_code }">
+   												
 												<hr>
-												<h3>대출 정보</h3>
+												<h3>대출정보</h3>
 												<div class="form-group row">
 													<label class="col-2 control-label" >대출번호</label>
 													<div class="col-10">
@@ -60,7 +73,7 @@
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >신청날짜</label>
+													<label class="col-2 control-label" >대출신청일</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.la_sysdate }
 													</div>
@@ -75,7 +88,7 @@
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >희망대출금액</label>
+													<label class="col-2 control-label" >희망대출액</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.la_hamount }원
 													</div>
@@ -89,7 +102,7 @@
 												</div>
 												
 												<div class="form-group row">
-													<label class="col-2 control-label" >상환방식</label>
+													<label class="col-2 control-label" >상환방법</label>
 													<div class="col-10">
 														${vo.loanApplicationVO.lr_type }
 													</div>
@@ -112,10 +125,10 @@
 												
 												<c:if test="${vo.lc_state eq '실행완료'}">
 												<hr>
-													<h3>상환 정보</h3>
+													<h3>상환정보</h3>
 													
 													<div class="form-group row">
-													<label class="col-2 control-label">실행날짜</label>
+													<label class="col-2 control-label">대출실행일</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_startdate }
 													</div>
@@ -127,13 +140,13 @@
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">대출잔액</label>
+													<label class="col-2 control-label">대출</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_balance }원
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">대출이자액</label>
+													<label class="col-2 control-label">이자상환액</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_interest }원
 													</div>
@@ -147,13 +160,13 @@
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">대출상환일</label>
+													<label class="col-2 control-label">상환일</label>
 													<div class="col-10">
 														매월 ${vo.loanRepayVO.lr_repaydate }일
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-2 control-label">상환계좌</label>
+													<label class="col-2 control-label">대출계좌</label>
 													<div class="col-10">
 														${vo.loanRepayVO.lr_reaccount }
 													</div>
@@ -177,20 +190,19 @@
 					<c:when test="${vo.lc_state eq '선정대기'}">
 					</c:when>
 					<c:when test="${vo.lc_state eq '서류제출대기'}">
-			<p class="text-center"><button type="button" class="btn btn-info" id="file">서류제출</button></p>
+			<p class="text-center"><button type="button" class="btn btn-info" id="file" value="${vo.lc_num }">서류제출</button></p>
 					</c:when>
 					<c:when test="${vo.lc_state eq '대출승인'}">
-					<p class="text-center"><button type="button" class="btn btn-info" id="loanstart">추가서류</button></p>
+					<p class="text-center"><button type="button" class="btn btn-info" id="loanstart" value="${vo.lc_num }">실행하기</button></p>
 					</c:when>
 					<c:when test="${vo.lc_state eq '실행완료'}">
-					<p class="text-center"><button type="button" class="btn btn-info">상환하기</button></p>
+					<p class="text-center"><button type="button" class="btn btn-info" value="${vo.lc_num }">상환하기</button></p>
 					</c:when>
 					<c:otherwise>
-					<p class="text-center"><button type="button" class="btn btn-info" id="refile">추가서류</button></p>
+					<p class="text-center"><button type="button" class="btn btn-info" id="refile" value="${vo.lc_num }">서류보완</button></p>
 					</c:otherwise>
 					
 					</c:choose>
-		</form>
 			</div>
 		
 			
@@ -198,7 +210,7 @@
 
 			
 			<script>
-		
+
 	
 	$('#file').click(function() {
 			location='checkfile?lc_num='+$(this).val();
@@ -210,5 +222,7 @@
 		$('#refile').click(function() {
 			location='checkfiledetail?lc_num='+$(this).val();
 		})
+		
+		
 	</script>
 

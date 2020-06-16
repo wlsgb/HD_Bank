@@ -115,10 +115,14 @@
 											<button class="btn btn-danger" onclick="location='new'">취소</button>
 										</div>
 										<div class="col-3">
+										<form method="post" action="saving_new">
+										<input type="hidden" id="sav_code" name="sav_code" value="${saving.sav_code }">
+										<input type="hidden" id="deptype" name="deptype" value="100">
 										<!-- 신청 버튼 -->
 											<c:if test="${saving.sav_online != 0}">
-												<button class="btn btn-primary" onclick="">신청</button>
+												<input type="submit" class="btn btn-primary" value="신청">
 											</c:if>
+										</form>
 										</div>
 									</div>
 									
@@ -133,6 +137,4 @@
 	</div>
 	<!-- 하단 컨텐츠 끝 -->
 </div>
-<script>
-</script>
 

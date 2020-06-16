@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="content">
 				<div class="panel-header bg-primary-gradient">
@@ -126,47 +126,60 @@
 									<table class="table table-hover">
 										<thead>
 											<tr>
+												<th scope="col">숫자</th>
 												<th scope="col">거래일시</th>
-												<th scope="col">보낸분/받는분</th>
 												<th scope="col">입금액(원)</th>
 												<th scope="col">출금액(원)</th>
 												<th scope="col">잔액(원)</th>
 												<th scope="col">송금메모</th>
-												<th scope="col">거래점</th>
+												
 											</tr>
 										</thead>
 										<tbody>
+										
+	
+										
+										<c:forEach var="e" items="${history}">
 											<tr>
-												<td scope="col">2020.02.24</td>
-												<td scope="col">홍길동</td>
-												<td scope="col">120,000</td>
-												<td scope="col">0</td>
-												<td scope="col">5,000,000</td>
-												<td scope="col">없음</td>
-												<td scope="col">Dank</td>
-											</tr>
-											<tr>
-												<td scope="col">2020.02.25</td>
-												<td scope="col">임성윤</td>
-												<td scope="col">2,334,234,435</td>
-												<td scope="col">5,342,222</td>
-												<td scope="col">999,999,999,999</td>
-												<td scope="col">없음</td>
-												<td scope="col">Dank</td>
-											</tr>
+												<td scope="col">${e.r_num }</td>
+												<td scope="col">${e.dealdate }</td>
+												<td scope="col">${e.dep_money }</td>
+												<td scope="col">${e.wit_money }</td>
+												<td scope="col">${e.balance }</td>
+												<td scope="col">${e.name }</td>
+												
 											
+											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>
 								
-								<div style="margin: auto;">
-								<button class="btn btn-default btn-xs" type="submit">1</button>
-								<button class="btn btn-default btn-xs" type="submit">2</button>
-								<button class="btn btn-default btn-xs" type="submit">3</button>
-								<button class="btn btn-default btn-xs" type="submit">4</button>
-								</div>
+											<div style="display: block; text-align: center;">
+												<c:if test="${paging.startPage != 1 }">
+											<!-- 	이전페이지 -->
+													<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"><</a>
+												</c:if>
+												<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+													var="p">
+													<c:choose>
+														<c:when test="${p == paging.nowPage }">
+															<b>${p }</b>
+														</c:when>
+														<c:when test="${p != paging.nowPage }">
+															<a href="inquire_detail?ac_num=${ac_num }&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+														</c:when>
+													</c:choose>
+												</c:forEach>
+												<c:if test="${paging.endPage != paging.lastPage}">
+													<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">></a>
+												</c:if>
+											</div>
 								<div style="margin:10px auto;">
 								<button type="button" class="btn btn-info btn-sm">엑셀 내리기</button>
+<!-- 								<div id="result" style="position: absolute; background: #000; width: 30px; height: 30px; opacity: 0.4; border-radius: 100%;"> </div> -->
+
+
 								</div>
 							</div>
 							</div>
@@ -181,97 +194,31 @@
 			
 			
 			<script>
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+// 			function resultFun(x) {
+// 				 var positionLeft = x.clientX;
+// 				  var positionTop = x.clientY;
+// 				   document.getElementById('result').style.left = positionLeft - 10 + "px";
+// 				    document.getElementById('result').style.top = positionTop - 10 +"px"; 
+// 				    }
+// 		     if (document.addEventListener) {
+// 			      document.addEventListener("mousemove", resultFun); 
+// 			      } else if (document.attachEvent) {
+// 				       document.attachEvent("onmousemove", resultFun);
+// 				        //attachEvent는 IE8이하와 오페라에서 사용하는 명령어이다
+// 				         };
 
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+$(document).ready(function() {
+	$('tbody').children().children().mouseover(function() {
+// 		console.log($(this).text())
+	})
 
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+})
 
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
+	
 
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+			
+
+		
 	</script>
 

@@ -37,96 +37,165 @@
 								
 								<div class="card-body">
 									<div class="row">
-										<div class="col-md-12 ml-auto mr-auto" style="text-align: center;">
-											<form action="" method="post">
+									
+										<div class="col-md-3">
+											<span class="blockquote blockquote-primary">보안카드 비밀번호 입력</span>
+											<!-- 보안카드 form 시작 -->
+											<form action="ssc" method="post">
+												<input type="hidden" value="${nextPage }" />
+												<div class="form-group">
+													<label for="">
+														<span class="h4 text-danger">
+															[${scd[0][0]}]
+														</span>
+														<span class="h5" style="font-style: italic;">
+															${scd[0][1]}
+														</span>에서 두자리 </label>
+													<input type="password" class="form-control" id="main_left" maxlength="2" name="main_code"
+													placeholder="[일련번호] - ${scd[0][1] }에서 두자리">
+												</div>
+												<div class="form-group">
+													<label for="email2">
+														<span class="h4 text-danger">
+															[${scd[1][0] }]
+														</span> 
+														<span class="h5" style="font-style: italic;">
+															${scd[1][1] }
+														</span>에서 두자리 </label>
+													<input type="password" class="form-control" id="fir_left" maxlength="2"  name="fir_code"
+													placeholder="[${scd[1][0] }] - ${scd[1][1] }에서 두자리">
+												</div>
+												<div class="form-group">
+													<label for="email2">
+														<span class="h4 text-danger">
+															[${scd[2][0] }]
+														</span>
+														<span class="h5" style="font-style: italic;">
+															${scd[2][1] }
+														</span>에서 두자리 </label>
+													<input type="password" class="form-control" id="sec_left" maxlength="2" name="sec_code"
+													placeholder="[${scd[2][0] }] - ${scd[2][1] }에서 두자리">
+												</div>
+												<div class="card-action">
+													<button type="button" class="btn btn-danger">취소</button>
+													<input type="submit" class="btn btn-success" value="확인" />
+												</div>
+											</form>
+											<!-- 보안카드 form 끝 -->
+										</div>
+											
+										<div class="col-md-9" style="text-align: center;">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
-															<th colspan="8" style="text-align: left;">
+															<th colspan="5" style="text-align: left;">
 																<span class="h1">보안카드</span>
 																<span class="h6" style="font-style: italic;">${name}님</span>
 															</th>
-															<th colspan="2" style="text-align: right;">일련번호 : ${scrVo.sc_code}</th>
+															<th colspan="5" style="text-align: right;">
+																<div class="form-group">
+																	<div class="input-group mb-3">
+																		<div class="input-group-prepend">
+																			<span class="input-group-text" 
+																			style="background-color: #2E9AFE; color: #ffffff;">일련번호</span>
+																		</div>
+																		<c:choose>
+																			<c:when test="${scd[0][1]=='앞'}">
+																				<input type="password" class="form-control" maxlength="2" 
+																				name="main_code" id="main_right" placeholder="**">
+																				<div class="input-group-append">
+																					<span class="input-group-text"
+																					style="font-size: 20px;">******</span>
+																				</div>
+																			</c:when>
+																			<c:otherwise>
+																				<div class="input-group-append">
+																					<span class="input-group-text" 
+																					style="font-size: 20px;">******</span>
+																				</div>
+																				<input type="password" class="form-control" maxlength="2"
+																				name="main_code" id="main_right" placeholder="**">
+																			</c:otherwise>
+																		</c:choose>
+																	</div>
+																</div>
+															</th>
+															
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">1</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_1 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">2</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_2 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">3</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_3 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">4</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_5 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">5</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_6 }</td>
-														</tr>
-														<tr>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">6</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_6 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">7</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_7 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">8</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_8 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">9</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_9 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">10</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_10 }</td>
-														</tr>
-														<tr>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">11</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_11 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">12</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_12}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">13</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_13 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">14</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_14 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">15</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_15 }</td>
-														</tr>
-														<tr>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">16</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_16}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">17</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_17}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">18</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_18 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">19</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_19}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">20</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_20 }</td>
-														</tr>
-														<tr>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">21</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_21}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">22</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_22}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">23</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_23 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">24</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_24}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">25</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_25 }</td>
-														</tr>
-														<tr>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">26</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_26}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">27</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_27}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">28</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_28 }</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">29</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_29}</td>
-															<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">30</td>
-															<td style="text-align: center;">${scrVo.secCard.sc_detcode_30 }</td>
-														</tr>
+															<tr>
+															<c:set var="code1" value="${scd[1][0] }"/>
+															<c:set var="code2" value="${scd[2][0] }"/>
+															
+													<c:forEach begin="0" end="29" step="1" varStatus="i">
+														<c:choose>
+															<c:when test="${(i.index+1)==code1}">
+																<td style="text-align: center; font-style: italic; 
+																background-color: #2E9AFE; color: #ffffff; font-size: 16px;">${i.index+1 }</td>
+																<td style="text-align: center; font-size: 20px;
+																color: #ffffff;">
+																	<div class="form-group">
+																		<div class="input-group">
+																<c:choose>
+																	<c:when test="${scd[1][1]=='앞'}">
+																		<input type="password" class="form-control" maxlength="2" 
+																		id="fir_right" name="fir_code">
+																		<div class="input-group-append">
+																			<span class="input-group-text">**</span>
+																		</div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="input-group-prepend">
+																			<span class="input-group-text">**</span>
+																		</div>
+																		<input type="password" class="form-control" maxlength="2"
+																		id="fir_right" name="fir_code">
+																	</c:otherwise>
+																</c:choose>
+																		</div>
+																	</div>
+																</td>
+															</c:when>
+															<c:when test="${(i.index+1)==code2}">
+																<td style="text-align: center; font-style: italic; 
+																background-color: #2E9AFE; color: #ffffff; font-size: 16px;">${i.index+1 }</td>
+																<td style="text-align: center; font-size: 20px;
+																color: #ffffff;">
+																<div class="form-group">
+																		<div class="input-group">
+																<c:choose>
+																	<c:when test="${scd[2][1]=='앞'}">
+																		<input type="password" class="form-control" maxlength="2"
+																		id="sec_right" name="sec_code">
+																		<div class="input-group-append">
+																			<span class="input-group-text">**</span>
+																		</div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="input-group-prepend">
+																			<span class="input-group-text">**</span>
+																		</div>
+																		<input type="password" class="form-control" maxlength="2"
+																		id="sec_right" name="sec_code">
+																	</c:otherwise>
+																</c:choose>
+																		</div>
+																	</div>
+																</td>
+															</c:when>
+															<c:otherwise>
+																<td style="text-align: center; font-style: italic; background-color: #F2F2F2;">${i.index+1 }</td>
+																<td style="text-align: center;">-</td>
+															</c:otherwise>
+														</c:choose>
+														<c:if test="${(i.index+1)%5==0 }">
+															</tr>
+															<tr>
+														</c:if>
+													</c:forEach>	
 													</tbody>
-													
 												</table>
-												
-											</form>
 										</div>
 									</div>
 								</div>
@@ -141,101 +210,65 @@
 	
 			
 			
-			<script>
-			$("#success").click(function() {
-				location = "security";
-			});
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
+	<script>
+	$(function() {
+		var oldVal = null;
+		/* 왼쪽 입력했을때 */
+		$("#main_left").on("propertychange change keyup paste input", function() {
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#main_right").val($("#main_left").val());
 		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
+		
+		$("#fir_left").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#fir_right").val($("#fir_left").val());
 		});
+		$("#sec_left").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#sec_right").val($("#sec_left").val());
+		});
+		/* 오른쪽 입력했을때 */
+		$("#main_right").on("propertychange change keyup paste input", function() {
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#main_left").val($("#main_right").val());
+		});
+		$("#fir_right").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#fir_left").val($("#fir_right").val());
+		});
+		$("#sec_right").on("propertychange change keyup paste input", function() {
+			console.log("입력됨")
+		    var currentVal = $(this).val();
+		    if(currentVal == oldVal) {
+		        return;
+		    }
+		    oldVal = currentVal;
+		    $("#sec_left").val($("#sec_right").val());
+		});
+		
+	})
 	</script>
 
