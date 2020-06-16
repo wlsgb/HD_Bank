@@ -27,5 +27,8 @@ public class MyinfoDao {
 			return ss.update("myinfo.updatemyinfo", vo);
 		}
 	
+	 public int mypwdUpdate(MemberVO vo) {
+			return ss.update("myinfo.updatemypwd", vo);
+		}
 	
 }
