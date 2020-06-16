@@ -386,12 +386,26 @@
 	 		,#{ata_check}
 	 		,#{ata_ing}
 	 		,#{ata_youracmemo}
-	 		
-	 		
+	 		,#{ata_yourmemcode}
 	 		
 	 		)
 	 		
 	</insert>
+	
+	
+	<select id="atloadval" resultType="atapplyvo">
+					select a.ac_num ac_num
+                  , atapply.ata_yourac ata_yourac
+                  ,atapply.ata_setmoney ata_setmoney
+                  ,atapply.ata_youracmemo ata_youracmemo
+                  ,atapply.ata_myacmemo ata_myacmemo
+                  ,atapply.ata_startdate ata_startdate
+                  ,atapply.ata_stopdate ata_stopdate
+                  ,atapply.ata_dterm ata_dterm
+                  ,atapply.ata_time ata_time
+                  from account a, at_application atapply
+                  where a.ac_code = atapply.ac_code and atapply.ata_check=0
+	</select>
 <!-- /@자동이체 종료 -->
 
 

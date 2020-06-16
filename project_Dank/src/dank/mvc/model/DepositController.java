@@ -397,36 +397,57 @@ public class DepositController {
 	}
 
 	@RequestMapping(value = { "/transfer_auto" })
-	public String transferautoPage() {
-		return "deposit/deposite_transfer_auto";
+	public ModelAndView transferautoPage(HttpSession session) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist",aclist);
+		
+		return mav;
 	}
 
 	@RequestMapping(value = { "/transfer_auto_apply" })
-	public String transferautoapplyPage() {
-		return "deposit/deposite_transfer_auto_apply";
+	public ModelAndView transferautoapplyPage(HttpSession session
+			,String ac_num
+			) {
+		
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		ModelAndView mav = new ModelAndView();
+		Map<String, String> getmyaclistwhentr =new  HashMap<String, String>();
+		getmyaclistwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+		getmyaclistwhentr.put("ac_num", ac_num);
+		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
+		for(String e : myaclist) {
+			System.out.println("계좌드릉ㄴ " +e);
+		}
+		
+		mav.setViewName("deposit/deposite_transfer_auto_apply");
+		mav.addObject("myaclist",myaclist);
+		return mav;
 	}
 	
 	@RequestMapping(value = { "/transfer_auto_apply_process" }, method = RequestMethod.POST)
 	public ModelAndView transferautoapplyprocess(
 			HttpSession session
 			,At_applicationVO atapplyvo
-//			,@RequestParam(value = "atastopdate", defaultValue = "-1",required = false) String atastopdate
-//			,@RequestParam(value = "atadterm", defaultValue = "-1",required = false) String atadterm
-//			,@RequestParam(value = "atamyacmemo", defaultValue = "자동이체",required = false) String atamyacmemo
-//			,@RequestParam(value = "atayouracmemo", defaultValue = "자동이체",required = false) String atayouracmemo
-//			,@RequestParam(value = "atacheck", defaultValue = "-1",required = false) String atacheck
-//			,@RequestParam(value = "ataing", defaultValue = "-1",required = false) String ataing
+			,@RequestParam(value = "atastopdate", defaultValue = "-1",required = false) String atastopdate
+			,@RequestParam(value = "atadterm", defaultValue = "-1",required = false) String atadterm
+			,@RequestParam(value = "atamyacmemo", defaultValue = "자동이체",required = false) String atamyacmemo
+			,@RequestParam(value = "atayouracmemo", defaultValue = "자동이체",required = false) String atayouracmemo
+			,@RequestParam(value = "atacheck", defaultValue = "-1",required = false) String atacheck
+			,@RequestParam(value = "ataing", defaultValue = "-1",required = false) String ataing
 			//파라미터 디폴트값 받기위해서 언더바 지운거로 보내고
 			//셋터로 vo값에 넣어주었다.
 			) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		atapplyvo.setMem_code(sessionmem.getMem_code());
-//		atapplyvo.setAta_stopdate(atastopdate);
-//		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
-//		atapplyvo.setAta_myacmemo(atamyacmemo);
-//		atapplyvo.setAta_youracmemo(atayouracmemo);
-//		atapplyvo.setAta_check(Integer.parseInt(atacheck));
-//		atapplyvo.setAta_ing(Integer.parseInt(ataing));
+		atapplyvo.setAta_stopdate(atastopdate);
+		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
+		atapplyvo.setAta_myacmemo(atamyacmemo);
+		atapplyvo.setAta_youracmemo(atayouracmemo);
+		atapplyvo.setAta_check(Integer.parseInt(atacheck));
+		atapplyvo.setAta_ing(Integer.parseInt(ataing));
 //		System.out.println();
 		System.out.println(atapplyvo.getMem_code());
 		System.out.println(atapplyvo.getAc_num());
@@ -441,11 +462,14 @@ public class DepositController {
 		System.out.println(atapplyvo.getAta_check());
 		System.out.println(atapplyvo.getAta_ing());
 	
+		
+		
 		bangkingdao.insertatapply(atapplyvo);
 		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:transfer_auto");
+		
 		return mav;
 	}
 
