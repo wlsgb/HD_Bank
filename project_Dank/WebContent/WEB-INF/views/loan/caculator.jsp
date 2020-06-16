@@ -38,7 +38,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						<div class="col-sm-6 col-md-6">
 								<div class="card card-stats card-round">
 								
-									<div class="card-body ">
+									<div class="card-body">
 										<div class="row">
 											<div class="col-2"></div>
 											
@@ -199,5 +199,14 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 			})
+			
+			$('body').on('focus', 'input[type=number]', function (e) {
+  $(this).on('wheel.disableScroll', function (e) {
+    e.preventDefault()
+  })
+})
+$('body').on('blur', 'input[type=number]', function (e) {
+  $(this).off('wheel.disableScroll')
+})
 	</script>
 

@@ -31,7 +31,7 @@ import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.AccountVO_backup;
 
 @Controller
-public class loanController {
+public class LoanController {
 
 	@Autowired
 	private LoanDao loanDao;
