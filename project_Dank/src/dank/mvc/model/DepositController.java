@@ -1,5 +1,6 @@
 package dank.mvc.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,22 +55,19 @@ public class DepositController {
 		return "deposit_new/new";
 	}
 	//예금-신규-특정 예금 상품 페이지 이동
-	@RequestMapping(value = "/saving_detail")
+	@RequestMapping(value = "/new_savdetail")
 	public String saving_detail(Model m, int sav_code) {
 		System.out.println(sav_code);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-//		System.out.println(saving);
-//		System.out.println(saving.getQua_code());
-//		System.out.println(saving.getSav_name());
 		m.addAttribute("saving",saving);
-		return "deposit_new/saving_detail";
+		return "deposit_new/new_savdetail";
 	}
 	//예금-신규-특정 적금 상품 페이지 이동
-	@RequestMapping(value = "/installment_detail")
+	@RequestMapping(value = "/new_insdetail")
 	public String installment_detail(Model m, int ins_code) {
 		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
 		m.addAttribute("ins",ins);
-		return "deposit_new/installment_detail";
+		return "deposit_new/new_insdetail";
 	}
 	//예금-신규-예금 신청 페이지 이동
 	@RequestMapping(value = "/saving_new")
@@ -86,9 +84,26 @@ public class DepositController {
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
 		m.addAttribute("saving", saving);
 		m.addAttribute("deptype", deptype);
-		return "deposit_new/deposit_new";
+		return "deposit_new/new_deposit";
 	}
-	//예금-신규-예금 신청
+	//예금-신규-적금 신청 페이지 이동
+		@RequestMapping(value = "/ins_new")
+		public String ins_new(HttpSession session,Model m, int ins_code, int deptype) {
+			
+			MemberVO member = (MemberVO)session.getAttribute("member");
+			if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+				session.setAttribute("pageName", "new");
+				return "login/login";
+			}
+			int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+			MemberVO memberVO = memberDao.numToEmailName(mem_code);
+			m.addAttribute("memberVO", memberVO);
+			Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
+			m.addAttribute("ins", ins);
+			m.addAttribute("deptype", deptype);
+			return "deposit_new/new_deposit";
+		}
+	//예금-신규-계좌 신청
 	@RequestMapping(value = "/deposit_newComplete")
 	public String deposit_new(HttpSession session,Model m,AccountVO account,int deptype,
 			@RequestParam(value = "sav_code",defaultValue = "0") int sav_code,
@@ -118,7 +133,34 @@ public class DepositController {
 		//ac_code,ac_num,ac_pwd,ac_balance,ac_name,ac_start_date,ac_end_date
 		//ac_code,mem_code,pro_code
 		depositService.newAccount(account,clientVO);
-		return "deposit_new/success";
+		return "deposit_new/new_success";
+	}
+	//예금-해지
+	@RequestMapping(value = { "/cancle" })
+	public String depositecancle(HttpSession session,Model m) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+		
+		List<AccountVO> aclist = bangkingdao.getaclist(member.getMem_code());
+
+		List<AccountVO> savlist = new ArrayList<AccountVO>();
+		List<AccountVO> inslist = new ArrayList<AccountVO>();
+		for(AccountVO e :aclist) {
+			System.out.println(e);
+			if(e.getSaving().getSav_code() != 0) {
+				savlist.add(e);
+			}else if (e.getIns().getIns_code() != 0) {
+				inslist.add(e);
+			}
+		}
+		m.addAttribute("savlist", savlist);
+		m.addAttribute("inslist", inslist);
+		m.addAttribute("aclist", aclist);
+		
+		return "deposit_new/cancle";
 	}
 	
 //	@RequestMapping(value = "/share_new_req")
@@ -473,10 +515,7 @@ public class DepositController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/deposite_cancle" })
-	public String depositecancle() {
-		return "deposit/deposite_cancle";
-	}
+	
 
 	@RequestMapping(value = { "/deposite_cancle_input_info" })
 	public String depositecancleinputinfo() {

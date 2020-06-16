@@ -129,10 +129,14 @@
 											<button class="btn btn-danger" onclick="location='new'">취소</button>
 										</div>
 										<div class="col-3">
-										<!-- 신청 버튼 -->
-											<c:if test="${ins.ins_online != 0}">
-												<button class="btn btn-primary" onclick="">신청</button>
-											</c:if>
+											<form method="post" action="ins_new">
+												<input type="hidden" id="ins_code" name="ins_code" value="${ins.ins_code }">
+												<input type="hidden" id="deptype" name="deptype" value="300">
+												<!-- 신청 버튼 -->
+													<c:if test="${ins.ins_online != 0}">
+														<input type="submit" class="btn btn-primary" value="신청">
+													</c:if>
+											</form>
 										</div>
 									</div>
 									

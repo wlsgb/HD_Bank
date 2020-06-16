@@ -4,20 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
 import dank.mvc.dao.MemberDao;
 import dank.mvc.vo.deposit.AccountHistoryVO;
-import dank.mvc.vo.deposit.AccountVO_backup;
+import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.PageVO;
 
 @Controller
@@ -39,7 +36,7 @@ public class DirectServiceController {
 	}
 
 	@RequestMapping(value = "/chkvalue")
-	public String cheValue(Model m, AccountVO_backup accountVO,String membirth, String type, String searchDate, PageVO pvo,
+	public String cheValue(Model m, AccountVO accountVO,String membirth, String type, String searchDate, PageVO pvo,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage) {
 		// 입력받은 계좌번호를 가져옴
