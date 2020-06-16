@@ -178,9 +178,13 @@ input[type="number"]::-webkit-inner-spin-button {
 				}
 				
 				$('#n').attr('value',0);
+				$('#n').val(0);
 				$('#g').attr('value',0);
+				$('#g').val(0);
 				$('#m').attr('value',0);
+				$('#m').val(0);
 				$('#r').attr('value',0);
+				$('#r').val(0);
 				
 				});
 
