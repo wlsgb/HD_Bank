@@ -127,7 +127,9 @@ public class BangkingDao {
 	public void insertatapply(At_applicationVO atapplyvo) {
 		ss.insert("bangking.atapply", atapplyvo);
 	}
-	
+	public List<At_applicationVO> atloadval() {
+		return ss.selectList("bangking.atloadval");
+	}
 	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

@@ -83,14 +83,18 @@ input[type="number"]::-webkit-inner-spin-button {
 													<div class="col-10">
    														<input type="text" class="form-control" readonly="readonly" value="${vo.lp_maximum }원">
    													</div>
+   													
 												</div>
 												
 												<div class="form-group row">
 												<label for="amount" class="col-2">대출 희망 금액</label>
-												<div class="col-10">
+												<div class="col-6">
 												<input type="hidden" id="maximum" value="${vo.lp_maximum }">
 												<input type="number" class="form-control" name="la_hamount" id="la_hamount"  placeholder="희망금액" value="0">
 												</div>
+												<div class="col-4">
+   														<p id="target"></p>
+   													</div>
 											</div>
 												
 												<div class="form-group row">
@@ -173,6 +177,39 @@ input[type="number"]::-webkit-inner-spin-button {
 			   
 
 			  });
+			  
+			  $('#la_hamount').change(function() {
+				  var amount = parseInt($('#la_hamount').val());
+				  var result = '';
+				  if(amount<10000){
+					  result = amount+'원';
+					  $('#target').html(result); 
+				  }else if(amount<100000000){
+					 console.log(result/10000)
+					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
+					  $('#target').html(result);
+				  }else if(amount<1000000000000){
+					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원'
+					  $('#target').html(result); 
+				  }
+			  })
+			  
+			  $('#la_hamount').keyup(function() {
+				  var amount = parseInt($('#la_hamount').val());
+				  var result = '';
+				  if(amount<10000){
+					  result = amount+'원';
+					  $('#target').html(result); 
+				  }else if(amount<100000000){
+					 console.log(result/10000)
+					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
+					  $('#target').html(result);
+				  }else if(amount<1000000000000){
+					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원'
+					  $('#target').html(result); 
+				  }
+			  })
+			  
 			  
 				var date = new Date().toISOString().slice(0, 10);
 				var dateSplit = date.split("-");
