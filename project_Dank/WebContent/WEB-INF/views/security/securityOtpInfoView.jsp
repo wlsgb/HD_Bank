@@ -14,9 +14,9 @@
 								 <span class="h2 mr-1"> > </span>
 								 <a href="security" class="btn btn-white btn-sm btn-border mr-1">보안카드 / OTP</a>
 								 <span class="h2 mr-1"> > </span>
-								 <a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">보안카드</a>
+								 <a href="securityotp" class="btn btn-white btn-sm btn-border mr-1">OTP</a>
 								 <span class="h2 mr-1"> > </span>
-								 <a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">신청</a>
+								 <a href="securityotp" class="btn btn-white btn-sm btn-border mr-1">신청</a>
 								 </h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
