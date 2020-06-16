@@ -5,7 +5,7 @@
 <mapper namespace="deposit">
 
 	<!-- 계좌번호를 넣으면 비밀번호값이 나온다. -->
-	<select id="accountPwChk" parameterType="int" resultType="int">
+	<select id="accountPwChk" parameterType="String" resultType="int">
 		select ac_pwd from account where ac_num=#{num}
 	</select>
 

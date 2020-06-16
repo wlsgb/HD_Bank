@@ -47,7 +47,7 @@ public class DirectServiceController {
 		// 계좌 번호로 멤버코드를 가져온다.
 		int mem_code = bangkingDao.acnumToMemcode(ac_num);//sy
 		// 패스워드와 주민번호 유효성검사
-		String pwd = String.valueOf(depositDao.pwdChk(Integer.parseInt(ac_num)));
+		String pwd = String.valueOf(depositDao.pwdChk(ac_num));
 		String birth = memberDao.forBirth(mem_code);
 		// ▼ 패스워드 실패시 ▼
 		if (!accountVO.getAc_pwd().equals(pwd)&&birth.equals(membirth)) {
