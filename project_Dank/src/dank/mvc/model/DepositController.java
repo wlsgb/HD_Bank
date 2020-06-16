@@ -448,6 +448,7 @@ public class DepositController {
 		atapplyvo.setAta_youracmemo(atayouracmemo);
 		atapplyvo.setAta_check(Integer.parseInt(atacheck));
 		atapplyvo.setAta_ing(Integer.parseInt(ataing));
+	
 //		System.out.println();
 		System.out.println(atapplyvo.getMem_code());
 		System.out.println(atapplyvo.getAc_num());

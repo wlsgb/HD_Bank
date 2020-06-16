@@ -8,10 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
+import dank.mvc.service.BangkingService;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
@@ -38,6 +40,10 @@ public class DepositRestController {
 	//////////남쪽///////////////////////////////////////////////////
 	@Autowired
 	private BangkingDao bangkingdao;
+	
+	@Autowired
+	private BangkingService bangkingservice;
+	
 	@RequestMapping(value = "/getmemcodewhentr")
 	public List<Map<String, String>> gettransfermemcode(String acnum) {/////ac_num 이아니라 acnum임
 		List<Map<String, String>>  val= 	bangkingdao.getmemcodewhentr(acnum);
@@ -57,6 +63,72 @@ public class DepositRestController {
 	@RequestMapping(value = "/atloadval")
 	public List<At_applicationVO> atloadval(){
 		return bangkingdao.atloadval();
+	}
+	
+	@RequestMapping(value = "/atprocess")
+	public String atprocess(
+			@RequestParam(value = "myac") String myac
+			,@RequestParam(value = "memcode") String memcode
+			,@RequestParam(value = "yourac") String yourac
+			,@RequestParam(value = "youracmem") String youracmem
+			,@RequestParam(value = "trmoney") String trmoney
+			,@RequestParam(value = "youracwrite", defaultValue = "이체로들어옴") String youracwrite
+			,@RequestParam(value = "myacwrite", defaultValue = "이체로빠짐") String myacwrite
+			
+			){
+		System.out.println("자동이체파람값");
+		System.out.println(myac);
+		System.out.println(yourac);
+		System.out.println(youracmem);
+		System.out.println(trmoney);
+		System.out.println(youracwrite);
+		System.out.println(myacwrite);
+		System.out.println(memcode);
+		Map<String, String> mapmy = new HashMap<String, String>();
+		mapmy.put("ac_num", myac);
+		mapmy.put("mem_code", memcode);
+		mapmy.put("at_dps_ac", yourac);
+		mapmy.put("at_set_mony", trmoney);
+		
+		
+		Map<String, String> mapmysp = new HashMap<String, String>();
+		mapmysp.put("ac_num", myac);
+		mapmysp.put("mem_code",memcode);
+		mapmysp.put("sp_name", myacwrite);
+		
+		
+		Map<String, String> mapyour = new HashMap<String, String>();
+		mapyour.put("ac_num", yourac);
+		mapyour.put("mem_code", youracmem);
+		mapyour.put("at_dps_ac",myac);
+		mapyour.put("at_set_mony", trmoney);
+		
+		Map<String, String> mapyoursp = new HashMap<String, String>();
+		mapyoursp.put("ac_num", yourac);
+		mapyoursp.put("mem_code",youracmem);
+		mapyoursp.put("sp_name", youracwrite);
+		
+		
+		
+		
+		if(bangkingdao.trtrAcChk(myac) >=1) {
+			System.out.println("1");
+			if(bangkingdao.trtrAcChk(yourac) >=1) {
+
+				System.out.println("2");
+				
+				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
+					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
+					System.out.println("이체실행댐");
+				}
+			}
+		}
+		
+		
+		
+		
+
+		return "a";
 	}
 	
 	@RequestMapping(value = "/dosomething")

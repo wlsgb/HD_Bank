@@ -383,10 +383,11 @@
 	 		,#{ata_stopdate}
 	 		,#{ata_dterm}
 	 		,#{ata_myacmemo}
+	 		,#{ata_youracmemo}
 	 		,#{ata_check}
 	 		,#{ata_ing}
-	 		,#{ata_youracmemo}
 	 		,#{ata_yourmemcode}
+	 		,#{mem_code}
 	 		
 	 		)
 	 		
@@ -403,6 +404,8 @@
                   ,atapply.ata_stopdate ata_stopdate
                   ,atapply.ata_dterm ata_dterm
                   ,atapply.ata_time ata_time
+                  ,atapply.ata_yourmemcode ata_yourmemcode
+                  ,atapply.ata_mymemcode ata_mymemcode
                   from account a, at_application atapply
                   where a.ac_code = atapply.ac_code and atapply.ata_check=0
 	</select>
