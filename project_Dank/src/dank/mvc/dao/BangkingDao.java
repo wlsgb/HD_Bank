@@ -133,6 +133,10 @@ public class BangkingDao {
 	public void afterchkup(String ata_code) {
 		ss.update("bangking.afterchkup", ata_code);
 	}
+	public List<Map<String, String>> atlist(Map<String, String> atlistparam){
+		System.out.println("atlist 실행댐");
+		return ss.selectList("bangking.atlist", atlistparam);
+	}
 	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

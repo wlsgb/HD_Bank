@@ -473,6 +473,22 @@ public class DepositController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "/deposit_transfer_auto_server")
+	public ModelAndView deposit_transfer_auto_server(HttpSession session,@RequestParam(value = "ac_num") String ac_num) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/server/deposit_transfer_auto_server");
+		Map<String, String> atlistparam = new HashMap<String, String>();
+		atlistparam.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+		atlistparam.put("ac_num", ac_num);
+		System.out.println(atlistparam.get("mem_code"));
+		System.out.println(atlistparam.get("ac_num"));
+		List<Map<String, String>> atlist = bangkingdao.atlist(atlistparam);
+		System.out.println(atlist.size());
+		mav.addObject("atlist",atlist);
+		return mav;
+	}
 
 	@RequestMapping(value = { "/deposite_cancle" })
 	public String depositecancle() {

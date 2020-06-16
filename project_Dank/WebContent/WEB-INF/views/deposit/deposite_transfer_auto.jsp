@@ -53,9 +53,12 @@
 									<td>계좌번호</td>
 									<td>
 <!-- 									<input type="text" placeholder="110-111-12345 : 보통예금" style="width: 300px; margin-left: 20%;"/> -->
-										<select name="ac_num" id="ac_num" class="form-control">
-										<c:forEach var="e" items="${aclist }">
+										<select name="ac_num" id="ac_num" class="form-control" >
+										<c:forEach var="e" items="${aclist }" varStatus="i">
 										<c:if test="${e.saving.sav_name != '0'}">
+											<c:if test="${i.index eq 0 }">
+											<option value="" selected="selected">선택</option>
+											</c:if>
 											<option>${e.ac_num }</option>
 											</c:if>
 											</c:forEach>
@@ -70,42 +73,13 @@
 										
 										
 										
-										<tbody style="border: 2px solid black;">
+										<tbody style="border: 2px solid black;" id="ajaxtarget">
 											
-											<tr>
-												<td colspan="5">num</td>
-											</tr>
-											
-											<tr>
-												<td rowspan="2" >출금정보</td><td>출금계좌정보</td><td>{출금계좌정보}</td><td>보내는분</td><td>{보내는분}</td>
-											</tr>
-											<tr>
-												<td>출금통장표시내역</td><td>{출금통장표시내역}</td><td>HD</td><td>HD</td>
-											</tr>
-											
-											<tr>
-												<td rowspan="2" >입금정보</td><td>입금계좌정보</td><td>{입금계좌정보}</td><td>받는분</td><td>{받는분}</td>
-											</tr>
-											<tr>
-												<td>입금통장표시내역</td><td>{입금통장표시내역}</td><td>HD</td><td>HD</td>
-											</tr>
-											<tr>
-												<td rowspan="4" >자동이체정보</td><td>시작일</td><td>{시작일}</td><td>종료일</td><td>{종료일}</td>
-											</tr>
-											<tr>
-												<td>이체금액</td><td>{이체금액}</td><td>이체일자</td><td>{이체일자}</td>
-											</tr>
-											<tr>
-												<td>이체시간</td><td>{이체시간}</td><td>진행상황</td><td>{진행상황}</td>
-											</tr>
-											<tr>
-												<td>종료여부</td><td>{종료여부}</td><td>HD</td><td>HD</td>
-											</tr>
+										
 											
 											
 										</tbody>
-										
-								
+																		
 										
 									</table>
 <!-- 										<div style="margin-left: 40%; margin-bottom: 20px;"> -->
@@ -127,28 +101,16 @@
 								</div>
 								</form>
 							</div>
-							
-							
-						
-											
-										</div>
-											
-											
-											
-							
 
-										
+										</div>
+
 									</div>
 								</div>
 								
 							</div>
 						</div>
 						</div>
-						
 
-						
-
-				
 				</div>
 				
 			</div>
@@ -260,21 +222,11 @@
 													}
 													
 												})
-												
-												
-												
+
 											}
 											
 										}
-										
-										
-										
-										
-										
-										
-										
-										
-										
+
 									}else if(parseInt(ajaxdatearr[2]) >= parseInt(nowtimedate)){
 										console.log('해당달의오늘이후')
 										console.log('자동이체 하면 안댐')
@@ -299,6 +251,34 @@
 				})
 				
 			}, 5000)
+			
+			
+			
+			
+			
+			///////////////////////////////////////////////////
+			
+	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			$('#ac_num').change(function() {
+				console.log("SSS")
+				$('#ajaxtarget').html("");
+				$.ajax({
+					url:'deposit_transfer_auto_server?ac_num='+$('#ac_num').val(),
+					success:function(data){
+						$('#ajaxtarget').html(data);
+					}
+				})
+			})
 		})
 	</script>
 	
