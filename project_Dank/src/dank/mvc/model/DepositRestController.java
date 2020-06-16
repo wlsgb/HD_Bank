@@ -1,5 +1,7 @@
 package dank.mvc.model;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +83,15 @@ public class DepositRestController {
 			,@RequestParam(value = "atacode") String atacode
 			
 			){
+		
+		try {
+			myacwrite = URLDecoder.decode(myacwrite, "UTF-8");
+			youracwrite = URLDecoder.decode(youracwrite, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("자동이체파람값");
 		System.out.println(myac);
 		System.out.println(yourac);
@@ -127,7 +138,7 @@ public class DepositRestController {
 					bangkingservice.autotransferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp,atacode);
 					System.out.println("자동이체실행댐");
 				}else {
-					System.out.println("잔액부족으로인한 미루기 처리");
+					bangkingdao.ifnomoneywhenat(atacode);
 				}
 			}
 		}

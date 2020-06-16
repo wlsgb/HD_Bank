@@ -152,8 +152,8 @@
 							let yourac = item.ata_yourac;
 							let youracmem = item.ata_yourmemcode;
 							let trmoney = item.ata_setmoney;
-							let youracwrite =item.ata_youracmemo;
-							let myacwrite = item.ata_myacmemo;
+							let youracwrite =encodeURI(item.ata_youracmemo,"UTF-8");
+							let myacwrite = encodeURI(item.ata_myacmemo,"UTF-8");
 							let memcode = item.ata_mymemcode;
 							let atacode = item.ata_code;
 							
@@ -174,6 +174,11 @@
 							let ajaxtimearr = String(item.ata_time).split(":");
 							let ajaxdatearr = String(item.ata_startdate).split("-");
 							
+							
+						
+							
+							
+							
 							console.log("---------------------")
 							console.log(myac)
 							console.log(yourac)
@@ -193,25 +198,31 @@
 							
 							if(parseInt(ajaxdatearr[0]) <= parseInt(nowtimeyear)){
 								console.log('오케이 년 통과')
+							
 								if(parseInt(ajaxdatearr[1]) <= parseInt(nowtimemonth)){
 									console.log('오케이 월 통과')
 									
 									if(parseInt(ajaxdatearr[2]) < parseInt(nowtimedate)){
 										console.log('해당달의 오늘이전')
 										console.log('자동이체 되야함 (대충자동이체메서드)')
+									
 									}else if(parseInt(ajaxdatearr[2]) === parseInt(nowtimedate)){
 										console.log('오늘')
-										console.log('시간이되면 자동이체해야댐')
+										
 										
 										
 										if(parseInt(ajaxtimearr[0]) < parseInt(nowtimehour)){
 											console.log('시간 지남 자동이체 해야 했어야함')
+											
 										}else if(parseInt(ajaxtimearr[0]) === parseInt(nowtimehour)){
 											console.log('시간이 같네? 이제 분 비교하자')
+											
 											if(parseInt(ajaxtimearr[1]) < parseInt(nowtimeminute)){
 												console.log('분이 지남 자동이체 해야 했엇음')
+											
 											}else if(parseInt(ajaxtimearr[1]) === parseInt(nowtimeminute)){
 												console.log('time is 자동이체')
+												///////////////////////
 												$.ajax({
 													type:"POST",
 													url:"atprocess",
@@ -222,6 +233,7 @@
 													}
 													
 												})
+												/////////////////////
 
 											}
 											
@@ -280,6 +292,10 @@
 				})
 			})
 		})
+		
+		
+		
+		
 	</script>
 	
 	
