@@ -258,15 +258,10 @@
 				
 				let startdatearr = $('#ata_startdate').val().split("-");
 				
-<<<<<<< HEAD
-				console.log("오늘은"+year+"-"+month+"-"+date)
-				console.log("고른날짜"+startdatearr[0]+"~"+startdatearr[1]+"~"+startdatearr[2])
-				console.log($('#ata_startdate').val())	
-=======
+
 // 				console.log("오늘은"+year+"-"+month+"-"+date)
 // 				console.log("고른날짜"+startdatearr[0]+"~"+startdatearr[1]+"~"+startdatearr[2])
 // 				console.log($('#ata_startdate').val())	
->>>>>>> refs/remotes/origin/master
 
 
 				if(parseInt(year) <= parseInt(startdatearr[0])){
