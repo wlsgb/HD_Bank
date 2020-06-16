@@ -1,6 +1,8 @@
 package dank.mvc.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -94,8 +96,7 @@ public class SecurityController {
 		String[][] realData = (String[][]) session.getAttribute("securityCheckData");
 		if (main_code.equals(realData[0][2])&&fir_code.equals(realData[1][2])&&sec_code.equals(realData[2][2])) {
 			session.setAttribute("scChk", true);
-			System.out.println((String) session.getAttribute("pageName"));
-			return "redirect:securityotp";
+			return "redirect:"+(String)session.getAttribute("pageName");
 		}else {
 			session.setAttribute("scChk", false);
 			return "redirect:securityCardSertify";
@@ -135,7 +136,7 @@ public class SecurityController {
 			return "security/security";
 		}
 		String acNum = acNameNum.split("-")[1];
-		String pwd = String.valueOf(depositDao.pwdChk(Integer.parseInt(acNum)));
+		String pwd = String.valueOf(depositDao.pwdChk(acNum));
 		// 패스워드 성공시
 		if (accountVO.getAc_pwd().equals(pwd) && successData.equals("success")) {
 			m.addAttribute("acNameNum", acNameNum);
@@ -172,6 +173,7 @@ public class SecurityController {
 		return "security/securityCardSuccess";
 	}
 
+	// 메일을 다시 보내주는 메소드
 	@RequestMapping(value = "/reMail")
 	public String reMail(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
@@ -191,6 +193,7 @@ public class SecurityController {
 		return "security/securityCardSuccess";
 	}
 
+	// 카드생성 성공하고 확인 버튼을 누르면 작동
 	@RequestMapping(value = "/scsuccess")
 	public String securityCardSuccess(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
@@ -213,15 +216,13 @@ public class SecurityController {
 			session.setAttribute("pageName", "securityotp");
 			return "login/login";
 		}
+		session.setAttribute("otpProgress", true);
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
-
 		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
 		m.addAttribute("error", error);
-		
-		session.setAttribute("scSuccess", true);
 		return "security/securityOtp";
 	}
 
@@ -234,19 +235,34 @@ public class SecurityController {
 			return "login/login";
 		}
 		String acNum = acNameNum.split("-")[1];
-		String pwd = String.valueOf(depositDao.pwdChk(Integer.parseInt(acNum)));
+		String pwd = String.valueOf(depositDao.pwdChk(acNum));
 		// 패스워드 성공시
 		if (accountVO.getAc_pwd().equals(pwd) && successData.equals("success")) {
 			m.addAttribute("acNameNum", acNameNum);
 			m.addAttribute("mem_email", memberVO.getMem_email());
-			return "security/securityOTPInfoView";
+			return "security/securityOtpInfoView";
 		} else {
 			return "redirect:securityotp?error=f";
 		}
 	}
 	
+	// otp신청이 완료되었을때 진입하는 페이지
 	@RequestMapping(value = "/securityotpsuccess")
-	public String viewCheckBalance() {
+	public String viewCheckBalance(Model m, HttpSession session) {
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "securitycard");
+			return "login/login";
+		}else if((securityDao.otpcheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			return "redirect:security";
+		}else  if ((boolean) session.getAttribute("scChk")) {
+			Map<String , Object> map = new HashMap<String, Object>();
+			map.put("mem_code", ((MemberVO) session.getAttribute("member")).getMem_code());
+			map.put("otp_certify", 1);
+			securityDao.otpCreate((HashMap<String, Object>) map);
+			session.removeAttribute("scChk");
+			session.removeAttribute("pageName");
+			return "security/securityOtpSuccess";
+		}
 		return "security/securityOtpSuccess";
 	}
 }
