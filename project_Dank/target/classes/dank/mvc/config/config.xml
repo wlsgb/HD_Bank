@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
-  <!--   	Null반환값 받기위한 설정 -->
+  <!--   	Null반환값 받기위한 설정 --> 
   	<settings>
   		<setting name="cacheEnabled" value="false"/>
   		<setting name="jdbcTypeForNull" value="NULL"/>
