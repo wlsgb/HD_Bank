@@ -38,7 +38,7 @@
 		<result property="ins_name" column="ins_name"/>
 		<result property="ins_online" column="ins_online"/>
 		<result property="ins_interestrate" column="ins_interestrate"/>
-		<result property="ins_monmoney" column="ins_monmoney"/>
+		<result property="ins_putmoney" column="ins_putmoney"/>
 		<result property="ins_term" column="ins_term"/>
 		<result property="shac_code" column="shac_code"/>
 		
@@ -54,7 +54,7 @@
 		</association>
 	</resultMap>
 	<select id="insDetail" parameterType="int" resultMap="insqua">
-		select i.ins_code, i.ins_name,i.ins_online,i.ins_interestrate,i.ins_monmoney,i.ins_term,i.shac_code,
+		select i.ins_code, i.ins_name,i.ins_online,i.ins_interestrate,i.ins_putmoney,i.ins_term,i.shac_code,
        		q.qua_code,q.qua_name,q.qua_maxage,q.qua_minage,q.qua_maxperiod,q.qua_minperiod,q.qua_maxmoney,q.qua_minmoney
 		from installment_saving i, qualification q
 		where i.qua_code = q.qua_code and ins_code=#{ins_code}
@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="inslist" resultType="insvo">
-		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_monmoney,ins_term,shac_code,qua_code 
+		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_putmoney,ins_term,shac_code,qua_code 
 		from installment_saving
 		order by ins_code
 	</select>
