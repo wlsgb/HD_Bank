@@ -49,6 +49,18 @@ public class MyInfoController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/mem_pw_reset")
+	public ModelAndView mypwdUpdate(MemberVO vo,HttpSession session) {
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
+		List<MemberVO> list = myinfoDao.myinfoList(mem_code);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myinfo/mem_pw_reset");
+		System.out.println(list.size());
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	
 	
 	/*
 	 * @RequestMapping(value = "/pri_info_chk") public String momo3() { return
@@ -71,10 +83,10 @@ public class MyInfoController {
 		return "myinfo/mem_pw_chk";
 	}
 
-	@RequestMapping(value = "/mem_pw_reset")
-	public String momo7() {
-		return "myinfo/mem_pw_reset";
-	}
+	/*
+	 * @RequestMapping(value = "/mem_pw_reset") public String momo7() { return
+	 * "myinfo/mem_pw_reset"; }
+	 */
 
 	@RequestMapping(value = "/tap")
 	public String tap() {
