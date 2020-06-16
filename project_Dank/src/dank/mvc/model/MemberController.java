@@ -116,9 +116,7 @@ public class MemberController {
 		if(memberVO != null) {
 			//System.out.println("로그인성공!");
 			session.setAttribute("member", memberVO);
-			System.out.println(((String) session.getAttribute("pageName"))!=null);
 			String pageName= ((String) session.getAttribute("pageName"))!=null ? "redirect:"+((String) session.getAttribute("pageName")) : "index/index";
-			System.out.println(pageName);
 			return pageName;
 		}
 		//System.out.println("로그인실패!");

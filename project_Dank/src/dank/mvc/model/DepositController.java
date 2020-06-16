@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -323,19 +324,7 @@ public class DepositController {
 		return mav;
 	}
 	
-//	@RequestMapping(value={ "/getsession" })
-//	public ModelAndView getsession(HttpServletRequest req,@RequestParam(value = "mem_code") String mem_code) {
-//		System.out.println("멤버코드는 : "+mem_code);
-//		HttpSession session =req.getSession();
-//		//session.invalidate();
-//		session.setAttribute("mem_code", mem_code);
-//		ModelAndView mav = new ModelAndView();
-//		System.out.println("세션넣기 성공");
-//		System.out.println("현ㅐ 세션 : "+session.getAttribute("mem_code"));
-//		mav.setViewName("redirect:inquire");
-//		return mav;
-//	}
-	
+
 	
 	
 	//계좌내역상세조회페이지
@@ -408,42 +397,79 @@ public class DepositController {
 	}
 
 	@RequestMapping(value = { "/transfer_auto" })
-	public String transferautoPage() {
-		return "deposit/deposite_transfer_auto";
+	public ModelAndView transferautoPage(HttpSession session) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist",aclist);
+		
+		return mav;
 	}
 
 	@RequestMapping(value = { "/transfer_auto_apply" })
-	public String transferautoapplyPage() {
-		return "deposit/deposite_transfer_auto_apply";
+	public ModelAndView transferautoapplyPage(HttpSession session
+			,String ac_num
+			) {
+		
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		ModelAndView mav = new ModelAndView();
+		Map<String, String> getmyaclistwhentr =new  HashMap<String, String>();
+		getmyaclistwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+		getmyaclistwhentr.put("ac_num", ac_num);
+		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
+		for(String e : myaclist) {
+			System.out.println("계좌드릉ㄴ " +e);
+		}
+		
+		mav.setViewName("deposit/deposite_transfer_auto_apply");
+		mav.addObject("myaclist",myaclist);
+		return mav;
 	}
 	
-	@RequestMapping(value = { "/transfer_auto_apply_process" })
+	@RequestMapping(value = { "/transfer_auto_apply_process" }, method = RequestMethod.POST)
 	public ModelAndView transferautoapplyprocess(
 			HttpSession session
 			,At_applicationVO atapplyvo
-			,@RequestParam(value = "atastopdate", defaultValue = "-1") String atastopdate
-			,@RequestParam(value = "atadterm", defaultValue = "-1") String atadterm
+			,@RequestParam(value = "atastopdate", defaultValue = "-1",required = false) String atastopdate
+			,@RequestParam(value = "atadterm", defaultValue = "-1",required = false) String atadterm
+			,@RequestParam(value = "atamyacmemo", defaultValue = "자동이체",required = false) String atamyacmemo
+			,@RequestParam(value = "atayouracmemo", defaultValue = "자동이체",required = false) String atayouracmemo
+			,@RequestParam(value = "atacheck", defaultValue = "-1",required = false) String atacheck
+			,@RequestParam(value = "ataing", defaultValue = "-1",required = false) String ataing
 			//파라미터 디폴트값 받기위해서 언더바 지운거로 보내고
 			//셋터로 vo값에 넣어주었다.
 			) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-//		atapplyvo.setMem_code(String.valueOf(sessionmem.getMem_code()));
-//		atapplyvo.setAta_stopdate(atastopdate);
-//		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
-//		
-//		System.out.println(atapplyvo.getAc_num());
-//		System.out.println(atapplyvo.getMem_code());
-//		System.out.println(atapplyvo.getAta_opac());
-//		System.out.println(atapplyvo.getAta_setmny());
-//		System.out.println(atapplyvo.getAta_dterm());
-//		System.out.println(atapplyvo.getAta_startdate());
-//		System.out.println(atapplyvo.getAta_stopdate());
-//		System.out.println(atapplyvo.getAta_time());
+		atapplyvo.setMem_code(sessionmem.getMem_code());
+		atapplyvo.setAta_stopdate(atastopdate);
+		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
+		atapplyvo.setAta_myacmemo(atamyacmemo);
+		atapplyvo.setAta_youracmemo(atayouracmemo);
+		atapplyvo.setAta_check(Integer.parseInt(atacheck));
+		atapplyvo.setAta_ing(Integer.parseInt(ataing));
+//		System.out.println();
+		System.out.println(atapplyvo.getMem_code());
+		System.out.println(atapplyvo.getAc_num());
+		System.out.println(atapplyvo.getAta_yourac());
+		System.out.println(atapplyvo.getAta_setmoney());
+		System.out.println(atapplyvo.getAta_startdate());
+		System.out.println(atapplyvo.getAta_time());
+		System.out.println(atapplyvo.getAta_stopdate());
+		System.out.println(atapplyvo.getAta_dterm());
+		System.out.println(atapplyvo.getAta_myacmemo());
+		System.out.println(atapplyvo.getAta_youracmemo());
+		System.out.println(atapplyvo.getAta_check());
+		System.out.println(atapplyvo.getAta_ing());
+	
+		
+		
 		bangkingdao.insertatapply(atapplyvo);
 		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:transfer_auto");
+		
 		return mav;
 	}
 

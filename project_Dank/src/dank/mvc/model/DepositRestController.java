@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
 import dank.mvc.vo.MemberVO;
+import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
 
@@ -50,6 +51,12 @@ public class DepositRestController {
 		getmybalwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		getmybalwhentr.put("ac_num", ac_num);
 		return bangkingdao.getmybalwhentr(getmybalwhentr);
+	}
+	
+	
+	@RequestMapping(value = "/atloadval")
+	public List<At_applicationVO> atloadval(){
+		return bangkingdao.atloadval();
 	}
 	
 	@RequestMapping(value = "/dosomething")
