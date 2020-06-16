@@ -383,10 +383,11 @@
 	 		,#{ata_stopdate}
 	 		,#{ata_dterm}
 	 		,#{ata_myacmemo}
+	 		,#{ata_youracmemo}
 	 		,#{ata_check}
 	 		,#{ata_ing}
-	 		,#{ata_youracmemo}
 	 		,#{ata_yourmemcode}
+	 		,#{mem_code}
 	 		
 	 		)
 	 		
@@ -403,9 +404,57 @@
                   ,atapply.ata_stopdate ata_stopdate
                   ,atapply.ata_dterm ata_dterm
                   ,atapply.ata_time ata_time
+                  ,atapply.ata_yourmemcode ata_yourmemcode
+                  ,atapply.ata_mymemcode ata_mymemcode
+                  ,atapply.ata_code ata_code
                   from account a, at_application atapply
-                  where a.ac_code = atapply.ac_code and atapply.ata_check=0
+                  where a.ac_code = atapply.ac_code and atapply.ata_check in(0,-1)
 	</select>
+	
+	<update id="afterchkup" parameterType="String">
+	update at_application set ata_check = 1 where ata_code=#{ata_code}
+	</update>
+	
+	
+	<resultMap type="hashMap" id="atlistResult">
+		<result column="ac_num" property="ac_num"/>
+		<result column="myname" property="myname"/>
+		<result column="ata_myacmemo" property="ata_myacmemo"/>
+		<result column="ata_yourac" property="ata_yourac"/>
+		<result column="yourname" property="yourname"/>
+		<result column="ata_youracmemo" property="ata_youracmemo"/>
+		<result column="ata_startdate" property="ata_startdate"/>
+		<result column="ata_stopdate" property="ata_stopdate"/>
+		<result column="ata_setmoney" property="ata_setmoney"/>
+		<result column="ata_dterm" property="ata_dterm"/>
+		<result column="ata_time" property="ata_time"/>
+		<result column="ata_ing" property="ata_ing"/>
+		<result column="ata_check" property="ata_check"/>
+	</resultMap>
+	
+	<select id="atlist" parameterType="hashMap" resultMap="atlistResult">
+	 				select a.ac_num ac_num
+                  ,(select mem_name from member where mem_code=ac.mem_code) myname
+                  ,atapply.ata_myacmemo ata_myacmemo
+                  ,atapply.ata_yourac ata_yourac
+                  ,(select mem_name from member where mem_code=atapply.ata_yourmemcode) yourname
+                  ,atapply.ata_youracmemo ata_youracmemo
+                  ,atapply.ata_startdate ata_startdate
+                  ,atapply.ata_stopdate ata_stopdate
+                  ,atapply.ata_setmoney ata_setmoney
+                  ,atapply.ata_dterm ata_dterm
+                  ,atapply.ata_time ata_time
+                  ,atapply.ata_ing ata_ing
+                  ,atapply.ata_check ata_check
+                
+                  from at_application atapply, account a, account_client ac
+                  where atapply.ac_code =a.ac_code and a.ac_code = ac.ac_code and ac.mem_code=#{mem_code} and a.ac_num=#{ac_num}
+	
+	</select>
+	
+	<update id="ifnomoneywhenat" parameterType="String">
+	update at_application set ata_check = -1 where ata_code=#{ata_code}
+	</update>
 <!-- /@자동이체 종료 -->
 
 
