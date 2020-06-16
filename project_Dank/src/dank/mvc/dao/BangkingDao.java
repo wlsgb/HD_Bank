@@ -130,6 +130,16 @@ public class BangkingDao {
 	public List<At_applicationVO> atloadval() {
 		return ss.selectList("bangking.atloadval");
 	}
+	public void afterchkup(String ata_code) {
+		ss.update("bangking.afterchkup", ata_code);
+	}
+	public List<Map<String, String>> atlist(Map<String, String> atlistparam){
+		System.out.println("atlist 실행댐");
+		return ss.selectList("bangking.atlist", atlistparam);
+	}
+	public void ifnomoneywhenat(String ata_code) {
+		ss.update("bangking.ifnomoneywhenat",  ata_code);
+	}
 	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

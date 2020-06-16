@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="content">
 				<!-- 상단의 푸른색 공간 시작 -->
@@ -49,26 +50,29 @@
 										<thead>
 										</thead>
 										<tbody>
+										
+										<c:forEach items="${list}" var="e" varStatus="i">
+										
 											<tr>
 												<td>이름</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inlineinput" placeholder="홍길동">
+													<input type="text" class="form-control input-full" id="inlineinput" value="${e.mem_name }" readonly="readonly">
 												</div></td>
 											</tr>
 											<tr>
 												<td>암호</td>
 												<td><div class="col-md-9 p-0">
-													<input type="password" class="form-control input-full" id="inlineinput" placeholder="****">
+													<input type="password" class="form-control input-full" id="inlineinput"  >
 												</div></td>
 											</tr>
 											<tr>
 												<td>암호 재입력</td>
 												<td><div class="col-md-9 p-0">
-													<input type="password" class="form-control input-full" id="inlineinput" placeholder="****">
+													<input type="password" class="form-control input-full" id="inlineinput"  >
 												</div></td>
 											</tr>
 											
-											
+											</c:forEach>
 										</tbody>
 									
 									</table>
