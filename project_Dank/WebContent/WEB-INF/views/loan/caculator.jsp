@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<style>
+label{
+padding-top: 10px;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+</style>
 
 			<div class="content">
 				<div class="panel-header bg-primary-gradient">
@@ -23,7 +33,6 @@
 				</div>
 		
 		<!--상환해야하는 대출  -->
-		<form action="" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-3"></div>
 						<div class="col-sm-6 col-md-6">
@@ -37,11 +46,11 @@
 												<label class="form-label">상환방법</label>
 												<div class="selectgroup w-100">
 													<label class="selectgroup-item">
-														<input type="radio" name="type" value="1" class="selectgroup-input" checked="checked">
+														<input type="radio" name="type" value="2" class="selectgroup-input" checked="checked">
 														<span class="selectgroup-button">원리금균등</span>
 													</label>
 													<label class="selectgroup-item">
-														<input type="radio" name="type" value="2" class="selectgroup-input">
+														<input type="radio" name="type" value="1" class="selectgroup-input">
 														<span class="selectgroup-button">원금균등</span>
 													</label>
 													<label class="selectgroup-item">
@@ -67,7 +76,28 @@
 														<span class="selectgroup-button">월</span>
 													</label>
 													<label>
-														<input type="number" class="form-control input-lg">
+														<input type="number" name="n" min="0" value="0" id="n" class="form-control input-lg">
+													</label>
+												</div>
+											</div>
+											<div class="col-2"></div>
+										</div>	
+										
+										<div class="row">
+										<div class="col-2"></div>
+												<div class="form-group col-8">
+												<label class="form-label">거치기간</label>
+												<div class="selectgroup w-100">
+													<label class="selectgroup-item">
+														<input type="radio" name="term2" value="1" class="selectgroup-input" checked="checked">
+														<span class="selectgroup-button">년</span>
+													</label>
+													<label class="selectgroup-item">
+														<input type="radio" name="term2" value="2" class="selectgroup-input">
+														<span class="selectgroup-button">월</span>
+													</label>
+													<label>
+														<input type="number" value="0" min="0" name="g" id="g" class="form-control input-lg">
 													</label>
 												</div>
 											</div>
@@ -81,7 +111,7 @@
 												<label class="form-label">대출 금액</label>
 												<div class="selectgroup w-100">
 													<label>
-														<input type="number" class="form-control input-lg">
+														<input type="number" value="0" min="0" name="m" id="m" class="form-control input-lg">
 													</label>
 												</div>
 											</div>
@@ -92,8 +122,8 @@
 												<label class="form-label">이자율</label>
 												<div class="selectgroup w-100">
 													<label>
-														<input type="number" class="form-control input-lg" step="0.1">
-													</label>
+														<input type="number" value="0" min="0" name="r" id="r" class="form-control input-lg" step="0.1">
+													</label> 
 												</div>
 											</div>
 										</div>
@@ -101,10 +131,10 @@
 										<div class="row">
 											<div class="col-2"></div>
 											<div class="col-4">
-											<button type="button" class="btn btn-primary"> 초기화 </button>
+											<button type="button" class="btn btn-primary" id="btnroll"> 초기화 </button>
 											</div>
 											<div class="col-4">
-											<button type="button" class="btn btn-primary">계산하기</button>
+											<button type="button" class="btn btn-primary" id="btn">계산하기</button>
 											</div>
 										</div>
 										
@@ -114,7 +144,15 @@
 		<div class="col-sm-6 col-md-3"></div>
 			
 						</div>
-		</form>
+						<div class="row">
+				<div class="col-3"></div>
+					<div class="row-card-no-pd col-6">
+						<div id="target">
+						<p class="text-center">계산기를 사용해 보세요!</p>
+						</div>
+						</div>
+						<div class="col-3"></div>
+						</div>
 			</div>
 		
 			
@@ -123,99 +161,43 @@
 			
 			
 			<script>
+			$("#btnroll").click(function () {
+				var radio_name = [];
+				var radio = $("input[type=radio]"); //라디오 정보를 가져옵니다.
+				$.each(radio, function (key, value) { // input radio의 name 값을 가져옵니다.
+				radio_name.push($(value).attr('name'));
+				});
+				//(9) ["school", "school", "school", "school", "sex", "sex", "grade", "grade", "grade"] log값
+				radio_name = $.unique(radio_name.sort()).sort(); //중복요소 이름을 제거
+				//(3) ["grade", "school", "sex"] log 값
+				for (var i = 0; i < radio_name.length; i++) {
+				$('input[name="' + radio_name[i] + '"]').removeAttr('checked');
+				//체크되어있는 항목 모두 해제
+				$('input[name="' + radio_name[i] + '"]')[0].checked = true;
+				//name에서 첫번 요소만 선택
+				}
+				
+				$('#n').attr('value',0);
+				$('#g').attr('value',0);
+				$('#m').attr('value',0);
+				$('#r').attr('value',0);
+				
+				});
+
+
 			
 			
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+			$('#btn').click(function() {
+				$.ajax({
+					type: "POST",
+					url: "caculator",
+					data: {type:$('[name=type]:checked').val(),term:$('[name=term]:checked').val(),n:$('#n').val(),term2:$('[name=term2]:checked').val(),g:$('#g').val(),m:$('#m').val(),r:$('#r').val()},
+					success: function(data){
+						$('#target').html(data);
+					}
+					});
 
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
 
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+			})
 	</script>
 

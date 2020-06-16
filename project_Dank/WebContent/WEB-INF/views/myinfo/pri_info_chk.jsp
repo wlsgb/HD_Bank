@@ -92,6 +92,7 @@
 												<th scope="col"></th>
 												<th scope="col"></th>
 												<th scope="col"></th>
+												
 											</tr>
 										</thead>
 										<tbody>
@@ -160,7 +161,7 @@
 										
 										
 										<div id="buttons" style="text-align: center;">
-									<a href="pri_info_chk"><button class="btn btn-primary btn-round">수정</button></a>
+									<a href="pri_info_chk2"><button class="btn btn-primary btn-round">수정</button></a>
 									<button class="btn btn-primary btn-round">확인</button>
 									</div>
 										

@@ -1,62 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Sidebar -->
 		<div class="sidebar sidebar-style-2">			
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
-					<!-- 로그인 창 시작 -->
-					<div class="form-group">
-						<label for="email2">이메일</label>
-						<input type="email" class="form-control" id="email2" placeholder="Enter Email">
-					</div>
-					<div class="form-group">
-						<label for="password">패스워드</label>
-						<input type="password" class="form-control" id="password" placeholder="Password">
-					</div>
-					<div class="form-group">
-						<a href="login" class="btn btn-primary btn-block">
-							<span class="btn-label mr-2"></span>로그인
-						</a>
-					</div>
-					<div class="form-group">
-						<a href="login" class="btn btn-primary btn-block">
-							<span class="btn-label mr-2"></span>회원가입
-						</a>
-					</div>
-					
-					<!-- 로그인 창 끝 -->
-					<!-- 로그인 한 후 시작 -->
-					<div class="user">
-						<div class="avatar-sm float-left mr-2">
-							<img src="resources/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
-						</div>
-						<div class="info">
-							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-								<span>
-									
-									<span class="user-level">홍길동</span>
-									<span class="caret"></span>
-								</span>
-							</a>
-							<div class="clearfix"></div>
-
-							<div class="collapse in" id="collapseExample">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">마이페이지</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">로그아웃</span>
-										</a>
-									</li>
-								</ul>
+					<c:choose>
+						<c:when test="${member.mem_email==null }">
+							<!-- 로그인 창 시작 -->
+							<form method="post" action="login" >
+								<div class="form-group">
+									<label for="email2">이메일</label>
+									<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email" value="wlsgb94@naver.com">
+								</div>
+								<div class="form-group">
+									<label for="password">패스워드</label>
+									<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password" value="1234">
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-primary btn-block" value="로그인" />
+								</div>
+							</form>
+							<!-- 로그인 창 끝 -->
+						</c:when>
+						<c:otherwise>
+							<!-- 로그인 정보 시작 -->
+							<div class="user">
+								<div class="info">
+									<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+										<span>
+											
+											<span class="user-level">${member.mem_name }님</span>
+											<span class="caret"></span>
+										</span>
+									</a>
+									<div class="clearfix"></div>
+		
+									<div class="collapse in" id="collapseExample">
+										<ul class="nav">
+											<li>
+												<a href="pri_info_chk">
+													<span class="link-collapse">마이페이지</span>
+												</a>
+											</li>
+											<li>
+												<a href="logout">
+													<span class="link-collapse">로그아웃</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<!-- 로그인 후 끝 -->
+							<!-- 로그인 정보 끝 -->
+						</c:otherwise>
+					</c:choose>
+					
 					<ul class="nav nav-primary">
 						
 						<li class="nav-item">

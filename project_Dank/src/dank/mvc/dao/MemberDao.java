@@ -1,13 +1,10 @@
 package dank.mvc.dao;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.vo.MemberVO;
-
 
 @Repository
 public class MemberDao {
@@ -19,10 +16,24 @@ public class MemberDao {
 		return ss.selectOne("member.namechk", email);
 	}
 	
+	public int idchk(String mem_email) {
+		return ss.selectOne("member.idchk",mem_email);
+	}
+	
 	public MemberVO numToEmailName(int num) {
 		return ss.selectOne("member.serNameEmail", num);
 	}
-
+	
+	public String forBirth(int num) {
+		return ss.selectOne("member.forBirth", num);
+	}
+	public void memberjoin(MemberVO vo) {
+		ss.insert("member.memberjoin",vo);
+	}
+	
+	public MemberVO memLogin(MemberVO user) {
+		return ss.selectOne("member.memlogin", user);
+	}
 
 }
 

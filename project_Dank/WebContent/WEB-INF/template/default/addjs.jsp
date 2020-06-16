@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!--   Core JS Files   -->
-	<script src="resources/js/core/jquery.3.2.1.min.js"></script>
+	<script src="resources/js/core/jquery.3.2.1.min.js"></script> 
 	
 	<script src="resources/js/core/popper.min.js"></script>
 	<script src="resources/js/core/bootstrap.min.js"></script>

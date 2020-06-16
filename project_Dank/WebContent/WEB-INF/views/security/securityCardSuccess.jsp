@@ -44,8 +44,8 @@
 												<thead>
 													<tr>
 														<th>
-															<span class="h1">보안카드 신청 완료되었습니다.</span><br>
-															<span class="h2">입력해주신 hani@naver.com 으로</span><br>
+															<span class="h1">보안카드 신청이 완료되었습니다.</span><br>
+															<span class="h2">입력해주신 ${memberVO.mem_email } 으로</span><br>
 															<span class="h2">보안카드가 전송되었습니다.</span>
 														</th>
 													</tr>
@@ -60,8 +60,8 @@
 													<th>
 														<div class="row">
 															<div class="col-md-12 ml-auto mr-auto" style="text-align: center;">
-																<button class="btn btn-danger">재전송</button>
-																<button class="btn btn-success" id="success">확인</button>
+																<a class="btn btn-danger" href="reMail">재전송</a>
+																<a class="btn btn-success" href="scsuccess">확인</a>
 															</div>
 														</div>
 													</th>
@@ -78,105 +78,6 @@
 				</div>
 			</div>
 
-
-	
-			
-			
-			<script>
-			$("#success").click(function() {
-				location = "security";
-			});
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+	<script>
 	</script>
 

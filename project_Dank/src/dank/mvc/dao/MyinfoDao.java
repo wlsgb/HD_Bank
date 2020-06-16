@@ -18,10 +18,14 @@ public class MyinfoDao {
 	}
 	
 	
-	 public List<MemberVO> myinfoList(){ 
-		 return ss.selectList("myinfo.getmyinfo");
+	 public List<MemberVO> myinfoList(int mem_code){ 
+		 return ss.selectList("myinfo.getmyinfo",mem_code);
 	 
 	 }
+	 
+	 public int myinfoUpdate(MemberVO vo) {
+			return ss.update("myinfo.updatemyinfo", vo);
+		}
 	
 	
 }

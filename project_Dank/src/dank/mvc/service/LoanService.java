@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dank.mvc.dao.LoanDao;
 import dank.mvc.vo.LoanApplicationVO;
+import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanRepayVO;
 
@@ -16,8 +17,8 @@ public class LoanService {
 	@Autowired
 	private LoanDao loanDao;
 	
-	public void addloanaplication(LoanApplicationVO avo,int lp_num) {
-		loanDao.insertLoanCheck(lp_num);
+	public void addloanaplication(LoanApplicationVO avo,LoanCheckVO vo) {
+		loanDao.insertLoanCheck(vo);
 		loanDao.insertLoanApllication(avo);
 	}
 	
@@ -27,6 +28,8 @@ public class LoanService {
 	}
 	
 	public void startrepay(LoanRepayVO vo) {
+		loanDao.loanmoneyexport(vo.getLr_amount());
+		loanDao.loanmoneyimport(vo);
 		loanDao.loanstart(vo.getLc_num());
 		loanDao.loanrepaystart(vo);
 	}

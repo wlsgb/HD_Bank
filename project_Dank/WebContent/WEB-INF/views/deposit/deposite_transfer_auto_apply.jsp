@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 		<div class="content">
 			<div class="panel-header bg-primary-gradient">
@@ -42,11 +42,21 @@
 								<div class="row">
 									<div class="col-md-2 col-lg-2"></div>
 									<div class="col-md-8 col-lg-8">
+									<form action="transfer_auto_apply_process" method="post">
 										<div class="form-group">
-											<label for="email2">계좌번호</label> <input type="text"
-												class="form-control" id="email2"
-												style="width: 400px; margin-left: 10%;"
-												placeholder="110-111-12345 : 보통예금">
+											<label for="email2">계좌번호</label> 
+											<select name="ac_num" id="ac_num" class="form-control" style="width: 360px; margin-left: 10%;">
+											<c:forEach var="e" items="${myaclist }">
+											
+											<option value="${e }">${e }</option>
+											
+											</c:forEach>
+											
+											</select>
+<!-- 											<input type="text" name="ac_num" -->
+<!-- 												class="form-control" id="email2" -->
+<!-- 												style="width: 400px; margin-left: 10%;" -->
+<!-- 												placeholder="110-111-12345 : 보통예금"> -->
 										</div>
 										<hr class="my-0">
 
@@ -54,79 +64,99 @@
 											<label for="email2">입금계좌번호</label>
 
 											<div class="form-inline" style="margin-left: 10%;">
-												<input type="text" placeholder="국민" class="form-control"
-													style="text-align: center; width: 100px;" /> <input
+												<input type="text" placeholder="HD" class="form-control"
+													style="text-align: center; width: 60px;" />
+												 <input name="ata_yourac" maxlength="10"
 													type="text" placeholder="입금 계좌 번호" class="form-control"
-													style="text-align: center; width: 300px;" />
+													style="text-align: center; width: 200px;"
+													id="inputacval"
+													 />
+													<select name="" id="selectyourname" class="form-control" >
+													
+													<option value="">대상이름</option>
+													
+													</select>
+													<input type="hidden" name="youracmem" placeholder="멤버코드" id="atapplymem" class="form-control" style=" text-align:center; background-color:red; width: 300px;"/>
+												<div id="ajaxtarget"></div>
 											</div>
 										</div>
 										<hr class="my-0">
 										<div class="form-group ">
-											<label for="email2">자동이체설정</label> <br />
-											<div class="selectgroup w-30 " style="margin-left: 11%;">
-												<label class="selectgroup-item"> <input
-													type="radio" name="value" value="50"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+100만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+50만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+10만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">+5만</span>
-												</label> <label class="selectgroup-item"> <input
-													type="radio" name="value" value="200"
-													class="selectgroup-input"> <span
-													class="selectgroup-button">전액</span>
-												</label>
-
-											</div>
+											<label for="email2">자동이체금액설정</label> <br />
+						
 											<div class="form-inline" style="margin-left: 10%;">
 
-												<input type="text" placeholder="이체 금액" class="form-control"
+												<input type="text" name="ata_setmoney" id="ata_setmoney" placeholder="이체 금액" class="form-control"
 													style="text-align: center; width: 360px;" />
 											</div>
 										</div>
 										<hr class="my-0">
+										
+										
 										<div class="form-group ">
-											<label for="email2">이체주기</label> <br />
-
+											<label for="email2">시작일/이체시간 설정</label> <br />
+												
 											<div class="form-inline" style="margin-left: 10%;">
-
-												<input type="text" placeholder="매월 19일" class="form-control"
-													style="text-align: center; width: 360px;" />
+														<input type="date" id="ata_startdate" class="form-control" name="ata_startdate" />
+														<input type="time" id="ata_time" name="ata_time"  class="form-control">
 											</div>
 										</div>
-
 										<div class="form-group ">
-											<label for="email2">시작일/종료일</label> <br />
-
-											<div class="form-inline" style="margin-left: 10%;">
-
-												<input type="text" placeholder="2020.02.04"
-													class="form-control"
-													style="text-align: center; width: 165px;" /> <span
-													style="font-size: 20px; margin-left: 10px; margin-right: 10px;">~</span>
-												<input type="text" placeholder="2020.08.09"
-													class="form-control"
-													style="text-align: center; width: 165px;" />
+											
+											<div class="form-inline" >
+													<label for="email2">받는분통장에 쓸 내용</label> <br />
+													<input type="text" name="atayouracmemo" class="form-control"  placeholder="받는분통장에 쓸 내용" style="text-align: center; width: 300px;"/>
+											</div>
+											<div class="form-inline">
+													<label for="email2">보내는분통장에 쓸 내용</label> <br />
+													<input type="text" name="atamyacmemo" class="form-control" placeholder="보내는분통장에 쓸 내용" style="text-align: center; width: 300px;" />
 											</div>
 										</div>
+										<input type="hidden" name="atacheck" value="0" />
+										<input type="hidden" name="ataing" value="0" />
+										
+													  
+													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/>
+			
+			
+			
+														<!--// 숨겨지는 영역 -->
+														
+														<div id="demo" class="collapse">
+															<div class="form-group ">
+															<label for="email2">이체주기</label> <br />
+				
+															<div class="form-inline" style="margin-left: 10%;">
+				
+																<input type="text" placeholder="매월 19일" class="form-control"
+																	style="text-align: center; width: 360px;" name="atadterm" />
+															</div>
+															</div>
+															<div class="form-group ">
+															<label for="email2">종료일</label> <br />
+				
+															<div class="form-inline" style="margin-left: 10%;">
+																<input type="date" class="form-control"  name="atastopdate"/>
+															</div>
+															</div>
+																		    
+														
+														  </div>
+														<!-- 숨겨지는 영역 //-->
+										
+										
+										
+
+										
 
 										<div class="form-group ">
 											<div class="form-inline">
 											
 										
-								<a href="transfer_auto"><button type="button" class="btn btn-danger "
+												<a href="transfer_auto"><button type="button" class="btn btn-danger "
 													style="margin-left: 10%; width: 200px;">취소</button></a>
-												<button type="button" class="btn btn-success "
-													style="margin-left: 10%; width: 200px;">신청</button>
+											
+													<input type="submit" class="btn btn-success " value="신청" style="margin-left: 10%; width: 200px;" />
 											</div>
 										</div>
 
@@ -134,7 +164,7 @@
 
 
 
-
+										</form>
 									</div>
 
 
@@ -162,99 +192,168 @@
 
 
 <script>
-	Circles.create({
-		id : 'circles-1',
-		radius : 45,
-		value : 60,
-		maxValue : 100,
-		width : 7,
-		text : 5,
-		colors : [ '#f1f1f1', '#FF9E27' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	Circles.create({
-		id : 'circles-2',
-		radius : 45,
-		value : 70,
-		maxValue : 100,
-		width : 7,
-		text : 36,
-		colors : [ '#f1f1f1', '#2BB930' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	Circles.create({
-		id : 'circles-3',
-		radius : 45,
-		value : 40,
-		maxValue : 100,
-		width : 7,
-		text : 12,
-		colors : [ '#f1f1f1', '#F25961' ],
-		duration : 400,
-		wrpClass : 'circles-wrp',
-		textClass : 'circles-text',
-		styleWrapper : true,
-		styleText : true
-	})
-
-	var totalIncomeChart = document.getElementById('totalIncomeChart')
-			.getContext('2d');
-
-	var mytotalIncomeChart = new Chart(totalIncomeChart, {
-		type : 'bar',
-		data : {
-			labels : [ "S", "M", "T", "W", "T", "F", "S", "S", "M", "T" ],
-			datasets : [ {
-				label : "Total Income",
-				backgroundColor : '#ff9e27',
-				borderColor : 'rgb(23, 125, 255)',
-				data : [ 6, 4, 9, 5, 4, 6, 4, 3, 8, 10 ],
-			} ],
-		},
-		options : {
-			responsive : true,
-			maintainAspectRatio : false,
-			legend : {
-				display : false,
-			},
-			scales : {
-				yAxes : [ {
-					ticks : {
-						display : false
-					//this will remove only the label
-					},
-					gridLines : {
-						drawBorder : false,
-						display : false
+		var getarr =null;
+		var settime="";
+		 
+		
+		
+		
+		$(document).ready(function() {
+			$('#inputacval').keyup(function() {
+				
+				document.getElementById('ajaxtarget').innerHTML ="";
+				var add = "";
+				$.ajax({
+					url:'getmemcodewhentr?acnum='+$('#inputacval').val(),
+					success: function (data) {
+								getarr=data;
+								console.log(typeof(data))
+								
+								data.forEach(function(item, index) {
+									add +="<option value="+item.mem_code+">";
+									if(item.mem_code==='0'){
+										add +="대상이름";
+									}else{
+										add +=item.mem_name
+									}
+									
+									add +="</option>";
+								})
+								document.getElementById('selectyourname').innerHTML = add;
+								
+								$('#atapplymem').val($('#selectyourname').val())
 					}
-				} ],
-				xAxes : [ {
-					gridLines : {
-						drawBorder : false,
-						display : false
-					}
-				} ]
-			},
-		}
-	});
 
-	$('#lineChart').sparkline([ 105, 103, 123, 100, 95, 105, 115 ], {
-		type : 'line',
-		height : '70',
-		width : '100%',
-		lineWidth : '2',
-		lineColor : '#ffa534',
-		fillColor : 'rgba(255, 165, 52, .14)'
-	});
-</script>
+				})
+				
+				
+				
+				
+			})
+			
+			$('#selectyourname').change(function() {
+				$('#trmem').val("0");
+				var youracvar =$('#selectyourname').val();
+				console.log(typeof(youracvar))
+				$('#trmem').val(youracvar);
+				console.log("히드값은"+$('#trmem').val());
+			})
+			
+			
+			
+			
+			
+			$('#ata_startdate').change(function() {
+				settime="0";
+				let year=String(new Date().getFullYear());
+				let month=String(new Date().getMonth()+1);
+				
+				let date = String(new Date().getDate());
+				
+				
+				if (month.length < 2) month = '0' + month;
+				if (date.length < 2) date = '0' + date;
+				console.log("몬스는"+month)
+
+				
+				let startdatearr = $('#ata_startdate').val().split("-");
+				
+				console.log("오늘은"+year+"-"+month+"-"+date)
+				console.log("고른날짜"+startdatearr[0]+"~"+startdatearr[1]+"~"+startdatearr[2])
+				console.log($('#ata_startdate').val())	
+
+
+				if(parseInt(year) <= parseInt(startdatearr[0])){
+					console.log('오케이 년 통과')
+					if(parseInt(year) ===parseInt(startdatearr[0])){
+						if(parseInt(month)<=parseInt(startdatearr[1])){
+							console.log('오케이 달통과')
+							if(parseInt(month)===parseInt(startdatearr[1])){
+								if(parseInt(date)<=parseInt(startdatearr[2])){
+									console.log('오케이 일 통과')
+									
+								}else {
+									console.log('나가뤼')
+									$('#ata_startdate').val(year+'-'+month+'-'+date)
+									settime="1";
+									checktime();
+								}
+							}
+						}else {
+							console.log("나가뤼")
+							$('#ata_startdate').val(year+'-'+month+'-'+date)
+							settime="1";
+							checktime();
+						}
+					}
+				}else {
+					console.log("나가뤼")
+					$('#ata_startdate').val(year+'-'+month+'-'+date)
+					settime="1";
+					checktime();
+				}
+				
+				
+				
+			})
+			
+			$('#ata_time').change(function() {
+				 checktime();
+			})
+			
+			function checktime(){
+				console.log("셋타임은? "+settime);
+				let hour = String(new Date().getHours());
+				let minute = String(new Date().getMinutes());
+				
+				if (hour.length < 2) hour = '0' + hour;
+				if (minute.length < 2) minute = '0' + minute;
+				
+				let timearr = $('#ata_time').val().split(":");
+				console.log($('#ata_time').val())
+				console.log(hour+"s"+minute+"///"+timearr[0]+"sdfa"+timearr[1])
+				if(settime ==="1"){
+					if(parseInt(hour) <= parseInt(timearr[0])){
+						console.log('오케이 시간통과')
+						if(parseInt(hour) === parseInt(timearr[0])){
+							if(parseInt(minute) <=parseInt(timearr[1])){
+								console.log('오케이 분 통과')
+							}else {
+								console.log('나가리')
+								$('#ata_time').val(hour+":"+minute)
+							}
+						}
+						
+					}else {
+						console.log('나가리')
+						$('#ata_time').val(hour+":"+minute)
+					}
+				}
+			}
+			
+
+			$('#ata_setmoney').keyup(function() {
+				console.log($(this).val())
+				
+				$.ajax({
+					url:'getmybalwhentr?ac_num='+$('#ac_num').val(),
+					success: function (data) {
+// 						console.log(data)
+// 						console.log($('#trmoney').val())
+						if(parseInt($('#ata_setmoney').val()) > parseInt(data)){
+							$('#ata_setmoney').val(data)
+						}
+						
+					}
+				})
+							
+					
+
+			})
+				
+			
+		
+			
+		})
+	</script>
 

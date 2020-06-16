@@ -1,15 +1,11 @@
 package dank.mvc.method;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dank.mvc.dao.SecurityDao;
 import dank.mvc.vo.security.Security_CardVO;
-import dank.mvc.vo.security.Security_Card_RegVO;
 
 @Repository
 public class SecurityCode {
@@ -108,12 +104,10 @@ public class SecurityCode {
 				} else if (i == 2) {
 					switch (j) {
 					case 0:
-						randomNum = (int) (Math.random() * 30 + 1);
-						securityCheckData[i][j] = String.valueOf(randomNum);
-						if (securityCheckData[i - 1][j].equals(securityCheckData[i][j])) {
-							continue xx;
-						}
- 
+						do {
+							randomNum = (int) (Math.random() * 30 + 1);
+							securityCheckData[i][j] = String.valueOf(randomNum);
+						} while (securityCheckData[i - 1][j].equals(securityCheckData[i][j]));
 						break;
 					case 1:
 						fronBack = (int) (Math.random() * 2 + 1);
