@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.LoanDao;
-import dank.mvc.service.BangkingService;
 import dank.mvc.service.LoanService;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCaculatorVO;
