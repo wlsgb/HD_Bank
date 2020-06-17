@@ -49,9 +49,7 @@
 				 and p.ins_code = ins.ins_code(+)
 			</select>
 <!--  /@계좌조회 끝(처음 조회눌렀을때 작동) -->
-	<select id="">
-		select count(*) from sa
-	</select>
+
 
 <!-- @입금 시작(입금 누르면 돈이 들어온다. 지점에서 현금을 받는다는 가정) -->
 		<!--1계좌유효성검사 적힌 계좌가 DB에 담겨있는지 count 를 반환한다 -->
