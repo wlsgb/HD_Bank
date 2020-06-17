@@ -42,16 +42,21 @@
 											<c:if test="${savlist != null}">
 												<table class="table">
 													<thead>
-														<tr><th colspan="4" style="border-style: none;" ><span class="h2">입출금식 상품</span></th></tr>
+														<tr><th colspan="4" style="border-style: none;" ><span class="h2">입출식 예금 상품</span></th></tr>
 													</thead>
 													<tbody>
 														<c:forEach items="${savlist }" var="e">
+														<form action="cancel_input_info" method="post">
 														<tr>
 															<td style="border-style: none; width: 60px; ">▶</td >
 															<td  style="border-style: none; width: 140px;">${e.saving.sav_name }</td>
 															<td style="width: 400px; border-style: none;">계좌번호 : ${e.ac_num }</td>
-															<td style="border-style: none;"><button type="button" class="btn btn-info ">해지하기</button></td>
+															<td style="border-style: none;">
+																<input type="hidden" id="ac_code" name="ac_code" value="${e.ac_code }">
+																<input type="submit" class="btn btn-info" value="해지하기">
+															</td>
 														</tr>
+														</form>
 														<tr>
 															<td style="border-style: none;"></td><td style="border-style: none;" >가입날짜 :</td>
 															<td style="border-style: none;"> ${e.ac_start_date }</td>
@@ -70,7 +75,7 @@
 											<c:if test="${inslist != null}">
 													<table class="table">
 														<thead>
-															<tr><th colspan="4" style="border-style: none;" ><span class="h2">적금식 상품</span></th></tr>
+															<tr><th colspan="4" style="border-style: none;" ><span class="h2">적금식 예금 상품</span></th></tr>
 														</thead>
 														<tbody>
 															<c:forEach items="${inslist }" var="e">
@@ -93,27 +98,6 @@
 														</tbody>
 													</table>
 											</c:if>
-												<table class="table">
-													<thead>
-													<tr><th colspan="4" style="border-style: none;" ><span class="h2">공유 예금 입출식 상품</span></th></tr>
-													</thead>
-													<tbody>
-													<tr  >
-														<td style="border-style: none; width: 60px; ">▶</td ><td  style="border-style: none; width: 140px;">슈퍼 정기 예금</td>
-														<td style="width: 400px; border-style: none;">계좌번호 : 110-123-789998</td><td style="border-style: none;"><a href="deposite_cancle_input_info"><button type="button" class="btn btn-info ">해지하기</button></a></td>
-													</tr>
-													<tr>
-														<td style="border-style: none;"></td><td style="border-style: none;" ><strong>참가인원 : 2명</strong> </td><td style="border-style: none;"> <a href="deposite_cancle_check_Account">참가인원 수정하기</a></td>
-													</tr>
-													<tr>
-														<td style="border-style: none;"></td><td style="border-style: none;" >가입날짜 :</td><td style="border-style: none;"> 2020.09.09</td>
-													</tr>
-													<tr >
-														<td style="border-style: none;"></td><td style="border-style: none;">잔액 : </td><td style="border-style: none;"> 700원</td>
-														<td style="border-style: none;"><a href="deposite_cancle_check_select">예금해지 예상 보러가기</a></td>
-													</tr>
-													</tbody>
-												</table>
 										</div>
 									</div>
 								</div>

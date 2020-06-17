@@ -165,12 +165,8 @@
   		insert into loan_repay values(#{lc_num},#{lr_amount},#{lr_balance},#{lr_interest},#{lr_repaydate},#{lr_firstdate},#{lr_reaccount},sysdate)
   	</insert>
   	
-  	<update id="loanmoneyexport" parameterType="int">
-  		update account set ac_balance = ac_balance - #{lr_amount} where ac_code = 2
-  	</update>
-  	
-  	<update id="loanmoneyimport" parameterType="lrvo">
-  		update account set ac_balance = ac_balance + #{lr_amount} where ac_num = #{lr_reaccount}
+  	<update id="repayloan" parameterType="lrvo">
+  		update loan_repay set lr_balance = lr_balance - #{lr_balance} where lc_num =#{lc_num}
   	</update>
   	
   	<select id="selectaccount" resultType="acvo" parameterType="int">

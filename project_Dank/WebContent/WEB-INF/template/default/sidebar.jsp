@@ -10,14 +10,6 @@
 							<!-- 로그인 창 시작 -->
 							<form method="post" action="login" >
 								<div class="form-group">
-									<label for="email2">이메일</label>
-									<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email" value="wlsgb94@naver.com">
-								</div>
-								<div class="form-group">
-									<label for="password">패스워드</label>
-									<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password" value="1234">
-								</div>
-								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block" value="로그인" />
 								</div>
 							</form>
@@ -82,7 +74,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="cancle">
+										<a href="cancel">
 											<span class="sub-item">해지</span>
 										</a>
 									</li>
@@ -169,14 +161,14 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#tables">
 								<i class="fas fa-layer-group"></i>
-								<p>고객 정보 관리</p>
+								<p>개인 정보 관리</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="tables">
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="pri_info_chk">
-											<span class="sub-item">고객 정보 조회 / 수정</span>
+											<span class="sub-item">개인 정보 조회 / 수정</span>
 										</a>
 									</li>
 									<li>
