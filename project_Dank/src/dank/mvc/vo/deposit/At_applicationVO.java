@@ -2,7 +2,7 @@ package dank.mvc.vo.deposit;
 
 public class At_applicationVO {
 
-	private int ata_code,ac_code,ata_setmoney,ata_dterm,ata_check,ata_ing,ata_yourmemcode;
+	private int ata_code,ac_code,ata_setmoney,ata_dterm,ata_check,ata_ing,ata_yourmemcode,ata_mymemcode;
 	private String ata_yourac,ata_startdate,ata_time,ata_stopdate,ata_myacmemo,ata_youracmemo;
 	
 	private int mem_code;//필요해서 추가함
@@ -11,6 +11,12 @@ public class At_applicationVO {
 	
 	
 	
+	public int getAta_mymemcode() {
+		return ata_mymemcode;
+	}
+	public void setAta_mymemcode(int ata_mymemcode) {
+		this.ata_mymemcode = ata_mymemcode;
+	}
 	public int getAta_yourmemcode() {
 		return ata_yourmemcode;
 	}
