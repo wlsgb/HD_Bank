@@ -1,4 +1,4 @@
-package dank.mvc.model;
+package dank.mvc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,4 +18,5 @@ public class DepositService {
 		depositDao.addAccount(accountVO);
 		depositDao.addAcClient(clientVO);
 	}
+	
 }

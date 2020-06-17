@@ -22,8 +22,7 @@ import dank.mvc.dao.DepositDao;
 import dank.mvc.dao.MemberDao;
 import dank.mvc.method.AccountNum;
 import dank.mvc.service.BangkingService;
-
-
+import dank.mvc.service.DepositService;
 import dank.mvc.vo.deposit.PageVO;
 import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.MemberVO;
@@ -136,8 +135,8 @@ public class DepositController {
 		return "deposit_new/new_success";
 	}
 	//예금-해지
-	@RequestMapping(value = { "/cancle" })
-	public String depositecancle(HttpSession session,Model m) {
+	@RequestMapping(value = "/cancel" )
+	public String depositecancel(HttpSession session,Model m) {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
 			session.setAttribute("pageName", "cancle");
@@ -149,7 +148,6 @@ public class DepositController {
 		List<AccountVO> savlist = new ArrayList<AccountVO>();
 		List<AccountVO> inslist = new ArrayList<AccountVO>();
 		for(AccountVO e :aclist) {
-			System.out.println(e);
 			if(e.getSaving().getSav_code() != 0) {
 				savlist.add(e);
 			}else if (e.getIns().getIns_code() != 0) {
@@ -160,9 +158,30 @@ public class DepositController {
 		m.addAttribute("inslist", inslist);
 		m.addAttribute("aclist", aclist);
 		
-		return "deposit_new/cancle";
+		return "deposit_new/cancel";
 	}
-	
+	//계좌 삭제 신청
+	@RequestMapping(value = "/cancel_input_info" )
+	public String cancel_input_info(int ac_code,Model m) {
+		System.out.println("ac_code"+ac_code);
+		AccountVO account= depositDao.getAcdetail(ac_code);
+		m.addAttribute("account", account);
+		return "deposit_new/cancel_input_info";
+	}
+	//계좌 삭제 신청 확인
+	@RequestMapping(value = "/cancel_check")
+	public String cancel_check(int ac_code,Model m) {
+		System.out.println("ac_code"+ac_code);
+		AccountVO account= depositDao.getAcdetail(ac_code);
+		m.addAttribute("account", account);
+		return "deposit_new/cancel_check";
+	}
+	//계좌 삭제
+	@RequestMapping(value = { "/cancelComplete" })
+	public String cancelComplete(int ac_code) {
+		depositDao.delAccount(ac_code);
+		return "deposit_new/cancel_success";
+	}
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
 //		return "deposit/share_new_req";
@@ -570,10 +589,7 @@ public class DepositController {
 
 	
 
-	@RequestMapping(value = { "/deposite_cancle_input_info" })
-	public String depositecancleinputinfo() {
-		return "deposit/deposite_cancle_input_info";
-	}
+	
 
 	@RequestMapping(value = { "/deposite_cancle_check_Account" })
 	public String depositecanclecheckshareAccount() {

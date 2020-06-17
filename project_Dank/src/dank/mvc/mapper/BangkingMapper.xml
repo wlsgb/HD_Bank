@@ -5,49 +5,78 @@
   <mapper namespace="bangking">
   
 <!--  @계좌조회(처음 조회눌렀을때 세션에서 멤버코드를 가지고 그멤버가 가진 계좌 리스트를 뽑아온다) -->
-			  <resultMap type="acvo" id="acinqueryResult">
-					<id property="ac_num" column="ac_num"/>
-					<result property="ac_balance" column="ac_balance"/>
-					<result property="ac_code" column="ac_code"/>
-					<result property="ac_name" column="ac_name"/>
-					<result property="ac_start_date" column="ac_start_date"/>
-					<collection property="saving" resultMap="savResult"></collection>
-					<collection property="ins" resultMap="insResult"></collection>
-				</resultMap>
-				<resultMap type="savvo" id="savResult">
-					<id property="sav_code" column="sav_code"/>
-					<result property="sav_name" column="sav_name"/>
-					<result property="shas_code" column="shas_code"/>
-				</resultMap>
-				<resultMap type="insvo" id="insResult">
-					<id property="ins_code" column="ins_code"/>
-					<result property="ins_name" column="ins_name"/>
-					<result property="shac_code" column="shac_code"/>
-				</resultMap>
-			<select id="acinquery" resultMap="acinqueryResult" parameterType="int" >
-				select a.ac_num ac_num
-					,a.ac_code ac_code
-					,a.ac_balance ac_balance
-					,to_char(a.ac_start_date,'yyyy-MM-dd') ac_start_date
-					,nvl(a.ac_name,'HD') ac_name
-					,nvl(s.sav_code,0) sav_code
-					,nvl(s.sav_name,0) sav_name
-					,nvl(s.shas_code,0) shas_code
-					,nvl(ins.ins_code,0) ins_code
-					,nvl(ins.ins_name,0) ins_name
-					,nvl(ins.shac_code,0) shac_code
-				from 
-				account_client ac
-				,account a
-				,product p
-				,saving s
-				,installment_saving ins
-				where ac.mem_code=#{mem_code}
-				 and ac.ac_code =a.ac_code 
-				 and ac.pro_code=p.pro_code 
-				 and p.sav_code =s.sav_code(+) 
-				 and p.ins_code = ins.ins_code(+)
-			</select>
+	  <resultMap type="acvo" id="acinqueryResult">
+			<id property="ac_num" column="ac_num"/>
+			<result property="ac_balance" column="ac_balance"/>
+			<result property="ac_code" column="ac_code"/>
+			<result property="ac_pwd" column="ac_pwd"/>
+			<result property="ac_name" column="ac_name"/>
+			<result property="ac_start_date" column="ac_start_date"/>
+			<collection property="saving" resultMap="savResult"></collection>
+			<collection property="ins" resultMap="insResult"></collection>
+		</resultMap>
+		<resultMap type="savvo" id="savResult">
+			<id property="sav_code" column="sav_code"/>
+			<result property="sav_name" column="sav_name"/>
+			<result property="shas_code" column="shas_code"/>
+		</resultMap>
+		<resultMap type="insvo" id="insResult">
+			<id property="ins_code" column="ins_code"/>
+			<result property="ins_name" column="ins_name"/>
+			<result property="shac_code" column="shac_code"/>
+		</resultMap>
+	<select id="acinquery" resultMap="acinqueryResult" parameterType="int" >
+		select a.ac_num ac_num
+			,a.ac_code ac_code
+			,a.ac_balance ac_balance
+			,to_char(a.ac_start_date,'yyyy-MM-dd') ac_start_date
+			,nvl(a.ac_name,'HD') ac_name
+			,nvl(s.sav_code,0) sav_code
+			,nvl(s.sav_name,0) sav_name
+			,nvl(s.shas_code,0) shas_code
+			,nvl(ins.ins_code,0) ins_code
+			,nvl(ins.ins_name,0) ins_name
+			,nvl(ins.shac_code,0) shac_code
+		from 
+		account_client ac
+		,account a
+		,product p
+		,saving s
+		,installment_saving ins
+		where ac.mem_code=#{mem_code}
+		 and ac.ac_code =a.ac_code 
+		 and ac.pro_code=p.pro_code 
+		 and p.sav_code =s.sav_code(+) 
+		 and p.ins_code = ins.ins_code(+)
+	</select>
+	
+	<!-- 계좌상세 조회 -->
+	<select id="acdetail" parameterType="int" resultMap="acinqueryResult">
+		select a.ac_num ac_num
+			,a.ac_code ac_code
+            ,a.ac_pwd ac_pwd
+			,a.ac_balance ac_balance
+			,to_char(a.ac_start_date,'yyyy-MM-dd') ac_start_date
+			,nvl(a.ac_name,'HD') ac_name
+			,nvl(s.sav_code,0) sav_code
+			,nvl(s.sav_name,0) sav_name
+			,nvl(s.shas_code,0) shas_code
+			,nvl(ins.ins_code,0) ins_code
+			,nvl(ins.ins_name,0) ins_name
+			,nvl(ins.shac_code,0) shac_code
+		from 
+		account_client ac
+		,account a
+		,product p
+		,saving s
+		,installment_saving ins
+		where ac.ac_code = #{ac_code}
+		 and ac.ac_code =a.ac_code 
+		 and ac.pro_code=p.pro_code 
+		 and p.sav_code =s.sav_code(+) 
+		 and p.ins_code = ins.ins_code(+)
+               ORDER BY sav_code desc
+	</select>
 <!--  /@계좌조회 끝(처음 조회눌렀을때 작동) -->
 
 

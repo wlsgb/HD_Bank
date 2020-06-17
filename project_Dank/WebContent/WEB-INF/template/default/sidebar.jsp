@@ -82,7 +82,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="cancle">
+										<a href="cancel">
 											<span class="sub-item">วุม๖</span>
 										</a>
 									</li>
