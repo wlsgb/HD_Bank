@@ -37,4 +37,49 @@ public class QnaController {
 		/* System.out.println("listsize"+qnaDao.getList(vo).size()); */
 		return "qna/qna";
 	}
+	
+	@RequestMapping(value = "/myquestion")
+	public String listSearch3(PageVO vo, Model model,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage,
+			@RequestParam(value = "searchType", required = false) String searchType,
+			@RequestParam(value = "searchValue", required = false) String searchValue) {
+		
+		System.out.println(vo.getSearchType());
+		int total = qnaDao.getTotalCount(vo);
+		System.out.println("total:"+total);
+		vo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), vo.getCategori());
+		System.out.println("------------------------");
+		vo.setSearchType(searchType);
+		vo.setSearchValue(searchValue);
+		System.out.println("타입"+vo.getSearchType());
+		System.out.println("벨류"+vo.getSearchValue());
+		model.addAttribute("paging", vo);
+		model.addAttribute("list", qnaDao.getList(vo));
+		
+		/* System.out.println("listsize"+qnaDao.getList(vo).size()); */
+		return "qna/myquestion";
+	}
+	
+	@RequestMapping(value = "/1on1question_princhk")
+	public String listSearch2(PageVO vo, Model model,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage,
+			@RequestParam(value = "searchType", required = false) String searchType,
+			@RequestParam(value = "searchValue", required = false) String searchValue) {
+		
+		System.out.println(vo.getSearchType());
+		int total = qnaDao.getTotalCount(vo);
+		System.out.println("total:"+total);
+		vo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), vo.getCategori());
+		System.out.println("------------------------");
+		vo.setSearchType(searchType);
+		vo.setSearchValue(searchValue);
+		System.out.println("타입"+vo.getSearchType());
+		System.out.println("벨류"+vo.getSearchValue());
+		model.addAttribute("paging", vo);
+		model.addAttribute("list", qnaDao.getList(vo));
+		
+		return "qna/1on1question_princhk";
+	}
 }

@@ -149,12 +149,12 @@
 										</a>
 									</li>
 									<li>
-										<a href="1on1question_prichk">
+										<a href="1on1question_princhk">
 											<span class="sub-item">1:1 문의하기</span>
 										</a>
 									</li>
 									<li>
-										<a href="forms/forms.jsp">
+										<a href="myquestion">
 											<span class="sub-item">나의 문의글</span>
 										</a>
 									</li>
