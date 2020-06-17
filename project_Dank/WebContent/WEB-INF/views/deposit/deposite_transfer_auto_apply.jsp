@@ -114,34 +114,35 @@
 										</div>
 										<input type="hidden" name="atacheck" value="0" />
 										<input type="hidden" name="ataing" value="0" />
-										
+										<input type="hidden" name="atadterm" />
+										<input type="hidden" name="atastopdate" />
 													  
-													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/>
+<!-- 													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/> -->
 			
 			
 			
 														<!--// 숨겨지는 영역 -->
 														
-														<div id="demo" class="collapse">
-															<div class="form-group ">
-															<label for="email2">이체주기</label> <br />
+<!-- 														<div id="demo" class="collapse"> -->
+<!-- 															<div class="form-group "> -->
+<!-- 															<label for="email2">이체주기</label> <br /> -->
 				
-															<div class="form-inline" style="margin-left: 10%;">
+<!-- 															<div class="form-inline" style="margin-left: 10%;"> -->
 				
-																<input type="text" placeholder="매월 19일" class="form-control"
-																	style="text-align: center; width: 360px;" name="atadterm" />
-															</div>
-															</div>
-															<div class="form-group ">
-															<label for="email2">종료일</label> <br />
+<!-- 																<input type="text" placeholder="매월 19일" class="form-control" -->
+<!-- 																	style="text-align: center; width: 360px;" name="atadterm" /> -->
+<!-- 															</div> -->
+<!-- 															</div> -->
+<!-- 															<div class="form-group "> -->
+<!-- 															<label for="email2">종료일</label> <br /> -->
 				
-															<div class="form-inline" style="margin-left: 10%;">
-																<input type="date" class="form-control"  name="atastopdate"/>
-															</div>
-															</div>
+<!-- 															<div class="form-inline" style="margin-left: 10%;"> -->
+<!-- 																<input type="date" class="form-control"  name="atastopdate"/> -->
+<!-- 															</div> -->
+<!-- 															</div> -->
 																		    
 														
-														  </div>
+<!-- 														  </div> -->
 														<!-- 숨겨지는 영역 //-->
 										
 										
@@ -195,9 +196,6 @@
 		var getarr =null;
 		var settime="";
 		 
-		
-		
-		
 		$(document).ready(function() {
 			$('#inputacval').keyup(function() {
 				
@@ -249,53 +247,34 @@
 				let month=String(new Date().getMonth()+1);
 				
 				let date = String(new Date().getDate());
-				
-				
+
 				if (month.length < 2) month = '0' + month;
 				if (date.length < 2) date = '0' + date;
-// 				console.log("몬스는"+month)
-
-				
+	
 				let startdatearr = $('#ata_startdate').val().split("-");
-				
-
-// 				console.log("오늘은"+year+"-"+month+"-"+date)
-// 				console.log("고른날짜"+startdatearr[0]+"~"+startdatearr[1]+"~"+startdatearr[2])
-// 				console.log($('#ata_startdate').val())	
-
 
 				if(parseInt(year) <= parseInt(startdatearr[0])){
-// 					console.log('오케이 년 통과')
 					if(parseInt(year) ===parseInt(startdatearr[0])){
 						if(parseInt(month)<=parseInt(startdatearr[1])){
-// 							console.log('오케이 달통과')
 							if(parseInt(month)===parseInt(startdatearr[1])){
-								if(parseInt(date)<=parseInt(startdatearr[2])){
-// 									console.log('오케이 일 통과')
-									
+								if(parseInt(date)<=parseInt(startdatearr[2])){				
 								}else {
-// 									console.log('나가뤼')
 									$('#ata_startdate').val(year+'-'+month+'-'+date)
 									settime="1";
 									checktime();
 								}
 							}
 						}else {
-// 							console.log("나가뤼")
 							$('#ata_startdate').val(year+'-'+month+'-'+date)
 							settime="1";
 							checktime();
 						}
 					}
 				}else {
-// 					console.log("나가뤼")
 					$('#ata_startdate').val(year+'-'+month+'-'+date)
 					settime="1";
 					checktime();
 				}
-				
-				
-				
 			})
 			
 			$('#ata_time').change(function() {
@@ -303,7 +282,6 @@
 			})
 			
 			function checktime(){
-// 				console.log("셋타임은? "+settime);
 				let hour = String(new Date().getHours());
 				let minute = String(new Date().getMinutes());
 				
@@ -311,22 +289,21 @@
 				if (minute.length < 2) minute = '0' + minute;
 				
 				let timearr = $('#ata_time').val().split(":");
-// 				console.log($('#ata_time').val())
-// 				console.log(hour+"s"+minute+"///"+timearr[0]+"sdfa"+timearr[1])
+
 				if(settime ==="1"){
 					if(parseInt(hour) <= parseInt(timearr[0])){
-// 						console.log('오케이 시간통과')
+						
 						if(parseInt(hour) === parseInt(timearr[0])){
 							if(parseInt(minute) <=parseInt(timearr[1])){
-// 								console.log('오케이 분 통과')
+
 							}else {
-// 								console.log('나가리')
+
 								$('#ata_time').val(hour+":"+minute)
 							}
 						}
 						
 					}else {
-// 						console.log('나가리')
+
 						$('#ata_time').val(hour+":"+minute)
 					}
 				}
@@ -339,8 +316,7 @@
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#ac_num').val(),
 					success: function (data) {
-// 						console.log(data)
-// 						console.log($('#trmoney').val())
+
 						if(parseInt($('#ata_setmoney').val()) > parseInt(data)){
 							$('#ata_setmoney').val(data)
 						}
@@ -353,19 +329,12 @@
 			})
 				
 			
-			$('#inputacval').change(function() {
-// 				console.log((($('#atapplymem').val() === "0")===false))
-// 				console.log((($('#atapplymem').val() === "")===false))
-				//console.log($('#atapplymem').val())
+			$('#gogonext').mouseover(function() {
 				if((($('#atapplymem').val() === "0")===false) && (($('#atapplymem').val() === "")===false) ){
-// 					console.log('섬밋이어야함')
 					$('#gogonext').attr('type','submit')
 				}else {
-					
-// 					console.log('버튼이여야함')
 					$('#gogonext').attr('type','button')
 				}
-// 				$('#gogonext').attr('type','button')
 			})
 			
 		

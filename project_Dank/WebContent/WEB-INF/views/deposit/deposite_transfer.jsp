@@ -126,7 +126,7 @@
 												 
 												 <div class="form-group "  >
 												 <a href="transfer_auto"><button type="button" class="btn btn-success  btn-lg" style="margin-left: 2%; width: 25%; ">자동이체</button></a>
-												 <input type="submit" value="확인" class="btn btn-success  btn-lg" style="margin-left: 20%; width: 25%; "/>
+												 <input type="button" id="gogonext" value="확인" class="btn btn-success  btn-lg" style="margin-left: 20%; width: 25%; "/>
 												
 												 </div>
 											
@@ -239,8 +239,7 @@
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#myac').val(),
 					success: function (data) {
-// 						console.log(data)
-// 						console.log($('#trmoney').val())
+
 						if(parseInt($('#trmoney').val()) > parseInt(data)){
 							$('#trmoney').val(data)
 						}
@@ -252,7 +251,16 @@
 
 			})
 				
-			
+			$('#gogonext').mouseover(function() {
+				if((($('#trmem').val() === "0")===false) && (($('#atapplymem').val() === "")=== false) ){
+					
+					$('#gogonext').attr('type','submit')
+				}else {
+					
+					$('#gogonext').attr('type','button')
+				}
+
+			})
 		
 			
 		})

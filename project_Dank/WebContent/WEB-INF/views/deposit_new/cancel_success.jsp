@@ -12,7 +12,7 @@
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
 								<span class="h2 mr-1"> > </span>
-								<a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">신규</a>
+								<a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">해지</a>
 								</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
@@ -30,9 +30,9 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">신규계좌</h4>
+										<h4 class="card-title">계좌</h4>
 									</div>
-									<p class="card-category">신청 완료</p>
+									<p class="card-category">해지 완료</p>
 								</div>
 								
 								<div class="card-body">
@@ -42,7 +42,7 @@
 												<thead>
 													<tr>
 														<th>
-															<span class="h1">신규계좌 신청이 완료되었습니다.</span><br>
+															<span class="h1">계좌 해지가 완료되었습니다.</span><br>
 														</th>
 													</tr>
 												</thead>
