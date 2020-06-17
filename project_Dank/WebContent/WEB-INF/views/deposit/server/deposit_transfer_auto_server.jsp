@@ -6,7 +6,7 @@
 	<c:forEach var="e" items="${atlist }">
 	<table border="1">
 	<tr>
-		<td colspan="5">TAS2R38 유전자는 PAV와 AVI 타입 두 가지가 있는데, PAV 타입은 100배에서 1000배 가량 쓴맛을 강하게 느낀다고 한다. 이는 오이를 먹어도 마찬가지이므로 이러한 유전자를 타고 난 사람은 오이를 싫어할 수밖에 없다</td>
+		<td colspan="5"><marquee behavior="alternate" direction="up" width="700" height="60" bgcolor="white" scrolldelay="5" scrollamount="30"><marquee behavior="alternate" scrollamount="10">임<marquee behavior="alternate" scrollamount="10">성<marquee behavior="alternate" scrollamount="10">윤</marquee></marquee></marquee></marquee></td>
 	</tr>
 	
 	<tr>
@@ -40,4 +40,5 @@
 		</td><td>HD</td><td>HD</td>
 	</tr>
 	</table>
+	
 	</c:forEach>

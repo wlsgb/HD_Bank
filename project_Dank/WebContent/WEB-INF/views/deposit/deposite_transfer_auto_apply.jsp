@@ -114,34 +114,35 @@
 										</div>
 										<input type="hidden" name="atacheck" value="0" />
 										<input type="hidden" name="ataing" value="0" />
-										
+										<input type="hidden" name="atadterm" />
+										<input type="hidden" name="atastopdate" />
 													  
-													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/>
+<!-- 													  <input type="button" data-toggle="collapse" data-target="#demo" value="매달"/> -->
 			
 			
 			
 														<!--// 숨겨지는 영역 -->
 														
-														<div id="demo" class="collapse">
-															<div class="form-group ">
-															<label for="email2">이체주기</label> <br />
+<!-- 														<div id="demo" class="collapse"> -->
+<!-- 															<div class="form-group "> -->
+<!-- 															<label for="email2">이체주기</label> <br /> -->
 				
-															<div class="form-inline" style="margin-left: 10%;">
+<!-- 															<div class="form-inline" style="margin-left: 10%;"> -->
 				
-																<input type="text" placeholder="매월 19일" class="form-control"
-																	style="text-align: center; width: 360px;" name="atadterm" />
-															</div>
-															</div>
-															<div class="form-group ">
-															<label for="email2">종료일</label> <br />
+<!-- 																<input type="text" placeholder="매월 19일" class="form-control" -->
+<!-- 																	style="text-align: center; width: 360px;" name="atadterm" /> -->
+<!-- 															</div> -->
+<!-- 															</div> -->
+<!-- 															<div class="form-group "> -->
+<!-- 															<label for="email2">종료일</label> <br /> -->
 				
-															<div class="form-inline" style="margin-left: 10%;">
-																<input type="date" class="form-control"  name="atastopdate"/>
-															</div>
-															</div>
+<!-- 															<div class="form-inline" style="margin-left: 10%;"> -->
+<!-- 																<input type="date" class="form-control"  name="atastopdate"/> -->
+<!-- 															</div> -->
+<!-- 															</div> -->
 																		    
 														
-														  </div>
+<!-- 														  </div> -->
 														<!-- 숨겨지는 영역 //-->
 										
 										

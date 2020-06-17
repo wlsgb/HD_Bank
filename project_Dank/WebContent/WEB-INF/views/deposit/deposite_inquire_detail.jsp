@@ -42,51 +42,50 @@
 									<div class="row">
 									<div class="col-md-2 col-lg-2"></div>
 										<div class="col-md-8 col-lg-8">
-											<div class="form-group">
-												<label for="email2">상품명</label>
-												<input type="text" style="width: 400px;" class="form-control" id="email2" placeholder="110-111-12345 : 보통예금">
-											</div>
-											<hr class="my-0">
-											<div class="form-group " >
-												<label for="email2" >월별조회</label>
-												  <div class="form-inline">
-												    <label class="col-xs-4">
-												    <input type="text" class="form-control" style="width: 40%; margin: 10px;" placeholder="2020"><span style="margin: 3px;">년</span>
-												    <input type="text" class="form-control"  style="width: 40%; margin: 10px;"  placeholder="05">월
-												    </label>
+										
+											
+<!-- 											<div class="form-group " > -->
+<!-- 												<label for="email2" >월별조회</label> -->
+<!-- 												  <div class="form-inline"> -->
+<!-- 												    <label class="col-xs-4"> -->
+<!-- 												    <input type="text" class="form-control" style="width: 40%; margin: 10px;" placeholder="2020"><span style="margin: 3px;">년</span> -->
+<!-- 												    <input type="text" class="form-control"  style="width: 40%; margin: 10px;"  placeholder="05">월 -->
+<!-- 												    </label> -->
 												    
-												  </div>
-											<hr class="my-0">
-											</div>
+<!-- 												  </div> -->
+<!-- 											<hr class="my-0"> -->
+<!-- 											</div> -->
 											
 											
 											<div class="form-group">
 												<label class="form-label">조회기간</label><br />
 											
-												<div class="selectgroup w-30 " style="margin-left:20%" >
-													<label class="selectgroup-item" >
-														<input type="radio" name="value" value="50" class="selectgroup-input" >
-														<span class="selectgroup-button">당일</span>
-													</label>
-													<label class="selectgroup-item">
-														<input type="radio" name="value" value="100" class="selectgroup-input">
-														<span class="selectgroup-button">1주일</span>
-													</label>
-													<label class="selectgroup-item">
-														<input type="radio" name="value" value="200" class="selectgroup-input">
-														<span class="selectgroup-button">1개월</span>
-													</label>
+<!-- 												<div class="selectgroup w-30 " style="margin-left:20%" > -->
+<!-- 													<label class="selectgroup-item" > -->
+<!-- 														<input type="radio" name="value" value="50" class="selectgroup-input" > -->
+<!-- 														<span class="selectgroup-button">당일</span> -->
+<!-- 													</label> -->
+<!-- 													<label class="selectgroup-item"> -->
+<!-- 														<input type="radio" name="value" value="100" class="selectgroup-input"> -->
+<!-- 														<span class="selectgroup-button">1주일</span> -->
+<!-- 													</label> -->
+<!-- 													<label class="selectgroup-item"> -->
+<!-- 														<input type="radio" name="value" value="200" class="selectgroup-input"> -->
+<!-- 														<span class="selectgroup-button">1개월</span> -->
+<!-- 													</label> -->
 											
-										</div>
-										 <div class="form-inline">
+<!-- 												</div> -->
+													<form action="inquire_detail_slct" method="post">
+													 <div class="form-inline">
 												    <label class="col-xs-4">
-												    <input type="text" class="form-control" style="width: 40%; margin: 10px;" placeholder="2020 02 04"><span style="margin: 3px;">~</span>
-												    <input type="text" class="form-control"  style="width: 40%; margin: 10px;"  placeholder="2020 04 22">
+												    <input type="date" class="form-control" name="startdate" id="startdate" style="width: 50%; margin: 10px;"><span style="margin: 3px;">~</span>
+												    <input type="date" class="form-control" name="lastdate" id="lastdate" style="width: 50%; margin: 10px;"  >
 												    </label>
 												    
 												  </div>
-												 <button type="button" class="btn btn-success" style="margin-left: 35%">조회하기</button>
-											
+												  	<input type="hidden" name="ac_num"  value="${ac_num }"/>
+												 	<button type="submit" class="btn btn-success" style="margin-left: 35%">조회하기</button>
+													</form>
 											
 											
 											
@@ -175,12 +174,12 @@
 													<a href="inquire_detail?ac_num=${ac_num }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">></a>
 												</c:if>
 											</div>
-								<div style="margin:10px auto;">
-								<button type="button" class="btn btn-info btn-sm">엑셀 내리기</button>
+<!-- 								<div style="margin:10px auto;"> -->
+<!-- 								<button type="button" class="btn btn-info btn-sm">엑셀 내리기</button> -->
 <!-- 								<div id="result" style="position: absolute; background: #000; width: 30px; height: 30px; opacity: 0.4; border-radius: 100%;"> </div> -->
 
 
-								</div>
+<!-- 								</div> -->
 							</div>
 							</div>
 

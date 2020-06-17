@@ -27,44 +27,35 @@ public class BangkingDao {
 	
 	///////////////////////////////////////////////////////////입금시작@
 	public int depcheckac(String ac_num) {
-		System.out.println("checkac");
 		return ss.selectOne("bangking.depcheckac", ac_num);
 	}
 	public void depplusdep(String dep_money) {
-		System.out.println("plusdep");
 		ss.insert("bangking.depplusdep", dep_money);
 	}
 	public void depplussp(Map<String, String> paramapsp ) {
-		System.out.println("plussp");
 		ss.insert("bangking.depplussp", paramapsp );
 	}
 	public void depdepupbalance(Map<String, String> paramapbal) {
-		System.out.println("depupbalance");
 		ss.update("bangking.depdepupbalance", paramapbal);
 	}
 	///////////////////////////////////////////////////////////입금종료/@
 	
 	///////////////////////////////////////////////////////////출금시작@
 	public int witcheckac(String ac_num) {
-		System.out.println("checkac");
 		return ss.selectOne("bangking.witcheckac", ac_num);
 	}
 	
 	public String witcheckbal(Map<String, String> paramckbal) {
-		System.out.println("checkbalance");
 		return ss.selectOne("bangking.witcheckbalance", paramckbal);
 	}
 	
 	public void witpluswit(String wit_money) {
-		System.out.println("pluswit");
 		ss.insert("bangking.witpluswit", wit_money);
 	}
 	public void witplussp(Map<String, String> paramapsp ) {
-		System.out.println("plussp");
 		ss.insert("bangking.witplussp", paramapsp );
 	}
 	public void witwitupbalance(Map<String, String> paramapbal) {
-		System.out.println("witupbalance");
 		ss.update("bangking.witwitupbalance", paramapbal);
 	}
 	///////////////////////////////////////////////////////////출금종료/@
@@ -109,6 +100,9 @@ public class BangkingDao {
 	public List<AccountHistoryVO> gethistory(Map<String, String> historymap){
 		return ss.selectList("bangking.achistory", historymap);
 	}
+	public List<AccountHistoryVO> gethistory_slct(Map<String, String> historymap){
+		return ss.selectList("bangking.achistory_slct", historymap);
+	}
 	public int gettotalcnt(Map<String, String> historymap) {
 		return ss.selectOne("bangking.totalcnt", historymap);
 	}
@@ -134,7 +128,6 @@ public class BangkingDao {
 		ss.update("bangking.afterchkup", ata_code);
 	}
 	public List<Map<String, String>> atlist(Map<String, String> atlistparam){
-		System.out.println("atlist 실행댐");
 		return ss.selectList("bangking.atlist", atlistparam);
 	}
 	public void ifnomoneywhenat(String ata_code) {
