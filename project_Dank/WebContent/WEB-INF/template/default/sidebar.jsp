@@ -7,7 +7,7 @@
 				<div class="sidebar-content">
 					<c:choose>
 						<c:when test="${member.mem_email==null }">
-							<!-- 로그인 창 시작 -->
+							<!-- 로그인 창 시작합니다. -->
 							<form method="post" action="login" >
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block" value="로그인" />
