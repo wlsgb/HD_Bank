@@ -42,7 +42,7 @@
 							<div class="card-pricing2 card-success">
 								<div class="pricing-header">
 									<h3 class="fw-bold">보안카드</h3>
-									<span class="sub-title">신청 / 재발급</span>
+									<span class="sub-title">신청</span>
 								</div>
 								<div class="price-value">
 									<div class="value">
@@ -57,7 +57,7 @@
 						<div class="card-pricing2 card-primary">
 							<div class="pricing-header">
 								<h3 class="fw-bold">OTP</h3>
-								<span class="sub-title">신청 / 해지</span>
+								<span class="sub-title">신청</span>
 							</div>
 							<div class="price-value">
 								<div class="value" >
