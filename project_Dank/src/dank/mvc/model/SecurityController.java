@@ -105,8 +105,7 @@ public class SecurityController {
 
 	// 보안카드 신청 폼 페이지
 	@RequestMapping(value = "/securitycard")
-	public String viewSecurity_card(Model m, HttpSession session,
-			@RequestParam(value = "error", defaultValue = "t") String error) {
+	public String viewSecurity_card(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
@@ -120,7 +119,6 @@ public class SecurityController {
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
-		m.addAttribute("error", error);
 		return "security/securityCard";
 	}
 

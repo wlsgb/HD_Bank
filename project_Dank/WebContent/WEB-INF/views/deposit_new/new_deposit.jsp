@@ -283,6 +283,8 @@
 				alert("비밀번호 재입력을 입력해주세요");
 			}else if($("#successData").val() !== 'success'){
 				alert("이메일 인증을 해주세요.");
+			}else if($("#ac_pwd").val() !== $("#ac_repwd").val()){
+				alert("비밀번호를 확인해주세요.");
 			}else{
 				f.submit();
 			}

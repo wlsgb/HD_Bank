@@ -32,7 +32,6 @@
 							<div class="card">
 								<div class="card-header">
 									
-									
 								</div>
 								
 								<div class="card-body">
@@ -46,7 +45,6 @@
 									
 									
 										
-										<c:forEach items="${list }" var="e" varStatus="i">
 										
 									<div class="card-body" style="">
 									
@@ -69,12 +67,12 @@
 										
 											<tr>
 												<td> 이름 </td>
-												<td> ${e.mem_name}</td>
+												<td> ${memberVO.mem_name}</td>
 												
 											</tr>
 											<tr>
 												<td>휴대폰번호</td>
-												<td>${e.mem_phn}</td>
+												<td>${memberVO.mem_phn}</td>
 												
 											</tr>
 											
@@ -156,7 +154,6 @@
 								</div>
 										
 						
-						</c:forEach>
 						
 										
 										

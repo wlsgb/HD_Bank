@@ -14,13 +14,12 @@
   	</select> 
   	
   	<update id="updatemyinfo" parameterType="mem">
-  		update member set mem_name = #{mem_name}, mem_phn = #{mem_phn},
-		mem_loc = #{mem_loc} 
+  		update member set mem_name = #{mem_name}, mem_phn = #{mem_phn}, mem_loc = #{mem_loc} 
 		where mem_code=#{mem_code}
   	</update>
   	
   	<update id="updatemypwd" parameterType="mem">
-  		update member set mem_pwd = #{mem_pwd}, 
+  		update member set mem_pwd = #{mem_pwd}
 		where mem_code=#{mem_code}
   	</update>
   	

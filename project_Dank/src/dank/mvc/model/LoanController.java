@@ -44,6 +44,7 @@ public class LoanController {
 		model.addAttribute("list", list);
 		return "loan/product";
 	}
+	
 	@RequestMapping(value = "/productinfo")
 	public ModelAndView productinfo(int lp_num) {
 		ModelAndView mav = new ModelAndView("loan/server/productserver");
