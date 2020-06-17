@@ -225,30 +225,10 @@ public class DepositController {
 			mav.setViewName("login/login");
 			return mav;
 		}
-		//session.setAttribute("mem_code", mem_code);
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		
-
-		//System.out.println("계좌조회에서 있는 세션은="+session.getAttribute("mem_code"));
-		System.out.println("계좌조회에서 있는 세션은="+sessionmem.getMem_code());
-		
-		
-		
-
 		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
 
-		for(AccountVO e :aclist) {
-			
-			System.out.println(e.getAc_num());
-			System.out.println(e.getAc_balance());
-			System.out.println(e.getAc_name());
-			System.out.println(e.getSaving().getSav_name());
-			System.out.println(e.getSaving().getShas_code());
-			System.out.println(e.getIns().getIns_name());
-			System.out.println(e.getIns().getShac_code());
-			System.out.println("*******************");
-			
-		}
 		mav.addObject("aclist",aclist);
 		mav.setViewName("deposit/deposite_inquire");
 		
@@ -259,11 +239,11 @@ public class DepositController {
 	public ModelAndView executedeposit(HttpSession session,String ac_num) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("******************입금실행댐,계좌번호는 ="+ac_num+",");
+
 		
 		String money ="10000";
 		
-		System.out.println("존재유무"+bangkingdao.depcheckac(ac_num));
+	
 		
 		if(bangkingdao.depcheckac(ac_num)>=1) {
 		Map<String, String> paramapsp = new HashMap<String, String>();
@@ -289,11 +269,11 @@ public class DepositController {
 		//int acnum = Integer.parseInt(ac_num);
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("******************출금실행댐,계좌번호는 ="+ac_num+",");
+		
 		
 		String money ="10000";
 		
-		System.out.println("존재유무"+bangkingdao.witcheckac(ac_num));
+		
 		
 		if(bangkingdao.witcheckac(ac_num)>=1) {
 			Map<String, String> paramckbal = new HashMap<String, String>();
@@ -332,12 +312,7 @@ public class DepositController {
 			
 			) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		System.out.println("트랜스퍼입니다."+sessionmem.getMem_code());
-		System.out.println("나의계좌"+myac);
-		System.out.println("입금계좌"+yourac);
-		System.out.println("입금액"+trmoney);
-		System.out.println("받는분통장표시"+youracwrite);
-		System.out.println("나의통장표시"+myacwrite);
+		
 
 		
 		Map<String, String> mapmy = new HashMap<String, String>();
@@ -368,10 +343,10 @@ public class DepositController {
 		
 		
 		if(bangkingdao.trtrAcChk(myac) >=1) {
-			System.out.println("1");
+			
 			if(bangkingdao.trtrAcChk(yourac) >=1) {
 
-				System.out.println("2");
+				
 				
 				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
 					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
@@ -398,16 +373,14 @@ public class DepositController {
 			,@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage
 			) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		System.out.println("ac_num : "+ac_num);
-		System.out.println("session ? : "+sessionmem.getMem_code());
+		
 		Map<String, String> historymap = new HashMap<String, String>();
 		historymap.put("ac_num", ac_num);
 		historymap.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		
 		int total = bangkingdao.gettotalcnt(historymap);
 		pvo = new PageVO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
-		System.out.println("Start : "+pvo.getStartPage());
-		System.out.println("End : "+pvo.getEnd());
+		
 		
 		historymap.put("start", String.valueOf(pvo.getStart()));
 		historymap.put("end", String.valueOf(pvo.getEnd()));
@@ -415,7 +388,7 @@ public class DepositController {
 		
 		
 		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
-		System.out.println("히스토리 리스트 크기 : "+history.size());
+		
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -425,6 +398,47 @@ public class DepositController {
 		mav.addObject("ac_num",ac_num);
 		return mav;
 	}
+	
+	
+	//계좌내역상세조회페이지2
+		@RequestMapping(value = { "/inquire_detail_slct" })
+		public ModelAndView inqure_detail_slctPage(
+				HttpSession session
+				,PageVO pvo
+				,@RequestParam(value = "ac_num") String ac_num
+				,@RequestParam(value = "startdate") String startdate
+				,@RequestParam(value = "lastdate") String lastdate
+				,@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage
+				,@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage
+				) {
+			MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+			System.out.println("ac_num은 :" +ac_num);
+			Map<String, String> historymap = new HashMap<String, String>();
+			historymap.put("ac_num", ac_num);
+			historymap.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+			
+			int total = bangkingdao.gettotalcnt(historymap);
+			pvo = new PageVO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+			
+			
+			historymap.put("start", String.valueOf(pvo.getStart()));
+			historymap.put("end", String.valueOf(pvo.getEnd()));
+			historymap.put("startdate", startdate);
+			historymap.put("lastdate", lastdate);
+			
+			
+			
+			List<AccountHistoryVO> history =bangkingdao.gethistory_slct(historymap);
+			
+			
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("deposit/deposite_inquire_detail");
+			mav.addObject("history",history);
+			mav.addObject("paging",pvo);
+			mav.addObject("ac_num",ac_num);
+			return mav;
+		}
 	//이체 페이지로 이동
 	@RequestMapping(value = { "/transfer" })
 	public ModelAndView transferPage(HttpSession session,@RequestParam(value = "ac_num",defaultValue = "0") String ac_num) {
@@ -436,7 +450,7 @@ public class DepositController {
 		}
 		
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		System.out.println("이체 세션은 "+sessionmem.getMem_code());
+		
 
 		Map<String, String> getmyaclistwhentr =new  HashMap<String, String>();
 		getmyaclistwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
@@ -445,11 +459,9 @@ public class DepositController {
 		
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 
-		//List<Integer> myaclist = bangkingDao.getmyaclistwhentr(sessionmem.getMem_code());
+		
 
-		for(String e : myaclist) {
-			System.out.println(e);
-		}
+		
 		
 		mav.setViewName("deposit/deposite_transfer");
 		mav.addObject("myaclist",myaclist);
@@ -467,6 +479,45 @@ public class DepositController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = { "/transfer_timereset" })
+	public ModelAndView transferautotimeresetPage(
+			HttpSession session
+			,@RequestParam(value = "restartdate") String restartdate
+			,@RequestParam(value = "retime") String retime
+			,@RequestParam(value = "ata_code") String ata_code
+			) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		Map<String, String> atresetparam = new HashMap<String, String>();
+		atresetparam.put("restartdate", restartdate);
+		atresetparam.put("retime", retime);
+		atresetparam.put("ata_code", ata_code);
+	
+		bangkingdao.atreset(atresetparam);
+		
+		
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist",aclist);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/transfer_auto_cancle")
+	public ModelAndView transferautoacancle(HttpSession session
+			,@RequestParam(value = "ata_code") String ata_code
+			) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		
+		bangkingdao.atdelete(ata_code);
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist",aclist);
+		return mav;
+	}
 
 	@RequestMapping(value = { "/transfer_auto_apply" })
 	public ModelAndView transferautoapplyPage(HttpSession session
@@ -479,9 +530,7 @@ public class DepositController {
 		getmyaclistwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		getmyaclistwhentr.put("ac_num", ac_num);
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
-		for(String e : myaclist) {
-			System.out.println("계좌드릉ㄴ " +e);
-		}
+	
 		
 		mav.setViewName("deposit/deposite_transfer_auto_apply");
 		mav.addObject("myaclist",myaclist);
@@ -510,19 +559,7 @@ public class DepositController {
 		atapplyvo.setAta_check(Integer.parseInt(atacheck));
 		atapplyvo.setAta_ing(Integer.parseInt(ataing));
 	
-//		System.out.println();
-		System.out.println(atapplyvo.getMem_code());
-		System.out.println(atapplyvo.getAc_num());
-		System.out.println(atapplyvo.getAta_yourac());
-		System.out.println(atapplyvo.getAta_setmoney());
-		System.out.println(atapplyvo.getAta_startdate());
-		System.out.println(atapplyvo.getAta_time());
-		System.out.println(atapplyvo.getAta_stopdate());
-		System.out.println(atapplyvo.getAta_dterm());
-		System.out.println(atapplyvo.getAta_myacmemo());
-		System.out.println(atapplyvo.getAta_youracmemo());
-		System.out.println(atapplyvo.getAta_check());
-		System.out.println(atapplyvo.getAta_ing());
+
 	
 		
 		
@@ -543,10 +580,9 @@ public class DepositController {
 		Map<String, String> atlistparam = new HashMap<String, String>();
 		atlistparam.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		atlistparam.put("ac_num", ac_num);
-		System.out.println(atlistparam.get("mem_code"));
-		System.out.println(atlistparam.get("ac_num"));
+		
 		List<Map<String, String>> atlist = bangkingdao.atlist(atlistparam);
-		System.out.println(atlist.size());
+		
 		mav.addObject("atlist",atlist);
 		return mav;
 	}
