@@ -12,6 +12,10 @@ public class MemberDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 
+	public String pwdChk(int num) {
+		return ss.selectOne("member.pwdChk", num);
+	}
+	
 	public String nameChk(String email) {
 		return ss.selectOne("member.namechk", email);
 	}
