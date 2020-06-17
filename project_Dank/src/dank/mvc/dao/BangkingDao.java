@@ -94,6 +94,26 @@ public class BangkingDao {
 	public void trtrdepupbal(Map<String, String> mapyour) {
 		ss.update("bangking.trtrdepupbal", mapyour);
 	}
+	
+	//어드민계좌 거래시
+	public String trbalChkadmin(Map<String, String> mapmy) {
+		return ss.selectOne("bangking.trbalchkadmin", mapmy);
+	}
+	public void trplusspwitadmin(Map<String, String> mapmysp) {
+		ss.insert("bangking.trplusspwitadmin", mapmysp);
+	}
+	public void trtrwitupbaladmin(Map<String, String> mapmy) {
+		ss.update("bangking.trtrwitupbaladmin", mapmy);
+	}
+	
+	public void trplusspdepadmin(Map<String, String> mapyoursp) {
+		ss.insert("bangking.trplusspdepadmin", mapyoursp);
+	}
+	public void trtrdepupbaladmin(Map<String, String> mapyour) {
+		ss.update("bangking.trtrdepupbaladmin", mapyour);
+	}
+	///어드민계좌 거래시 종료
+	
 	///////////////////////////////////////////////////////////계좌이체종료/@
 	
 	///////////////////////////////////////////////////////////거래내역조회시작@

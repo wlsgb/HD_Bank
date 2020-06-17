@@ -281,6 +281,101 @@
 		                              from deposit))
 		    )
 		</insert>
+		
+		<!--어드민계좌 일경우   -->
+		<!--if3.출금계좌A잔고체크 -->
+		<select id="trbalchkadmin" parameterType="hashMap" resultType="String">
+			select a.ac_balance ac_balance
+		    from account a
+		    	, account_admin ac
+		    where a.ac_num='9001111111'
+		    	 and ac.hd_code=2
+		    	 and a.ac_code=ac.ac_code
+		</select>
+		<!--tr5.출금계좌A입출내역작성,(내통장에표시할거표시) -->
+		<insert id="trplusspwitadmin" parameterType="hashMap">
+			insert into sav_process values(sav_process_seq.nextval
+	        ,(select a.ac_code ac_code
+	        from account a
+	        	, account_admin ad
+	        where a.ac_num=#{ac_num} 
+	        	and ad.hd_code=#{hd_code}
+	        	 and a.ac_code=ad.ac_code)
+	        ,#{sp_name}
+	        ,null
+	        ,(select max(WIT_CODE)
+	                    from withdraw)
+	        ,(select max(AT_CODE)
+	                    from transfer)
+	        ,(select a.ac_balance ac_balance
+	         from account a
+	         		,account_admin ad
+	          where a.ac_num=#{ac_num}
+	          		 and ad.hd_code=#{hd_code}
+	          		  and a.ac_code=ad.ac_code)-(select wit_money 
+									               from withdraw
+									               where wit_code=(select max(wit_code) 
+									                                  from withdraw))
+	        )
+		</insert>
+		<!--tr6.출금계좌A통장잔고 업데이트 -->
+		<update id="trtrwitupbaladmin" parameterType="hashMap">
+		 	update account 
+	        set ac_balance=(select sp_balance 
+	                        from sav_process 
+	                        where sp_code=(select max(sp_code) 
+	                                        from sav_process))
+	        where ac_code=
+	            (select a.ac_code ac_code
+	            from account a
+	            	, account_admin ad
+	            where a.ac_num=#{ac_num}
+	            	 and ad.hd_code=#{hd_code}
+	            	  and a.ac_code=ad.ac_code)
+		</update>
+		
+		
+		
+		<!--tr8.입금계좌B 입출내역작성(받는분통장에 표시할거 표시) -->
+		<insert id="trplusspdepadmin" parameterType="hashMap">
+			insert into sav_process values(sav_process_seq.nextval
+		    ,(select a.ac_code ac_code
+		    from account a
+		    	, account_admin ad
+		    where a.ac_num=#{ac_num}
+		    	 and ad.hd_code=#{hd_code}
+		    	  and a.ac_code=ad.ac_code)
+		    ,#{sp_name}
+		    ,(select max(dep_code)
+		                from deposit)
+		    ,null
+		    ,(select max(at_code)
+		                from transfer)
+		    ,(select a.ac_balance 
+		      from account a
+		      		, account_admin ad 
+		      where a.ac_num=#{ac_num}
+		      		 and ad.hd_code=#{hd_code} 
+		      		 and a.ac_code=ad.ac_code)
+		    +(select dep_money 
+		           from deposit 
+		           where dep_code=(select max(dep_code) 
+		                              from deposit))
+		    )
+		</insert>
+		<!--tr9.입금계좌B 통장잔고 업데이트 -->
+	  	<update id="trtrdepupbaladmin" parameterType="hashMap">
+	  		update account 
+			set ac_balance=(select sp_balance 
+			                from sav_process 
+			                where sp_code=(select max(sp_code) 
+			                                from sav_process))
+			where ac_code=
+			    (select a.ac_code ac_code
+			    from account a ,account_admin ad
+			    where a.ac_num=#{ac_num} and ad.hd_code=#{hd_code} and a.ac_code=ad.ac_code)
+	  	</update>
+		<!--어드민 계좌일 경우 끝  -->
 		<!--tr9.입금계좌B 통장잔고 업데이트 -->
 	  	<update id="trtrdepupbal" parameterType="hashMap">
 	  		update account 
