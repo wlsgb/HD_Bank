@@ -104,7 +104,7 @@
 				//console.log(savlist);
 				for(var e in savlist){
 					//console.log(savlist[e].sav_name);
-					$('#depval').append("<tr><th scope='col'>"+savlist[e].sav_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='saving_detail?sav_code="+savlist[e].sav_code+"'\"></div></div></td></tr>")
+					$('#depval').append("<tr><th scope='col'>"+savlist[e].sav_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='new_savdetail?sav_code="+savlist[e].sav_code+"'\"></div></div></td></tr>")
 				};
 			}
 		});
@@ -120,7 +120,7 @@
 				//console.log(savlist);
 				for(var e in savlist){
 					//console.log(savlist[e].sav_name);
-					$('#depval').append("<tr><th scope='col'>"+savlist[e].sav_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='saving_detail?sav_code="+savlist[e].sav_code+"'\"></div></div></td></tr>")
+					$('#depval').append("<tr><th scope='col'>"+savlist[e].sav_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='new_savdetail?sav_code="+savlist[e].sav_code+"'\"></div></div></td></tr>")
 				};
 			}
 		});
@@ -136,7 +136,7 @@
 				//console.log(inslist);
 				for(var e in inslist){
 					//console.log(inslist[e].ins_name);
-					$('#depval').append("<tr><th scope='col'>"+inslist[e].ins_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='installment_detail?ins_code="+inslist[e].ins_code+"'\"></div></div></td></tr>")
+					$('#depval').append("<tr><th scope='col'>"+inslist[e].ins_name+"</th><td><div class='row'><div class='col-md-4 ml-auto'><input type='button' class='btn btn-default' value='신청하기' onclick=\"location='new_insdetail?ins_code="+inslist[e].ins_code+"'\"></div></div></td></tr>")
 				};
 			}
 		});

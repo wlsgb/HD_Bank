@@ -38,4 +38,18 @@ public class BangkingService {
 		bangkingdao.trplusspdep(mapyoursp);
 		bangkingdao.trtrdepupbal(mapyour);
 	}
+	public void autotransferprocess(String trmoney,Map<String, String> mapmy,Map<String, String> mapmysp,
+			Map<String, String> mapyour,Map<String, String> mapyoursp, String atacode) {
+			bangkingdao.trpluswit(trmoney);
+			bangkingdao.trpluswittr(mapmy);
+			bangkingdao.trplusspwit(mapmysp);
+			bangkingdao.trtrwitupbal(mapmy);
+			
+			bangkingdao.trplusdep(trmoney);
+			bangkingdao.trplusdeptr(mapyour);
+			bangkingdao.trplusspdep(mapyoursp);
+			bangkingdao.trtrdepupbal(mapyour);
+			
+			bangkingdao.afterchkup(atacode);
+		}
 }

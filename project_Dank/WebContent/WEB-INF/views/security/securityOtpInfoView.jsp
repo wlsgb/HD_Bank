@@ -35,12 +35,11 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">보안카드</h4>
+										<h4 class="card-title">OTP</h4>
 									</div>
 									<p class="card-category">
 									신청 개인정보 확인</p>
 								</div>
-								
 								<div class="card-body">
 									<div class="row">
 										<div class="col-12">
@@ -48,7 +47,8 @@
 										
 										
 										<!-- 보안카드 신청 form 시작 -->
-											<form action="securitycardcreate" method="post">
+											<form action="securitysertify" method="post">
+												<c:set var="pageName" scope="session" value="securityotpsuccess"/>
 												<table class="table mt-1">
 												<tbody>
 													<tr>
@@ -82,7 +82,7 @@
 															<div class="row">
 																<div class="col-md-6 ml-auto mr-auto">
 																	<button type="button" class="btn btn-danger" id="cancel">재입력</button>
-																	<input type="submit" class="btn btn-success" value="확인">
+																	<input type="submit" class="btn btn-success" value="다음">
 																</div>
 															</div>
 														</th>

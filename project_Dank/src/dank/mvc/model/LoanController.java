@@ -28,10 +28,10 @@ import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayVO;
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.deposit.AccountVO_backup;
+import dank.mvc.vo.deposit.AccountVO;
 
 @Controller
-public class loanController {
+public class LoanController {
 
 	@Autowired
 	private LoanDao loanDao;
@@ -408,7 +408,7 @@ public class loanController {
 		mav.addObject("vo", vo);
 		
 		
-		List<AccountVO_backup> list = loanDao.repayaccount(mem_code);
+		List<AccountVO> list = loanDao.repayaccount(mem_code);
 		mav.addObject("list", list);
 		return mav;
 	}
