@@ -122,8 +122,6 @@
 			<script>
 			
 		$(document).ready(function() {
-			
-			
 			setInterval(function() {
 				
 				$.ajax({
@@ -253,9 +251,6 @@
 								console.log("나가뤼")
 								
 							}
-							
-							
-							
 							console.log("현재시각"+nowtimehour+":"+nowtimeminute)
 							console.log(ajaxdatearr[0]+"//"+ajaxdatearr[1]+"//"+ajaxdatearr[2]+"//"+ajaxtimearr[0]+"//"+ajaxtimearr[1]+"//")
 						})
@@ -270,17 +265,6 @@
 			
 			///////////////////////////////////////////////////
 			
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			$('#ac_num').change(function() {
 				console.log("SSS")
 				$('#ajaxtarget').html("");
@@ -292,7 +276,6 @@
 				})
 			})
 		})
-		
 		
 		
 		

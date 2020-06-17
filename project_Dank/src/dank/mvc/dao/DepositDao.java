@@ -17,7 +17,7 @@ public class DepositDao {
 	private SqlSessionTemplate ss;
 	
 	// 비밀번호 체크
-	public int pwdChk(int acNum) {
+	public int pwdChk(String acNum) {
 		return ss.selectOne("deposit.accountPwChk",acNum);
 	}
 	//특정 예금상품 조회
