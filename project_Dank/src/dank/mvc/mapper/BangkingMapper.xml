@@ -478,6 +478,7 @@
 		<result column="ata_time" property="ata_time"/>
 		<result column="ata_ing" property="ata_ing"/>
 		<result column="ata_check" property="ata_check"/>
+		<result column="ata_code" property="ata_code"/>
 	</resultMap>
 	
 	<select id="atlist" parameterType="hashMap" resultMap="atlistResult">
@@ -494,6 +495,7 @@
                   ,atapply.ata_time ata_time
                   ,atapply.ata_ing ata_ing
                   ,atapply.ata_check ata_check
+                  ,atapply.ata_code ata_code
                 
                   from at_application atapply, account a, account_client ac
                   where atapply.ac_code =a.ac_code and a.ac_code = ac.ac_code and ac.mem_code=#{mem_code} and a.ac_num=#{ac_num}
@@ -503,6 +505,14 @@
 	<update id="ifnomoneywhenat" parameterType="String">
 	update at_application set ata_check = -1 where ata_code=#{ata_code}
 	</update>
+	
+	<update id="atreset" parameterType="hashMap">
+	update at_application set ata_startdate=#{restartdate},ata_time=#{retime} where ata_code=#{ata_code}
+	</update>
+	
+	<delete id="atdelete" parameterType="String">
+	delete at_application where ata_code =#{ata_code}
+	</delete>
 <!-- /@자동이체 종료 -->
 
 

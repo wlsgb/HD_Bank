@@ -133,6 +133,12 @@ public class BangkingDao {
 	public void ifnomoneywhenat(String ata_code) {
 		ss.update("bangking.ifnomoneywhenat",  ata_code);
 	}
+	public void atreset(Map<String, String> atresetparam) {
+		ss.update("bangking.atreset", atresetparam);
+	}
+	public void atdelete(String ata_code) {
+		ss.delete("bangking.atdelete", ata_code);
+	}
 	///////////////////////////////////////////////////////////자동이체종료/@
 	
 }

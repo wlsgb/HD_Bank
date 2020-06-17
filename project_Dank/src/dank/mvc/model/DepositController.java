@@ -220,7 +220,7 @@ public class DepositController {
 	public ModelAndView executedeposit(HttpSession session,String ac_num) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("******************ÀÔ±Ý½ÇÇà´ï,°èÁÂ¹øÈ£´Â ="+ac_num+",");
+
 		
 		String money ="10000";
 		
@@ -324,10 +324,10 @@ public class DepositController {
 		
 		
 		if(bangkingdao.trtrAcChk(myac) >=1) {
-			System.out.println("1");
+			
 			if(bangkingdao.trtrAcChk(yourac) >=1) {
 
-				System.out.println("2");
+				
 				
 				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
 					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
@@ -458,6 +458,45 @@ public class DepositController {
 		mav.setViewName("deposit/deposite_transfer_auto");
 		mav.addObject("aclist",aclist);
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = { "/transfer_timereset" })
+	public ModelAndView transferautotimeresetPage(
+			HttpSession session
+			,@RequestParam(value = "restartdate") String restartdate
+			,@RequestParam(value = "retime") String retime
+			,@RequestParam(value = "ata_code") String ata_code
+			) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		Map<String, String> atresetparam = new HashMap<String, String>();
+		atresetparam.put("restartdate", restartdate);
+		atresetparam.put("retime", retime);
+		atresetparam.put("ata_code", ata_code);
+	
+		bangkingdao.atreset(atresetparam);
+		
+		
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist",aclist);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/transfer_auto_cancle")
+	public ModelAndView transferautoacancle(HttpSession session
+			,@RequestParam(value = "ata_code") String ata_code
+			) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		
+		bangkingdao.atdelete(ata_code);
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist",aclist);
 		return mav;
 	}
 

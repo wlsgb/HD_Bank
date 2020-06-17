@@ -108,16 +108,10 @@
 									<table>
 									<tr>
 									<td style="width: 400px; text-align: center;">
-									<select class="form-control" style="width: 40%; margin-left: 30px;">
-									    <option selected="selected"
-									    >전체</option>
-									    <option >일별</option>
-									    <option >월별</option>
-									    <option >기타</option>
-									</select>
+									
 									</td>
-									<td style="width: 400px; text-align: center;">총입금금액 (100건) 5,000,000 원</td>
-									<td style="width: 400px; text-align: center;">총출금금액 (10건) 200,000 원</td>
+<!-- 									<td style="width: 400px; text-align: center;">총입금금액 (100건) 5,000,000 원</td> -->
+<!-- 									<td style="width: 400px; text-align: center;">총출금금액 (10건) 200,000 원</td> -->
 									</tr>
 									</table>
 								</div>
@@ -206,12 +200,12 @@
 // 				        //attachEvent는 IE8이하와 오페라에서 사용하는 명령어이다
 // 				         };
 
-$(document).ready(function() {
-	$('tbody').children().children().mouseover(function() {
+// $(document).ready(function() {
+// 	$('tbody').children().children().mouseover(function() {
 // 		console.log($(this).text())
-	})
+// 	})
 
-})
+// })
 
 
 	
