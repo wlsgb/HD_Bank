@@ -31,7 +31,14 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">HD 기본통장</h4>
+										<c:choose>
+											<c:when test="${saving != null }">
+												<h4 class="card-title">${saving.sav_name }</h4>
+											</c:when>
+											<c:when test="${ins != null }">
+												<h4 class="card-title">${ins.ins_name }</h4>
+											</c:when>
+										</c:choose>
 									</div>
 									<p class="card-category">
 									예금 상품 / 신청</p>
@@ -111,13 +118,35 @@
 															</div>
 														</td>
 													</tr>
+													<c:if test="${ins != null }">
+													<tr>
+														<th scope="col">기간(개월수)</th>
+														<td>
+															<div class="row">
+																<div class="col-6">
+																	<input type="text" id="ins_term" name="ins_term" class="form-control input-full">
+																</div>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<th scope="col">월 납입금액</th>
+														<td>
+															<div class="row">
+																<div class="col-6">
+																	<input type="text" id="ins_putmoney" name="ins_putmoney" class="form-control input-full">
+																</div>
+															</div>
+														</td>
+													</tr>
+													</c:if>
 												</tbody>
 												<tfoot>
 													<tr>
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-4 ml-auto">
-																	<button class="btn btn-warning" id="cancel">개인정보 수정하기</button>
+																	<button class="btn btn-warning" id="update">개인정보 수정하기</button>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
 																	<button class="btn btn-danger" id="cancel">취소</button>
@@ -129,7 +158,7 @@
 												</tfoot>
 											</table>
 										</form>
-										<!-- 보안카드 신청 form 끝 -->
+										<!--form 끝 -->
 										
 										
 										
@@ -153,7 +182,7 @@
 			var email = null;
 			var emailCode = null;
 			$("#cancel").click(function() {
-				location = "#";
+				location = "index";
 			});
 			
 			$("#codeCheck").click(function() {

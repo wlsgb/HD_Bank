@@ -3,6 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="security">
+  
+  	<!-- OTP신청 -->
+  	<insert id="otpReg" parameterType="hashMap">
+  		insert into otp_reg
+  		values(otp_seq.nextVal,#{mem_code},#{otp_certify})
+  	</insert>
+  
+  	<!-- OTP신청이 되어 있는지 확인 -->
+  	<select id="otpChk" parameterType="int" resultType="int">
+  		select count(*) 
+  		from otp_reg
+  		where mem_code=#{num}
+  	</select>
+  
   	<!-- 보안카드 생성 -->
   	<insert id="cardCreat" parameterType="cardvo">
   		INSERT INTO security_card VALUES (
@@ -22,14 +36,17 @@
   		)
   	</insert>
   	
+  	<!-- 보안카드 일련번호를 넣고 보안카드가 있는지 확인 -->
   	<select id="priCodeChk" parameterType="cardvo" resultType="int" >
   		select count(*) from security_card where sc_code=#{sc_code}
   	</select>
   	
+  	<!-- 멤버코드를 입력받아 보안카드가 생성되었는지 확인 -->
   	<select id="scrNumChk" parameterType="int" resultType="int">
   		select count(*) from security_card_reg where mem_code=#{num}
   	</select>
   	
+  	<!-- 보안카드를 만들어줌 -->
   	<resultMap type="scrvo" id="scr_sc">
   		<id property="scr_code" column="scr_code"/>
   		<result property="mem_code" column="mem_code"/>
