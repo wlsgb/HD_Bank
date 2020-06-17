@@ -76,7 +76,7 @@
 													<option value="">대상이름</option>
 													
 													</select>
-													<input type="hidden" name="youracmem" placeholder="멤버코드" id="atapplymem" class="form-control" style=" text-align:center; background-color:red; width: 300px;"/>
+													<input type="hidden" name="ata_yourmemcode" placeholder="멤버코드" id="atapplymem" class="form-control" style=" text-align:center; background-color:red; width: 300px;"/>
 												<div id="ajaxtarget"></div>
 											</div>
 										</div>
@@ -156,7 +156,7 @@
 												<a href="transfer_auto"><button type="button" class="btn btn-danger "
 													style="margin-left: 10%; width: 200px;">취소</button></a>
 											
-													<input type="submit" class="btn btn-success " value="신청" style="margin-left: 10%; width: 200px;" />
+													<input type="button" id="gogonext" class="btn btn-success " value="신청" style="margin-left: 10%; width: 200px;" />
 											</div>
 										</div>
 
@@ -232,11 +232,11 @@
 			})
 			
 			$('#selectyourname').change(function() {
-				$('#trmem').val("0");
+				$('#atapplymem').val("0");
 				var youracvar =$('#selectyourname').val();
 				console.log(typeof(youracvar))
-				$('#trmem').val(youracvar);
-				console.log("히드값은"+$('#trmem').val());
+				$('#atapplymem').val(youracvar);
+				console.log("히드값은"+$('#atapplymem').val());
 			})
 			
 			
@@ -253,41 +253,42 @@
 				
 				if (month.length < 2) month = '0' + month;
 				if (date.length < 2) date = '0' + date;
-				console.log("몬스는"+month)
+// 				console.log("몬스는"+month)
 
 				
 				let startdatearr = $('#ata_startdate').val().split("-");
 				
-				console.log("오늘은"+year+"-"+month+"-"+date)
-				console.log("고른날짜"+startdatearr[0]+"~"+startdatearr[1]+"~"+startdatearr[2])
-				console.log($('#ata_startdate').val())	
+
+// 				console.log("오늘은"+year+"-"+month+"-"+date)
+// 				console.log("고른날짜"+startdatearr[0]+"~"+startdatearr[1]+"~"+startdatearr[2])
+// 				console.log($('#ata_startdate').val())	
 
 
 				if(parseInt(year) <= parseInt(startdatearr[0])){
-					console.log('오케이 년 통과')
+// 					console.log('오케이 년 통과')
 					if(parseInt(year) ===parseInt(startdatearr[0])){
 						if(parseInt(month)<=parseInt(startdatearr[1])){
-							console.log('오케이 달통과')
+// 							console.log('오케이 달통과')
 							if(parseInt(month)===parseInt(startdatearr[1])){
 								if(parseInt(date)<=parseInt(startdatearr[2])){
-									console.log('오케이 일 통과')
+// 									console.log('오케이 일 통과')
 									
 								}else {
-									console.log('나가뤼')
+// 									console.log('나가뤼')
 									$('#ata_startdate').val(year+'-'+month+'-'+date)
 									settime="1";
 									checktime();
 								}
 							}
 						}else {
-							console.log("나가뤼")
+// 							console.log("나가뤼")
 							$('#ata_startdate').val(year+'-'+month+'-'+date)
 							settime="1";
 							checktime();
 						}
 					}
 				}else {
-					console.log("나가뤼")
+// 					console.log("나가뤼")
 					$('#ata_startdate').val(year+'-'+month+'-'+date)
 					settime="1";
 					checktime();
@@ -302,7 +303,7 @@
 			})
 			
 			function checktime(){
-				console.log("셋타임은? "+settime);
+// 				console.log("셋타임은? "+settime);
 				let hour = String(new Date().getHours());
 				let minute = String(new Date().getMinutes());
 				
@@ -310,22 +311,22 @@
 				if (minute.length < 2) minute = '0' + minute;
 				
 				let timearr = $('#ata_time').val().split(":");
-				console.log($('#ata_time').val())
-				console.log(hour+"s"+minute+"///"+timearr[0]+"sdfa"+timearr[1])
+// 				console.log($('#ata_time').val())
+// 				console.log(hour+"s"+minute+"///"+timearr[0]+"sdfa"+timearr[1])
 				if(settime ==="1"){
 					if(parseInt(hour) <= parseInt(timearr[0])){
-						console.log('오케이 시간통과')
+// 						console.log('오케이 시간통과')
 						if(parseInt(hour) === parseInt(timearr[0])){
 							if(parseInt(minute) <=parseInt(timearr[1])){
-								console.log('오케이 분 통과')
+// 								console.log('오케이 분 통과')
 							}else {
-								console.log('나가리')
+// 								console.log('나가리')
 								$('#ata_time').val(hour+":"+minute)
 							}
 						}
 						
 					}else {
-						console.log('나가리')
+// 						console.log('나가리')
 						$('#ata_time').val(hour+":"+minute)
 					}
 				}
@@ -351,6 +352,21 @@
 
 			})
 				
+			
+			$('#inputacval').change(function() {
+// 				console.log((($('#atapplymem').val() === "0")===false))
+// 				console.log((($('#atapplymem').val() === "")===false))
+				//console.log($('#atapplymem').val())
+				if((($('#atapplymem').val() === "0")===false) && (($('#atapplymem').val() === "")===false) ){
+// 					console.log('섬밋이어야함')
+					$('#gogonext').attr('type','submit')
+				}else {
+					
+// 					console.log('버튼이여야함')
+					$('#gogonext').attr('type','button')
+				}
+// 				$('#gogonext').attr('type','button')
+			})
 			
 		
 			

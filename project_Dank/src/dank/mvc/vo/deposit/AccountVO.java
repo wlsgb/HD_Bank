@@ -3,18 +3,9 @@ package dank.mvc.vo.deposit;
 public class AccountVO {
 	private int ac_code, ac_balance;
 	private String ac_num, ac_pwd, ac_name, ac_start_date, ac, end_date;
-
-	///sy
-	//<collection property="saving" resultMap="savResult"></collection>
-	//<collection property="ins" resultMap="insResult"></collection>
 	
 	private SavingVO saving;
 	private Installment_savingVO ins;
-	
-	///\sy
-	
-	
-	
 	
 	public SavingVO getSaving() {
 		return saving;

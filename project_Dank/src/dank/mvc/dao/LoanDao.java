@@ -11,8 +11,7 @@ import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayVO;
-import dank.mvc.vo.deposit.AccountVO_backup;
-
+import dank.mvc.vo.deposit.AccountVO;
 
 
 @Repository
@@ -64,7 +63,7 @@ public class LoanDao {
 	public void loanrepaystart(LoanRepayVO vo) {
 		ss.insert("loan.loanrepay", vo);
 	}
-	public List<AccountVO_backup> repayaccount(int mem_code) {
+	public List<AccountVO> repayaccount(int mem_code) {
 		return ss.selectList("loan.selectaccount",mem_code);
 	}
 	public void loanmoneyexport(int lr_amount) {

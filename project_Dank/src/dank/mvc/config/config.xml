@@ -22,6 +22,7 @@
 		<!-- 대출 영역 끝 -->
 		
   		<!-- 보안 알리아스 시작-->
+  		<typeAlias type="dank.mvc.vo.security.Otp_RegVO" alias="otpvo"/>
   		<typeAlias type="dank.mvc.vo.security.Security_Card_RegVO" alias="scrvo"/>
   		<typeAlias type="dank.mvc.vo.security.Security_CardVO" alias="cardvo"/>
   		<!-- 보안 알리아스 끝-->
