@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 <context:component-scan base-package="dank.mvc"/>
 <!-- 적혀잇는 패키지들에서 해당되는 어노테이션들을 스프링컨테이너로 빈등록을 해준다  -->
-
+ 
 
 <mvc:annotation-driven/>
 <mvc:resources location="/resources/" mapping="/resources/**"/>
