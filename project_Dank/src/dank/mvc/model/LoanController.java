@@ -532,10 +532,6 @@ public class LoanController {
 		return mav;		
 	}
 
-	@RequestMapping(value = "/repaymentdetail")
-	public String repaymentdetail() {
-		return "loan/repaymentdetail";
-	}
 
 	@RequestMapping(value = "/repaymentform")
 	public String repaymentform() {
