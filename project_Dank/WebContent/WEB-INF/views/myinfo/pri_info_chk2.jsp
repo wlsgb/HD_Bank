@@ -33,270 +33,158 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									
-									
 								</div>
-								
 								<div class="card-body">
-									<div class="row">
-										<div class="col-md-10">
-											<div class="table-responsive table-hover table-sales">
-											<div  style="margin: auto;">
 									
-									
-									
-									
-									
-										
+									<!-- 기본 정보 테이블 시작 -->
 										<form action="updatemyinfo" method="post">
-										
-									<div class="card-body" style="">
-									
-									
-									
-								
-									
-									<table class="table mt-3">
-										<thead>
-											<tr>
-												<th scope="col">기본정보</th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-											</tr>
-										</thead>
-										
-									
-										
-										<tbody>
-										
-										
-										
-										
-											<tr>
-												<td> 이름 </td>
-												<td><input type="text" value="${list.mem_name }" class="form-control input-full" id="setname" placeholder="" name="mem_name"></td>
+											<table class="table mt-3">
+												<tbody>
+												<!-- 기본 정보 -->
+													<tr>
+														<th scope="col" colspan="2"><span class="h3">개인 정보</span></th>
+													</tr>
+													<tr>
+														<td>이름</td>
+														<td>
+															<div class="row">
+																<div class="col-12">
+																	<input type="text" id="mem_name" name="mem_name" value="${memberVO.mem_name}" required="required" class="form-control input-full"/>
+																</div>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>이메일</td>
+														<td>
+															<div class="row">
+																<div class="col-12">
+																	<input type="text" id="mem_email" name="mem_email" value="${memberVO.mem_email}" required="required" class="form-control input-full"/>
+																</div>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>전화번호</td>
+														<td>
+															<div class="row">
+																<div class="col-12">
+																	<input type="text" id="mem_phn" name="mem_phn" value="${memberVO.mem_phn}" required="required" class="form-control input-full"/>
+																</div>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>생년월일</td>
+														<td>
+															<div class="row">
+																<div class="col-12">
+																	<input type="text" id="mem_birth" name="mem_birth" value="${memberVO.mem_birth}" maxlength="6" required="required" class="form-control input-full"/>
+																</div>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>주소</td>
+														<td>
+															<div class="row">
+																<div class="col-12">
+																	<input type="text" id="mem_loc" name="mem_loc" value="${memberVO.mem_loc}" required="required" class="form-control input-full"/>
+																</div>
+															</div>
+														</td>
+													</tr>
+												<!-- 상세 정보 -->
 												
-											</tr>
-											<tr>
-												<td>휴대폰번호</td>
-												<td><input type="text" value="${list.mem_phn }" class="form-control input-full" id="setphn" placeholder="" name="mem_phn"></td>
-												
-											</tr>
-											
-											
-											
-										
-										</tbody>
-										
-									</table>
-									
-									<table class="table mt-3">
-										<thead>
-											<tr>
-												<th scope="col">자택정보</th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>자택 주소</td>
-												<td><input type="text" value="${list.mem_loc }" class="form-control input-full" id="setloc" placeholder="" name="mem_loc"></td>
-												
-											</tr>
-											<tr>
-												<td>자택 전화번호</td>
-												<td>010-1234-5678</td>
-												
-											</tr>
-											
-											
-											
-										</tbody>
-									</table>
-									
-									<table class="table mt-3">
-										<thead>
-											<tr>
-												<th scope="col">등급정보</th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>회원 등급</td>
-												<td>다이아몬드</td>
-												
-											</tr>
-											<tr>
-												<td>포인트</td>
-												<td>785,000</td>
-												
-											</tr>
-											
-										</tbody>
-									</table>
-									
-									<table class="table mt-2">
-										<thead>
-											<tr>
-												<th scope="col">기본정보</th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-												<th scope="col"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>sms수신여부</td>
-												<td>동의</td>
-												
-											</tr>
-									
-											
-										</tbody>
-									</table>
-								</div>
-										
-				
-						
-						
-										
-										
-										<div id="buttons" style="text-align: center;">
-								
-									<input type="submit" class="btn btn-primary btn-round" value="확인">
-									
-									</div>
-										
-										</form>
-									
-									
-									
-									
-									
-									
-								</div>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="mapcontainer">
-												<div id="map-example" class="vmap"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="card-body">
-								
+													<tr>
+														<th scope="col" colspan="2"><span class="h3">상세 정보</span></th>
+													</tr>
+													<tr>
+														<td>가입날짜</td>
+														<td>${memberVO.mem_in_date}</td>
+													</tr>
+													<tr>
+														<td>개인정보동의</td>
+														<td>
+														<c:choose>
+															<c:when test="${memberVO.mem_pri_chk==1 }">
+																동의
+															</c:when>
+															<c:otherwise>
+																비동의
+															</c:otherwise>
+														</c:choose>
+														</td>
+													</tr>
+													<tr>
+														<td>메일전송동의</td>
+														<td>
+														<c:choose>
+															<c:when test="${memberVO.mem_email_chk==1 }">
+																동의
+															</c:when>
+															<c:otherwise>
+																비동의
+															</c:otherwise>
+														</c:choose>
+														</td>
+													</tr>
+													<tr>
+														<td>보안카드신청</td>
+														<td>
+														<c:choose>
+															<c:when test="${scurityCardYN==1 }">
+																있음
+															</c:when>
+															<c:otherwise>
+																없음
+															</c:otherwise>
+														</c:choose>
+														</td>
+													</tr>
+													<tr>
+														<td>OTP신청</td>
+														<td>
+														<c:choose>
+															<c:when test="${otpYN==1 }">
+																있음
+															</c:when>
+															<c:otherwise>
+																없음
+															</c:otherwise>
+														</c:choose>
+														</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th colspan="2">
+															<div class="row">
+																<div class="col-md-4 ml-auto">
+																	<button class="btn btn-warning" id="update">비밀번호 수정하기</button>
+																</div>
+																<div class="col-md-8 ml-auto mr-auto">
+																	<button class="btn btn-danger" id="cancel">취소</button>
+																	<input type="submit" class="btn btn-success" value="확인">
+																</div>
+															</div>
+														</th>
+													</tr>
+												</tfoot>
+											</table>
+											</form>
+										<!-- 기본 정보 테이블 끝 -->
 								</div>
 							</div>
 						</div>
 					</div>
-					
 					<!-- 페이지 레이아웃 끝 -->
 				</div>
 			</div>
-
-
-			
-			<script>$("#checkBalance").click(function() {
-				location = "checkBalance";
-			});
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
+	<script>
+	$(function() {
+		$("#update").click(function() {
+			location = "mem_pw_reset";
 		})
-
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
+	})
 	</script>

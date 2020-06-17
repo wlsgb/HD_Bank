@@ -231,7 +231,10 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			return "redirect:security";
 		}
+		
 		String acNum = acNameNum.split("-")[1];
 		String pwd = String.valueOf(depositDao.pwdChk(acNum));
 		// 패스워드 성공시
@@ -250,7 +253,7 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		}else if((securityDao.otpcheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
 			return "redirect:security";
 		}else  if ((boolean) session.getAttribute("scChk")) {
 			Map<String , Object> map = new HashMap<String, Object>();

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.MemberDao;
 import dank.mvc.dao.MyinfoDao;
+import dank.mvc.dao.SecurityDao;
 import dank.mvc.vo.MemberVO;
 
 @Controller
@@ -23,33 +24,60 @@ public class MyInfoController {
 
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private SecurityDao securityDao;
 
+	// 개인 정보 관리 페이지
 	@RequestMapping(value = "/pri_info_chk")
-	public ModelAndView myinfoView(HttpSession session) {
-		System.out.println("info시작");
+	public String myinfoView(Model m, HttpSession session) {
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "pri_info_chk");
+			return "login/login";
+		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		// 멤버 테이블 (패스워드, 성별 빼고 다)
 		MemberVO memberVO = myinfoDao.myinfo(mem_code);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myinfo/pri_info_chk");
-		mav.addObject("memberVO", memberVO);
-		return mav;
+		m.addAttribute("memberVO", memberVO);
+		// 보안카드와 OTP신청 여부를 보내준다.
+		int scurityCardYN = securityDao.scrNumChk(mem_code);
+		int otpYN = securityDao.otpCheck(mem_code);
+		m.addAttribute("scurityCardYN",scurityCardYN);
+		m.addAttribute("otpYN",otpYN);
+		return "myinfo/pri_info_chk";
 
 	}
 
+	// 개인정보 수정 폼
 	@RequestMapping(value = "/pri_info_chk2")
-	public ModelAndView momo8(MemberVO vo) {
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myinfo/pri_info_chk2");
-		return mav;
+	public String momo8(MemberVO vo,HttpSession session,Model m) {
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "pri_info_chk2");
+			return "login/login";
+		}
+		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		// 멤버 테이블 (패스워드, 성별 빼고 다)
+		MemberVO memberVO = myinfoDao.myinfo(mem_code);
+		m.addAttribute("memberVO", memberVO);
+		// 보안카드와 OTP신청 여부를 보내준다.
+		int scurityCardYN = securityDao.scrNumChk(mem_code);
+		int otpYN = securityDao.otpCheck(mem_code);
+		m.addAttribute("scurityCardYN",scurityCardYN);
+		m.addAttribute("otpYN",otpYN);
+		return "myinfo/pri_info_chk2";
 	}
 
+	// 개인정보 수정 확인 버튼을 누르면 작동
 	@RequestMapping(value = "/updatemyinfo")
 	public ModelAndView myinfoUpadte2(MemberVO vo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		if (session.getAttribute("member") == null) {
+			session.setAttribute("pageName", "updatemyinfo");
+			mav.setViewName("login/login");
+		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
 		vo.setMem_code(mem_code);
-		int i = myinfoDao.myinfoUpdate(vo);
+		myinfoDao.myinfoUpdate(vo);
 		mav.setViewName("redirect:pri_info_chk");
 		return mav;
 	}
@@ -103,7 +131,7 @@ public class MyInfoController {
 		return "pri_info_modi";
 	}
 
-	// 암호 변경 하기 전에 이메일확인을 받는 장소
+	// 암호 변경 하기 전에 이메일 or 패스워드를 확인을 받는 장소
 	@RequestMapping(value = "/mem_pw_reset_input")
 	public String momo5(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {

@@ -6,15 +6,32 @@
   
   
   	<select id="getemail" parameterType="mem" resultType="String">
-  	select mem_email from member where mem_name=#{mem_name} and mem_birth=#{mem_birth}
+	  	select mem_email 
+	  	from member
+	  	where mem_name=#{mem_name} and mem_birth=#{mem_birth}
   	</select>
   	
   	<select id="getmyinfo"  resultType="mem" parameterType="int">
-  		select mem_email mem_email, mem_name mem_name, mem_phn mem_phn, mem_loc mem_loc from member where mem_code=#{mem_code}
+  		select 
+  			mem_email, 
+  			mem_name,
+  			mem_phn,
+  			to_char(mem_in_date,'yyyy"년" MM"월" dd"일" hh"시" mm"분"') mem_in_date,
+  			mem_pri_chk,
+  			mem_email_chk,
+  			mem_birth,
+  			mem_loc
+  		from member where mem_code=#{mem_code}
   	</select> 
   	
   	<update id="updatemyinfo" parameterType="mem">
-  		update member set mem_name = #{mem_name}, mem_phn = #{mem_phn}, mem_loc = #{mem_loc} 
+  		update member 
+  		set 
+  			mem_name = #{mem_name}, 
+  			mem_email = #{mem_email},
+  			mem_phn = #{mem_phn}, 
+  			mem_birth = #{mem_birth},
+  			mem_loc = #{mem_loc} 
 		where mem_code=#{mem_code}
   	</update>
   	

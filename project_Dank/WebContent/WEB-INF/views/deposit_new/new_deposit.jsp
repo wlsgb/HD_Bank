@@ -146,6 +146,7 @@
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-4 ml-auto">
+																	<input>
 																	<button class="btn btn-warning" id="update">개인정보 수정하기</button>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
