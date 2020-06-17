@@ -44,4 +44,12 @@ public class DepositDao {
 	public void addAcClient(Account_ClientVO clientVO) {
 		ss.insert("deposit.addAcClient",clientVO);
 	}
+	//계좌 상세조회
+	public AccountVO getAcdetail(int ac_code){
+		return ss.selectOne("bangking.acdetail",ac_code);
+	}
+	//계좌 삭제
+	public void delAccount(int ac_code) {
+		ss.delete("deposit.delAccount",ac_code);
+	}
 }
