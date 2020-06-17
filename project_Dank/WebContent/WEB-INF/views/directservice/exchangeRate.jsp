@@ -41,12 +41,12 @@
 							</div>
 							<!-- 계좌 이체 -->
 							<!-- 분석 -->
-							<div class="card" id="analysis">
+							<!-- <div class="card" id="analysis">
 								<div class="card-body pb-0">
 									<h2 class="mb-2">분석</h2>
 									<p class="text-muted">Analysis</p>
 								</div>
-							</div>
+							</div> -->
 							<!-- 분석 -->
 							<!-- 환율 조회 -->
 							<div class="card card-primary bg-primary-gradient">

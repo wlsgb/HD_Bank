@@ -213,6 +213,9 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securityotp");
 			return "login/login";
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			session.setAttribute("error", "f");
+			return "redirect:security";
 		}
 		session.setAttribute("otpProgress", true);
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
