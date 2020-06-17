@@ -72,4 +72,7 @@ public class LoanDao {
 	public void loanmoneyimport(LoanRepayVO vo) {
 		ss.update("loan.loanmoneyimport", vo);
 	}
+	public void repayloan(LoanRepayVO vo) {
+		ss.update("loan.repayloan",vo);
+	}
 }
