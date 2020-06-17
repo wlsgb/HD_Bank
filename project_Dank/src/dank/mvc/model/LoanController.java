@@ -220,7 +220,6 @@ public class LoanController {
 		mapyoursp.put("mem_code",String.valueOf(mem_code));
 		mapyoursp.put("sp_name", check.getLoanProductVO().getLp_name());
 		
-		System.out.println("???:"+ac_num);
 		
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
