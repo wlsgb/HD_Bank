@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<!-- 상단의 푸른색 공간 끝 -->
-
+	<form action="addquestion" accept-charset="euc-kr" method="post">
 	<div class="page-inner mt--5">
 		<div class="row">
 			<div class="col-md-12">
@@ -51,7 +51,7 @@
 									<tr>
 										<td>분류</td>
 										<td><select class="form-control input-full"
-											id="inlineinput">
+											id="inlineinput" name="cat_num">
 												<option>-분류선택-</option>
 												<option value="1">예금</option>
 												<option value="2">대출</option>
@@ -59,23 +59,11 @@
 												<option value="4">기타</option>
 										</select></td>
 									</tr>
-									<tr>
-										<td>답변받기</td>
-										<td><span class="col-1">전화번호</span><input type="text"
-											class="col-7 input-full" id="inlineinput"
-											placeholder="입력하시오."> <input type="checkbox"
-											name="searchopen" value="1" class="col-1 box_check"
-											id=search_conform checked></td>
-										<td><span class="col-1">이메일</span><input type="text"
-											class="col-7 input-full" id="inlineinput"
-											placeholder="입력하시오."> <input type="checkbox"
-											name="searchopen" value="1" class="col-1 box_check"
-											id=search_conform checked></td>
-									</tr>
+									
 									<tr>
 										<td>제목</td>
-										<td><input type="text" class="form-control input-full"
-											id="inlineinput" placeholder="입력 하시오." style="width: 1000px">
+										<td><input type="text" name="inq_title" class="form-control input-full"
+											id="inq_title" placeholder="입력 하시오." style="width: 1000px">
 										</td>
 									</tr>
 
@@ -92,7 +80,7 @@
 												style="height: 400px;">
 												<tbody>
 													<tr valign="top">
-														<td><textarea style="width: 1000px; height: 500px;"></textarea>
+														<td><textarea name="inq_content" style="width: 1000px; height: 500px;"></textarea>
 														</td>
 													</tr>
 												</tbody>
@@ -107,9 +95,9 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><a href="mem_pw_chk"><button
-														class="btn btn-primary btn-round">확인</button></a> <a
-												href="qna"><button class="btn btn-danger btn-round">취소</button></a>
+											<td><button
+														class="btn btn-primary btn-round">확인</button>
+												<button class="btn btn-danger btn-round">취소</button>
 											</td>
 										</tr>
 									</tbody>
@@ -121,28 +109,8 @@
 			</div>
 		</div>
 	</div>
+	</form>
 </div>
 <script>
-	$('#one').click(function() {
-		location = 'qna?categori=0'
-	})
-	$('#two').click(function() {
-		location = 'qna?categori=2'
-	})
-	$('#three').click(function() {
-		location = 'qna?categori=3'
-	})
-	$('#four').click(function() {
-		location = 'qna?categori=4'
-	})
-	$('#five').click(function() {
-		location = 'qna?categori=5'
-	})
-
-	$('#search').click(
-			function() {
-				location = 'qna?categori=0&searchType='
-						+ $('#searchType').val() + '&searchValue='
-						+ $('#searchValue').val()
-			})
+	
 </script>
