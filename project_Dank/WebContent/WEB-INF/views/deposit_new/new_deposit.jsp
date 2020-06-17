@@ -146,6 +146,7 @@
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-4 ml-auto">
+																	<input>
 																	<button class="btn btn-warning" id="update">개인정보 수정하기</button>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
@@ -283,6 +284,8 @@
 				alert("비밀번호 재입력을 입력해주세요");
 			}else if($("#successData").val() !== 'success'){
 				alert("이메일 인증을 해주세요.");
+			}else if($("#ac_pwd").val() !== $("#ac_repwd").val()){
+				alert("비밀번호를 확인해주세요.");
 			}else{
 				f.submit();
 			}

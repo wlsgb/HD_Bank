@@ -29,6 +29,10 @@
 		select mem_birth from member where mem_code=#{num}
 	</select>
 	
+	<select id="pwdChk" parameterType="int" resultType="String">
+		select mem_pwd from member where mem_code=#{num}
+	</select>	
+
 	<select id="memlogin" parameterType="mem" resultType="mem">
 		select 
 			mem_code,

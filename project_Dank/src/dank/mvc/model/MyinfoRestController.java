@@ -24,21 +24,17 @@ public class MyinfoRestController {
 	public String idChk(MemberVO vo,
 			@RequestParam(value="mem_name") String mem_name,
 			@RequestParam(value="mem_birth") String mem_birth
-
 			) {
-		
-			String deco=null;
-			try {
-				deco = URLDecoder.decode(vo.getMem_name(),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			vo.setMem_name(deco);
-		System.out.println("sss"+vo.getMem_name());
-
-	String email=midao.getemail(vo);
-	System.out.println(email);
-
+		String deco=null;
+		try {
+			deco = URLDecoder.decode(vo.getMem_name(),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		vo.setMem_name(deco);
+		System.out.println("입력한 이름 deco : "+deco);
+		String email=midao.getemail(vo);
+		System.out.println("이메일 : "+email);
 		return email;
 	}
 }
