@@ -31,7 +31,7 @@
 								
 									<div class="card-body ">
 										<div class="row">
-										<h2>&nbsp;&nbsp;&nbsp;&nbsp;대출 실행</h2>
+										<h2>&nbsp;&nbsp;&nbsp;&nbsp;대출 상환</h2>
 											<table class="table table-hover">
 												
 													<tr>
