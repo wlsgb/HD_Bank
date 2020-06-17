@@ -7,22 +7,22 @@
 				<div class="sidebar-content">
 					<c:choose>
 						<c:when test="${member.mem_email==null }">
-							<!-- ·Î±×ÀÎ Ã¢ ½ÃÀÛ -->
+							<!-- ë¡œê·¸ì¸ ì°½ ì‹œìž‘ -->
 							<form method="post" action="login" >
 								<div class="form-group">
-									<input type="submit" class="btn btn-primary btn-block" value="·Î±×ÀÎ" />
+									<input type="submit" class="btn btn-primary btn-block" value="ë¡œê·¸ì¸" />
 								</div>
 							</form>
-							<!-- ·Î±×ÀÎ Ã¢ ³¡ -->
+							<!-- ë¡œê·¸ì¸ ì°½ ë -->
 						</c:when>
 						<c:otherwise>
-							<!-- ·Î±×ÀÎ Á¤º¸ ½ÃÀÛ -->
+							<!-- ë¡œê·¸ì¸ ì •ë³´ ì‹œìž‘ -->
 							<div class="user">
 								<div class="info">
 									<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 										<span>
 											
-											<span class="user-level">${member.mem_name }´Ô</span>
+											<span class="user-level">${member.mem_name }ë‹˜</span>
 											<span class="caret"></span>
 										</span>
 									</a>
@@ -32,19 +32,19 @@
 										<ul class="nav">
 											<li>
 												<a href="pri_info_chk">
-													<span class="link-collapse">¸¶ÀÌÆäÀÌÁö</span>
+													<span class="link-collapse">ë§ˆì´íŽ˜ì´ì§€</span>
 												</a>
 											</li>
 											<li>
 												<a href="logout">
-													<span class="link-collapse">·Î±×¾Æ¿ô</span>
+													<span class="link-collapse">ë¡œê·¸ì•„ì›ƒ</span>
 												</a>
 											</li>
 										</ul>
 									</div>
 								</div>
 							</div>
-							<!-- ·Î±×ÀÎ Á¤º¸ ³¡ -->
+							<!-- ë¡œê·¸ì¸ ì •ë³´ ë -->
 						</c:otherwise>
 					</c:choose>
 					
@@ -53,34 +53,34 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#deposit">
 								<i class="fas fa-layer-group"></i>
-								<p>¿¹±Ý</p>
+								<p>ì˜ˆê¸ˆ</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="deposit">
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="inquire">
-											<span class="sub-item">Á¶È¸</span>
+											<span class="sub-item">ì¡°íšŒ</span>
 										</a>
 									</li>
 									<li>
 										<a href="transfer">
-											<span class="sub-item">ÀÌÃ¼</span>
+											<span class="sub-item">ì´ì²´</span>
 										</a>
 									</li>
 									<li>
 										<a href="new">
-											<span class="sub-item">½Å±Ô</span>
+											<span class="sub-item">ì‹ ê·œ</span>
 										</a>
 									</li>
 									<li>
 										<a href="cancel">
-											<span class="sub-item">ÇØÁö</span>
+											<span class="sub-item">í•´ì§€</span>
 										</a>
 									</li>
 									<li>
 										<a href="analysis">
-											<span class="sub-item">ºÐ¼®</span>
+											<span class="sub-item">ë¶„ì„</span>
 										</a>
 									</li>
 								</ul>
@@ -89,39 +89,39 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#sidebarLayouts">
 							<i class="fas fa-layer-group"></i>
-							<p>´ëÃâ</p>
+							<p>ëŒ€ì¶œ</p>
 							<span class="caret"></span>
 							</a>
 							<div class="collapse" id="sidebarLayouts">
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="product">
-											<span class="sub-item">»óÇ°¼Ò°³</span>
+											<span class="sub-item">ìƒí’ˆì†Œê°œ</span>
 										</a>
 									</li>
 									<li>
 										<a href="application">
-											<span class="sub-item">´ëÃâ ½ÅÃ»</span>
+											<span class="sub-item">ëŒ€ì¶œ ì‹ ì²­</span>
 										</a>
 									</li>
 									<li>
 										<a href="fileuploadhome">
-											<span class="sub-item">¼­·ù Á¦Ãâ</span>
+											<span class="sub-item">ì„œë¥˜ ì œì¶œ</span>
 										</a>
 									</li>
 									<li>
 										<a href="check">
-											<span class="sub-item">´ëÃâ ÇöÈ² Á¶È¸</span>
+											<span class="sub-item">ëŒ€ì¶œ í˜„í™© ì¡°íšŒ</span>
 										</a>
 									</li>
 									<li>
 										<a href="repayment">
-											<span class="sub-item">´ëÃâ »óÈ¯</span>
+											<span class="sub-item">ëŒ€ì¶œ ìƒí™˜</span>
 										</a>
 									</li>
 									<li>
 										<a href="caculator">
-											<span class="sub-item">ÀÌÀÚ °è»ê±â</span>
+											<span class="sub-item">ì´ìž ê³„ì‚°ê¸°</span>
 										</a>
 									</li>
 								</ul>
@@ -130,29 +130,30 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#forms">
 								<i class="fas fa-layer-group"></i>
-								<p>°í°´¼¾ÅÍ</p>
+								<p>ê³ ê°ì„¼í„°</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="forms">
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="qna">
-											<span class="sub-item">ÀÚÁÖ Ã£´Â Áú¹®</span>
+											<span class="sub-item">ìžì£¼ ì°¾ëŠ” ì§ˆë¬¸</span>
 										</a>
 									</li>
 									<li>
 										<a href="1on1question_princhk">
-											<span class="sub-item">1:1 ¹®ÀÇÇÏ±â</span>
+											<span class="sub-item">1:1 ë¬¸ì˜í•˜ê¸°</span>
 										</a>
 									</li>
-									<li>
-										<a href="myquestion">
-											<span class="sub-item">³ªÀÇ ¹®ÀÇ±Û</span>
-										</a>
-									</li>
+
 									<!-- <li>
 										<a href="forms/forms.jsp">
-											<span class="sub-item">°¡±î¿î ATM Á¶È¸</span>
+											<span class="sub-item">ë‚˜ì˜ ë¬¸ì˜ê¸€</span>
+										</a>
+									</li> -->
+									<!-- <li>
+										<a href="forms/forms.jsp">
+											<span class="sub-item">ê°€ê¹Œìš´ ATM ì¡°íšŒ</span>
 										</a>
 									</li> -->
 								</ul>
@@ -161,29 +162,29 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#tables">
 								<i class="fas fa-layer-group"></i>
-								<p>°³ÀÎ Á¤º¸ °ü¸®</p>
+								<p>ê°œì¸ ì •ë³´ ê´€ë¦¬</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="tables">
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="pri_info_chk">
-											<span class="sub-item">°³ÀÎ Á¤º¸ Á¶È¸ / ¼öÁ¤</span>
+											<span class="sub-item">ê°œì¸ ì •ë³´ ì¡°íšŒ / ìˆ˜ì •</span>
 										</a>
 									</li>
 									<li>
 										<a href="tap">
-											<span class="sub-item">ID Á¶È¸</span>
+											<span class="sub-item">ID ì¡°íšŒ</span>
 										</a>
 									</li>
 									<li>
 										<a href="mem_pw_reset_input">
-											<span class="sub-item">»ç¿ëÀÚ ¾ÏÈ£ Àç¼³Á¤</span>
+											<span class="sub-item">ì‚¬ìš©ìž ì•”í˜¸ ìž¬ì„¤ì •</span>
 										</a>
 									</li>
 									<li>
 										<a href="security">
-											<span class="sub-item">º¸¾ÈÄ«µå / OTP</span>
+											<span class="sub-item">ë³´ì•ˆì¹´ë“œ / OTP</span>
 										</a>
 									</li>
 								</ul>

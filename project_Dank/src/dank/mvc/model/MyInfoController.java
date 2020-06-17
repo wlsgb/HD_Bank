@@ -95,6 +95,7 @@ public class MyInfoController {
 			MemberVO memberVO = myinfoDao.myinfo(mem_code);
 			mav.addObject("memberVO", memberVO);
 			mav.setViewName("myinfo/mem_pw_reset");
+			session.setAttribute("error", "t");
 			session.setAttribute("mem_pw_reset", true);
 		}else {
 			session.setAttribute("error", "f");
