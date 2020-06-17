@@ -32,7 +32,7 @@
 								<p class="card-category">이메일 인증</p>
 							</div>
 							<div class="card-body">
-								<%-- <c:if test="${error=='f' }">
+								<c:if test="${error=='f' }">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="card">
@@ -44,7 +44,7 @@
 											</div>
 										</div>
 									</div>
-								</c:if> --%> 
+								</c:if> 
 								<div class="row">
 									<div class="col-md-6 ml-auto mr-auto">
 									<!-- 테이블 시작 -->

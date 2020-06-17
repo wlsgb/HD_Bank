@@ -161,7 +161,7 @@
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-4 ml-auto">
-																	<button type="button" class="btn btn-warning" id="update">비밀번호 수정하기</button>
+																	<button class="btn btn-warning" id="update">비밀번호 수정하기</button>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
 																	<button class="btn btn-danger" id="cancel">취소</button>
@@ -186,6 +186,5 @@
 		$("#update").click(function() {
 			location = "mem_pw_reset";
 		})
-		
 	})
 	</script>

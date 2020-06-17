@@ -41,12 +41,12 @@
 							</div>
 							<!-- 계좌 이체 -->
 							<!-- 분석 -->
-							<!-- <div class="card" id="analysis">
+							<div class="card" id="analysis">
 								<div class="card-body pb-0">
 									<h2 class="mb-2">분석</h2>
 									<p class="text-muted">Analysis</p>
 								</div>
-							</div> -->
+							</div>
 							<!-- 분석 -->
 							<!-- 환율 조회 -->
 							<div class="card" id="exchangeRate">
@@ -101,7 +101,7 @@
 														</div>
 													</td>
 												</tr>
-												<!-- <tr>
+												<tr>
 													<th scope="col">조회구분</th>
 													<td>
 														<div class="col-md-12 p-0">
@@ -127,7 +127,7 @@
 															<input class="form-control" type="date" id="searchDate" name="searchDate" required="required">
 														</div>
 													</td>
-												</tr> -->
+												</tr>
 											</tbody>
 											<tfoot>
 												<tr>
