@@ -74,5 +74,5 @@ public class LoanDao {
 	}
 	public void repayloan(LoanRepayVO vo) {
 		ss.update("loan.repayloan",vo);
-	}
+	}  
 }
