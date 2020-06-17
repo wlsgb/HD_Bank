@@ -152,10 +152,6 @@
 					<!-- 페이지 레이아웃 끝 -->
 				</div>
 			</div>
-
-
-			
-			
 			<script>
 			$("#cancel").click(function() {
 				location = "security";
@@ -179,7 +175,7 @@
 							className: 'btn btn-danger'
 						}
 					}
-				}).then((Delete) => {
+				}).then((Delete) = {/* =>  */
 					if (Delete) {
 						swal({
 							title: '전송되었습니다.',
