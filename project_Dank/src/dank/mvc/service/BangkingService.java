@@ -52,4 +52,5 @@ public class BangkingService {
 			
 			bangkingdao.afterchkup(atacode);
 		}
+
 }
