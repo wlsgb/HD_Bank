@@ -49,9 +49,7 @@
 				 and p.ins_code = ins.ins_code(+)
 			</select>
 <!--  /@계좌조회 끝(처음 조회눌렀을때 작동) -->
-	<select id="">
-		select count(*) from sa
-	</select>
+
 
 <!-- @입금 시작(입금 누르면 돈이 들어온다. 지점에서 현금을 받는다는 가정) -->
 		<!--1계좌유효성검사 적힌 계좌가 DB에 담겨있는지 count 를 반환한다 -->
@@ -403,8 +401,8 @@
 			from(
 			select rownum r_num, dealdate, dep_money, wit_money, balance, name
 			from(
-			select COALESCE(to_char(d.dep_date,'YY-MM-DD HH24:MI')
-			,to_char(w.wit_date,'YY-MM-DD HH24:MI')) dealdate
+			select COALESCE(to_char(d.dep_date,'YYYY-MM-DD HH24:MI')
+			,to_char(w.wit_date,'YYYY-MM-DD HH24:MI')) dealdate
 			, d.dep_money dep_money
 			,w.wit_money wit_money
 			,sp.sp_balance balance
@@ -431,6 +429,47 @@
 			)
 			)
 			where r_num between #{start} and #{end}
+	  </select>
+	  <!--******조회시 	거래내역 가져오기 ,숫자,거래날자,입금액,출금액,잔액,이름 -->
+	  <select id="achistory_slct" parameterType="hashMap" resultType="achvo">
+			  select 
+			r_num
+			, dealdate
+			, dep_money
+			, wit_money
+			, balance
+			, name
+			from(
+			select rownum r_num, dealdate, dep_money, wit_money, balance, name
+			from(
+			select COALESCE(to_char(d.dep_date,'YYYY-MM-DD HH24:MI')
+			,to_char(w.wit_date,'YYYY-MM-DD HH24:MI')) dealdate
+			, d.dep_money dep_money
+			,w.wit_money wit_money
+			,sp.sp_balance balance
+			, sp.sp_name name
+			from account a
+			,account_client ac 
+			,sav_process sp
+			, deposit d
+			, withdraw w
+			where ac.mem_code=#{mem_code}
+			 and a.ac_code=ac.ac_code 
+			 and a.ac_code=(select a.ac_code
+			 				 from account a, account_client ac
+			 				  where a.ac_num=#{ac_num}
+									  and ac.mem_code=#{mem_code}
+									   and ac.ac_code=a.ac_code) 
+			  and sp.ac_code=(select a.ac_code 
+			  					from account a, account ac 
+			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} 
+			  							and a.ac_code = ac.ac_code) 
+			  and d.dep_code(+)=sp.dep_code
+			   and w.wit_code(+) = sp.wit_code
+			order by sp_code desc
+			)
+			)
+			where r_num between #{start} and #{end}  and substr(dealdate,0,10) between #{startdate} and #{lastdate}
 	  </select>
 		<!--페이징처리를 위한 총 갯수 가져오기 -->
 	  <select id="totalcnt" resultType="int" parameterType="hashMap">
@@ -532,6 +571,7 @@
 		<result column="ata_time" property="ata_time"/>
 		<result column="ata_ing" property="ata_ing"/>
 		<result column="ata_check" property="ata_check"/>
+		<result column="ata_code" property="ata_code"/>
 	</resultMap>
 	
 	<select id="atlist" parameterType="hashMap" resultMap="atlistResult">
@@ -548,6 +588,7 @@
                   ,atapply.ata_time ata_time
                   ,atapply.ata_ing ata_ing
                   ,atapply.ata_check ata_check
+                  ,atapply.ata_code ata_code
                 
                   from at_application atapply, account a, account_client ac
                   where atapply.ac_code =a.ac_code and a.ac_code = ac.ac_code and ac.mem_code=#{mem_code} and a.ac_num=#{ac_num}
@@ -557,6 +598,14 @@
 	<update id="ifnomoneywhenat" parameterType="String">
 	update at_application set ata_check = -1 where ata_code=#{ata_code}
 	</update>
+	
+	<update id="atreset" parameterType="hashMap">
+	update at_application set ata_startdate=#{restartdate},ata_time=#{retime} where ata_code=#{ata_code}
+	</update>
+	
+	<delete id="atdelete" parameterType="String">
+	delete at_application where ata_code =#{ata_code}
+	</delete>
 <!-- /@자동이체 종료 -->
 
 

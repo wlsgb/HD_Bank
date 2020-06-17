@@ -147,7 +147,10 @@
 															</td>
 															
 															<td class="text-right">
-																<a href="inquire_detail"><input type="button" value="조회"  /></a>
+																<form action="inquire_detail" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="조회"  style="display: inline-block;" />
+																	</form>
 <!-- 																<input type="button" value="두섬팅" id="dosomething" /> -->
 <!-- 																<a href="#"><input type="button" value="입금" /></a> -->
 <!-- 																<a href="#"><input type="button" value="출금" /></a> -->
