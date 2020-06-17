@@ -7,7 +7,7 @@
 				<div class="sidebar-content">
 					<c:choose>
 						<c:when test="${member.mem_email==null }">
-							<!-- 로그인 창 시작 -->
+							<!-- 로그인 창 시작합니다. -->
 							<form method="post" action="login" >
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block" value="로그인" />
@@ -78,11 +78,11 @@
 											<span class="sub-item">해지</span>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a href="analysis">
 											<span class="sub-item">분석</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</li>
@@ -141,15 +141,15 @@
 										</a>
 									</li>
 									<li>
-										<a href="1on1question_prichk">
+										<a href="1on1question_princhk">
 											<span class="sub-item">1:1 문의하기</span>
 										</a>
 									</li>
-									<li>
-										<a href="forms/forms.jsp">
+									<!-- <li>
+										<a href="myquestion">
 											<span class="sub-item">나의 문의글</span>
 										</a>
-									</li>
+									</li> -->
 									<!-- <li>
 										<a href="forms/forms.jsp">
 											<span class="sub-item">가까운 ATM 조회</span>

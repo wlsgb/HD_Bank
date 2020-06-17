@@ -29,8 +29,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<p class="card-category">
-									ID조회</p>
+									<p class="card-category">ID조회</p>
 									
 								</div>
 								
@@ -56,10 +55,10 @@
 											<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" 
 											role="tab" aria-controls="pills-home" aria-selected="true">ID조회</a>
 										</li>
-										<li class="nav-item">
+										<!-- <li class="nav-item">
 											<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" 
 											role="tab" aria-controls="pills-profile" aria-selected="false">무엇을위한 페이지인가...</a>
-										</li>
+										</li> -->
 										
 									</ul>
 									
@@ -70,16 +69,16 @@
 									<div class="tab-content mt-2 mb-3" id="pills-tabContent">
 										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" >
 											<tr>
-												<td>이름을 입력하세요</td>
+												<td>이름</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inputname" placeholder="이름을 정확히 입력하세요" name="sename">
+													<input type="text" class="form-control input-full" id="inputname" placeholder="(이름)" name="sename">
 												</div></td>
 												<br>
 											</tr>
 											<tr>
-												<td>생년월일은?</td>
+												<td>생년월일</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inputbirth" placeholder="생년월일을 강력히 입력하세요" name="sebirth">
+													<input type="text" class="form-control input-full" id="inputbirth" placeholder="(생년월일)" name="sebirth">
 												</div></td>
 												
 											</tr>
@@ -92,7 +91,7 @@
 										
 										</div>
 										
-										<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+										<!-- <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 											<tr>
 												<td>ID</td>
 												<td><div class="col-md-9 p-0">
@@ -111,7 +110,7 @@
 													<input type="password" class="form-control input-full" id="inlineinput" placeholder="비밀번호">
 												</div></td>
 											</tr>
-										</div>
+										</div> -->
 										
 									</div>
 								</div>

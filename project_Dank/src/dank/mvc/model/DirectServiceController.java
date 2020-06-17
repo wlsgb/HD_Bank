@@ -36,7 +36,8 @@ public class DirectServiceController {
 	}
 
 	@RequestMapping(value = "/chkvalue")
-	public String cheValue(Model m, AccountVO accountVO,String membirth, String type, String searchDate, PageVO pvo,
+	public String cheValue(Model m, AccountVO accountVO, String membirth,
+			/* String type, String searchDate, */ PageVO pvo,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage) {
 		// 입력받은 계좌번호를 가져옴
@@ -69,7 +70,7 @@ public class DirectServiceController {
 		m.addAttribute("paging", pvo);
 		m.addAttribute("ac_num", ac_num);
 
-		m.addAttribute("type", type);
+		/* m.addAttribute("type", type); */
 		return "directservice/checkBalance";
 	}
 
