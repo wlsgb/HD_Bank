@@ -122,14 +122,7 @@
 			<script>
 			
 		$(document).ready(function() {
-			
-<<<<<<< HEAD
-			
-// 			setInterval(function() {
-=======
-			
 			setInterval(function() {
->>>>>>> refs/remotes/origin/master
 				
 				$.ajax({
 					url:"atloadval",
@@ -258,19 +251,6 @@
 								console.log("나가뤼")
 								
 							}
-							
-							
-							
-<<<<<<< HEAD
-// 							console.log("현재시각"+nowtimehour+":"+nowtimeminute)
-// 							console.log(ajaxdatearr[0]+"//"+ajaxdatearr[1]+"//"+ajaxdatearr[2]+"//"+ajaxtimearr[0]+"//"+ajaxtimearr[1]+"//")
-// 						})
-// 					}
-// 				})
-				
-// 			}, 10000)
-// 		})
-=======
 							console.log("현재시각"+nowtimehour+":"+nowtimeminute)
 							console.log(ajaxdatearr[0]+"//"+ajaxdatearr[1]+"//"+ajaxdatearr[2]+"//"+ajaxtimearr[0]+"//"+ajaxtimearr[1]+"//")
 						})
@@ -284,17 +264,6 @@
 			
 			
 			///////////////////////////////////////////////////
-			
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			$('#ac_num').change(function() {
 				console.log("SSS")
@@ -310,8 +279,6 @@
 		
 		
 		
-		
->>>>>>> refs/remotes/origin/master
 	</script>
 	
 	
