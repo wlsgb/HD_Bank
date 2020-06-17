@@ -146,8 +146,7 @@
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-4 ml-auto">
-																	<input>
-																	<button class="btn btn-warning" id="update">개인정보 수정하기</button>
+																	<input type="button" class="btn btn-warning" id="update" value="개인정보 수정하기"/>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
 																	<button class="btn btn-danger" id="cancel">취소</button>
@@ -184,6 +183,9 @@
 			var emailCode = null;
 			$("#cancel").click(function() {
 				location = "index";
+			});
+			$("#update").click(function() {
+				location = "pri_info_chk2";
 			});
 			
 			$("#codeCheck").click(function() {

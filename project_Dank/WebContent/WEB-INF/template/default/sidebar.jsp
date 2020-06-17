@@ -145,11 +145,11 @@
 											<span class="sub-item">1:1 문의하기</span>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a href="forms/forms.jsp">
 											<span class="sub-item">나의 문의글</span>
 										</a>
-									</li>
+									</li> -->
 									<!-- <li>
 										<a href="forms/forms.jsp">
 											<span class="sub-item">가까운 ATM 조회</span>
