@@ -32,9 +32,10 @@ import dank.mvc.vo.deposit.AccountVO;
 
 @Controller
 public class LoanController {
-
+ 
 	@Autowired
 	private LoanDao loanDao;
+	
 	@Autowired
 	private LoanService loanService;
 
