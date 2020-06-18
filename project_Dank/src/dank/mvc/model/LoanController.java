@@ -34,9 +34,10 @@ import dank.mvc.vo.deposit.AccountVO;
 
 @Controller
 public class LoanController {
-
+ 
 	@Autowired
 	private LoanDao loanDao;
+	
 	@Autowired
 	private LoanService loanService;
 	@Autowired
@@ -49,6 +50,7 @@ public class LoanController {
 		model.addAttribute("list", list);
 		return "loan/product";
 	}
+	
 	@RequestMapping(value = "/productinfo")
 	public ModelAndView productinfo(int lp_num) {
 		ModelAndView mav = new ModelAndView("loan/server/productserver");

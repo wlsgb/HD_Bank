@@ -105,8 +105,7 @@ public class SecurityController {
 
 	// 보안카드 신청 폼 페이지
 	@RequestMapping(value = "/securitycard")
-	public String viewSecurity_card(Model m, HttpSession session,
-			@RequestParam(value = "error", defaultValue = "t") String error) {
+	public String viewSecurity_card(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
@@ -120,7 +119,6 @@ public class SecurityController {
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
-		m.addAttribute("error", error);
 		return "security/securityCard";
 	}
 
@@ -215,6 +213,9 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securityotp");
 			return "login/login";
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			session.setAttribute("error", "f");
+			return "redirect:security";
 		}
 		session.setAttribute("otpProgress", true);
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
@@ -233,7 +234,10 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			return "redirect:security";
 		}
+		
 		String acNum = acNameNum.split("-")[1];
 		String pwd = String.valueOf(depositDao.pwdChk(acNum));
 		// 패스워드 성공시
@@ -252,7 +256,7 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		}else if((securityDao.otpcheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
 			return "redirect:security";
 		}else  if ((boolean) session.getAttribute("scChk")) {
 			Map<String , Object> map = new HashMap<String, Object>();
