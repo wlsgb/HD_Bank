@@ -189,7 +189,7 @@ input[type="number"]::-webkit-inner-spin-button {
 					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
 					  $('#target').html(result);
 				  }else if(amount<1000000000000){
-					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원'
+					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원';
 					  $('#target').html(result); 
 				  }
 			  })

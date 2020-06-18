@@ -43,7 +43,7 @@
 												</thead>
 												<tbody>
 												<c:forEach items="${list }" var="e">
-												<c:if test="${e.lc_state ne '실행완료' }">
+												<c:if test="${e.lc_state ne '실행완료' and e.lc_state ne '대출승인'}">
 													<tr>
 													 <td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanApplicationVO.la_sysdate }</td>
@@ -55,10 +55,10 @@
 														<td><button type="button" class="btn btn-lg btn-primary" disabled="disabled">선정대기</button></td>														
 															</c:when>
 															<c:when test="${e.lc_state eq '서류제출대기' }">
-														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">서류제출하기</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">서류제출</button></td>
 															</c:when>
 															<c:when test="${e.lc_state eq '서류제출완료' }">
-														<td><button type="button" class="btn btn-lg btn-primary refile" value="${e.lc_num }">서류다시제출하기</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary refile" value="${e.lc_num }">추가제출</button></td>
 															
 															</c:when>
 															<c:otherwise>
