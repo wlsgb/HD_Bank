@@ -21,7 +21,7 @@
 						</ul>
 					</nav>
 					<div class="copyright ml-auto">
-						Copyright KB HanDon Bank. All Rights Reserved.
+						Copyright HanDon Bank. All Rights Reserved.
 					</div>				
 				</div>
 			</footer>
