@@ -161,6 +161,24 @@ input[type="number"]::-webkit-inner-spin-button {
 			
 			
 			<script>
+			
+			$("input").keydown(function () {
+			    // Save old value.
+			    if (!$(this).val() || (parseInt($(this).val()) <= $('#maximum').val()  && parseInt($(this).val()) >= 0))
+			    $(this).data("old", $(this).val());
+			  });
+			  $("input").keyup(function () {
+			    // Check correct, else revert back to old value.
+			    if (!$(this).val() || (parseInt($(this).val()) <= $('#maximum').val() && parseInt($(this).val()) >= 0)){
+			    	
+			    }else if(parseInt($(this).val()) < 0){
+			    	alert('음수는 입력할 수 없습니다.')
+			    	$(this).val(0);
+			    }
+			   
+
+			  });
+			
 			$("#btnroll").click(function () {
 				var radio_name = [];
 				var radio = $("input[type=radio]"); //라디오 정보를 가져옵니다.
