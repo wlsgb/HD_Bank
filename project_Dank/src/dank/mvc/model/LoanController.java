@@ -284,7 +284,7 @@ public class LoanController {
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
-				if(Long.parseLong(bangkingdao.trbalChkadmin(mapmy)) >=Long.parseLong(lr_balance)) {
+				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(lr_balance)) {
 					loanService.repayloan(lr_balance, mapmy, mapmysp, mapyour, mapyoursp,vo);
 				}
 			}
