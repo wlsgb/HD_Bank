@@ -48,7 +48,7 @@ input[type="number"]::-webkit-inner-spin-button {
    														<div id="target">
 	   														<input type='hidden' id='chk' value='0'>
 	   													</div>
-   													</div>
+   													</div> 
    													<div class="col-6">
 														<button type="button" class="btn btn-info" id="idchk">중복검사</button>
 														<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
