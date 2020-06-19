@@ -53,7 +53,7 @@ input[type="number"]::-webkit-inner-spin-button {
 														<button type="button" class="btn btn-info" id="idchk">중복검사</button>
 														<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
 													</div>
-												</div>
+												</div> 
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">인증번호</label>
 													<div class="col-6">
