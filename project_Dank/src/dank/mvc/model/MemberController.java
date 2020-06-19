@@ -54,9 +54,18 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping(value = "/memberjoin")
-	public String memberjoin(MemberVO vo,String mem_phn1,String mem_phn2,String mem_phn3) {
+	public String memberjoin(MemberVO vo,String mem_phn1,String mem_phn2,String mem_phn3, HttpSession session,
+			@RequestParam(value = "successData", defaultValue = "fail") String successData) {
+		if (session.getAttribute("member") != null) {
+			session.setAttribute("pageName", "index");
+			System.out.println("실패");
+			return "login/login";
+		}else if(successData.equals("fail")) {
+			return "member/memberForm";
+		}
 		vo.setMem_phn(mem_phn1+"-"+mem_phn2+"-"+mem_phn3);
 		memberDao.memberjoin(vo);
+		System.out.println("성공");
 		return "login/login";
 	}
 	@RequestMapping(value = "/radio")

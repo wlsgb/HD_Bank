@@ -97,11 +97,11 @@
 									
 									<div class="form-inline" style="margin-left: 10%;">
 										<span>입금 계좌번호</span>
-										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="계좌번호를 입력해주세요"/>
+										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="계좌번호를 입력해주세요" max="10"/>
 									</div>
 									<div class="form-inline" style="margin-left: 10%;">
-										<span>계정 비밀번호</span>
-										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="비밀번호를 입력해주세요"/>
+										<span>계좌 비밀번호</span>
+										<input type="password" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="비밀번호를 입력해주세요" max="4"/>
 									</div>
 									<div style="margin-left: 60%; margin-top: 30px;" >
 										<input type="button" class="btn btn-info" value="취소" id="cancel">
