@@ -31,7 +31,7 @@ input[type="number"]::-webkit-inner-spin-button {
 					</div>
 				</div>
 				
-		<form action="memberjoin" method="post" class="form-horizontal">
+		<form action="memberjoin" method="post" class="form-horizontal"> 
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
