@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dank.mvc.vo.deposit.TransferDTO;
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.At_applicationVO;
@@ -63,54 +64,54 @@ public class BangkingDao {
 	public int trtrAcChk(String ac_num) {
 		return ss.selectOne("bangking.tracchk", ac_num);
 	}
-	public String trbalChk(Map<String, String> mapmy) {
-		return ss.selectOne("bangking.trbalchk", mapmy);
+	public String trbalChk(TransferDTO my_tr) {
+		return ss.selectOne("bangking.trbalchk", my_tr);
 	}
 	
 	
 	public void trpluswit(String wit_money) {
 		ss.insert("bangking.trpluswit", wit_money);
 	}
-	public void trpluswittr(Map<String, String> mapmy) {
-		ss.insert("bangking.trpluswittr", mapmy);
+	public void trpluswittr(TransferDTO my_tr) {
+		ss.insert("bangking.trpluswittr", my_tr);
 	}
-	public void trplusspwit(Map<String, String> mapmysp) {
-		ss.insert("bangking.trplusspwit", mapmysp);
+	public void trplusspwit(TransferDTO my_tr) {
+		ss.insert("bangking.trplusspwit", my_tr);
 	}
-	public void trtrwitupbal(Map<String, String> mapmy) {
-		ss.update("bangking.trtrwitupbal", mapmy);
+	public void trtrwitupbal(TransferDTO my_tr) {
+		ss.update("bangking.trtrwitupbal", my_tr);
 	}
 	
 	
 	public void trplusdep(String dep_money) {
 		ss.insert("bangking.trplusdep", dep_money);
 	}
-	public void trplusdeptr(Map<String, String> mapyour) {
-		ss.insert("bangking.trplusdeptr", mapyour);
+	public void trplusdeptr(TransferDTO your_tr) {
+		ss.insert("bangking.trplusdeptr", your_tr);
 	}
-	public void trplusspdep(Map<String, String> mapyoursp) {
-		ss.insert("bangking.trplusspdep", mapyoursp);
+	public void trplusspdep(TransferDTO your_tr) {
+		ss.insert("bangking.trplusspdep", your_tr);
 	}
-	public void trtrdepupbal(Map<String, String> mapyour) {
-		ss.update("bangking.trtrdepupbal", mapyour);
+	public void trtrdepupbal(TransferDTO your_tr) {
+		ss.update("bangking.trtrdepupbal", your_tr);
 	}
 	
 	//¾îµå¹Î°èÁÂ °Å·¡½Ã
-	public String trbalChkadmin(Map<String, String> mapmy) {
-		return ss.selectOne("bangking.trbalchkadmin", mapmy);
+	public String trbalChkadmin(TransferDTO my_tr) {
+		return ss.selectOne("bangking.trbalchkadmin", my_tr);
 	}
-	public void trplusspwitadmin(Map<String, String> mapmysp) {
-		ss.insert("bangking.trplusspwitadmin", mapmysp);
+	public void trplusspwitadmin(TransferDTO my_tr) {
+		ss.insert("bangking.trplusspwitadmin", my_tr);
 	}
-	public void trtrwitupbaladmin(Map<String, String> mapmy) {
-		ss.update("bangking.trtrwitupbaladmin", mapmy);
+	public void trtrwitupbaladmin(TransferDTO my_tr) {
+		ss.update("bangking.trtrwitupbaladmin", my_tr);
 	}
 	
-	public void trplusspdepadmin(Map<String, String> mapyoursp) {
-		ss.insert("bangking.trplusspdepadmin", mapyoursp);
+	public void trplusspdepadmin(TransferDTO your_tr) {
+		ss.insert("bangking.trplusspdepadmin", your_tr);
 	}
-	public void trtrdepupbaladmin(Map<String, String> mapyour) {
-		ss.update("bangking.trtrdepupbaladmin", mapyour);
+	public void trtrdepupbaladmin(TransferDTO your_tr) {
+		ss.update("bangking.trtrdepupbaladmin", your_tr);
 	}
 	///¾îµå¹Î°èÁÂ °Å·¡½Ã Á¾·á
 	
