@@ -2,7 +2,14 @@ package dank.mvc.vo;
 
 public class LoanProductVO {
 	private int lp_num,lp_interestrate,lp_cancelfee,lp_maximum;
-	private String lp_name;
+	private String lp_name,lp_dambo;
+	
+	public String getLp_dambo() {
+		return lp_dambo;
+	}
+	public void setLp_dambo(String lp_dambo) {
+		this.lp_dambo = lp_dambo;
+	}
 	public int getLp_num() {
 		return lp_num;
 	}

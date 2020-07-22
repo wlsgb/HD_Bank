@@ -22,7 +22,7 @@
 					</div>
 				</div>
 				<!--대출 신청 조회  -->
-				<form action="loanrepay" method="post">
+				<form method="post" name="myform">
 				
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
@@ -45,10 +45,18 @@
 													<tr>
 														<th>대출이율</th>
 														<td><input type="text" readonly="readonly" value="${vo.loanProductVO.lp_interestrate }"></td>
+													</tr>
+													<tr>
+														<th>중도상환수수료</th>
+														<td><input type="text" readonly="readonly" value="${vo.loanProductVO.lp_cancelfee }" name="lp_cancelfee" id="lp_cancelfee"></td>
 													</tr>	
 													<tr>
 														<th>대출신청액</th>
 														<td><input type="text" readonly="readonly" value="${vo.loanApplicationVO.la_hamount }"></td>
+													</tr>
+													<tr>
+														<th>대출잔액</th>
+														<td><input type="text" readonly="readonly" value="${vo.loanRepayVO.lr_balance }" id="repaybal"></td>
 													</tr>
 													<tr>
 														<th>거치기간</th>
@@ -69,12 +77,17 @@
 														</td>
 													</tr>
 													<tr>
+														<th>최대 상환 금액</th>
+														<td><p id="target"></p></td>
+													</tr>
+													<tr>
 														<th>상환금액</th>
-														<td><input type="number" name="lr_balance"></td>
+														<td><input type="number" name="lr_balance" id="bal"></td>
 													</tr>	
+													
 													<tr>
 														<td colspan="2">
-											<p class="text-center"><button type="submit" class="btn btn-lg btn-primary repay" value="${vo.lc_num }">상환하기</button></p>
+											<p class="text-center"><button type="button" class="btn btn-lg btn-primary repay" value="${vo.lc_num }" onclick="check()">상환하기</button></p>
 														
 														</td>
 													</tr>	
@@ -100,7 +113,32 @@
 			
 			
 			<script>
+			
 		
-	
+			
+		function check(){
+			var myform = document.myform;
+			var bal = Number($('#bal').val())
+			var repaybal = Number($('#repaybal').val())
+			var can = Number($('#lp_cancelfee').val())
+			if((bal/100)*(100-can)>repaybal){
+				alert('상환 금액이 대출 잔액보다 큽니다.')
+				return;
+			}
+			myform.action = 'loanrepay'
+			myform.submit() 
+			
+		}
+		
+		window.onload = function(){
+			var repaybal = Number($('#repaybal').val())
+			var can = Number($('#lp_cancelfee').val())
+			var max = (repaybal*100)/(100-can)
+			
+			console.log(max)
+			max = Math.floor(max)
+			document.getElementById('target').innerHTML = max
+		}
+		
 	</script>
 
