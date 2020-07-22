@@ -23,7 +23,7 @@ public class SecurityDao {
 		ss.insert("security.otpReg", map);
 	}
 	
-	public int otpcheck(int num) {
+	public int otpCheck(int num) {
 		return ss.selectOne("security.otpChk", num);
 	}
 	

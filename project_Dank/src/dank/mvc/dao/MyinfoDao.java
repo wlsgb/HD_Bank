@@ -18,8 +18,8 @@ public class MyinfoDao {
 	}
 	
 	
-	 public List<MemberVO> myinfoList(int mem_code){ 
-		 return ss.selectList("myinfo.getmyinfo",mem_code);
+	 public MemberVO myinfo(int mem_code){ 
+		 return ss.selectOne("myinfo.getmyinfo",mem_code);
 	 
 	 }
 	 

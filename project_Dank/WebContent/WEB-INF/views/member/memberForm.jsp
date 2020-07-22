@@ -31,7 +31,7 @@ input[type="number"]::-webkit-inner-spin-button {
 					</div>
 				</div>
 				
-		<form action="memberjoin" method="post" class="form-horizontal">
+		<form action="memberjoin" method="post" class="form-horizontal"> 
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -43,15 +43,27 @@ input[type="number"]::-webkit-inner-spin-button {
 												<h3>신청자 정보</h3>
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">이메일</label>
-													<div class="col-6">
+													<div class="col-4">
    														<input type="email" class="form-control"  id="mem_email1" name="mem_email">
-   													<div id="target">
-   													<input type='hidden' id='chk' value='0'>
-   													</div>
-   													</div>
-   													<div class="col-2">
-   													<input type="button" id="idchk" class="btn btn-info" value="중복검사">
-   													</div>
+   														<div id="target">
+	   														<input type='hidden' id='chk' value='0'>
+	   													</div>
+   													</div>  
+   													<div class="col-6">
+														<button type="button" class="btn btn-info" id="idchk">중복검사</button>
+														<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
+													</div>
+												</div> 
+												<div class="form-group row">
+													<label for="name" class="col-2 control-label">인증번호</label>
+													<div class="col-6">
+														<input type="text" id="codenum" name="codenum" required="required"
+														class="form-control input-full">                                      
+													</div>
+													<div class="col-4 mt-1" id="codeTarget">
+														<button type="button" class="btn btn-primary" id="codeCheck">확인</button>
+														
+													</div>
 												</div>
 												<div class="form-group row">
 													<label for="name" class="col-2 control-label">비밀번호</label>
@@ -140,9 +152,77 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			
 			<script>
+			$(function() {
+				var email = null;
+				var emailCode = null;
+				$("#cancel").click(function() {
+					location = "security";
+				});
+				
+				$("#codeCheck").click(function() {
+					console.log("emailCode : "+emailCode);
+					console.log("codenum : "+$("#codenum").val());
+					if ($("#codenum").val() == emailCode) {
+						$("#mem_email1").attr("readonly", true);
+						$("#codenum").attr("readonly", true);
+						$("#codeTarget").html('<button class="btn btn-success btn-sm" disabled="disabled">Success</button>');
+						$("#codeTarget").append('<input type="hidden" value="success" name="successData" />')
+					}else {
+						$("#codeTarget").append('<input type="hidden" value="fail" name="successData" />')
+					}
+					
+				})
+				
+				$('#emailBtn').click(function(e) {
+					email = $("#mem_email1").val();
+					swal({
+						title: '이메일을 전송 하시겠습니까?',
+						text: "이메일을 확인해주세요. \n"+email,
+						type: 'warning',
+						buttons:{
+							confirm: {
+								text : '전송',
+								className : 'btn btn-success'
+							},
+							cancel: {
+								text : '취소',
+								visible: true,
+								className: 'btn btn-danger'
+							}
+						}
+					}).then((Delete) => {
+						if (Delete) {
+							$.ajax({
+								url:"emailsend?email="+email,
+								success:function(data){
+									emailCode = data;
+								}
+							})
+							swal({
+								title: '전송되었습니다.',
+								text: '전송된 코드를 입력해주세요.',
+								type: 'success',
+								buttons : {
+									confirm: {
+										text : '확인',
+										className : 'btn btn-success'
+									}
+								},
+								
+							});
+						} else {
+							swal.close();
+						}
+					});
+				});
+			})
+				
+			
+			
+			
 		$(function() {
 			
-		
+			/*  */
 			$('#check1').click(function() {
 				$.ajax({
 					url:'radio?radio='+$('#check1').val(),
@@ -258,6 +338,14 @@ input[type="number"]::-webkit-inner-spin-button {
 			
 		})
 		
+					$('form').on('focus', 'input[type=number]', function (e) {
+  $(this).on('wheel.disableScroll', function (e) {
+    e.preventDefault()
+  })
+})
+$('form').on('blur', 'input[type=number]', function (e) {
+  $(this).off('wheel.disableScroll')
+})
 		
 	</script>
 

@@ -34,48 +34,42 @@ import dank.mvc.vo.deposit.AccountVO;
 
 @Controller
 public class LoanController {
-
+	//최호현
+	
 	@Autowired
 	private LoanDao loanDao;
+	
 	@Autowired
 	private LoanService loanService;
 	@Autowired
 	private BangkingDao bangkingdao;
 	
 	
+	//대출 상품 정보 가져오기
 	@RequestMapping(value = "/product")
 	public String product(Model model) {
 		List<LoanProductVO> list = loanDao.getLoanProductList();
 		model.addAttribute("list", list);
 		return "loan/product";
 	}
+	
+	//대출 상품 디테일 ajax로 가져오기
 	@RequestMapping(value = "/productinfo")
 	public ModelAndView productinfo(int lp_num) {
 		ModelAndView mav = new ModelAndView("loan/server/productserver");
-		LoanProductVO vo = loanDao.getProductInfo(lp_num);
-		StringBuilder info = new StringBuilder();
-		info.append("<input type=\"hidden\" id=\"lp_num\" value=\""+lp_num+"\">");
-		info.append("<div class=\"col-md-12\">");
-		info.append("<h1 class=\"text-center\">").append(vo.getLp_name()).append("</h1><br>");
-		info.append("</div><div class=\"col-md-12\">");
-		info.append("<p class=\"text-center\">").append("이자율 : ").append(vo.getLp_interestrate()).append("%</p><br>");
-		info.append("</div><div class=\"col-md-12\">");
-		info.append("<p class=\"text-center\">").append("최대 대출 가능 금액 : ").append(vo.getLp_maximum()).append("원</p><br>");
-		info.append("</div><div class=\"col-md-12\">");
-		info.append("<p class=\"text-center\">").append("중도 해지 수수료 : ").append(vo.getLp_cancelfee()).append("%</p>");
-		info.append("</div>");
-
-		mav.addObject("info", info.toString());
+		LoanProductVO vo = loanDao.getProductInfo(lp_num);	
+		mav.addObject("vo", vo);
+		
 		return mav;
 	}
-
+	//대출 신청
 	@RequestMapping(value = "/application")
 	public String application(Model model) {
 		List<LoanProductVO> list = loanDao.getLoanProductList();
 		model.addAttribute("list", list);
 		return "loan/application";
 	}
-
+	//대출 신청폼
 	@RequestMapping(value = "/applicationform")
 	public String applicationform(Model model,int lp_num,HttpSession session) {
 		
@@ -88,17 +82,18 @@ public class LoanController {
 		model.addAttribute("vo", vo);
 		return "loan/applicationform";
 	}
-
+	//대출 신청
 	@RequestMapping(value = "/applicationsuccess",method = RequestMethod.POST)
 	public String applicationsuccess(LoanCheckVO vo,LoanApplicationVO avo) {
 		loanService.addloanaplication(avo, vo);
 		return "redirect:success";
 	}
+	//대출 성공 페이지
 	@RequestMapping(value = "/success")
 	public String success() {
 		return "loan/applicationsuccess";
 	}
-
+	//신청 대출 정보 리스트
 	@RequestMapping(value = "/check")
 	public ModelAndView check(HttpSession session) {
 		ModelAndView mav = new ModelAndView("loan/check");
@@ -115,7 +110,8 @@ public class LoanController {
 		mav.addObject("list", list);
 		return mav;
 	}
-
+	
+	//신청 정보 디테일
 	@RequestMapping(value = "/checkdetail")
 	public ModelAndView checkdetail(int lc_num,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -143,7 +139,7 @@ public class LoanController {
 	}
 	
 	
-	
+	//파일 업로드 리스트
 	@RequestMapping(value = "/fileuploadhome")
 	public ModelAndView fileuploadhome(HttpSession session) {
 		ModelAndView mav = new ModelAndView("loan/fileuploadhome");
@@ -160,7 +156,7 @@ public class LoanController {
 		mav.addObject("list", list);
 		return mav;
 	}
-	
+	//제출 파일 디테일
 	@RequestMapping(value = "/checkfiledetail")
 	public ModelAndView checkfiledetail(int lc_num) {
 		ModelAndView mav = new ModelAndView("loan/checkfiledetail");
@@ -171,6 +167,7 @@ public class LoanController {
 		
 		return mav;
 	}
+	//대출 실행
 	@RequestMapping(value = "/loanstart")
 	public  ModelAndView loanstart(int lc_num,String ac_num,HttpSession session) {
 		ModelAndView mav = new ModelAndView("redirect:check");
@@ -230,6 +227,7 @@ public class LoanController {
 		
 		return mav;
 	}
+	//대출 상환 폼
 	@RequestMapping(value = "/repaymentloan")
 	public ModelAndView repayloan(HttpSession session,int lc_num) {
 		ModelAndView mav = new ModelAndView("loan/repaymentloan");
@@ -246,6 +244,7 @@ public class LoanController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	//대출 상환
 	@RequestMapping(value = "/loanrepay")
 	public ModelAndView loanrepay(HttpSession session,String lr_balance,String ac_num,String lp_name,int lc_num) {
 		ModelAndView mav = new ModelAndView("redirect:check");
@@ -282,7 +281,7 @@ public class LoanController {
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
-				if(Long.parseLong(bangkingdao.trbalChkadmin(mapmy)) >=Long.parseLong(lr_balance)) {
+				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(lr_balance)) {
 					loanService.repayloan(lr_balance, mapmy, mapmysp, mapyour, mapyoursp,vo);
 				}
 			}
@@ -291,7 +290,7 @@ public class LoanController {
 		
 		return mav;
 	}
-	
+	//대출 실행 폼
 	@RequestMapping(value = "/repaymentstart")
 	public ModelAndView repaymentstart(int lc_num,HttpSession session) {
 		ModelAndView mav = new ModelAndView("loan/repaymentstart");
@@ -308,6 +307,7 @@ public class LoanController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	//이자 계산기 계산
 	@RequestMapping(value = "/caculator", method = RequestMethod.POST)
 	public ModelAndView caculator(LoanCaculatorVO vo) {
 		ModelAndView mav = new ModelAndView("loan/server/caculatorserver");
@@ -408,7 +408,7 @@ public class LoanController {
 	
 	
 	
-	
+	//대출 상환 리스트
 	@RequestMapping(value = "/repayment")
 	public ModelAndView repayment(HttpSession session) {
 		
@@ -425,18 +425,12 @@ public class LoanController {
 		mav.addObject("list", list);
 		return mav;		
 	}
-
-
-	@RequestMapping(value = "/repaymentform")
-	public String repaymentform() {
-		return "loan/repaymentform";
-	}
-
+	//이자 계산기 이동
 	@RequestMapping(value = "/caculator")
 	public String caculator() {
 		return "loan/caculator";
 	}
-
+	// 제출서류 다운로드
 	 @RequestMapping("/fileDown.do")
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
@@ -446,7 +440,7 @@ public class LoanController {
 	     modelMap.put("fileDir", fileDir);
 	     return "/loan/server/filedown";
 	   }
-	 
+	 //제출 서류 등록
 	 @RequestMapping(value = "/fileupload",method =  RequestMethod.POST)
 		public ModelAndView fileupload(LoanFileVO vo,HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView("redirect:check");//view의 이름을 생성자의 인자값으로 지정
@@ -633,7 +627,7 @@ public class LoanController {
 			loanService.fileupload(vo);
 			return mav;
 		}
-	 
+	 //제출 서류 보완 제출
 	 @RequestMapping(value = "/refileupload",method =  RequestMethod.POST)
 		public ModelAndView refileupload(LoanFileVO vo,HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView("redirect:check");//view의 이름을 생성자의 인자값으로 지정
