@@ -26,7 +26,7 @@ import dank.mvc.service.DepositService;
 import dank.mvc.vo.deposit.PageVO;
 import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.MemberVO;
-
+import dank.mvc.vo.deposit.TransferDTO;
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
@@ -314,30 +314,44 @@ public class DepositController {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		
 
+		TransferDTO my_tr = new TransferDTO();
+		my_tr.setAc_num(myac);
+		my_tr.setMem_code(String.valueOf(sessionmem.getMem_code()));
+		my_tr.setAt_dps_ac(yourac);
+		my_tr.setSp_name(myacwrite);
+		my_tr.setAt_set_mony(trmoney);
+
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(yourac);
+		your_tr.setMem_code(youracmem);
+		your_tr.setAt_dps_ac(myac);
+		your_tr.setSp_name(youracmem);
+		your_tr.setAt_set_mony(trmoney);
 		
-		Map<String, String> mapmy = new HashMap<String, String>();
-		mapmy.put("ac_num", myac);
-		mapmy.put("mem_code", String.valueOf(sessionmem.getMem_code()));
-		mapmy.put("at_dps_ac", yourac);
-		mapmy.put("at_set_mony", trmoney);
 		
-		
-		Map<String, String> mapmysp = new HashMap<String, String>();
-		mapmysp.put("ac_num", myac);
-		mapmysp.put("mem_code",String.valueOf(sessionmem.getMem_code()));
-		mapmysp.put("sp_name", myacwrite);
-		
-		
-		Map<String, String> mapyour = new HashMap<String, String>();
-		mapyour.put("ac_num", yourac);
-		mapyour.put("mem_code", youracmem);
-		mapyour.put("at_dps_ac",myac);
-		mapyour.put("at_set_mony", trmoney);
-		
-		Map<String, String> mapyoursp = new HashMap<String, String>();
-		mapyoursp.put("ac_num", yourac);
-		mapyoursp.put("mem_code",youracmem);
-		mapyoursp.put("sp_name", youracwrite);
+//		Map<String, String> mapmy = new HashMap<String, String>();
+//		mapmy.put("ac_num", myac);
+//		mapmy.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+//		mapmy.put("at_dps_ac", yourac);
+//		mapmy.put("at_set_mony", trmoney);
+//		
+//		
+//		Map<String, String> mapmysp = new HashMap<String, String>();
+//		mapmysp.put("ac_num", myac);
+//		mapmysp.put("mem_code",String.valueOf(sessionmem.getMem_code()));
+//		mapmysp.put("sp_name", myacwrite);
+//		
+//		
+//		Map<String, String> mapyour = new HashMap<String, String>();
+//		mapyour.put("ac_num", yourac);
+//		mapyour.put("mem_code", youracmem);
+//		mapyour.put("at_dps_ac",myac);
+//		mapyour.put("at_set_mony", trmoney);
+//		
+//		Map<String, String> mapyoursp = new HashMap<String, String>();
+//		mapyoursp.put("ac_num", yourac);
+//		mapyoursp.put("mem_code",youracmem);
+//		mapyoursp.put("sp_name", youracwrite);
 		
 		
 		
@@ -348,8 +362,8 @@ public class DepositController {
 
 				
 				
-				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
-					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
+				if(Long.parseLong(bangkingdao.trbalChk(my_tr)) >=Long.parseLong(trmoney)) {
+					bangkingservice.transferprocess(my_tr,your_tr);
 					System.out.println("¿Ã√ºΩ««‡¥Ô");
 				}
 			}

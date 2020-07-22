@@ -28,9 +28,11 @@ import dank.mvc.vo.LoanCaculatorVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
+import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.TransferDTO;
 
 @Controller
 public class LoanController {
@@ -191,36 +193,31 @@ public class LoanController {
 		vo.setLr_reaccount(ac_num);
 		
 		
-		Map<String, String> mapmy = new HashMap<String, String>();
-		mapmy.put("ac_num", "9001111111");
-		mapmy.put("hd_code", "2");
-		mapmy.put("at_dps_ac", ac_num);
-		mapmy.put("at_set_mony", String.valueOf(vo.getLr_amount()));
+		
+		TransferDTO my_tr =new TransferDTO();
+		my_tr.setAc_num("9001111111");
+		my_tr.setHd_code("2");
+		my_tr.setAt_dps_ac(ac_num);
+		my_tr.setAt_set_mony(String.valueOf(vo.getLr_amount()));
+		my_tr.setSp_name(check.getLoanProductVO().getLp_name());
 		
 		
-		Map<String, String> mapmysp = new HashMap<String, String>();
-		mapmysp.put("ac_num", "9001111111");
-		mapmysp.put("hd_code","2");
-		mapmysp.put("sp_name", check.getLoanProductVO().getLp_name());
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(vo.getLr_reaccount());
+		your_tr.setMem_code(String.valueOf(mem_code));
+		your_tr.setAt_dps_ac("9001111111");
+		your_tr.setAt_set_mony(String.valueOf(vo.getLr_amount()));
+		your_tr.setSp_name(check.getLoanProductVO().getLp_name());
 		
 		
-		Map<String, String> mapyour = new HashMap<String, String>();
-		mapyour.put("ac_num", vo.getLr_reaccount());
-		mapyour.put("mem_code", String.valueOf(mem_code));
-		mapyour.put("at_dps_ac", "9001111111");
-		mapyour.put("at_set_mony",String.valueOf(vo.getLr_amount()) );
-		
-		Map<String, String> mapyoursp = new HashMap<String, String>();
-		mapyoursp.put("ac_num", ac_num);
-		mapyoursp.put("mem_code",String.valueOf(mem_code));
-		mapyoursp.put("sp_name", check.getLoanProductVO().getLp_name());
+
 		
 		
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
-				if(Long.parseLong(bangkingdao.trbalChkadmin(mapmy)) >=Long.parseLong(String.valueOf(vo.getLr_amount()))) {
-					loanService.startrepay(vo,String.valueOf(vo.getLr_amount()), mapmy, mapmysp, mapyour, mapyoursp);
+				if(Long.parseLong(bangkingdao.trbalChkadmin(my_tr)) >=Long.parseLong(String.valueOf(vo.getLr_amount()))) {
+					loanService.startrepay(vo, my_tr,your_tr);
 				}
 			}
 		}
@@ -245,55 +242,64 @@ public class LoanController {
 		return mav;
 	}
 	//대출 상환
+	
 	@RequestMapping(value = "/loanrepay")
-	public ModelAndView loanrepay(HttpSession session,String lr_balance,String ac_num,String lp_name,int lc_num) {
+	public ModelAndView loanrepay(HttpSession session,String lr_balance,String ac_num,String lp_name,int lc_num,int lp_cancelfee) {
 		ModelAndView mav = new ModelAndView("redirect:check");
 		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
 		LoanRepayVO vo = new LoanRepayVO();
+		double balance = Double.parseDouble(lr_balance);
+		double bal1 = (double)(balance/100);
+		System.out.println("bal1:"+bal1);
+		double bal2 = bal1*(100-lp_cancelfee);
+		System.out.println("bal2"+bal2);
+		int bal = (int)Math.round(bal2);
+		System.out.println("bal="+bal);
+		
 		vo.setLc_num(lc_num);
-		vo.setLr_balance(Integer.parseInt(lr_balance));
-				
-		Map<String, String> mapmy = new HashMap<String, String>();
-		mapmy.put("ac_num", ac_num);
-		mapmy.put("mem_code", String.valueOf(mem_code));
-		mapmy.put("at_dps_ac", "9002222222");
-		mapmy.put("at_set_mony", lr_balance);
+		vo.setLr_balance(bal);		
+
+		LoanRepayLogVO logVO = new LoanRepayLogVO();
+		logVO.setLc_num(lc_num);
+		logVO.setLrl_amount(bal);
+		logVO.setLrl_interest(Integer.parseInt(lr_balance)-bal);
+		logVO.setLrl_total(Integer.parseInt(lr_balance));
 		
 		
-		Map<String, String> mapmysp = new HashMap<String, String>();
-		mapmysp.put("ac_num", ac_num);
-		mapmysp.put("mem_code",String.valueOf(mem_code));
-		mapmysp.put("sp_name", lp_name+" 상환");
+		TransferDTO my_tr =new TransferDTO();
+		my_tr.setAc_num(ac_num);
+		my_tr.setMem_code(String.valueOf(mem_code));
+		my_tr.setAt_dps_ac("9002222222");
+		my_tr.setAt_set_mony(lr_balance);
+		my_tr.setSp_name(lp_name+" 상환");
+
+		
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num("9002222222");
+		your_tr.setHd_code("2");
+		your_tr.setAt_dps_ac(ac_num);
+		your_tr.setAt_set_mony(lr_balance);
+		your_tr.setSp_name(lp_name+" 상환");
 		
 		
-		Map<String, String> mapyour = new HashMap<String, String>();
-		mapyour.put("ac_num", "9002222222");
-		mapyour.put("hd_code", "2");
-		mapyour.put("at_dps_ac", ac_num);
-		mapyour.put("at_set_mony",lr_balance );
-		
-		Map<String, String> mapyoursp = new HashMap<String, String>();
-		mapyoursp.put("ac_num", "9002222222");
-		mapyoursp.put("hd_code","2");
-		mapyoursp.put("sp_name", lp_name+" 상환");
-		
+
+	
 		
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
-				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(lr_balance)) {
-					loanService.repayloan(lr_balance, mapmy, mapmysp, mapyour, mapyoursp,vo);
-				}
+				if(Long.parseLong(bangkingdao.trbalChk(my_tr)) >=Long.parseLong(lr_balance)) {
+					loanService.repayloan(my_tr,your_tr,vo,logVO);
+				
 			}
 		}
-		
-		
+		}
 		return mav;
 	}
 	//대출 실행 폼
 	@RequestMapping(value = "/repaymentstart")
 	public ModelAndView repaymentstart(int lc_num,HttpSession session) {
-		ModelAndView mav = new ModelAndView("loan/repaymentstart");
+		ModelAndView mav = new ModelAndView("loan/repaymentstart"); 
 		LoanCheckVO v = new LoanCheckVO();
 		int mem_code =((MemberVO)session.getAttribute("member")).getMem_code();
 		v.setLc_num(lc_num);
