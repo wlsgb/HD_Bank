@@ -9,5 +9,9 @@
 		values(inquiry_seq.nextVal,#{mem_code},#{cat_num},
 		#{inq_title},#{inq_content},0,null,sysdate,1)
 	</insert> 
+	
+	<select id="myqlist" resultType="qvo" parameterType="qvo">
+		select inq_num,mem_code,cat_num,inq_title,inq_content,inq_hit,inq_file1,inq_date,pro_code from INQUIRY order by 1
+	</select>
 
 </mapper>
