@@ -82,7 +82,7 @@ public class MemberController {
 		System.out.println("¼º°ø");
 		return "login/login";
 	}
-	// ???
+	// ????
 	@RequestMapping(value = "/radio")
 	public ModelAndView radio(int radio) {
 		ModelAndView mav = new ModelAndView("member/server/idchkserver");
