@@ -11,6 +11,7 @@ import dank.mvc.dao.LoanDao;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
+import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
 
 
@@ -48,7 +49,7 @@ public class LoanService {
 	}
 	
 	public void repayloan(String trmoney,Map<String, String> mapmy,Map<String, String> mapmysp,
-			Map<String, String> mapyour,Map<String, String> mapyoursp,LoanRepayVO vo) {
+			Map<String, String> mapyour,Map<String, String> mapyoursp,LoanRepayVO vo,LoanRepayLogVO logVO) {
 		bangkingdao.trpluswit(trmoney);
 		bangkingdao.trpluswittr(mapmy);
 		bangkingdao.trplusspwit(mapmysp);
@@ -61,6 +62,14 @@ public class LoanService {
 		
 		
 		loanDao.repayloan(vo);
+		loanDao.repaylog(logVO);
+		
+		
+		//¥Î√‚¿‹æ◊
+				int after = loanDao.balance(vo.getLc_num());
+				if(after <= 0 ) {
+					loanDao.loanend(vo.getLc_num());
+				}
 	}
 	
 
