@@ -7,16 +7,8 @@
 				<div class="sidebar-content">
 					<c:choose>
 						<c:when test="${member.mem_email==null }">
-							<!-- 로그인 창 시작 -->
+							<!-- 로그인 창 시작합니다. -->
 							<form method="post" action="login" >
-								<div class="form-group">
-									<label for="email2">이메일</label>
-									<input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="Enter Email" value="wlsgb94@naver.com">
-								</div>
-								<div class="form-group">
-									<label for="password">패스워드</label>
-									<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="Password" value="1234">
-								</div>
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block" value="로그인" />
 								</div>
@@ -82,15 +74,15 @@
 										</a>
 									</li>
 									<li>
-										<a href="cancle">
+										<a href="cancel">
 											<span class="sub-item">해지</span>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a href="analysis">
 											<span class="sub-item">분석</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</li>
@@ -149,15 +141,15 @@
 										</a>
 									</li>
 									<li>
-										<a href="1on1question_prichk">
+										<a href="1on1question_princhk">
 											<span class="sub-item">1:1 문의하기</span>
 										</a>
 									</li>
-									<li>
-										<a href="forms/forms.jsp">
+									<!-- <li>
+										<a href="myquestion">
 											<span class="sub-item">나의 문의글</span>
 										</a>
-									</li>
+									</li> -->
 									<!-- <li>
 										<a href="forms/forms.jsp">
 											<span class="sub-item">가까운 ATM 조회</span>
@@ -169,14 +161,14 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#tables">
 								<i class="fas fa-layer-group"></i>
-								<p>고객 정보 관리</p>
+								<p>개인 정보 관리</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="tables">
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="pri_info_chk">
-											<span class="sub-item">고객 정보 조회 / 수정</span>
+											<span class="sub-item">개인 정보 조회 / 수정</span>
 										</a>
 									</li>
 									<li>

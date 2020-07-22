@@ -81,7 +81,7 @@
 			<!-- End Navbar -->
 		</div>
 		
-		<%
+<%-- 		<%
  String strReferer = request.getHeader("referer");
  
  if(strReferer == null){
@@ -93,7 +93,7 @@
 <%
   return;
  }
-%>
+%> --%>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 

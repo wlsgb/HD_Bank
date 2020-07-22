@@ -8,14 +8,12 @@
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">고객정보관리</h2>
+								<h2 class="text-white pb-2 fw-bold">예금</h2>
 								<h5 class="text-white op-7 mb-2">
 								<a href="index" class="btn btn-white btn-sm btn-border mr-1"><span class="flaticon-home"/></a>
-								 <span class="h2 mr-1"> > </span>
-								 <a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">보안카드</a>
-								 <span class="h2 mr-1"> > </span>
-								 <a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">신청</a>
-								 </h5>
+								<span class="h2 mr-1"> > </span>
+								<a href="securitycard" class="btn btn-white btn-sm btn-border mr-1">신규</a>
+								</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="checkbalance" class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a>
