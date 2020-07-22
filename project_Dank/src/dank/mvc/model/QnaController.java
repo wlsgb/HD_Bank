@@ -1,5 +1,7 @@
 package dank.mvc.model;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.QnaDao;
 import dank.mvc.dao.Question_princhk_Dao;
@@ -46,11 +49,14 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "/myquestion")
-	public String listSearch3() {
+	public ModelAndView listSearch3(Question_princhk_VO qvo) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/myquestion");
+		List<Question_princhk_VO> list = question_princhk_Dao.myQList(qvo);
+		mav.addObject("list", list);
 		
 		
-		
-		return "qna/myquestion";
+		return mav;
 	}
 	
 	@RequestMapping(value = "/1on1question_princhk")
@@ -73,4 +79,7 @@ public class QnaController {
 		question_princhk_Dao.questionAdd(vo);
 		return "index/index";
 	}
+	
+	
+	
 }
