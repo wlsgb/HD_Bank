@@ -163,25 +163,25 @@ public class DepositController {
 	//계좌 삭제 신청
 	@RequestMapping(value = "/cancel_input_info" )
 	public String cancel_input_info(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
+		//System.out.println("ac_code"+ac_code);
+		
 		AccountVO account= depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		
 		return "deposit_new/cancel_input_info";
 	}
+	
 	//계좌 삭제 신청 확인
 	@RequestMapping(value = "/cancel_check")
-	public String cancel_check(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
+	public String cancel_check(int ac_code,String take_ac,Model m) {
+		//System.out.println("ac_code"+ac_code);
+		
 		AccountVO account= depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		m.addAttribute("take_ac", take_ac);
 		return "deposit_new/cancel_check";
 	}
-	//계좌 삭제
-	@RequestMapping(value = { "/cancelComplete" })
-	public String cancelComplete(int ac_code) {
-		depositDao.delAccount(ac_code);
-		return "deposit_new/cancel_success";
-	}
+	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
 //		return "deposit/share_new_req";
@@ -473,10 +473,6 @@ public class DepositController {
 		
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 
-		
-
-		
-		
 		mav.setViewName("deposit/deposite_transfer");
 		mav.addObject("myaclist",myaclist);
 		
@@ -600,10 +596,6 @@ public class DepositController {
 		mav.addObject("atlist",atlist);
 		return mav;
 	}
-
-	
-
-	
 
 	@RequestMapping(value = { "/deposite_cancle_check_Account" })
 	public String depositecanclecheckshareAccount() {

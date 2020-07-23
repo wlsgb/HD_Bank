@@ -36,6 +36,19 @@ public class DepositDao {
 	public List<Installment_savingVO> getInslist(){
 		return ss.selectList("deposit.inslist");
 	}
+	//계좌번호로 계좌의 존재 확인
+	public boolean existAc(String ac_num){
+		int exist = ss.selectOne("deposit.existAc",ac_num);
+		if(exist>0) {
+			return true; //계좌가 있으면 true
+		}else{
+			return false; //계좌가 없으면 false
+		}
+	}
+	//계좌 번호로 회원이름 조회
+	public String getName(String ac_num){
+		return ss.selectOne("deposit.numToName",ac_num);
+	}
 	//계좌 생성
 	public void addAccount(AccountVO accountVO) {
 		ss.insert("deposit.addAccount",accountVO);
@@ -52,4 +65,5 @@ public class DepositDao {
 	public void delAccount(int ac_code) {
 		ss.delete("deposit.delAccount",ac_code);
 	}
+	
 }
