@@ -39,7 +39,7 @@
 											<div class="col-9 col-stats">
 												<div class="numbers">
 												<input type="hidden" id="lp_num" value="${e.lp_num }">
-													<p class="card-category">무담보 대출</p>
+													<p class="card-category">${e.lp_dambo}</p>
 													<h4 class="card-title">${e.lp_name }</h4>
 												</div>
 											</div>

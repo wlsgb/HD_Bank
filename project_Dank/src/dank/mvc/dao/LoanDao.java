@@ -10,6 +10,7 @@ import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
+import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
 import dank.mvc.vo.deposit.AccountVO;
 
@@ -79,5 +80,16 @@ public class LoanDao {
 	public void repayloan(LoanRepayVO vo) {
 		ss.update("loan.repayloan",vo);
 	}  
+	//대출 상환  로그
+	public void repaylog(LoanRepayLogVO vo) {
+		ss.insert("loan.repaylog", vo);
+	}
+	public int balance(int lc_num) {
+		return ss.selectOne("loan.balance",lc_num);
+	}
+	public void loanend(int lc_num) {
+		ss.update("loan.end",lc_num);
+		
+	}
 
 }
