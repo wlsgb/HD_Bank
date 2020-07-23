@@ -6,7 +6,7 @@
  <!--최호현  -->
  	<!--상품 정보 -->
   	<select id="product" resultType="lpvo">
-  		select lp_num,lp_name,lp_interestrate,lp_cancelfee,lp_maximum from loan_product
+  		select lp_num,lp_name,lp_interestrate,lp_cancelfee,lp_maximum,lp_dambo from loan_product
   	</select>
   	
   	<!--선택한 상품 정보  -->
@@ -189,10 +189,24 @@
   		update loan_repay set lr_balance = lr_balance - #{lr_balance} where lc_num =#{lc_num}
   	</update>
   	
+  	<!-- 대출 상환 로그 -->
+  	<insert id="repaylog" parameterType="lrlvo">
+  		insert into loan_repaylog values(loan_repaylog_seq.nextVal,#{lc_num},#{lrl_amount},#{lrl_interest},#{lrl_total},sysdate)
+  	</insert>
   	<!-- 대출 상환을 위한 개인 예금 가져오기 -->
   	<select id="selectaccount" resultType="acvo" parameterType="int">
   	select ac.ac_code, ac.ac_num from account  
         ac, product pr,account_client acc where ac.ac_code=acc.ac_code and acc.pro_code=pr.pro_code and mem_code = #{mem_code} and sav_code is not null
         
     </select>
+    
+    <!-- 대출잔액 -->
+    <select id="balance" parameterType="int" resultType="int">
+    	select lr_balance from loan_repay where lc_num = #{lc_num}
+    </select>
+    
+    <!-- 대출끝 -->
+    <update id="end" parameterType="int">
+    	update loan_check set lc_state='상환종료' where lc_num = #{lc_num}
+    </update>
   </mapper>

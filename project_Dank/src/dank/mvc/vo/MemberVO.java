@@ -5,6 +5,24 @@ public class MemberVO {
 
 	private int mem_code,mem_pri_chk,mem_email_chk;
 	private String mem_email, mem_pwd, mem_name, mem_phn, mem_in_date, mem_birth, mem_gender, mem_loc;
+	private int mem_job;
+	private String mem_reip;
+
+	public int getMem_job() {
+		return mem_job;
+	}
+
+	public void setMem_job(int mem_job) {
+		this.mem_job = mem_job;
+	}
+
+	public String getMem_reip() {
+		return mem_reip;
+	}
+
+	public void setMem_reip(String mem_reip) {
+		this.mem_reip = mem_reip;
+	}
 
 	public int getMem_email_chk() {
 		return mem_email_chk;

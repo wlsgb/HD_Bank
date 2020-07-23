@@ -18,7 +18,7 @@
   		<typeAlias type="dank.mvc.vo.LoanApplicationVO" alias="lavo"/>
   		<typeAlias type="dank.mvc.vo.LoanFileVO" alias="lfvo"/>
   		<typeAlias type="dank.mvc.vo.LoanRepayVO" alias="lrvo"/>
-  		
+  		<typeAlias type="dank.mvc.vo.LoanRepayLogVO" alias="lrlvo"/>
 		<!-- 대출 영역 끝 -->
 		
   		<!-- 보안 알리아스 시작-->
@@ -46,6 +46,7 @@
   		<typeAlias type="dank.mvc.vo.deposit.At_applicationVO" alias="atapplyvo"/>
 		<typeAlias type="dank.mvc.vo.deposit.Account_AdminVO" alias="adminvo"/>
 		<typeAlias type="dank.mvc.vo.deposit.Account_ClientVO" alias="clientvo"/>
+		<typeAlias type="dank.mvc.vo.deposit.TransferDTO" alias="trdto"/>
 		
 		<typeAlias type="dank.mvc.vo.deposit.ProSavInsDto" alias="psidto"/>
   		<!-- 예금 영역 끝 -->

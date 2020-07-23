@@ -8,12 +8,16 @@
 					<c:choose>
 						<c:when test="${member.mem_email==null }">
 							<!-- 로그인 창 시작합니다. -->
-							<form method="post" action="login" >
 								<div class="form-group">
-									<input type="submit" class="btn btn-primary btn-block" value="로그인" />
+									<input type="button"  onclick="location='loginPage'" class="btn btn-primary btn-block" value="로그인" />
+									<input type="button" onclick="location='memberForm'" class="btn btn-primary btn-block" value="회원가입" />
 								</div>
-							</form>
 							<!-- 로그인 창 끝 -->
+							<!-- 회원가입 창 시작합니다. -->
+								<!-- <div class="form-group">
+									
+								</div> -->
+							<!-- 회원가입 창 끝 -->
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 정보 시작 -->
@@ -145,11 +149,11 @@
 											<span class="sub-item">1:1 문의하기</span>
 										</a>
 									</li>
-									<!-- <li>
+									<li>
 										<a href="myquestion">
 											<span class="sub-item">나의 문의글</span>
 										</a>
-									</li> -->
+									</li>
 									<!-- <li>
 										<a href="forms/forms.jsp">
 											<span class="sub-item">가까운 ATM 조회</span>
