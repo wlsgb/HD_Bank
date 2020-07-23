@@ -67,7 +67,7 @@ public class IndexController {
 	            // TaskRejectedException : 개수 초과시 발생
 	            System.out.println("==============>>>>>>>>>>>> THREAD ERROR");
 	            System.out.println("TaskRejectedException : 등록 개수 초과");
-	            System.out.println("==============>>>>>>>>>>>> THREAD END");
+	            System.out.println("==============>>>>>>>>>>>> THREAD ENDs");
 	        }
 			
 			
