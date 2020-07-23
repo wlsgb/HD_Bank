@@ -11,6 +11,15 @@
 	  	where mem_name=#{mem_name} and mem_birth=#{mem_birth}
   	</select>
   	
+  	
+  	<select id="getpwd" parameterType="mem" resultType="String">
+	  	select mem_pwd 
+	  	from member
+	  	where mem_name=#{mem_name} and mem_birth=#{mem_birth} and mem_email=#{mem_email}
+  	</select>
+  	
+  	
+  	
   	<select id="getmyinfo"  resultType="mem" parameterType="int">
   		select 
   			mem_email, 
