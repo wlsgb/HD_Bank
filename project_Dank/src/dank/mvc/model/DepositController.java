@@ -26,7 +26,7 @@ import dank.mvc.service.DepositService;
 import dank.mvc.vo.deposit.PageVO;
 import dank.mvc.vo.deposit.ProSavInsDto;
 import dank.mvc.vo.MemberVO;
-
+import dank.mvc.vo.deposit.TransferDTO;
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
@@ -163,25 +163,25 @@ public class DepositController {
 	//계좌 삭제 신청
 	@RequestMapping(value = "/cancel_input_info" )
 	public String cancel_input_info(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
+		//System.out.println("ac_code"+ac_code);
+		
 		AccountVO account= depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		
 		return "deposit_new/cancel_input_info";
 	}
+	
 	//계좌 삭제 신청 확인
 	@RequestMapping(value = "/cancel_check")
-	public String cancel_check(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
+	public String cancel_check(int ac_code,String take_ac,Model m) {
+		//System.out.println("ac_code"+ac_code);
+		
 		AccountVO account= depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		m.addAttribute("take_ac", take_ac);
 		return "deposit_new/cancel_check";
 	}
-	//계좌 삭제
-	@RequestMapping(value = { "/cancelComplete" })
-	public String cancelComplete(int ac_code) {
-		depositDao.delAccount(ac_code);
-		return "deposit_new/cancel_success";
-	}
+	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
 //		return "deposit/share_new_req";
@@ -314,30 +314,44 @@ public class DepositController {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		
 
+		TransferDTO my_tr = new TransferDTO();
+		my_tr.setAc_num(myac);
+		my_tr.setMem_code(String.valueOf(sessionmem.getMem_code()));
+		my_tr.setAt_dps_ac(yourac);
+		my_tr.setSp_name(myacwrite);
+		my_tr.setAt_set_mony(trmoney);
+
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(yourac);
+		your_tr.setMem_code(youracmem);
+		your_tr.setAt_dps_ac(myac);
+		your_tr.setSp_name(youracmem);
+		your_tr.setAt_set_mony(trmoney);
 		
-		Map<String, String> mapmy = new HashMap<String, String>();
-		mapmy.put("ac_num", myac);
-		mapmy.put("mem_code", String.valueOf(sessionmem.getMem_code()));
-		mapmy.put("at_dps_ac", yourac);
-		mapmy.put("at_set_mony", trmoney);
 		
-		
-		Map<String, String> mapmysp = new HashMap<String, String>();
-		mapmysp.put("ac_num", myac);
-		mapmysp.put("mem_code",String.valueOf(sessionmem.getMem_code()));
-		mapmysp.put("sp_name", myacwrite);
-		
-		
-		Map<String, String> mapyour = new HashMap<String, String>();
-		mapyour.put("ac_num", yourac);
-		mapyour.put("mem_code", youracmem);
-		mapyour.put("at_dps_ac",myac);
-		mapyour.put("at_set_mony", trmoney);
-		
-		Map<String, String> mapyoursp = new HashMap<String, String>();
-		mapyoursp.put("ac_num", yourac);
-		mapyoursp.put("mem_code",youracmem);
-		mapyoursp.put("sp_name", youracwrite);
+//		Map<String, String> mapmy = new HashMap<String, String>();
+//		mapmy.put("ac_num", myac);
+//		mapmy.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+//		mapmy.put("at_dps_ac", yourac);
+//		mapmy.put("at_set_mony", trmoney);
+//		
+//		
+//		Map<String, String> mapmysp = new HashMap<String, String>();
+//		mapmysp.put("ac_num", myac);
+//		mapmysp.put("mem_code",String.valueOf(sessionmem.getMem_code()));
+//		mapmysp.put("sp_name", myacwrite);
+//		
+//		
+//		Map<String, String> mapyour = new HashMap<String, String>();
+//		mapyour.put("ac_num", yourac);
+//		mapyour.put("mem_code", youracmem);
+//		mapyour.put("at_dps_ac",myac);
+//		mapyour.put("at_set_mony", trmoney);
+//		
+//		Map<String, String> mapyoursp = new HashMap<String, String>();
+//		mapyoursp.put("ac_num", yourac);
+//		mapyoursp.put("mem_code",youracmem);
+//		mapyoursp.put("sp_name", youracwrite);
 		
 		
 		
@@ -348,8 +362,8 @@ public class DepositController {
 
 				
 				
-				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
-					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
+				if(Long.parseLong(bangkingdao.trbalChk(my_tr)) >=Long.parseLong(trmoney)) {
+					bangkingservice.transferprocess(my_tr,your_tr);
 					System.out.println("이체실행댐");
 				}
 			}
@@ -459,10 +473,6 @@ public class DepositController {
 		
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 
-		
-
-		
-		
 		mav.setViewName("deposit/deposite_transfer");
 		mav.addObject("myaclist",myaclist);
 		
@@ -586,10 +596,6 @@ public class DepositController {
 		mav.addObject("atlist",atlist);
 		return mav;
 	}
-
-	
-
-	
 
 	@RequestMapping(value = { "/deposite_cancle_check_Account" })
 	public String depositecanclecheckshareAccount() {
