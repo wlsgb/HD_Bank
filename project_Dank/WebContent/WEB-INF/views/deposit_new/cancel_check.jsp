@@ -43,7 +43,7 @@
 								<form action="cancelComplete" method="post">
 									<div class="row">
 										<div class="col-md-10 col-lg-10">
-											<table class="table table-hover" style="margin-left: 20%;" >
+											<table class="table">
 												<thead>
 													<tr><th colspan="2" style="border-style: none;" >
 														<c:choose>
@@ -58,32 +58,44 @@
 												</thead>
 												<tbody >
 													<c:choose>
-															<c:when test="${account.saving.sav_code != 0 }">
-																<tr>
-																	<td style="border-style: none; width: 140px;">상품명</td>
-																	<td style="width: 400px; border-style: none;">${account.saving.sav_name}</td>
-																</tr>
-																<tr>
-																	<td style="border-style: none;" >계좌번호</td>
-																	<td style="border-style: none;">${account.ac_num}</td>
-																</tr>
-																<tr>
-																	<td style="border-style: none;">현재 잔액 </td>
-																	<td style="border-style: none;">${account.ac_balance}</td>
-																</tr>																
-															</c:when>
-															<c:when test="${account.ins.ins_code != 0 }">
-																<span class="h2">적금식 예금 상품</span>
-															</c:when>
-														</c:choose>
+														<c:when test="${account.saving.sav_code != 0 }">
+															<tr>
+																<td style="border-style: none; width: 140px;">상품명</td>
+																<td style="width: 400px; border-style: none;">${account.saving.sav_name}</td>
+															</tr>												
+														</c:when>
+														<c:when test="${account.ins.ins_code != 0 }">
+															<tr>
+																<td style="border-style: none; width: 140px;">상품명</td>
+																<td style="width: 400px; border-style: none;">${account.ins.ins_name}</td>
+															</tr>
+														</c:when>
+													</c:choose>
+													<tr>
+														<td style="border-style: none;" >계좌번호</td>
+														<td style="border-style: none;">${account.ac_num}</td>
+													</tr>
+													<tr>
+														<td style="border-style: none;">입금할 계좌 </td>
+														<td style="border-style: none;">${take_ac}</td>
+													</tr>
+													<tr>
+														<td style="border-style: none;">입금할 금액 </td>
+														<td style="border-style: none;">${account.ac_balance}</td>
+													</tr>
 												</tbody>
 												
 											</table>
 											<hr/>
+											<div class="form-inline" style="margin-left: 10%;">
+												<span>계좌 비밀번호</span>
+												<input type="password" class="form-control" id="ac_pwd" name="ac_pwd" style="width: 400px; margin-left: 30px;" placeholder="비밀번호를 입력해주세요" maxlength="4"/>
+											</div>
 											<div style="margin-left: 60%; margin-top: 30px;" >
 												<input type="button" class="btn btn-info" value="취소" id="cancel">
 												<input type="hidden" id="ac_code" name="ac_code" value="${account.ac_code }">
-												<input type="submit" class="btn btn-info" value="해지하기">
+												<input type="hidden" id="ac_num" name="ac_num" value="${account.ac_num }">
+												<input type="button" class="btn btn-info" value="해지하기" id="next">
 											</div>
 										</div>
 									</div>
@@ -101,5 +113,35 @@
 	<script>
 	$('#cancel').click(function() {
 		location='index';
+	});
+	var count = 0;
+	$("#next").click(function() {
+		var ac_pwd = $("#ac_pwd").val();
+		var ac_num = $("#ac_num").val();
+		alert("ac_pwd"+ac_pwd+"ac_num"+ac_num);
+		if(ac_pwd === ''){
+			alert("계좌 비밀번호를 입력해주세요.");
+	    }else {
+	    	$.ajax({
+				url:'acPwdChk?ac_pwd='+ac_pwd+'&ac_num='+ac_num,
+				success:function(data){
+					var acPwdOk=data;
+					if(count===2){
+						alert("비밀번호를 3회 틀렸습니다. 비밀번호를 확인후 다시 진행해주세요.");
+						location = "cancel";
+					}else{
+						if(!acPwdOk){
+							count+=1;
+							alert(count+"회 비밀번호가 틀렸습니다.");
+							$('#ac_pwd').val("")
+							$('#ac_pwd').focus();
+						}else{
+							f.submit();
+						}
+					}
+				}
+			});
+		}
+		
 	});
 	</script>

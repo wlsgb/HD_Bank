@@ -256,7 +256,7 @@
 		    oldVal = currentVal;
 		   	if($('#ac_repwd').val() !== $("#ac_pwd").val()){
 			   $('#target').html("입력하신 비밀번호와 다릅니다.").addClass('text-danger');
-		   }else {
+		    }else {
 			   $('#target').removeClass('text-danger');
 			   $('#target').html("입력하신 비밀번호와 일치합니다.").addClass('text-primary');;
 			}
@@ -268,10 +268,9 @@
 		        return;
 		    }
 		    oldVal = currentVal;
-		    console.log("반응");
 		   	if($('#ac_pwd').val() !== $("#ac_repwd").val()){
 			   $('#target').html("입력하신 비밀번호와 다릅니다.").addClass('text-danger');
-		   }else {
+		    }else {
 			   $('#target').removeClass('text-danger');
 			   $('#target').html("입력하신 비밀번호와 일치합니다.").addClass('text-primary');;
 			}
