@@ -112,8 +112,8 @@ public class MemberController {
 	//로그인 페이지로 이동을함 	
 	@RequestMapping(value= "/loginPage")
 	public String goLoginPage(HttpSession session, Model m) {
-		
 		MemberVO member = (MemberVO)session.getAttribute("member");
+		System.out.println("로그인 페이지로 이동됩니다.");
 		if(member != null) { //세션 정보가 존재한다면 home 으로 
 			return "index/index";
 		}
