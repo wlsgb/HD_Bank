@@ -5,7 +5,6 @@
 <div class="content">
 				<!-- 상단의 푸른색 공간 시작 -->
 				
-				
 				<div class="panel-header bg-primary-gradient">
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
@@ -27,9 +26,6 @@
 					</div>
 				</div>
 				
-				
-				
-				
 				<!-- 상단의 푸른색 공간 끝 -->
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
@@ -40,7 +36,7 @@
 									<div class="card-title">해지</div>
 								</div>
 								<div class="card-body" style="margin-bottom: 20px; margin-top: 0">
-								<form action="cancelComplete" method="post">
+								<form action="cancelComplete" method="post" id="f">
 									<div class="row">
 										<div class="col-md-10 col-lg-10">
 											<table class="table">
@@ -94,7 +90,9 @@
 											<div style="margin-left: 60%; margin-top: 30px;" >
 												<input type="button" class="btn btn-info" value="취소" id="cancel">
 												<input type="hidden" id="ac_code" name="ac_code" value="${account.ac_code }">
+												<input type="hidden" id="money" name="money" value="${account.ac_balance}">
 												<input type="hidden" id="ac_num" name="ac_num" value="${account.ac_num }">
+												<input type="hidden" id="take_ac" name="take_ac" value="${take_ac }">
 												<input type="button" class="btn btn-info" value="해지하기" id="next">
 											</div>
 										</div>
@@ -118,9 +116,9 @@
 	$("#next").click(function() {
 		var ac_pwd = $("#ac_pwd").val();
 		var ac_num = $("#ac_num").val();
-		alert("ac_pwd"+ac_pwd+"ac_num"+ac_num);
 		if(ac_pwd === ''){
 			alert("계좌 비밀번호를 입력해주세요.");
+			$('#ac_pwd').focus();
 	    }else {
 	    	$.ajax({
 				url:'acPwdChk?ac_pwd='+ac_pwd+'&ac_num='+ac_num,

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
@@ -45,8 +46,8 @@ public class DepositDao {
 			return false; //계좌가 없으면 false
 		}
 	}
-	//계좌 번호로 회원이름 조회
-	public String getName(String ac_num){
+	//계좌 번호로 회원 조회
+	public MemberVO getMember(String ac_num){
 		return ss.selectOne("deposit.numToName",ac_num);
 	}
 	//계좌 생성

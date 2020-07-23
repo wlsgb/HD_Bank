@@ -49,7 +49,7 @@
 			mem_email_chk,
 			mem_birth,
 			mem_gender,
-			mem_loc,
+			mem_loc
 		from member
 		where mem_email=#{mem_email} and mem_pwd=#{mem_pwd}
 	</select>
