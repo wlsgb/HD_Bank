@@ -72,4 +72,12 @@
 	
 </bean>
 
+
+
+
+<!-- autoTransferBoolean -->
+<bean id="autoTransferChk" class="java.lang.Boolean">
+	<constructor-arg value="True"/>
+</bean>
+
 </beans>
