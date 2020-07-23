@@ -8,9 +8,9 @@
 	<select id="existAc" parameterType="String" resultType="int">
 		select count(*) from account where ac_num=#{ac_num}
 	</select>
-	<!-- 계좌 번호로 회원이름 조회-->
-	<select id="numToName" parameterType="String" resultType="String">
-		select m.mem_name
+	<!-- 계좌 번호로 회원 조회-->
+	<select id="numToName" parameterType="String" resultType="mem">
+		select m.mem_code,m.mem_name
 		from account_client ac, member m
 		where ac.mem_code = m.mem_code 
 			and ac.ac_code=(select ac_code from account	where ac_num=#{ac_num})
