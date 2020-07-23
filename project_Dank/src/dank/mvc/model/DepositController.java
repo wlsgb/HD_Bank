@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -162,26 +161,64 @@ public class DepositController {
 	}
 	//계좌 삭제 신청
 	@RequestMapping(value = "/cancel_input_info" )
-	public String cancel_input_info(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
+	public String cancel_input_info(HttpSession session,int ac_code,Model m) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+		
 		AccountVO account= depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		
 		return "deposit_new/cancel_input_info";
 	}
+	
 	//계좌 삭제 신청 확인
 	@RequestMapping(value = "/cancel_check")
-	public String cancel_check(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
+	public String cancel_check(HttpSession session,int ac_code,String take_ac,Model m) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+		
 		AccountVO account= depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		m.addAttribute("take_ac", take_ac);
 		return "deposit_new/cancel_check";
 	}
 	//계좌 삭제
 	@RequestMapping(value = { "/cancelComplete" })
-	public String cancelComplete(int ac_code) {
-		depositDao.delAccount(ac_code);
+	public String cancelComplete(HttpSession session,int ac_code,int money,String ac_num,String take_ac) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+		
+		MemberVO send = depositDao.getMember(ac_num);
+		MemberVO receive = depositDao.getMember(take_ac);
+		
+		TransferDTO my_tr = new TransferDTO();
+		my_tr.setAc_num(ac_num);
+		my_tr.setMem_code(String.valueOf(send.getMem_code()));
+		my_tr.setAt_dps_ac(take_ac);
+		my_tr.setSp_name(send.getMem_name());
+		my_tr.setAt_set_mony(String.valueOf(money));
+
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(take_ac);
+		your_tr.setMem_code(String.valueOf(receive.getMem_code()));
+		your_tr.setAt_dps_ac(ac_num);
+		your_tr.setSp_name(receive.getMem_name());
+		your_tr.setAt_set_mony(String.valueOf(money));
+		
+		depositService.cancelComplete(ac_code,my_tr,your_tr);
 		return "deposit_new/cancel_success";
+		
 	}
+	
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
 //		return "deposit/share_new_req";
@@ -300,7 +337,7 @@ public class DepositController {
 		mav.setViewName("redirect:inquire");
 		return mav;
 	}
-	//자동이체 진행
+	//계좌이체 진행
 	@RequestMapping(value = "/transfer_process")
 	public ModelAndView transferprocess(HttpSession session
 			,@RequestParam(value = "myac") String myac
@@ -328,40 +365,10 @@ public class DepositController {
 		your_tr.setSp_name(youracmem);
 		your_tr.setAt_set_mony(trmoney);
 		
-		
-//		Map<String, String> mapmy = new HashMap<String, String>();
-//		mapmy.put("ac_num", myac);
-//		mapmy.put("mem_code", String.valueOf(sessionmem.getMem_code()));
-//		mapmy.put("at_dps_ac", yourac);
-//		mapmy.put("at_set_mony", trmoney);
-//		
-//		
-//		Map<String, String> mapmysp = new HashMap<String, String>();
-//		mapmysp.put("ac_num", myac);
-//		mapmysp.put("mem_code",String.valueOf(sessionmem.getMem_code()));
-//		mapmysp.put("sp_name", myacwrite);
-//		
-//		
-//		Map<String, String> mapyour = new HashMap<String, String>();
-//		mapyour.put("ac_num", yourac);
-//		mapyour.put("mem_code", youracmem);
-//		mapyour.put("at_dps_ac",myac);
-//		mapyour.put("at_set_mony", trmoney);
-//		
-//		Map<String, String> mapyoursp = new HashMap<String, String>();
-//		mapyoursp.put("ac_num", yourac);
-//		mapyoursp.put("mem_code",youracmem);
-//		mapyoursp.put("sp_name", youracwrite);
-		
-		
-		
-		
 		if(bangkingdao.trtrAcChk(myac) >=1) {
 			
 			if(bangkingdao.trtrAcChk(yourac) >=1) {
 
-				
-				
 				if(Long.parseLong(bangkingdao.trbalChk(my_tr)) >=Long.parseLong(trmoney)) {
 					bangkingservice.transferprocess(my_tr,your_tr);
 					System.out.println("이체실행댐");
@@ -373,8 +380,6 @@ public class DepositController {
 		mav.setViewName("redirect:inquire");
 		return mav;
 	}
-	
-
 	
 	
 	//계좌내역상세조회페이지
@@ -473,10 +478,6 @@ public class DepositController {
 		
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 
-		
-
-		
-		
 		mav.setViewName("deposit/deposite_transfer");
 		mav.addObject("myaclist",myaclist);
 		
@@ -600,10 +601,6 @@ public class DepositController {
 		mav.addObject("atlist",atlist);
 		return mav;
 	}
-
-	
-
-	
 
 	@RequestMapping(value = { "/deposite_cancle_check_Account" })
 	public String depositecanclecheckshareAccount() {

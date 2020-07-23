@@ -23,10 +23,10 @@
 	<if test="searchValue != null">
 			<choose>
 				<when test="searchType==1">
-				and	cat_num Like '%'|| #{searchValue} ||'%'
+				and	qna_title Like '%'|| #{searchValue} ||'%'
 				</when>
 				<when test="searchType==2">
-				and	qna_num Like '%'|| #{searchValue} ||'%'
+				and	qna_title Like '%'|| #{searchValue} ||'%'
 				</when>
 				<when test="searchType==3">
 				and	qna_content Like '%'|| #{searchValue} ||'%'
