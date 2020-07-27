@@ -10,6 +10,7 @@ import dank.mvc.vo.FilenameVO;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
+import dank.mvc.vo.LoanFileVO2;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
@@ -96,5 +97,16 @@ public class LoanDao {
 	public List<FilenameVO> filelist(){
 		return ss.selectList("loan.filename");
 	}
-
+	
+	public void fileup(LoanFileVO2 vo) {
+		ss.insert("loan.fileup",vo);
+	}
+	
+	public List<LoanFileVO2> filelist(int lc_num){
+		return ss.selectList("loan.checkfiledetail",lc_num);
+	}
+	
+	public String checkstate(int lc_num) {
+		return ss.selectOne("loan.checkstate",lc_num);
+	}
 }

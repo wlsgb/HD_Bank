@@ -214,4 +214,15 @@
     	select * from filelist
     </select>
     
+    <insert id="fileup" parameterType="lfvo2">
+    	insert into loan_file1 values(loan_file1_seq.nextVal,#{lc_num},#{lf_name},#{lf_oriname},sysdate)
+    </insert>
+    
+    <select id="checkfiledetail" resultType="lfvo2" parameterType="int">
+    	select * from loan_file1 where lc_num = #{lc_num}
+    </select>
+    
+    <select id="checkstate" parameterType="int">
+    	select lc_state loan_check where lc_num = #{lc_num}
+    </select>
   </mapper>
