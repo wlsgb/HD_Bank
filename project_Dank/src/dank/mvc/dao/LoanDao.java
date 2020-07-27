@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dank.mvc.vo.FilenameVO;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
@@ -90,6 +91,10 @@ public class LoanDao {
 	public void loanend(int lc_num) {
 		ss.update("loan.end",lc_num);
 		
+	}
+	
+	public List<FilenameVO> filelist(){
+		return ss.selectList("loan.filename");
 	}
 
 }

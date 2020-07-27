@@ -119,7 +119,7 @@ function counter_reset() {
 function counter_run() {
 	document.all.counter.innerText = time_format(cnt);
 	cnt--;
-	if(cnt < 0) {
+	if(cnt < 0) { 
 		clearInterval(tid);
 		self.location = "logout";
 	}
