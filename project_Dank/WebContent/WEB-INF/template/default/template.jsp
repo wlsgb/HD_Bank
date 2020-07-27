@@ -76,7 +76,7 @@
 			
 </body>
 <script>
-setInterval(function() {
+/* setInterval(function() {
 	
 	$.ajax({
 		url:"atloadval",
@@ -150,7 +150,7 @@ setInterval(function() {
 			})
 		}
 	})	
-}, 5000)
+}, 5000) */
 
 ///////////////////////////////////////////////////
 </script>

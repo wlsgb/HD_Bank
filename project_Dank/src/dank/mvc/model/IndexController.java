@@ -13,12 +13,6 @@ public class IndexController {
 
 		@RequestMapping(value= {"/","/index"})
 		public String indexPage(HttpSession session) {
-			HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-			String ip = req.getHeader("X-FORWARDED-FOR");
-			if (ip==null) {
-				ip = req.getRemoteAddr();
-			}
-			System.out.println("ip¡§∫∏: "+ip);
 			session.removeAttribute("error");
 			session.removeAttribute("pageName");
 			return "index/index";
