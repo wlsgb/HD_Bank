@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dank.mvc.dao.BangkingDao;
@@ -30,12 +26,10 @@ import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCaculatorVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
-import dank.mvc.vo.LoanFileVO2;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
 import dank.mvc.vo.MemberVO;
-import dank.mvc.vo.TESTVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.TransferDTO;
 
@@ -137,7 +131,7 @@ public class LoanController {
 		mav.addObject("lc_num", lc_num);
 		List<FilenameVO> list = loanDao.filelist();
 		mav.addObject("list", list);
-		mav.setViewName("loan/checkfile_final");
+		mav.setViewName("loan/checkfile");
 		return mav;
 	}
 	@RequestMapping(value = "/checkrefile")
@@ -169,8 +163,8 @@ public class LoanController {
 	//제출 파일 디테일
 	@RequestMapping(value = "/checkfiledetail")
 	public ModelAndView checkfiledetail(int lc_num) {
-		ModelAndView mav = new ModelAndView("loan/checkfiledetail_final");
-		List<LoanFileVO2> list = loanDao.filelist(lc_num);
+		ModelAndView mav = new ModelAndView("loan/checkfiledetail");
+		List<LoanFileVO> list = loanDao.filelist(lc_num);
 		mav.addObject("list",list);
 		mav.addObject("lc_num",lc_num);
 		
@@ -455,7 +449,7 @@ public class LoanController {
 	   }
 	 //제출 서류 등록
 	 @RequestMapping(value = "/fileupload",method =  RequestMethod.POST)
-	 public ModelAndView fileupload_final(LoanFileVO2 vo,HttpServletRequest request) {
+	 public ModelAndView fileupload(LoanFileVO vo,HttpServletRequest request) {
 		 ModelAndView mav = new ModelAndView("redirect:check");
 		 HttpSession session = request.getSession();
 			String r_path = session.getServletContext().getRealPath("/");
@@ -467,7 +461,7 @@ public class LoanController {
 					 if(!ff.exists()) {
 						 ff.mkdirs();
 					 }
-					 for(LoanFileVO2 e: vo.getList()) {
+					 for(LoanFileVO e: vo.getList()) {
 						 if(e.getMfile().getOriginalFilename()!="") {
 							 StringBuffer path = new StringBuffer();
 							 path.append(r_path).append(img_path).append(vo.getLc_num()).append("\\").append(e.getMfile().getOriginalFilename());

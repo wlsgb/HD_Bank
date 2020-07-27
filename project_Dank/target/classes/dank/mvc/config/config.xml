@@ -19,7 +19,6 @@
   		<typeAlias type="dank.mvc.vo.LoanFileVO" alias="lfvo"/>
   		<typeAlias type="dank.mvc.vo.LoanRepayVO" alias="lrvo"/>
   		<typeAlias type="dank.mvc.vo.LoanRepayLogVO" alias="lrlvo"/>
-  		<typeAlias type="dank.mvc.vo.LoanFileVO2" alias="lfvo2"/>
   		<typeAlias type="dank.mvc.vo.FilenameVO" alias="fnvo"/>
 		<!-- 대출 영역 끝 -->
 		
