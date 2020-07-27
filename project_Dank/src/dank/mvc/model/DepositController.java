@@ -39,7 +39,6 @@ import dank.mvc.vo.deposit.SavingVO;
 public class DepositController {
 	@Autowired
 	private DepositDao depositDao;
-
 	@Autowired
 	private AccountNum accountNum;
 	@Autowired
@@ -219,30 +218,30 @@ public class DepositController {
 		
 	}
 	
-//	@RequestMapping(value = "/share_new_req")
-//	public String share_new_req() {
-//		return "deposit/share_new_req";
-//	}
-//
-//	@RequestMapping(value = "/share_new_res")
-//	public String share_new_res() {
-//		return "deposit/share_new_res";
-//	}
-//
-//	@RequestMapping(value = "/share_new_insert")
-//	public String share_new_insert() {
-//		return "deposit/share_new_insert";
-//	}
-//
-//	@RequestMapping(value = "/share_new_complete")
-//	public String share_new_complete() {
-//		return "deposit/share_new_complete";
-//	}
-//
-//	@RequestMapping(value = "/share_new_check")
-//	public String share_new_check() {
-//		return "deposit/share_new_check";
-//	}
+	@RequestMapping(value = "/share_new_req")
+	public String share_new_req() {
+		return "deposit/share_new_req";
+	}
+
+	@RequestMapping(value = "/share_new_res")
+	public String share_new_res() {
+		return "deposit/share_new_res";
+	}
+
+	@RequestMapping(value = "/share_new_insert")
+	public String share_new_insert() {
+		return "deposit/share_new_insert";
+	}
+
+	@RequestMapping(value = "/share_new_complete")
+	public String share_new_complete() {
+		return "deposit/share_new_complete";
+	}
+
+	@RequestMapping(value = "/share_new_check")
+	public String share_new_check() {
+		return "deposit/share_new_check";
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////
