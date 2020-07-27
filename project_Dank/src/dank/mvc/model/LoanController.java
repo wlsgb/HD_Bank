@@ -30,7 +30,7 @@ import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCaculatorVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
-import dank.mvc.vo.LoanFileVO2;
+import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
@@ -170,7 +170,7 @@ public class LoanController {
 	@RequestMapping(value = "/checkfiledetail")
 	public ModelAndView checkfiledetail(int lc_num) {
 		ModelAndView mav = new ModelAndView("loan/checkfiledetail_final");
-		List<LoanFileVO2> list = loanDao.filelist(lc_num);
+		List<LoanFileVO> list = loanDao.filelist(lc_num);
 		mav.addObject("list",list);
 		mav.addObject("lc_num",lc_num);
 		
@@ -455,7 +455,7 @@ public class LoanController {
 	   }
 	 //제출 서류 등록
 	 @RequestMapping(value = "/fileupload",method =  RequestMethod.POST)
-	 public ModelAndView fileupload_final(LoanFileVO2 vo,HttpServletRequest request) {
+	 public ModelAndView fileupload_final(LoanFileVO vo,HttpServletRequest request) {
 		 ModelAndView mav = new ModelAndView("redirect:check");
 		 HttpSession session = request.getSession();
 			String r_path = session.getServletContext().getRealPath("/");
@@ -467,7 +467,7 @@ public class LoanController {
 					 if(!ff.exists()) {
 						 ff.mkdirs();
 					 }
-					 for(LoanFileVO2 e: vo.getList()) {
+					 for(LoanFileVO e: vo.getList()) {
 						 if(e.getMfile().getOriginalFilename()!="") {
 							 StringBuffer path = new StringBuffer();
 							 path.append(r_path).append(img_path).append(vo.getLc_num()).append("\\").append(e.getMfile().getOriginalFilename());

@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class LoanFileVO2 {
+public class LoanFileVO {
 	private int lf_num,lc_num;
 	private String lf_name, lf_oriname,lf_sysdate;
 	private MultipartFile mfile;
-	private List<LoanFileVO2> list;
+	private List<LoanFileVO> list;
 	
 	
 	public MultipartFile getMfile() {
@@ -17,10 +17,10 @@ public class LoanFileVO2 {
 	public void setMfile(MultipartFile mfile) {
 		this.mfile = mfile;
 	}
-	public List<LoanFileVO2> getList() {
+	public List<LoanFileVO> getList() {
 		return list;
 	}
-	public void setList(List<LoanFileVO2> list) {
+	public void setList(List<LoanFileVO> list) {
 		this.list = list;
 	}
 	public int getLf_num() {
