@@ -131,7 +131,7 @@ public class LoanController {
 		mav.addObject("lc_num", lc_num);
 		List<FilenameVO> list = loanDao.filelist();
 		mav.addObject("list", list);
-		mav.setViewName("loan/checkfile_final");
+		mav.setViewName("loan/checkfile");
 		return mav;
 	}
 	@RequestMapping(value = "/checkrefile")
@@ -163,7 +163,7 @@ public class LoanController {
 	//제출 파일 디테일
 	@RequestMapping(value = "/checkfiledetail")
 	public ModelAndView checkfiledetail(int lc_num) {
-		ModelAndView mav = new ModelAndView("loan/checkfiledetail_final");
+		ModelAndView mav = new ModelAndView("loan/checkfiledetail");
 		List<LoanFileVO> list = loanDao.filelist(lc_num);
 		mav.addObject("list",list);
 		mav.addObject("lc_num",lc_num);
@@ -449,7 +449,7 @@ public class LoanController {
 	   }
 	 //제출 서류 등록
 	 @RequestMapping(value = "/fileupload",method =  RequestMethod.POST)
-	 public ModelAndView fileupload_final(LoanFileVO vo,HttpServletRequest request) {
+	 public ModelAndView fileupload(LoanFileVO vo,HttpServletRequest request) {
 		 ModelAndView mav = new ModelAndView("redirect:check");
 		 HttpSession session = request.getSession();
 			String r_path = session.getServletContext().getRealPath("/");
