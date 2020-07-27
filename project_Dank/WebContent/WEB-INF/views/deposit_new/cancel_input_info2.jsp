@@ -99,14 +99,10 @@
 										<span>입금 계좌번호</span>
 										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="계좌번호를 입력해주세요"/>
 									</div>
-									<div class="form-inline" style="margin-left: 10%;">
-										<span>계정 비밀번호</span>
-										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="비밀번호를 입력해주세요"/>
-									</div>
 									<div style="margin-left: 60%; margin-top: 30px;" >
 										<input type="button" class="btn btn-info" value="취소" id="cancel">
 										<input type="hidden" id="ac_code" name="ac_code" value="${ac_code }">
-										<input type="submit" class="btn btn-info" value="해지하기">
+										<input type="submit" class="btn btn-info" value="해지하기" id="next">
 									</div>
 								</div>
 							</div>
@@ -127,4 +123,19 @@
 		$('#cancel').click(function() {
 			location='index';
 		});
+		$('#next').click(function() {
+			$.ajax({
+				url:'inslist',
+				dataType:'JSON',
+				success:function(data){
+					var inslist=data;
+					//console.log(inslist);
+					for(var e in inslist){
+						//console.log(inslist[e].ins_name);
+						$('#depval').append()
+					};
+				}
+			});
+		});
+		
 	</script>

@@ -17,11 +17,15 @@ public class Question_princhk_Dao {
 	@Autowired
 	private SqlSessionTemplate ss;
 	
+	
+	
 	public int questionAdd(Question_princhk_VO qvo) {
 		// 입력처리되면1, 실패하면 0을 반환한다.
 		return ss.insert("question.add", qvo);
 	}
 
-	
+	public List<Question_princhk_VO> myQList(Question_princhk_VO qvo){
+		return ss.selectList("question.myqlist", qvo);
+	}
 
 }

@@ -116,7 +116,6 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-6">
-											<iframe width="1120;" height="600" src="//www.youtube.com/embed/GVzE92CMWTA?&amp;autoplay=1&amp;loop=1 frameborder="></iframe>
 										</div>
 									</div>
 								</div>
@@ -129,6 +128,7 @@
 			</div>
 	
 	<script>
+	
 		/* 페이지 이동 자바스크립트 시작 */
 		$("#checkBalance").click(function() {
 			location = "checkbalance";

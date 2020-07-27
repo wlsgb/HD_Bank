@@ -105,7 +105,8 @@ $(function() {
 })
 
 var tid;
-var cnt = parseInt(600+1000000);//초기값(초단위)
+var cnt = parseInt(600+100000);//초기값(초단위)
+
 function counter_init() {
 	tid = setInterval("counter_run()", 1000);
 }
