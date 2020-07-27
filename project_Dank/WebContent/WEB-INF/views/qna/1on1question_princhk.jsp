@@ -38,32 +38,32 @@
 					</div>
 					<div class="form-group" id="">
 						<div class="input-icon" style="display: inline-block;">
-							<table class="table mt-3" style="width: 1000px;" >
+							<table class="table mt-3"  >
 								<thead>
 								</thead>
 								<tbody>
 									<tr>
 										<td>작성자</td>
-										<td><input type="text" class="form-control input-full"
-											id="inlineinput" placeholder="이름">
+										<td><div class="col-xs-6"><input type="text" class="form-control"
+											id="inlineinput" placeholder="이름"></div>
 										</td>
 									</tr>
 									<tr>
 										<td>분류</td>
-										<td><select class="form-control input-full"
-											id="inlineinput" name="cat_num">
+										<td><div class="col-xs-6"><select class="form-control"
+											id="inlineinput" name="cat_num"></div>
 												<option>-분류선택-</option>
 												<option value="1">예금</option>
 												<option value="2">대출</option>
 												<option value="3">회원정보</option>
 												<option value="4">기타</option>
-										</select></td>
+										</select></div></td>
 									</tr>
 									
 									<tr>
 										<td>제목</td>
-										<td><input type="text" name="inq_title" class="form-control input-full"
-											id="inq_title" placeholder="입력 하시오." style="width: 1000px">
+										<td><div class="col-xs-8"><input type="text" name="inq_title" class="form-control"
+											id="inq_title" placeholder="입력 하시오." >
 										</td>
 									</tr>
 
@@ -77,10 +77,10 @@
 									<ul class="pagination pg-primary">
 										<li class="page-item">
 											<table role="resentation" class="wrap" id="toolbox"
-												style="height: 400px;">
+												style="height: 200px;">
 												<tbody>
 													<tr valign="top">
-														<td><textarea name="inq_content" style="width: 1000px; height: 500px;"></textarea>
+														<td><textarea class="form-control"  name="inq_content" style="width: 700px; height: 1000px;"></textarea>
 														</td>
 													</tr>
 												</tbody>
@@ -95,8 +95,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><button
-														class="btn btn-primary btn-round">확인</button>
+											<td><input type="submit" value="확인" class="btn btn-primary btn-round">
 												<button class="btn btn-danger btn-round">취소</button>
 											</td>
 										</tr>

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.LoanDao;
 import dank.mvc.service.LoanService;
+import dank.mvc.vo.FilenameVO;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCaculatorVO;
 import dank.mvc.vo.LoanCheckVO;
@@ -125,11 +126,22 @@ public class LoanController {
 		mav.addObject("vo",loanDao.checkdetail(vo));
 		return mav;
 	}
+	/*
 	@RequestMapping(value = "/checkfile")
 	public ModelAndView checkfile(int lc_num) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lc_num", lc_num);
 		mav.setViewName("loan/checkfile");
+		return mav;
+	}
+	*/
+	@RequestMapping(value = "/checkfile")
+	public ModelAndView checkfile(int lc_num) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("lc_num", lc_num);
+		List<FilenameVO> list = loanDao.filelist();
+		mav.addObject("list", list);
+		mav.setViewName("loan/checkfile_final");
 		return mav;
 	}
 	@RequestMapping(value = "/checkrefile")
