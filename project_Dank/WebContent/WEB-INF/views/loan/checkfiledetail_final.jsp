@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 			<div class="content">
 					<div class="panel-header bg-primary-gradient">
 					<div class="page-inner py-5">
@@ -22,7 +21,7 @@
 					</div>
 				</div>
 				<!--대출 신청   -->
-		<form action="fileupload" method="post" class="form-horizontal" enctype="multipart/form-data">
+				
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -33,23 +32,28 @@
 											<div class="col-1"></div>
 											<div class="col-10">
 												
-												<h1>서류제출</h1>
+												<h1>제출서류 확인</h1>
 												<hr>
-												
+												 
 												<h3>첨부 파일</h3>
 												
-												<input type="hidden" value="${lc_num }" name="lc_num" id="lc_num"> 
-												<c:forEach items="${list }" var="e" varStatus="i" begin="0" step="1">
-												<div class="form-group row">
-													 <label for="file1" class="col-4" >${e.filename }</label> 
-													<div class="col-8">
-								
-														 <input type="file" name="list[${i.index }].mfile" >
-														<input type="hidden" value="${e.filename }" name="list[${i.index }].lf_name">
-														 
+												<input type="hidden" value="${list[0].lc_num }" name="lc_num" id="lc_num"> 
+												
+												<c:forEach items="${list }" var="e">
+													<c:if test="${e.lf_oriname ne null}">
+														<div class="form-group row">
+															<label for="file1" class="col-4" >${e.lf_name }</label>
+															<div class="col-8">
+																<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${e.lc_num }&fileName=${e.lf_oriname} "/>">
+															${e.lf_oriname}
+														</a>
 													</div>
 												</div>
+													</c:if>
+													
 												</c:forEach>
+												
+												
 												
 												
 											</div>
@@ -62,8 +66,8 @@
 			
 						</div>
 					
-			<p class="text-center"><input type="submit" class="btn btn-info" value="제출하기"></p>
-		</form>
+			<p class="text-center"><input type="button" class="btn btn-info refile" value="다시제출하기"></p>
+			
 			</div>
 		
 			
@@ -71,6 +75,8 @@
 
 			
 			<script>
-
+			$('.refile').click(function() {
+				location='checkfile?lc_num='+$('#lc_num').val();
+			})
 	</script>
 

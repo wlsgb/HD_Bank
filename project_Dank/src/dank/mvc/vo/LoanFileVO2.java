@@ -1,8 +1,28 @@
 package dank.mvc.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class LoanFileVO2 {
 	private int lf_num,lc_num;
 	private String lf_name, lf_oriname,lf_sysdate;
+	private MultipartFile mfile;
+	private List<LoanFileVO2> list;
+	
+	
+	public MultipartFile getMfile() {
+		return mfile;
+	}
+	public void setMfile(MultipartFile mfile) {
+		this.mfile = mfile;
+	}
+	public List<LoanFileVO2> getList() {
+		return list;
+	}
+	public void setList(List<LoanFileVO2> list) {
+		this.list = list;
+	}
 	public int getLf_num() {
 		return lf_num;
 	}
