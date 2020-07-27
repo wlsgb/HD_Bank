@@ -209,4 +209,9 @@
     <update id="end" parameterType="int">
     	update loan_check set lc_state='상환종료' where lc_num = #{lc_num}
     </update>
+    
+    <select id="filename" resultType="fnvo">
+    	select * from filelist
+    </select>
+    
   </mapper>
