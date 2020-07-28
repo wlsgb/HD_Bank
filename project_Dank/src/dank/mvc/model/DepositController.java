@@ -220,28 +220,44 @@ public class DepositController {
 	
 	@RequestMapping(value = "/share_new_req")
 	public String share_new_req() {
-		return "deposit/share_new_req";
+		return "deposit_new/share_new_req";
 	}
 
 	@RequestMapping(value = "/share_new_res")
 	public String share_new_res() {
-		return "deposit/share_new_res";
+		return "deposit_new/share_new_res";
 	}
 
 	@RequestMapping(value = "/share_new_insert")
 	public String share_new_insert() {
-		return "deposit/share_new_insert";
+		return "deposit_new/share_new_insert";
 	}
 
 	@RequestMapping(value = "/share_new_complete")
 	public String share_new_complete() {
-		return "deposit/share_new_complete";
+		return "deposit_new/share_new_complete";
 	}
 
 	@RequestMapping(value = "/share_new_check")
 	public String share_new_check() {
-		return "deposit/share_new_check";
+		return "deposit_new/share_new_check";
 	}
+	
+	@RequestMapping(value = { "/deposite_cancle_check_shareAccount" })
+	public String deposite_cancle_check_shareAccount() {
+		return "deposit_new/deposite_cancle_check_shareAccount";
+	}
+
+	@RequestMapping(value = { "/share_cancel_req" })
+	public String share_cancel_req() {
+		return "deposit_new/share_cancel_req";
+	}
+	
+	@RequestMapping(value = { "/share_cancel" })
+	public String share_cancel() {
+		return "deposit_new/share_cancel";
+	}
+	
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -573,9 +589,6 @@ public class DepositController {
 		atapplyvo.setAta_check(Integer.parseInt(atacheck));
 		atapplyvo.setAta_ing(Integer.parseInt(ataing));
 	
-
-	
-		
 		
 		bangkingdao.insertatapply(atapplyvo);
 		
@@ -601,15 +614,7 @@ public class DepositController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/deposite_cancle_check_Account" })
-	public String depositecanclecheckshareAccount() {
-		return "deposit/deposite_cancle_check_shareAccount";
-	}
-
-	@RequestMapping(value = { "/deposite_cancle_check_select" })
-	public String depositecanclecheckselect() {
-		return "deposit/deposite_cancle_check_select";
-	}
+	
 	
 	@RequestMapping(value = "/analysis")
 	public String viewAnalysis() {

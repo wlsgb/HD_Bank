@@ -172,10 +172,6 @@
 				</div>
 			</div>
 
-
-			
-			
-			
 	<script>
 	
 		$(function() {

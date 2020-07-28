@@ -104,7 +104,7 @@
 		</if>
 	</select>
 	
-	
+	<!-- 계좌 생성 -->
 	<insert id="addAccount" parameterType="acvo">
 		insert into account values(account_seq.nextVal,#{ac_num},#{ac_pwd},0,#{ac_name},sysdate,null)
 	</insert>
@@ -112,6 +112,7 @@
 		insert into account_client values(account_seq.currval,#{mem_code},#{pro_code})
 	</insert>
 	
+	<!-- 계좌 삭제 -->
 	<delete id="delAccount" parameterType="int">
 		delete from account where ac_code=#{ac_code}
 	</delete>
