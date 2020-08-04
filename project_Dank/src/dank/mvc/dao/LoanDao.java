@@ -10,6 +10,7 @@ import dank.mvc.vo.FilenameVO;
 import dank.mvc.vo.LoanApplicationVO;
 import dank.mvc.vo.LoanCheckVO;
 import dank.mvc.vo.LoanFileVO;
+import dank.mvc.vo.LoanFileVO;
 import dank.mvc.vo.LoanProductVO;
 import dank.mvc.vo.LoanRepayLogVO;
 import dank.mvc.vo.LoanRepayVO;
@@ -45,14 +46,7 @@ public class LoanDao {
 	public LoanCheckVO checkdetail(LoanCheckVO vo) {
 		return ss.selectOne("loan.checkdetail",vo);
 	}
-	//서류제출
-	public void fileupload(LoanFileVO vo) {
-		ss.insert("loan.fileupload", vo);
-	}
-	//서류 보완 및 재 제출
-	public void refileupload(LoanFileVO vo) {
-		ss.update("loan.refileupload", vo);
-	}
+
 	//대출상태 변경
 	public void stateupdate(int lc_num) {
 		ss.update("loan.stateupdate",lc_num);
@@ -61,10 +55,7 @@ public class LoanDao {
 	public LoanFileVO fileuploadhome(int mem_code) {
 		return ss.selectOne("loan.fileuploadhome",mem_code);
 	}
-	//제출 서류 확인
-	public LoanFileVO filedetail(int lc_num) {
-		return ss.selectOne("loan.filedetail",lc_num);
-	}
+
 	//대출 실행(대출 상태 변경)
 	public void loanstart(int lc_num) {
 		ss.update("loan.loanstart", lc_num);
@@ -96,5 +87,16 @@ public class LoanDao {
 	public List<FilenameVO> filelist(){
 		return ss.selectList("loan.filename");
 	}
-
+	
+	public void fileup(LoanFileVO vo) {
+		ss.insert("loan.fileup",vo);
+	}
+	
+	public List<LoanFileVO> filelist(int lc_num){
+		return ss.selectList("loan.checkfiledetail",lc_num);
+	}
+	
+	public String checkstate(int lc_num) {
+		return ss.selectOne("loan.checkstate",lc_num);
+	}
 }
