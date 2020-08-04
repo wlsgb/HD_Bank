@@ -26,7 +26,7 @@
 				<!-- 상단의 푸른색 공간 끝 -->
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
-				<div class="row row-card-no-pd">
+				<div class="row row-card-no-pd"> 
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
