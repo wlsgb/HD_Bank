@@ -16,6 +16,10 @@ public class MemberDao {
 		return ss.selectOne("member.pwdChk", num);
 	}
 	
+	public String serPhone(int num) {
+		return ss.selectOne("member.serPhoneNum", num);
+	}
+	
 	public String nameChk(String email) {
 		return ss.selectOne("member.namechk", email);
 	}

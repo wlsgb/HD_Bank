@@ -9,6 +9,9 @@
 						<c:when test="${member.mem_email==null }">
 							<!-- 로그인 창 시작합니다. -->
 								<div class="form-group">
+									<input type="button"  
+									onclick="window.open('http://localhost:3000/','_blank','height=' + (screen.height) + ',width=' + (screen.width) + 'fullscreen=yes'+',toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,left=0')"
+									class="btn btn-primary btn-block" value="RTC화상채팅" />
 									<input type="button"  onclick="location='loginPage'" class="btn btn-primary btn-block" value="로그인" />
 									<input type="button" onclick="location='memberForm'" class="btn btn-primary btn-block" value="회원가입" />
 								</div>

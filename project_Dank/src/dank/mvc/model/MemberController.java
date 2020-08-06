@@ -77,6 +77,7 @@ public class MemberController {
 			return "member/memberForm";
 		}
 		System.out.println(vo.getMem_gender()); 
+		
 		vo.setMem_phn(mem_phn1+"-"+mem_phn2+"-"+mem_phn3);
 		memberDao.memberjoin(vo);
 		System.out.println("¼º°ø");
