@@ -28,10 +28,7 @@ public class LoanService {
 		loanDao.insertLoanApllication(avo);
 	}
 	
-	public void fileupload(LoanFileVO vo) {
-		loanDao.fileupload(vo);
-		loanDao.stateupdate(vo.getLc_num());
-	}
+
 	
 	public void startrepay(LoanRepayVO vo,TransferDTO my_tr,TransferDTO your_tr) {
 		bangkingdao.trpluswit(my_tr.getAt_set_mony());

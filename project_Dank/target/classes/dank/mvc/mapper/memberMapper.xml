@@ -19,7 +19,7 @@
 	
 	<!-- 이메일(ID) => 회원이름 -->
   	<select id="namechk" parameterType="String" resultType="String">
-  		select mem_name from member where mem_email=#{email}
+  		select mem_name #{email}
   	</select>
 	
 	<!-- 회원 고유 번호 => 이메일, 회원이름 -->

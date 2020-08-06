@@ -144,6 +144,14 @@
 	$("#shasinfo").click(function() {
 		$('#depname').html("공유예금");
 		$('#depval').html("");
+		$('#depval').append("<a href='share_new_req'>share_new_req</a><br>");
+		$('#depval').append("<a href='share_new_res'>share_new_res</a><br>");
+		$('#depval').append("<a href='share_new_insert'>share_new_insert</a><br>");
+		$('#depval').append("<a href='share_new_complete'>share_new_complete</a><br>");
+		$('#depval').append("<a href='share_new_check'>share_new_check</a><br>");
+		$('#depval').append("<a href='deposite_cancle_check_shareAccount'>deposite_cancle_check_shareAccount</a><br>");
+		$('#depval').append("<a href='share_cancel_req'>share_cancel_req</a><br>");
+		$('#depval').append("<a href='share_cancel'>share_cancel</a><br>");
 	});
 	$("#shacinfo").click(function() {
 		$('#depname').html("도적하기(공유적금)");
