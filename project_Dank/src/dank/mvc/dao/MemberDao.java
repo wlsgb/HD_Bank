@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dank.mvc.vo.MemberLogVO;
 import dank.mvc.vo.MemberVO;
 
 @Repository
@@ -41,6 +42,10 @@ public class MemberDao {
 	
 	public MemberVO memLogin(MemberVO user) {
 		return ss.selectOne("member.memlogin", user);
+	}
+	
+	public MemberVO addMemLog(MemberLogVO vo) {
+		return ss.selectOne("member.memberLog", vo);
 	}
 
 }

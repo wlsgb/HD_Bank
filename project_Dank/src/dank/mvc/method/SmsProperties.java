@@ -16,10 +16,10 @@ public class SmsProperties {
 		 *        PHP
 		 */
 		
-		if(true) {
-			System.out.println("메세지 전송기능은 일시정지되어있습니다.");
-			return false;
-		}
+//		if(true) {
+//			System.out.println("메세지 전송기능은 일시정지되어있습니다.");
+//			return false;
+//		}
 		String api_key = "NCSNJETH2DZH45LE";
 		String api_secret = "HPUX3CCLXEEJSLEWMVS3JTSDNIWVHDNZ";
 		Message coolsms = new Message(api_key, api_secret);
