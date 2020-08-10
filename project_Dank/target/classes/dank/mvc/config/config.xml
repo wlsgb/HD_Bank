@@ -60,6 +60,8 @@
 		
 		<!-- 현재 접속자 -->
 		<typeAlias type="dank.mvc.vo.Curr_VisitorVO" alias="cvvo"/>
+		<!-- 멤버로그 -->
+		<typeAlias type="dank.mvc.vo.MemberLogVO" alias="ml"/>
   	</typeAliases>
 
   </configuration>
