@@ -50,7 +50,7 @@ public class SecurityRestController {
 		String SecretCode = securityCode.securityCodeMaking(4);
 		content.append("요청하신 인증번호").append("[").append(SecretCode).append("]");
 		content.append("를 화면에 입력해주세요.");
-		smsProperties.sendSms(phoneNum, content.toString());
+//		smsProperties.sendSms(phoneNum, content.toString());
 		
 		return SecretCode;
 	}

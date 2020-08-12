@@ -43,5 +43,10 @@ public class MemberDao {
 		return ss.selectOne("member.memlogin", user);
 	}
 
+	public MemberVO getMem_code(String your_email) {
+		// TODO Auto-generated method stub
+		return ss.selectOne("member.getMem_code", your_email);
+	}
+
 }
 

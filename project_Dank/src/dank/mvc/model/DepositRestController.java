@@ -20,6 +20,7 @@ import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
+import dank.mvc.vo.deposit.Shared_savingVO;
 import dank.mvc.vo.deposit.TransferDTO;
 
 @RestController
@@ -36,6 +37,7 @@ public class DepositRestController {
 	public List<Installment_savingVO> inslist() {
 		return depositDao.getInslist();
 	}
+
 	//해지-비밀번호 확인
 	@RequestMapping(value = "/acPwdChk")
 	public boolean acPwdChk(String ac_pwd,String ac_num) {
