@@ -122,27 +122,56 @@ public class MemberController {
 		return "login/login"; //존재하지 않는다면 로그인 페이지로 
 	}
 	
-	//로그인 시 로그인 한 사람의 정보를 세션에 삽입 
+//	//로그인 시 로그인 한 사람의 정보를 세션에 삽입 
+//    @RequestMapping(value = "/login" ,method = RequestMethod.POST ,produces = "application/json")
+//	public String login(HttpSession session, HttpServletRequest req, @ModelAttribute MemberVO user , Model m) throws Exception {
+//		MemberVO memberVO =  memberDao.memLogin(user);
+//		//UserVO userVO = registerService.selectUser(user);
+//		session = req.getSession();
+//		if(memberVO != null) {
+//			//System.out.println("로그인성공!");
+//			session.setAttribute("member", memberVO);
+//			String pageName= ((String) session.getAttribute("pageName"))!=null ? "redirect:"+((String) session.getAttribute("pageName")) : "index/index";
+//			return pageName;
+//		}
+//		//System.out.println("로그인실패!");
+//		return "login/login";
+//	}
+//    
+//    //로그아웃
+//    @RequestMapping(value= "/logout")
+//	public String logout(HttpSession session, HttpServletRequest req) {
+//		session.invalidate();
+//		return "login/login";
+//	}
+    
+  //로그인 시 로그인 한 사람의 정보를 세션에 삽입 
     @RequestMapping(value = "/login" ,method = RequestMethod.POST ,produces = "application/json")
-	public String loginPage(@ModelAttribute MemberVO user , HttpServletRequest req, Model m,HttpSession session) throws Exception {
+	public ModelAndView login(HttpSession session, HttpServletRequest req, @ModelAttribute MemberVO user) throws Exception {
 		MemberVO memberVO =  memberDao.memLogin(user);
 		//UserVO userVO = registerService.selectUser(user);
 		session = req.getSession();
-		if(memberVO != null) {
+		ModelAndView mav = new ModelAndView();
+		if(memberVO == null) {
+			//System.out.println("로그인실패!");
+			mav.setViewName("login/login");
+		}else if(memberVO != null) {
 			//System.out.println("로그인성공!");
 			session.setAttribute("member", memberVO);
 			String pageName= ((String) session.getAttribute("pageName"))!=null ? "redirect:"+((String) session.getAttribute("pageName")) : "index/index";
-			return pageName;
+			mav.setViewName(pageName);
 		}
-		//System.out.println("로그인실패!");
-		return "login/login";
+		
+		return mav;
 	}
     
     //로그아웃
     @RequestMapping(value= "/logout")
-	public String logout(HttpSession session) {
+	public ModelAndView logout(HttpSession session, HttpServletRequest req) {
 		session.invalidate();
-		return "login/login";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login/login");
+		return mav;
 	}
 
 	
