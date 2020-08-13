@@ -18,6 +18,7 @@
 							class="btn btn-white btn-sm btn-border mr-1">계좌조회</a>
 					</h5>
 				</div>
+
 				<div class="ml-md-auto py-2 py-md-0">
 					<a href="checkbalance"
 						class="btn btn-white btn-border btn-round mr-2">빠른 페이지</a> <a
@@ -41,6 +42,7 @@
 									class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card">
 									<span class="fa fa-sync-alt"></span>
 								</button>
+
 
 							</div>
 						</div>
@@ -94,6 +96,7 @@
 <!-- 												<form action="deposit" method="post" -->
 <!-- 													style="display: inline-block;"> -->
 <%-- 													<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+
 <%-- 													<input type="submit" value="입금" id="depbtn${i.index}" /> --%>
 <%-- 												</form> <c:choose> --%>
 <%-- 													<c:when test="${fn:contains(theString,'공유계좌:공유자')}"></c:when> --%>
@@ -102,6 +105,7 @@
 <!-- 															style="display: inline-block;"> -->
 <%-- 															<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
 <!-- 															<input type="submit" value="출금" /> -->
+
 <!-- 														</form> -->
 <%-- 													</c:otherwise> --%>
 <%-- 												</c:choose> --%>

@@ -373,6 +373,7 @@ public class DepositController {
 		your_tr.setSp_name(youracmem);
 		your_tr.setAt_set_mony(trmoney);
 
+
 		if (bangkingdao.trtrAcChk(myac) >= 1) {
 
 			if (bangkingdao.trtrAcChk(yourac) >= 1) {
@@ -407,7 +408,16 @@ public class DepositController {
 		historymap.put("start", String.valueOf(pvo.getStart()));
 		historymap.put("end", String.valueOf(pvo.getEnd()));
 
-		List<AccountHistoryVO> history = bangkingdao.gethistory(historymap);
+		
+		
+		
+		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
+		
+		for(AccountHistoryVO e: history) {
+			System.out.println(e.getSp_code());
+			System.out.println(e.getName());
+		}
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_inquire_detail");
