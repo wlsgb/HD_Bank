@@ -91,20 +91,20 @@
 												</c:choose>
 
 
-												<form action="deposit" method="post"
-													style="display: inline-block;">
-													<input type="hidden" value="${e.ac_num }" name="ac_num">
-													<input type="submit" value="입금" id="depbtn${i.index}" />
-												</form> <c:choose>
-													<c:when test="${fn:contains(theString,'공유계좌:공유자')}"></c:when>
-													<c:otherwise>
-														<form action="withdraw" method="post"
-															style="display: inline-block;">
-															<input type="hidden" value="${e.ac_num }" name="ac_num">
-															<input type="submit" value="출금" />
-														</form>
-													</c:otherwise>
-												</c:choose>
+<!-- 												<form action="deposit" method="post" -->
+<!-- 													style="display: inline-block;"> -->
+<%-- 													<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+<%-- 													<input type="submit" value="입금" id="depbtn${i.index}" /> --%>
+<%-- 												</form> <c:choose> --%>
+<%-- 													<c:when test="${fn:contains(theString,'공유계좌:공유자')}"></c:when> --%>
+<%-- 													<c:otherwise> --%>
+<!-- 														<form action="withdraw" method="post" -->
+<!-- 															style="display: inline-block;"> -->
+<%-- 															<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+<!-- 															<input type="submit" value="출금" /> -->
+<!-- 														</form> -->
+<%-- 													</c:otherwise> --%>
+<%-- 												</c:choose> --%>
 											</td>
 										</tr>
 									</c:if>

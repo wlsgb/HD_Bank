@@ -59,11 +59,10 @@
 		from member
 		where mem_email=#{mem_email} and mem_pwd=#{mem_pwd}
 	</select>
-<<<<<<< HEAD
+
 	<select id="getMem_code" parameterType="String" resultType="mem">
 		select mem_code from member where mem_email = #{mem_email}
 	</select>
-=======
 	
 	<!-- 회원가입 -->
 	<insert id="memberLog" parameterType="ml">
@@ -71,5 +70,4 @@
 		values (MEMBER_LOG_SEQ.nextVal,#{mem_code},#{ml_ip},#{ml_check},sysdate)
 	</insert>
 	
->>>>>>> refs/remotes/origin/master
 </mapper>
