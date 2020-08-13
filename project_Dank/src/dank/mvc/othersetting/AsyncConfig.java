@@ -14,7 +14,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class AsyncConfig implements AsyncConfigurer {
 
-	/** 기본 Thread 수 */
+	/** 기본 Thread 수  */
     private static int TASK_CORE_POOL_SIZE = 2;
     /** 최대 Thread 수 */
     private static int TASK_MAX_POOL_SIZE = 5;
