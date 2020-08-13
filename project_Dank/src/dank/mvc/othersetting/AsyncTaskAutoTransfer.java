@@ -57,7 +57,7 @@ public class AsyncTaskAutoTransfer {
 		try {
 			Thread.sleep(5000);
 			List<At_applicationVO> atlist = bangkingdao.atloadval();
-			System.out.println("자동이체 리스트 갯수"+atlist.size());
+			//System.out.println("자동이체 리스트 갯수"+atlist.size());
 //			for (At_applicationVO e : atlist) {
 //				System.out.println(e.getAc_num());
 //				System.out.println(e.getAta_myacmemo());
