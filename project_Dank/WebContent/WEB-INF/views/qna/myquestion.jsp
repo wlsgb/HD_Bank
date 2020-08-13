@@ -49,9 +49,9 @@
 									<c:if test="${e.cat_num eq 5}">기타</c:if>
 								</div>
 								
-								<div>${e.inq_title }</div>
-								<div style="border: 1px solid gray; background-color: #E2E2E2;">${e.inq_content }
-									<div>${e.inq_date }</div>
+								<div>제목 : ${e.inq_title }</div><div>문의 시간 : ${e.inq_date }</div>
+								<div style="border: 1px solid gray; background-color: #E2E2E2;">내용 : ${e.inq_content }
+									
 								</div>
 							</c:forEach>
 							<div class="card-body">

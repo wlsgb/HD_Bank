@@ -29,128 +29,99 @@
 
 	<div class="page-inner mt--5">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-9 ml-auto mr-auto">
 				<div class="card">
 					<div class="card-header">
 						<div class="card-head-row">
 							<div class="card-title col-3">자주 찾는 질문</div>
 						</div>
 					</div>
-					<div class="form-group" id="">
-						<div class="input-icon" style="display: inline-block;">
-
-
-
-							<!-- <input type="text" class="form-control"
-								placeholder="Search for..."">
+					<div class="form-group">
+						<!-- <div class="input-icon"> -->
+						<div class="col-md-6 row">
+							<select name="searchType" id="searchType" class="form-control col-3">
+								<option value="2">제목</option>
+									
+								<option value="3">내용</option>
+								<option value="4">날짜</option>
+							</select>
+							&nbsp;
+							<input type="text" name="searchValue" id="searchValue" class="form-control col-5">
+							&nbsp;
+							<input class="btn btn-info col-2" type="button" id="search" value="검색">
 						</div>
-						<button class="btn btn-info" style="display: inline-block;">검색</button> -->
-						<select name="searchType" id="searchType">
-						<option value="1">항목</option>
-						<option value="2">번호</option>	
-						<option value="3">내용</option>
-						<option value="4">날짜</option>
-						</select>
-						<input type="text" name="searchValue" id="searchValue">
-						<input class="btn btn-info" type="button" id="search" value="검색">
-
-
-							
-
 
 						</div>
 						<div class="card-body">
-							<button id="one"
-								style="background-color: #48abf7; border-color: #48abf7; color: white; border: 1px solid transparent;">전체</button>
-							<button id="two"
-								style="background-color: #48abf7; border-color: #48abf7; color: white; border: 1px solid transparent;">
-								예금</button>
-							<button id="three"
-								style="background-color: #48abf7; border-color: #48abf7; color: white; border: 1px solid transparent;">
-								대출</button>
-							<button id="four"
-								style="background-color: #48abf7; border-color: #48abf7; color: white; border: 1px solid transparent;">회원정보</button>
-							<button id="five"
-								style="background-color: #48abf7; border-color: #48abf7; color: white; border: 1px solid transparent;">기타</button>
+							<button id="one" class="btn btn-primary">전체</button>
+							<button id="two" class="btn btn-primary">예금</button>
+							<button id="three" class="btn btn-primary">대출</button>
+							<button id="four" class="btn btn-primary">회원정보</button>
+							<button id="five" class="btn btn-primary">기타</button>
+							<br />
+							<br />
 
+			
 							<c:forEach items="${list }" var="e">
-								<div>${e.qna_num }번)
+								<div class="row col-12">
+									<span class="blockquote blockquote-primary text-info">
+									[
 									<c:if test="${e.cat_num eq 2}">예금</c:if>
 									<c:if test="${e.cat_num eq 3}">대출</c:if>
 									<c:if test="${e.cat_num eq 4}">회원정보</c:if>
 									<c:if test="${e.cat_num eq 5}">기타</c:if>
+									]
+									</span>
+									&nbsp;
+									<span class="blockquote blockquote-primary">${e.qna_title }</span>
 								</div>
-								<div>${e.qna_title }</div>
-								<div style="border: 1px solid gray; background-color: #E2E2E2;">${e.qna_content }
-									<div>${e.qna_date }</div>
+								<div class="card-sub">
+									<span class="lead">${e.qna_content }</span>
+									<br />
+									<br />
+									<p style="text-align: right;">수정/게시된 날짜 : <b>${e.qna_date }</b></p>
 								</div>
+								<br />
+								<br />
 							</c:forEach>
 							<div class="card-body">
-								<div class="demo">
 									<ul class="pagination pg-primary">
-										<li class="page-item">
-											<!-- 이전 페이지  --> <input type="hidden" id="cntperpage"
-											value="${paging.cntPerPage}"> <c:if
-												test="${paging.startPage != 1 }">
-												<a
-													href="qna?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&categori=${paging.categori}
-													&searchType=${paging.searchType }&searchValue=${paging.searchValue}"></a>
-											</c:if> <c:forEach begin="${paging.startPage }"
-												end="${paging.endPage }" var="p">
+											<li>
+											<!-- 이전 페이지  --> 
+											<input type="hidden" id="cntperpage" value="${paging.cntPerPage}">
+											</li> 
+											<c:if test="${paging.startPage != 1 }">
+												<li class="page-item">
+												<a href="qna?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&categori=${paging.categori}
+													&searchType=${paging.searchType }&searchValue=${paging.searchValue}" class="page-link">&lt;&lt;</a>
+												</li>
+											</c:if> 
+												<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 												<c:choose>
 													<c:when test="${p == paging.nowPage }">
-														<b>${p }</b>
+														<li class="page-item active">
+														<a class="page-link">${p }</a>
 														<input type="hidden" value="${p }" id="p">
 														<!--현재 페이지 일경우 링크 해제 -->
+														</li>
 													</c:when>
 													<c:when test="${p != paging.nowPage }">
+													<li class="page-item">
 														<!--다른페이지 링크   -->
-														<a
-															href="qna?nowPage=${p }&cntPerPage=${paging.cntPerPage}&categori=${paging.categori}
-															&searchType=${paging.searchType }&searchValue=${paging.searchValue}">${p }</a>
+														<a href="qna?nowPage=${p }&cntPerPage=${paging.cntPerPage}&categori=${paging.categori}
+															&searchType=${paging.searchType }&searchValue=${paging.searchValue}" class="page-link">${p }</a>
+													</li>
 													</c:when>
 												</c:choose>
-											</c:forEach> <!-- 다음페이지  --> <c:if
-												test="${paging.endPage != paging.lastPage}">
-												<a
-													href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}&categori=${paging.categori}
-													&searchType=${paging.searchType }&searchValue=${paging.searchValue}"></a>
+											</c:forEach> 
+											<!-- 다음페이지  --> 
+											<c:if test="${paging.endPage != paging.lastPage}">
+												<li class="page-item">
+												<a href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}&categori=${paging.categori}
+													&searchType=${paging.searchType }&searchValue=${paging.searchValue}" class="page-link">&gt;&gt;</a>
+												</li>
 											</c:if>
-											</button> <%-- <!-- 이전 페이지  --> <c:if test="${paging.startPage != 1 }">
-										<a
-											href="qna?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}"></a>
-									</c:if> <c:forEach begin="${paging.startPage }"
-										end="${paging.endPage }" var="p">
-										<c:choose>
-											<c:when test="${p == paging.nowPage }">
-												<b>${p }</b>
-												<!--현재 페이지 일경우 링크 해제 -->
-											</c:when>
-											<c:when test="${p != paging.nowPage }">
-												<!--다른페이지 링크   -->
-												<a href="qna?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-											</c:when>
-										</c:choose>
-									</c:forEach> <!-- 다음페이지  --> <c:if
-										test="${paging.endPage != paging.lastPage}">
-										<a
-											href="qna?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"></a>
-									</c:if>  --%> <!-- <a class="page-link" href="#" aria-label="Previous">
-													<span aria-hidden="true"> < </span>
-													<span class="sr-only"></span>
-												</a>
-											</li>
-											<li class="page-item active"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item">
-												<a class="page-link" href="#" aria-label="Next">
-													<span aria-hidden="true">></span>
-													<span class="sr-only"></span>
-												</a> -->
-										</li>
 									</ul>
-								</div>
 							</div>
 						</div>
 					</div>

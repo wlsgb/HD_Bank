@@ -30,5 +30,9 @@ public class MyinfoDao {
 	 public int mypwdUpdate(MemberVO vo) {
 			return ss.update("myinfo.updatemypwd", vo);
 		}
+	 
+	 public String getpwd(MemberVO vo) {
+		 return ss.selectOne("myinfo.getpwd", vo);
+	 }
 	
 }

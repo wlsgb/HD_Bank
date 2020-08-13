@@ -4,72 +4,100 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="deposit">
 
+	<!-- 계좌 번호 유효성 -->
+	<select id="existAc" parameterType="String" resultType="int">
+		select
+		count(*) from account where ac_num=#{ac_num}
+	</select>
+	<!-- 계좌 번호로 회원 조회 -->
+	<select id="numToName" parameterType="String" resultType="mem">
+		select
+		m.mem_code,m.mem_name
+		from account_client ac, member m
+		where ac.mem_code
+		= m.mem_code
+		and ac.ac_code=(select ac_code from account where
+		ac_num=#{ac_num})
+	</select>
+
 	<!-- 계좌번호를 넣으면 비밀번호값이 나온다. -->
-	<select id="accountPwChk" parameterType="String" resultType="int">
+	<select id="accountPwChk" parameterType="String"
+		resultType="int">
 		select ac_pwd from account where ac_num=#{num}
 	</select>
 
 	<resultMap type="savvo" id="savingqua">
-		<id property="sav_code" column="sav_code"/>
-		<result property="sav_name" column="sav_name"/>
-		<result property="sav_interestrate" column="sav_interestrate"/>
-		<result property="sav_online" column="sav_online"/>
-		<association property="qualificationVO" column="qua_code" javaType="quavo">
-			<id property="qua_code" column="qua_code"/>
-			<result property="qua_name" column="qua_name"/>
-			<result property="qua_minperiod" column="qua_minperiod"/>
-			<result property="qua_maxperiod" column="qua_maxperiod"/>
-			<result property="qua_minage" column="qua_minage"/>
-			<result property="qua_maxage" column="qua_maxage"/>
-			<result property="qua_minmoney" column="qua_minmoney"/>
-			<result property="qua_maxmoney" column="qua_maxmoney"/>
+		<id property="sav_code" column="sav_code" />
+		<result property="sav_name" column="sav_name" />
+		<result property="sav_interestrate" column="sav_interestrate" />
+		<result property="sav_online" column="sav_online" />
+		<association property="qualificationVO" column="qua_code"
+			javaType="quavo">
+			<id property="qua_code" column="qua_code" />
+			<result property="qua_name" column="qua_name" />
+			<result property="qua_minperiod" column="qua_minperiod" />
+			<result property="qua_maxperiod" column="qua_maxperiod" />
+			<result property="qua_minage" column="qua_minage" />
+			<result property="qua_maxage" column="qua_maxage" />
+			<result property="qua_minmoney" column="qua_minmoney" />
+			<result property="qua_maxmoney" column="qua_maxmoney" />
 		</association>
 	</resultMap>
-	<select id="savingDetail" parameterType="int" resultMap="savingqua">
-		select s.sav_code,s.sav_name,s.sav_interestrate,s.sav_online,
-				q.qua_code,q.qua_name,q.qua_minperiod,q.qua_maxperiod,
-				q.qua_minage,q.qua_maxage,q.qua_minmoney,q.qua_maxmoney
-		from saving s, qualification q
+	<select id="savingDetail" parameterType="int"
+		resultMap="savingqua">
+		select
+		s.sav_code,s.sav_name,s.sav_interestrate,s.sav_online,
+		q.qua_code,q.qua_name,q.qua_minperiod,q.qua_maxperiod,
+		q.qua_minage,q.qua_maxage,q.qua_minmoney,q.qua_maxmoney
+		from saving s,
+		qualification q
 		where s.qua_code = q.qua_code and sav_code=#{sav_code}
 	</select>
-	
+
 	<resultMap type="insvo" id="insqua">
-		<id property="ins_code" column="ins_code"/>
-		<result property="ins_name" column="ins_name"/>
-		<result property="ins_online" column="ins_online"/>
-		<result property="ins_interestrate" column="ins_interestrate"/>
-		<result property="ins_putmoney" column="ins_putmoney"/>
-		<result property="ins_term" column="ins_term"/>
-		<result property="shac_code" column="shac_code"/>
-		
-		<association property="qualificationVO" column="qua_code" javaType="quavo">
-			<id property="qua_code" column="qua_code"/>
-			<result property="qua_name" column="qua_name"/>
-			<result property="qua_minperiod" column="qua_minperiod"/>
-			<result property="qua_maxperiod" column="qua_maxperiod"/>
-			<result property="qua_minage" column="qua_minage"/>
-			<result property="qua_maxage" column="qua_maxage"/>
-			<result property="qua_minmoney" column="qua_minmoney"/>
-			<result property="qua_maxmoney" column="qua_maxmoney"/>
+		<id property="ins_code" column="ins_code" />
+		<result property="ins_name" column="ins_name" />
+		<result property="ins_online" column="ins_online" />
+		<result property="ins_interestrate" column="ins_interestrate" />
+		<result property="ins_putmoney" column="ins_putmoney" />
+		<result property="ins_term" column="ins_term" />
+		<result property="shac_code" column="shac_code" />
+
+		<association property="qualificationVO" column="qua_code"
+			javaType="quavo">
+			<id property="qua_code" column="qua_code" />
+			<result property="qua_name" column="qua_name" />
+			<result property="qua_minperiod" column="qua_minperiod" />
+			<result property="qua_maxperiod" column="qua_maxperiod" />
+			<result property="qua_minage" column="qua_minage" />
+			<result property="qua_maxage" column="qua_maxage" />
+			<result property="qua_minmoney" column="qua_minmoney" />
+			<result property="qua_maxmoney" column="qua_maxmoney" />
 		</association>
 	</resultMap>
 	<select id="insDetail" parameterType="int" resultMap="insqua">
-		select i.ins_code, i.ins_name,i.ins_online,i.ins_interestrate,i.ins_putmoney,i.ins_term,i.shac_code,
-       		q.qua_code,q.qua_name,q.qua_maxage,q.qua_minage,q.qua_maxperiod,q.qua_minperiod,q.qua_maxmoney,q.qua_minmoney
+		select
+		i.ins_code,
+		i.ins_name,i.ins_online,i.ins_interestrate,i.ins_putmoney,i.ins_term,i.shac_code,
+		q.qua_code,q.qua_name,q.qua_maxage,q.qua_minage,q.qua_maxperiod,q.qua_minperiod,q.qua_maxmoney,q.qua_minmoney
 		from installment_saving i, qualification q
-		where i.qua_code = q.qua_code and ins_code=#{ins_code}
+		where i.qua_code =
+		q.qua_code and ins_code=#{ins_code}
 	</select>
-	
+
 	<select id="savlist" resultType="savvo">
-		select sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from saving order by sav_code
+		select
+		sav_code,sav_name,sav_interestrate,sav_online,shas_code,qua_code from
+		saving  where shas_code IS NULL order by sav_code
 	</select>
 	
 	<select id="inslist" resultType="insvo">
-		select ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_putmoney,ins_term,shac_code,qua_code 
+		select
+		ins_code,ins_name,ins_online,ins_interestrate,ins_droprate,ins_putmoney,ins_term,shac_code,qua_code
 		from installment_saving
 		order by ins_code
 	</select>
-	
+
 	<select id="pro_codeNum" parameterType="psidto" resultType="int">
 		select pro_code from pro_sav_ins
 		<if test="deptype != null">
@@ -91,17 +119,22 @@
 			</where>
 		</if>
 	</select>
-	
-	
+
+	<!-- 계좌 생성 -->
 	<insert id="addAccount" parameterType="acvo">
-		insert into account values(account_seq.nextVal,#{ac_num},#{ac_pwd},0,#{ac_name},sysdate,null)
+		insert into account
+		values(account_seq.nextVal,#{ac_num},#{ac_pwd},0,#{ac_name},sysdate,null)
 	</insert>
+
 	<insert id="addAcClient" parameterType="clientvo">
-		insert into account_client values(account_seq.currval,#{mem_code},#{pro_code})
+		insert into
+		account_client values(account_seq.currval,#{mem_code},#{pro_code})
 	</insert>
-	
+
+	<!-- 계좌 삭제 -->
 	<delete id="delAccount" parameterType="int">
-		delete from account where ac_code=#{ac_code}
+		delete from account where
+		ac_code=#{ac_code}
 	</delete>
 
 </mapper>

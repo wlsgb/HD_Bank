@@ -21,6 +21,7 @@ import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.Sav_process_forModalVO;
 import dank.mvc.vo.deposit.SavingVO;
+import dank.mvc.vo.deposit.Shared_savingVO;
 import dank.mvc.vo.deposit.TransferDTO;
 
 @RestController
@@ -36,6 +37,28 @@ public class DepositRestController {
 	@RequestMapping(value = "/inslist")
 	public List<Installment_savingVO> inslist() {
 		return depositDao.getInslist();
+	}
+
+	//해지-비밀번호 확인
+	@RequestMapping(value = "/acPwdChk")
+	public boolean acPwdChk(String ac_pwd,String ac_num) {
+		String password = String.valueOf(depositDao.pwdChk(ac_num));
+		
+		if(password.equals(ac_pwd)) {
+			return true;
+		}
+		return false;
+	}
+	//해지-잔고를 이체할 계좌 유효성 확인
+	@RequestMapping(value = "/acNumChk", produces = "application/text; charset=utf8")
+	public String acNumChk(String take_ac) {
+		boolean existAc = depositDao.existAc(take_ac);
+		
+		if(existAc) {
+			MemberVO member = depositDao.getMember(take_ac);
+			return member.getMem_name();
+		}
+		return null;
 	}
 	//////////북쪽////////////////////////////////////////////////////
 	//////////38선///////////////////////////////////////////////////

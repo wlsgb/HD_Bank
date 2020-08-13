@@ -33,6 +33,7 @@ public class IndexController {
 		private BangkingDao bangkingdao;
 	
 		@RequestMapping(value= {"/","/index"})
+
 		public String indexPage(HttpSession session) throws Exception {
 			HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 			String ip = req.getHeader("X-FORWARDED-FOR");
@@ -40,6 +41,7 @@ public class IndexController {
 				ip = req.getRemoteAddr();
 			}
 			System.out.println("ip¡§∫∏: "+ip);
+
 			session.removeAttribute("error");
 			session.removeAttribute("pageName");
 			

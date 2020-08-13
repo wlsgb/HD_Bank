@@ -25,10 +25,11 @@ public class QnaController {
 	private QnaDao qnaDao;
 	@Autowired
 	private Question_princhk_Dao question_princhk_Dao;
+	
 	@RequestMapping(value = "/qna")
 	public String listSearch(PageVO vo, Model model,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
-			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage,
+			@RequestParam(value = "cntPerPage", required = false, defaultValue = "5") String cntPerPage,
 			@RequestParam(value = "searchType", required = false) String searchType,
 			@RequestParam(value = "searchValue", required = false) String searchValue) {
 		

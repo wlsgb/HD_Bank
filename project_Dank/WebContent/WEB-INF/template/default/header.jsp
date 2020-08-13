@@ -105,7 +105,8 @@ $(function() {
 })
 
 var tid;
-var cnt = parseInt(600+1000000);//초기값(초단위)
+var cnt = parseInt(600);//초기값(초단위)
+
 function counter_init() {
 	tid = setInterval("counter_run()", 1000);
 }
@@ -119,7 +120,7 @@ function counter_reset() {
 function counter_run() {
 	document.all.counter.innerText = time_format(cnt);
 	cnt--;
-	if(cnt < 0) {
+	if(cnt < 0) { 
 		clearInterval(tid);
 		self.location = "logout";
 	}
