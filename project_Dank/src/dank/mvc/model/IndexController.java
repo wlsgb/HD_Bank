@@ -21,15 +21,15 @@ import dank.mvc.vo.deposit.At_applicationVO;
 
 @Controller
 public class IndexController {
-		//스레드
+		//스레드_성윤
 		@Resource(name = "asyncTaskAutoTransfer")
 		private AsyncTaskAutoTransfer asyncTaskAutoTransfer;
-		//AsyncConfig
+		//AsyncConfig_성윤
 		@Resource(name = "asyncConfig")
 		private AsyncConfig asyncConfig;
-		@Autowired
+		@Autowired//스레드_성윤
 		boolean autoTransferChk;
-		@Autowired
+		@Autowired//스레드_성윤
 		private BangkingDao bangkingdao;
 	
 		@RequestMapping(value= {"/","/index"})
@@ -45,12 +45,12 @@ public class IndexController {
 			
 			
 
-			//자동이체 스레드
+			//자동이체 스레드_성윤------
 			try {
 				
-	            // 등록 가능 여부 체크
+	            // 등록 가능 여부 체크_성윤
 	            if (asyncConfig.isTaskExecute()) {
-	            	//두번실행 방지
+	            	//두번실행 방지_성윤
 	            	if(autoTransferChk) {
 	            		autoTransferChk=false;
 		            	Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
@@ -70,7 +70,7 @@ public class IndexController {
 	            System.out.println("==============>>>>>>>>>>>> THREAD ENDs");
 	        }
 			
-			
+			//자동이체 스레드_성윤------
 			return "index/index";
 		}
 

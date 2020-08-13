@@ -47,6 +47,7 @@
 		<typeAlias type="dank.mvc.vo.deposit.Account_AdminVO" alias="adminvo"/>
 		<typeAlias type="dank.mvc.vo.deposit.Account_ClientVO" alias="clientvo"/>
 		<typeAlias type="dank.mvc.vo.deposit.TransferDTO" alias="trdto"/>
+		<typeAlias type="dank.mvc.vo.deposit.Sav_process_forModalVO" alias="smvo"/>
 		
 		<typeAlias type="dank.mvc.vo.deposit.ProSavInsDto" alias="psidto"/>
   		<!-- 예금 영역 끝 -->

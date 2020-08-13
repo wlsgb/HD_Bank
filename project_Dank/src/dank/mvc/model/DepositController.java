@@ -329,30 +329,6 @@ public class DepositController {
 		your_tr.setAt_set_mony(trmoney);
 		
 		
-//		Map<String, String> mapmy = new HashMap<String, String>();
-//		mapmy.put("ac_num", myac);
-//		mapmy.put("mem_code", String.valueOf(sessionmem.getMem_code()));
-//		mapmy.put("at_dps_ac", yourac);
-//		mapmy.put("at_set_mony", trmoney);
-//		
-//		
-//		Map<String, String> mapmysp = new HashMap<String, String>();
-//		mapmysp.put("ac_num", myac);
-//		mapmysp.put("mem_code",String.valueOf(sessionmem.getMem_code()));
-//		mapmysp.put("sp_name", myacwrite);
-//		
-//		
-//		Map<String, String> mapyour = new HashMap<String, String>();
-//		mapyour.put("ac_num", yourac);
-//		mapyour.put("mem_code", youracmem);
-//		mapyour.put("at_dps_ac",myac);
-//		mapyour.put("at_set_mony", trmoney);
-//		
-//		Map<String, String> mapyoursp = new HashMap<String, String>();
-//		mapyoursp.put("ac_num", yourac);
-//		mapyoursp.put("mem_code",youracmem);
-//		mapyoursp.put("sp_name", youracwrite);
-		
 		
 		
 		
@@ -403,7 +379,10 @@ public class DepositController {
 		
 		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
 		
-		
+		for(AccountHistoryVO e: history) {
+			System.out.println(e.getSp_code());
+			System.out.println(e.getName());
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_inquire_detail");

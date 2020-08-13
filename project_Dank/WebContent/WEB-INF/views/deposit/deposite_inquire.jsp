@@ -80,14 +80,15 @@
 																	<input type="hidden" value="${e.ac_num }" name="ac_num">
 																	<input type="submit" value="이체" />
 																	</form>
-																	<form action="deposit" method="post" style="display: inline-block;">
-																	<input type="hidden" value="${e.ac_num }" name="ac_num">
-																	<input type="submit" value="입금" id="depbtn${i.index}"  />
-																	</form>
-																	<form action="withdraw" method="post" style="display: inline-block;">
-																	<input type="hidden" value="${e.ac_num }" name="ac_num">
-																	<input type="submit" value="출금" />
-																	</form>
+<!-- 																	<form action="deposit" method="post" style="display: inline-block;"> -->
+<%-- 																	<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+<%-- 																	<input type="submit" value="입금" id="depbtn${i.index}"  /> --%>
+<!-- 																	</form> -->
+<!-- 																	<form action="withdraw" method="post" style="display: inline-block;"> -->
+<%-- 																	<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+<!-- 																	<input type="submit" value="출금" /> -->
+<!-- 																	</form> -->
+			
 																</td>
 														</tr>
 													</c:if>
