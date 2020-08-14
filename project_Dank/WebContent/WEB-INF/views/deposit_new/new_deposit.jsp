@@ -26,7 +26,7 @@
 				<!-- 상단의 푸른색 공간 끝 -->
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
-				<div class="row row-card-no-pd">
+				<div class="row row-card-no-pd"> 
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
@@ -146,7 +146,7 @@
 														<th colspan="2">
 															<div class="row">
 																<div class="col-md-4 ml-auto">
-																	<button class="btn btn-warning" id="update">개인정보 수정하기</button>
+																	<input type="button" class="btn btn-warning" id="update" value="개인정보 수정하기"/>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
 																	<button class="btn btn-danger" id="cancel">취소</button>
@@ -172,10 +172,6 @@
 				</div>
 			</div>
 
-
-			
-			
-			
 	<script>
 	
 		$(function() {
@@ -183,6 +179,9 @@
 			var emailCode = null;
 			$("#cancel").click(function() {
 				location = "index";
+			});
+			$("#update").click(function() {
+				location = "pri_info_chk2";
 			});
 			
 			$("#codeCheck").click(function() {
@@ -253,7 +252,7 @@
 		    oldVal = currentVal;
 		   	if($('#ac_repwd').val() !== $("#ac_pwd").val()){
 			   $('#target').html("입력하신 비밀번호와 다릅니다.").addClass('text-danger');
-		   }else {
+		    }else {
 			   $('#target').removeClass('text-danger');
 			   $('#target').html("입력하신 비밀번호와 일치합니다.").addClass('text-primary');;
 			}
@@ -265,10 +264,9 @@
 		        return;
 		    }
 		    oldVal = currentVal;
-		    console.log("반응");
 		   	if($('#ac_pwd').val() !== $("#ac_repwd").val()){
 			   $('#target').html("입력하신 비밀번호와 다릅니다.").addClass('text-danger');
-		   }else {
+		    }else {
 			   $('#target').removeClass('text-danger');
 			   $('#target').html("입력하신 비밀번호와 일치합니다.").addClass('text-primary');;
 			}
@@ -283,6 +281,8 @@
 				alert("비밀번호 재입력을 입력해주세요");
 			}else if($("#successData").val() !== 'success'){
 				alert("이메일 인증을 해주세요.");
+			}else if($("#ac_pwd").val() !== $("#ac_repwd").val()){
+				alert("비밀번호를 확인해주세요.");
 			}else{
 				f.submit();
 			}

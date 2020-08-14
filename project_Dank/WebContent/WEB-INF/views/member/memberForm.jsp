@@ -31,7 +31,8 @@ input[type="number"]::-webkit-inner-spin-button {
 					</div>
 				</div>
 				
-		<form action="memberjoin" method="post" class="form-horizontal">
+		<form action="memberjoin" method="post" class="form-horizontal"> 
+		<input type="hidden" value="${reip}" name="mem_reip" />
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -41,89 +42,143 @@ input[type="number"]::-webkit-inner-spin-button {
 												<h1>회원가입</h1>
 												<hr>
 												<h3>신청자 정보</h3>
-												<div class="form-group row">
-													<label for="name" class="col-2 control-label">이메일</label>
-													<div class="col-6">
-   														<input type="email" class="form-control"  id="mem_email1" name="mem_email">
-   													<div id="target">
-   													<input type='hidden' id='chk' value='0'>
-   													</div>
-   													</div>
-   													<div class="col-2">
-   													<input type="button" id="idchk" class="btn btn-info" value="중복검사">
-   													</div>
+												<div class="col-md-10 ml-auto mr-auto" style="text-align:right;">
+													<span class="text-danger h4" > * 필수사항</span>
 												</div>
-												<div class="form-group row">
-													<label for="name" class="col-2 control-label">비밀번호</label>
-													<div class="col-10">
-   														<input type="password" class="form-control"  id="mem_pwd1" name="mem_pwd">
-   													</div>
+												<div class="col-md-10 ml-auto mr-auto">
+													<div class="form-group ">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>이메일</label>
+														<div class="row">
+															<div class="col-6">
+		   														<input type="email" class="form-control"  id="mem_email1" name="mem_email">
+		   														<div id="target">
+			   														<input type='hidden' id='chk' value='0'>
+			   													</div>
+		   													</div>  
+		   													<div class="col-6">
+																<button type="button" class="btn btn-info" id="idchk">중복검사</button>
+																<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
+															</div>
+														</div>
+													</div> 
+													<div class="form-group">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>인증번호</label>
+														<div class="row">
+															<div class="col-6">
+																<input type="text" id="codenum" name="codenum" required="required"
+																class="form-control input-full">                                      
+															</div>
+															<div class="col-4 mt-1" id="codeTarget">
+																<button type="button" class="btn btn-primary" id="codeCheck">확인</button>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>비밀번호</label>
+														<div class="row">
+															<div class="col-10">
+		   														<input type="password" class="form-control"  id="mem_pwd1" name="mem_pwd">
+		   													</div>
+	   													</div>
+													</div>
+													<div class="form-group">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>비밀번호확인</label>
+														<div class="row">
+															<div class="col-10">
+		   														<input type="password" class="form-control"  id="mem_pwd2" name="mem_pwd2">
+		   													</div>
+	   													</div>
+													</div>
+													<div class="form-group">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>이름</label>
+														<div class="row">
+															<div class="col-10">
+		   														<input type="text" class="form-control"  id="mem_name" name="mem_name">
+		   													</div>
+	   													</div>
+													</div>
+													<div class="form-group">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>전화번호</label>
+														<div class="col-10 row">
+															<select id="mem_phn1" name="mem_phn1" class="col-3">
+																<option>010</option>
+																<option>016</option>
+																<option>019</option>
+															</select>
+	   														<p class="col-1 text-center">ㅡ</p>
+	   														<input type="number" class="form-control col-3"  id="mem_phn2" name="mem_phn2">
+	   														<p class="col-1 text-center">ㅡ</p>
+	   														<input type="number" class="form-control col-3" id="mem_phn3" name="mem_phn3">
+	   													</div>
+													</div>
+													<div class="form-group">
+														<label for="mem_birth" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>생년월일</label>
+														<div class="row">
+															<div class="col-10">
+		   														<input type="number" class="form-control" id="mem_birth" name="mem_birth" placeholder="예)951201">
+		   													</div>
+	   													</div>
+													</div>
+														<div class="form-group">
+														<label for="name" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>주소</label>
+														<div class="row">
+															<div class="col-10">
+		   														<input type="text" class="form-control"  id="mem_loc" name="mem_loc">
+		   													</div>
+	   													</div>
+													</div>
+													<div class="form-check">
+														<label for="mem_birth" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>성별</label>
+														<br />
+														<div class="col-10 ">
+															<label class="form-radio-label">
+																<input class="form-radio-input" type="radio" name="mem_gender" value="M"  checked="">
+																<span class="form-radio-sign">남자</span>
+															</label>
+															<label class="form-radio-label ml-3">
+																<input class="form-radio-input" type="radio" name="mem_gender" value="F">
+																<span class="form-radio-sign">여자</span>
+															</label>
+	   													</div>
+													</div>
+													<div class="form-check">
+														<label for="mem_birth" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>이메일수신동의</label>
+														<br />
+														<div class="col-10 ">
+															<label class="form-radio-label">
+																<input class="form-radio-input" type="radio" name="mem_email_chk" value="1">
+																<span class="form-radio-sign">동의</span>
+															</label>
+															<label class="form-radio-label ml-3">
+																<input class="form-radio-input" type="radio" name="mem_email_chk" value="0"  checked="">
+																<span class="form-radio-sign">비동의</span>
+															</label>
+	   													</div>
+													</div>
+													<div class="form-check">
+														<label for="mem_birth" class="col-2 control-label"><span class="text-danger blockquote blockquote-primary"> * </span>개인정보동의</label>
+														<br />
+														<div class="col-10 ">
+															<label class="form-radio-label">
+																<input class="form-radio-input" type="radio" name="mem_pri_chk" value="1">
+																<span class="form-radio-sign">동의</span>
+															</label>
+															<label class="form-radio-label ml-3">
+																<input class="form-radio-input" type="radio" name="mem_pri_chk" value="0" checked="">
+																<span class="form-radio-sign">비동의</span>
+															</label>
+	   													</div>
+													</div>
+													<div class="form-group">
+														<label for="name" class="col-2 control-label">직업</label>
+														<div class="col-10 row">
+															<select id="mem_job" name="mem_job" class="form-control col-5 ">
+																<option value="0">기타</option>
+																<option value="1">무직</option>
+															</select>
+	   													</div>
+													</div>
 												</div>
-												<div class="form-group row">
-													<label for="name" class="col-2 control-label">비밀번호확인</label>
-													<div class="col-10">
-   														<input type="password" class="form-control"  id="mem_pwd2" name="mem_pwd2">
-   													</div>
-												</div>
-												<div class="form-group row">
-													<label for="name" class="col-2 control-label">이름</label>
-													<div class="col-10">
-   														<input type="text" class="form-control"  id="mem_name" name="mem_name">
-   													</div>
-												</div>
-												<div class="form-group row">
-													<label for="name" class="col-2 control-label">전화번호</label>
-													<div class="col-10 row">
-														<select id="mem_phn1" name="mem_phn1" class="col-3">
-															<option>010</option>
-															<option>016</option>
-															<option>010</option>
-														</select>
-   														<p class="col-1 text-center">ㅡ</p>
-   														<input type="number" class="form-control col-3"  id="mem_phn2" name="mem_phn2">
-   														<p class="col-1 text-center">ㅡ</p>
-   														<input type="number" class="form-control col-3" id="mem_phn3" name="mem_phn3">
-   													</div>
-												</div>
-												<div class="form-group row">
-													<label for="mem_birth" class="col-2 control-label">생년월일</label>
-													<div class="col-10">
-   														<input type="number" class="form-control" id="mem_birth" name="mem_birth" placeholder="예)951201">
-   													</div>
-												</div>
-													<div class="form-group row">
-													<label for="name" class="col-2 control-label">주소</label>
-													<div class="col-10">
-   														<input type="text" class="form-control"  id="mem_loc" name="mem_loc">
-   													</div>
-												</div>
-												<div class="form-group row">
-													<label for="mem_birth" class="col-2 control-label">성별</label>
-													<div class="col-10">
-   														<input type="radio"  name="mem_gender" value="m"><span>남자</span>
-   														<input type="radio"  name="mem_gender" value="f" checked="checked"><span>여자</span>
-   													</div>
-												</div>
-												<div class="form-group row">
-													<label for="mem_birth" class="col-2 control-label">이메일수신동의</label>
-													<div class="col-10">
-   														<input type="radio"  name="mem_email_chk" value="1"><span>동의</span>
-   														<input type="radio"  name="mem_email_chk" value="0" checked="checked"><span>비동의</span>
-   													</div>
-												</div>
-												<div class="form-group row">
-													<label for="mem_birth" class="col-2 control-label">개인정보동의</label>
-													<div class="col-10" id="mem_chk">
-   														<input type="radio" id="check1" name="mem_pri_chk" value="1">동의
-   														<input type="radio" id="check2" name="mem_pri_chk" value="0" checked="checked">비동의
-   													</div>
-												</div>
-												
-												
-											
-												
-												
-											
 									</div>
 								</div>
 							</div>
@@ -140,9 +195,77 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			
 			<script>
+			$(function() {
+				var email = null;
+				var emailCode = null;
+				$("#cancel").click(function() {
+					location = "security";
+				});
+				
+				$("#codeCheck").click(function() {
+					console.log("emailCode : "+emailCode);
+					console.log("codenum : "+$("#codenum").val());
+					if ($("#codenum").val() == emailCode) {
+						$("#mem_email1").attr("readonly", true);
+						$("#codenum").attr("readonly", true);
+						$("#codeTarget").html('<button class="btn btn-success btn-sm" disabled="disabled">Success</button>');
+						$("#codeTarget").append('<input type="hidden" value="success" name="successData" />')
+					}else {
+						$("#codeTarget").append('<input type="hidden" value="fail" name="successData" />')
+					}
+					
+				})
+				
+				$('#emailBtn').click(function(e) {
+					email = $("#mem_email1").val();
+					swal({
+						title: '이메일을 전송 하시겠습니까?',
+						text: "이메일을 확인해주세요. \n"+email,
+						type: 'warning',
+						buttons:{
+							confirm: {
+								text : '전송',
+								className : 'btn btn-success'
+							},
+							cancel: {
+								text : '취소',
+								visible: true,
+								className: 'btn btn-danger'
+							}
+						}
+					}).then((Delete) => {
+						if (Delete) {
+							$.ajax({
+								url:"emailsend?email="+email,
+								success:function(data){
+									emailCode = data;
+								}
+							})
+							swal({
+								title: '전송되었습니다.',
+								text: '전송된 코드를 입력해주세요.',
+								type: 'success',
+								buttons : {
+									confirm: {
+										text : '확인',
+										className : 'btn btn-success'
+									}
+								},
+								
+							});
+						} else {
+							swal.close();
+						}
+					});
+				});
+			})
+				
+			
+			
+			
 		$(function() {
 			
-		
+			/*  */
 			$('#check1').click(function() {
 				$.ajax({
 					url:'radio?radio='+$('#check1').val(),
@@ -258,6 +381,14 @@ input[type="number"]::-webkit-inner-spin-button {
 			
 		})
 		
+					$('form').on('focus', 'input[type=number]', function (e) {
+  $(this).on('wheel.disableScroll', function (e) {
+    e.preventDefault()
+  })
+})
+$('form').on('blur', 'input[type=number]', function (e) {
+  $(this).off('wheel.disableScroll')
+})
 		
 	</script>
 

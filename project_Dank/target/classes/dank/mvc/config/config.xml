@@ -18,7 +18,8 @@
   		<typeAlias type="dank.mvc.vo.LoanApplicationVO" alias="lavo"/>
   		<typeAlias type="dank.mvc.vo.LoanFileVO" alias="lfvo"/>
   		<typeAlias type="dank.mvc.vo.LoanRepayVO" alias="lrvo"/>
-  		
+  		<typeAlias type="dank.mvc.vo.LoanRepayLogVO" alias="lrlvo"/>
+  		<typeAlias type="dank.mvc.vo.FilenameVO" alias="fnvo"/>
 		<!-- 대출 영역 끝 -->
 		
   		<!-- 보안 알리아스 시작-->
@@ -46,6 +47,8 @@
   		<typeAlias type="dank.mvc.vo.deposit.At_applicationVO" alias="atapplyvo"/>
 		<typeAlias type="dank.mvc.vo.deposit.Account_AdminVO" alias="adminvo"/>
 		<typeAlias type="dank.mvc.vo.deposit.Account_ClientVO" alias="clientvo"/>
+		<typeAlias type="dank.mvc.vo.deposit.TransferDTO" alias="trdto"/>
+		<typeAlias type="dank.mvc.vo.deposit.Sav_process_forModalVO" alias="smvo"/>
 		
 		<typeAlias type="dank.mvc.vo.deposit.ProSavInsDto" alias="psidto"/>
   		<!-- 예금 영역 끝 -->
@@ -54,7 +57,12 @@
   		<typeAlias type="dank.mvc.vo.QnaVO" alias="qnavo"/>
   		<typeAlias type="dank.mvc.vo.MemberVO" alias="mem"/>
   		<typeAlias type="dank.mvc.vo.EmployeeVO" alias="emp"/>
-
+		<typeAlias type="dank.mvc.vo.Question_princhk_VO" alias="qvo"/>
+		
+		<!-- 현재 접속자 -->
+		<typeAlias type="dank.mvc.vo.Curr_VisitorVO" alias="cvvo"/>
+		<!-- 멤버로그 -->
+		<typeAlias type="dank.mvc.vo.MemberLogVO" alias="ml"/>
   	</typeAliases>
 
   </configuration>

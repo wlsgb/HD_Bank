@@ -50,7 +50,7 @@
 														<td>${e.loanRepayVO.lr_startdate }</td>
 														<td>${e.loanRepayVO.lr_amount }</td>
 														<td>${e.loanRepayVO.lr_balance }</td>
-														<td><button type="button" class="btn btn-lg btn-primary" value="${e.lc_num }">상환하기</button></td>
+														<td><button type="button" class="btn btn-lg btn-primary repay" value="${e.lc_num }">상환하기</button></td>
 														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
 													
@@ -79,5 +79,8 @@
 			$('.checkdetail').click(function() {
 				location='checkdetail?lc_num='+$(this).val();
 			})
+			$('.repay').click(function() {
+			location='repaymentloan?lc_num='+$(this).val();
+		})
 	</script>
 

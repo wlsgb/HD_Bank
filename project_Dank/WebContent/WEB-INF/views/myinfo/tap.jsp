@@ -29,8 +29,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<p class="card-category">
-									ID조회</p>
+									<p class="card-category">ID조회</p>
 									
 								</div>
 								
@@ -58,7 +57,7 @@
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" 
-											role="tab" aria-controls="pills-profile" aria-selected="false">무엇을위한 페이지인가...</a>
+											role="tab" aria-controls="pills-profile" aria-selected="false">비밀번호조회</a>
 										</li>
 										
 									</ul>
@@ -70,21 +69,21 @@
 									<div class="tab-content mt-2 mb-3" id="pills-tabContent">
 										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" >
 											<tr>
-												<td>이름을 입력하세요</td>
+												<td>이름</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inputname" placeholder="이름을 정확히 입력하세요" name="sename">
+													<input type="text" class="form-control input-full" id="inputname" placeholder="(이름)" name="sename">
 												</div></td>
 												<br>
 											</tr>
 											<tr>
-												<td>생년월일은?</td>
+												<td>생년월일</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inputbirth" placeholder="생년월일을 강력히 입력하세요" name="sebirth">
+													<input type="text" class="form-control input-full" id="inputbirth" placeholder="(생년월일)" name="sebirth">
 												</div></td>
 												
 											</tr>
 											<br>
-											<input type="button" id="gogo" style="text-align: center;" class="btn btn-primary btn-round" value="확인">
+											<input type="button" id="idgo" style="text-align: center;" class="btn btn-primary btn-round" value="확인">
 											
 									
 									<div id="ajaxtarget" style="display: inline-block; margin: 15px;" ></div>
@@ -94,23 +93,27 @@
 										
 										<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 											<tr>
+												<td>이름</td>
+												<td><div class="col-md-9 p-0">
+													<input type="text" class="form-control input-full" id="inputname1" placeholder="(이름)">
+												</div></td>
+											</tr>
+											<tr>
 												<td>ID</td>
 												<td><div class="col-md-9 p-0">
-													<div id="ajaxtarget"><input type="text" class="form-control input-full" id="inlineinput" placeholder="아이디"></div>
+													<input type="text" class="form-control input-full" id="inputid" placeholder="(아이디)">
 												</div></td>
 											</tr>
 											<tr>
-												<td>계좌정보</td>
+												<td>생년월일</td>
 												<td><div class="col-md-9 p-0">
-													<input type="text" class="form-control input-full" id="inlineinput" placeholder="계좌번호">
+													<input type="text" class="form-control input-full" id="inputbirth1" placeholder="(생년월일)">
 												</div></td>
 											</tr>
-											<tr>
-												<td>계좌 비밀번호</td>
-												<td><div class="col-md-9 p-0">
-													<input type="password" class="form-control input-full" id="inlineinput" placeholder="비밀번호">
-												</div></td>
-											</tr>
+											<br>
+											<input type="button" id="pwgo" style="text-align: center;" class="btn btn-primary btn-round" value="확인">
+											
+											<div id="ajaxpwd" style="display: inline-block; margin: 15px;" ></div>
 										</div>
 										
 									</div>
@@ -157,143 +160,63 @@
 		
 			
 			
-			<script> 
-			
-			
-			$(function() {
-			var emailPath = null;
-			var namesy;
-			$('#gogo').click(function () {
-				namesy=encodeURI($('#inputname').val(),"UTF-8");
-				emailPath = 'getemail?mem_name='+namesy+'&mem_birth='+$('#inputbirth').val();
-				
-						$.ajax({
-							url:emailPath,
-							contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
-							success: function (data) {
+	<script> 
+	
+	
+	$(function() {
+	var emailPath = null;
+	var namesy;
+	$('#idgo').click(function () {
+		namesy=encodeURI($('#inputname').val(),"UTF-8");
+		console.log("namesy : " + namesy)
+		emailPath = 'getemail?mem_name='+namesy+'&mem_birth='+$('#inputbirth').val();
+		console.log("emailPath : " + emailPath)
+				$.ajax({
+					url:emailPath,
+					contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+					success: function (data) {
+					'당신의 아이디는'+$('#ajaxtarget').html(data)+'입니다';
 					
-							
-							'당신의 아이디는'+$('#ajaxtarget').html(data)+'입니다';
-							
-							},
-							error : function(xhr, textStatus, errorThrown){
-						        // Error시, 처리
-						        alert(xhr);
-						        alert(textStatus);
-						        alert(errorThrown);
-						    }
-
-						})
+					},
+					error : function(xhr, textStatus, errorThrown){
+				        // Error시, 처리
+				        alert(xhr);
+				        alert(textStatus);
+				        alert(errorThrown);
+				    }
 				})
-			})
-		
-			
+		})
+	})
 	
-			
-			
-			$("#checkBalance").click(function() {
-				location = "checkBalance";
-			});
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+	$(function() {
+	var pwdpath = null;
 
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-// 		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-// 			type: 'line',
-// 			height: '70',
-// 			width: '100%',
-// 			lineWidth: '2',
-// 			lineColor: '#ffa534',
-// 			fillColor: 'rgba(255, 165, 52, .14)'
-			
-// 		});
-			
-			
-				
-				
-			
 	
-  
-			
+	$('#pwgo').click(function () {
+		var name = encodeURI($('#inputname1').val(),"UTF-8");
+		var birth = encodeURI($('#inputbirth1').val(),"UTF-8");
+		var id = encodeURI($('#inputid').val(),"UTF-8");
 		
+		
+		
+		pwdpath = 'getpwd?mem_name='+name+'&mem_birth='+birth+'&mem_email='+id;
+		console.log("pwdpath : " + pwdpath)
+				$.ajax({
+					url:pwdpath,
+					contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+					success: function (data) {
+					'당신의 비밀번호는'+$('#ajaxpwd').html(data)+'입니다';
+					
+					},
+					error : function(xhr, textStatus, errorThrown){
+				        // Error시, 처리
+				        console.log(xhr);
+				        console.log(textStatus);
+				        console.log(errorThrown);
+				    }
+				})
+		})
+	})
+	
+
 	</script>

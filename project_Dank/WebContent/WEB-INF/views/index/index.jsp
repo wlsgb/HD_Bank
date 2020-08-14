@@ -20,7 +20,7 @@
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
 				<div class="row">
-						<div class="col-sm-6 col-md-3" id="checkBalance">
+						<div class="col-4" id="checkBalance">
 							<div class="card card-stats card-primary card-round">
 								<div class="card-body">
 									<div class="row">
@@ -39,7 +39,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3" id="transfer">
+						<div class="col-4" id="transfer">
 							<div class="card card-stats card-info card-round">
 								<div class="card-body">
 									<div class="row">
@@ -58,7 +58,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3" id="analysis">
+						<!-- <div class="col-sm-6 col-md-3" id="analysis">
 							<div class="card card-stats card-success card-round">
 								<div class="card-body ">
 									<div class="row">
@@ -76,8 +76,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-sm-6 col-md-3" id="exchangeRate">
+						</div> -->
+						<div class="col-4" id="exchangeRate">
 							<div class="card card-stats card-secondary card-round">
 								<div class="card-body ">
 									<div class="row">
@@ -116,7 +116,6 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-6">
-											<iframe width="1120;" height="600" src="//www.youtube.com/embed/GVzE92CMWTA?&amp;autoplay=1&amp;loop=1 frameborder="></iframe>
 										</div>
 									</div>
 								</div>
@@ -129,6 +128,7 @@
 			</div>
 	
 	<script>
+	
 		/* 페이지 이동 자바스크립트 시작 */
 		$("#checkBalance").click(function() {
 			location = "checkbalance";
