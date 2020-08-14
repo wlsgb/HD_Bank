@@ -5,11 +5,14 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+<aop:aspectj-autoproxy/>
 <context:component-scan base-package="dank.mvc"/>
 <!-- 적혀잇는 패키지들에서 해당되는 어노테이션들을 스프링컨테이너로 빈등록을 해준다  -->
 <mvc:annotation-driven/>
@@ -58,6 +61,14 @@
 			<value>/WEB-INF/tiles/tiles-definitions.xml</value>
 		</list>
 	</property>
+</bean>
+
+
+
+
+<!-- autoTransferBoolean -->
+<bean id="autoTransferChk" class="java.lang.Boolean">
+	<constructor-arg value="True"/>
 </bean>
 
 </beans>
