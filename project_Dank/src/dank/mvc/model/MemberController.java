@@ -24,6 +24,7 @@ import dank.mvc.vo.MemberVO;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private MemberDao memberDao;
 
