@@ -131,9 +131,13 @@
 										<tbody>
 										
 	
-										
+<!-- 										<a data-toggle="modal" data-target="#myModal">s</a> -->
 										<c:forEach var="e" items="${history}">
-											<tr>
+										<!-- Button trigger modal -->
+
+
+											
+											<tr class="modalclick" data-toggle="modal" data-id="${e.sp_code}" data-target="#myModal">
 												<td scope="col">${e.r_num }</td>
 												<td scope="col">${e.dealdate }</td>
 												<td scope="col">${e.dep_money }</td>
@@ -141,9 +145,10 @@
 												<td scope="col">${e.balance }</td>
 												<td scope="col">${e.name }</td>
 												
-											
 											</tr>
+											
 										</c:forEach>
+										
 										</tbody>
 									</table>
 								</div>
@@ -183,29 +188,88 @@
 
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">상세보기</h4>
+      </div>
+      <div class="modal-body">
+        <div id="testbody">
+        <table class="table table-bordered table-dark">
+	        <tr>
+	        	<th>거래구분</th><td id="modal1"></td>
+	        </tr>
+	        <tr>
+        		<th>거래일시</th><td id="modal2"></td>
+       		</tr>
+       		<tr>
+        		<th>거래내용</th><td id="modal3"></td>
+       		</tr>
+       		<tr>
+        		<th>금액</th><td id="modal4"></td>
+       		</tr>
+       		<tr>
+        		<th>상대은행</th><td >HD</td>
+       		</tr>
+       		<tr>
+        		<th>상대계좌</th><td id="modal5"></td>
+       		</tr>
+        
+        </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal end-->
 	
 			
 			
 			<script>
-// 			function resultFun(x) {
-// 				 var positionLeft = x.clientX;
-// 				  var positionTop = x.clientY;
-// 				   document.getElementById('result').style.left = positionLeft - 10 + "px";
-// 				    document.getElementById('result').style.top = positionTop - 10 +"px"; 
-// 				    }
-// 		     if (document.addEventListener) {
-// 			      document.addEventListener("mousemove", resultFun); 
-// 			      } else if (document.attachEvent) {
-// 				       document.attachEvent("onmousemove", resultFun);
-// 				        //attachEvent는 IE8이하와 오페라에서 사용하는 명령어이다
-// 				         };
-
-// $(document).ready(function() {
-// 	$('tbody').children().children().mouseover(function() {
-// 		console.log($(this).text())
-// 	})
-
-// })
+			$(document).on("click", ".modalclick", function () {
+			     var myId = $(this).data('id');
+			     //$(".modal-body #testbody").html(myId)
+			     // As pointed out in comments, 
+			     // it is unnecessary to have to manually call the modal.
+			     // $('#addBookDialog').modal('show');
+			     
+			     $.ajax({
+			 			url:'sp_codeis?sp_code='+myId,
+			 			success:function(data){
+			 				//console.log(data)
+			 				
+			 				if(data[0].classified==='이체거래'){
+			 					$('#modal1').html(data[0].classified)
+				 				$('#modal2').html(data[0].at_date)
+				 				$('#modal3').html(data[0].sp_name)
+				 				$('#modal4').html(data[0].at_set_mony)
+				 				$('#modal5').html(data[0].at_dps_ac)
+			 				}else if(data[0].classified==='입금거래'){
+			 					$('#modal1').html(data[0].classified)
+				 				$('#modal2').html(data[0].dep_date)
+				 				$('#modal3').html(data[0].sp_name)
+				 				$('#modal4').html(data[0].dep_money)
+				 				$('#modal5').html('-')
+			 				}else{
+			 					$('#modal1').html(data[0].classified)
+				 				$('#modal2').html(data[0].wit_date)
+				 				$('#modal3').html(data[0].sp_name)
+				 				$('#modal4').html(data[0].wit_money)
+				 				$('#modal5').html('-')
+			 				}
+			 				
+			 			}		
+			     
+			 		})
+			});
 
 
 	

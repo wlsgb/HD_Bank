@@ -19,7 +19,9 @@ import dank.mvc.service.BangkingService;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
+import dank.mvc.vo.deposit.Sav_process_forModalVO;
 import dank.mvc.vo.deposit.SavingVO;
+import dank.mvc.vo.deposit.Shared_savingVO;
 import dank.mvc.vo.deposit.TransferDTO;
 
 @RestController
@@ -36,6 +38,7 @@ public class DepositRestController {
 	public List<Installment_savingVO> inslist() {
 		return depositDao.getInslist();
 	}
+
 	//해지-비밀번호 확인
 	@RequestMapping(value = "/acPwdChk")
 	public boolean acPwdChk(String ac_pwd,String ac_num) {
@@ -89,7 +92,7 @@ public class DepositRestController {
 		return bangkingdao.atloadval();
 	}
 	
-	@RequestMapping(value = "/atprocess")
+	@RequestMapping(value = "/atprocess")//이젠 필요없듬
 	public String atprocess(
 			@RequestParam(value = "myac") String myac
 			,@RequestParam(value = "memcode") String memcode
@@ -125,30 +128,7 @@ public class DepositRestController {
 		your_tr.setSp_name(youracmem);
 		your_tr.setAt_set_mony(trmoney);
 		your_tr.setAta_code(atacode);
-		
-//		Map<String, String> mapmy = new HashMap<String, String>();
-//		mapmy.put("ac_num", myac);
-//		mapmy.put("mem_code", memcode);
-//		mapmy.put("at_dps_ac", yourac);
-//		mapmy.put("at_set_mony", trmoney);
-//		
-//		
-//		Map<String, String> mapmysp = new HashMap<String, String>();
-//		mapmysp.put("ac_num", myac);
-//		mapmysp.put("mem_code",memcode);
-//		mapmysp.put("sp_name", myacwrite);
-//		
-//		
-//		Map<String, String> mapyour = new HashMap<String, String>();
-//		mapyour.put("ac_num", yourac);
-//		mapyour.put("mem_code", youracmem);
-//		mapyour.put("at_dps_ac",myac);
-//		mapyour.put("at_set_mony", trmoney);
-//		
-//		Map<String, String> mapyoursp = new HashMap<String, String>();
-//		mapyoursp.put("ac_num", yourac);
-//		mapyoursp.put("mem_code",youracmem);
-//		mapyoursp.put("sp_name", youracwrite);
+
 		
 		
 		
@@ -183,5 +163,36 @@ public class DepositRestController {
 	@RequestMapping(value = "/dosomething2")
 	public void dosomething2() {
 		System.out.println("gdgdgd im do something2");
+	}
+	
+	//sp_code를 받아와서 거래구분 확인
+	@RequestMapping(value = "/sp_codeis")
+	public List<Sav_process_forModalVO> getsp_code(String sp_code) {
+		//System.out.println(sp_code);
+		List<Sav_process_forModalVO> classified =bangkingdao.classifiedmodal(sp_code);
+		List<Sav_process_forModalVO> modal=null;
+		for (Sav_process_forModalVO e:classified) {
+			//System.out.println(e.getWit_code());
+			//System.out.println(e.getDep_code());
+			//System.out.println(e.getAt_code());
+			
+			
+			if(e.getAt_code() !=0) {
+				modal =bangkingdao.modal_tr(sp_code);
+				modal.get(0).setClassified("이체거래");
+				//System.out.println("계좌이체거래");
+			}else if((e.getAt_code()==0)&&(e.getDep_code()!=0)) {
+				modal =bangkingdao.modal_dep(sp_code);
+				modal.get(0).setClassified("입금거래");
+				//System.out.println("임금거래");
+			}else if((e.getAt_code()==0)&&(e.getWit_code()!=0)) {
+				modal =bangkingdao.modal_wit(sp_code);
+				modal.get(0).setClassified("출금거래");
+				//System.out.println("출금거래");
+			}
+		}
+		
+		
+		return modal;
 	}
 }

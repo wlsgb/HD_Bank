@@ -86,15 +86,15 @@
 														</td>
 													</tr>
 													<tr>
-														<th scope="col">이메일</th>
+														<th scope="col">핸드폰번호</th>
 														<td>
 															<div class="row">
 																<div class="col-8">
-																	<input type="email" id="mem_email" name="mem_email" readonly="readonly"
-																	class="form-control input-full" value="${memberVO.mem_email }">
+																	<input type="text" id="mem_phn" name="mem_phn" readonly="readonly"
+																	class="form-control input-full" value="${mem_phn }">
 																</div>
 																<div class="col-4">
-																	<button type="button" class="btn btn-primary" id="emailBtn">인증코드 전송</button>
+																	<button type="button" class="btn btn-primary" id="phnBtn">인증코드 전송</button>
 																</div>
 															</div>
 														</td>
@@ -162,11 +162,11 @@
 					
 				})
 				
-				$('#emailBtn').click(function(e) {
-					email = $("#mem_email").val();
+				$('#phnBtn').click(function(e) {
+					phoneNum = $("#mem_phn").val();
 					swal({
-						title: '이메일을 전송 하시겠습니까?',
-						text: "이메일을 확인해주세요. \n"+email,
+						title: '인증번호를 전송 하시겠습니까?',
+						text: "전화번호를 확인해주세요. \n"+phoneNum,
 						type: 'warning',
 						buttons:{
 							confirm: {
@@ -182,7 +182,7 @@
 					}).then((Delete) => {
 						if (Delete) {
 							$.ajax({
-								url:"emailsend?email="+email,
+								url:"smssend?phoneNum="+phoneNum,
 								success:function(data){
 									emailCode = data;
 								}

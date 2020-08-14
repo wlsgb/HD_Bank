@@ -11,6 +11,7 @@ import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
+import dank.mvc.vo.deposit.Shared_savingVO;
 
 @Repository
 public class DepositDao {
@@ -54,6 +55,8 @@ public class DepositDao {
 	public void addAccount(AccountVO accountVO) {
 		ss.insert("deposit.addAccount",accountVO);
 	}
+
+	
 	//°èÁÂ »ý¼º
 	public void addAcClient(Account_ClientVO clientVO) {
 		ss.insert("deposit.addAcClient",clientVO);
@@ -66,5 +69,5 @@ public class DepositDao {
 	public void delAccount(int ac_code) {
 		ss.delete("deposit.delAccount",ac_code);
 	}
-	
+
 }

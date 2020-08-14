@@ -177,6 +177,7 @@
 					success: function (data) {
 								getarr=data;
 								console.log(typeof(data))
+								//console.log(data)
 								
 								data.forEach(function(item, index) {
 									add +="<option value="+item.mem_code+">";

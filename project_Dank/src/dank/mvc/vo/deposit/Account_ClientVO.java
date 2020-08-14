@@ -9,6 +9,7 @@ public class Account_ClientVO {
 	private ProductVO productVO;
 
 	public int getAc_code() {
+
 		return ac_code;
 	}
 

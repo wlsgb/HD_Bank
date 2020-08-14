@@ -21,6 +21,7 @@
 					</div>
 				</div>
 				<!--대출 신청   -->
+				
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -36,228 +37,23 @@
 												 
 												<h3>첨부 파일</h3>
 												
-												<input type="hidden" value="${vo.lc_num }" name="lc_num" id="lc_num"> 
+												<input type="hidden" value="${list[0].lc_num }" name="lc_num" id="lc_num"> 
 												
-												<c:if test="${vo.file1 ne null }">
-												<div class="form-group row">
-													<label for="file1" class="col-4" >주민등록등본</label>
-													<div class="col-8">
-														<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file1} "/>">
-															${vo.file1}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-													<c:if test="${vo.file2 ne null }">
-												<div class="form-group row">
-													<label for="file2" class="col-4">주민등록초본</label>
-													<div class="col-8">
-														<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file2 }"/>">
-															${vo.file2 }
+												<c:forEach items="${list }" var="e">
+													<c:if test="${e.lf_oriname ne null}">
+														<div class="form-group row">
+															<label for="file1" class="col-4" >${e.lf_name }</label>
+															<div class="col-8">
+																<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${e.lc_num }&fileName=${e.lf_oriname} "/>">
+															${e.lf_oriname}
 														</a>
 													</div>
 												</div>
 													</c:if>
-			
-												<c:if test="${vo.file3 ne null }">
-												<div class="form-group row">
-													<label for="file3" class="col-4" >소득금액증명원</label>
-													<div class="col-8">
-														<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file3} "/>">
-															${vo.file3}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file4 ne null }">
-												<div class="form-group row">
-													<label for="file4" class="col-4">사실확인증명원</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file4} "/>">
-															${vo.file4}
-														</a>
-													</div>
-												</div>
-												</c:if>
+													
+												</c:forEach>
 												
 												
-												<c:if test="${vo.file5 ne null }">
-												<div class="form-group row">
-													<label for="file5" class="col-4">건강보험납부료확인서</label>
-													<div class="col-8">
-														<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file5} "/>">
-															${vo.file5} 
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file6 ne null }">
-												<div class="form-group row">
-													<label for="file6" class="col-4">건강보험자격득실확인서</label>
-													<div class="col-8">
-														<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file6} "/>">
-															${vo.file6}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file7 ne null }">
-												<div class="form-group row">
-													<label for="file7" class="col-4">근로소득원천징수영수증</label>
-													<div class="col-8">
-														<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file7} "/>">
-															${vo.file7}
-														</a>
-
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file8 ne null }">
-												<div class="form-group row">
-													<label for="file8" class="col-4">사업자등록증</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file8} "/>">
-															${vo.file8}
-														</a>
-
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file9 ne null }">
-												<div class="form-group row">
-													<label for="file9" class="col-4">배우자주민등록등본</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file9} "/>">
-															${vo.file9}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file10 ne null }">
-												<div class="form-group row">
-													<label for="file10" class="col-4">배우자주민등록초본</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file10} "/>">
-															${vo.file10}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file11 ne null }">
-												<div class="form-group row">
-													<label for="file11" class="col-4">배우자소득금액증명원</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file11} "/>">
-															${vo.file11}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file12 ne null }">
-												<div class="form-group row">
-													<label for="file12" class="col-4">배우자사실확인증명원</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file12} "/>">
-															${vo.file12}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file13 ne null }">
-												<div class="form-group row">
-													<label for="file13" class="col-4">배우자건강보험납부료확인서</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file13} "/>">
-															${vo.file13}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file14 ne null }">
-												<div class="form-group row">
-													<label for="file14" class="col-4">배우자건강보험자격득실확인서</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file14} "/>">
-															${vo.file14}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												<c:if test="${vo.file15 ne null }">
-												<div class="form-group row">
-													<label for="file15" class="col-4">배우자근로소득원천징수영수증</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file15} "/>">
-															${vo.file15}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file16 ne null }">
-												<div class="form-group row">
-													<label for="file16" class="col-4">배우자사업자등록증</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file16} "/>">
-															${vo.file16}
-														</a>
-													</div>
-												</div>
-											</c:if>
-											
-											<c:if test="${vo.file17 ne null }">
-												<div class="form-group row">
-													<label for="file17" class="col-4">기타1</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file17} "/>">
-															${vo.file17}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file18 ne null }">
-												<div class="form-group row">
-													<label for="file18" class="col-4">기타2</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file18} "/>">
-															${vo.file18}
-														</a>
-													</div>
-												</div>
-												</c:if>
-												
-												<c:if test="${vo.file19 ne null }">
-												<div class="form-group row">
-													<label for="file19" class="col-4">기타3</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file19} "/>">
-															${vo.file19}
-														</a>
-													</div>
-												</div>
-											</c:if>
-											<c:if test="${vo.file20 ne null }">
-												<div class="form-group row">
-													<label for="file20" class="col-4">기타4</label>
-													<div class="col-8">
-													<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${vo.lc_num }&fileName=${vo.file20} "/>">
-															${vo.file20}
-														</a>
-													</div>
-												</div>
-												</c:if>
 												
 												
 											</div>
@@ -270,7 +66,8 @@
 			
 						</div>
 					
-			<p class="text-center"><input type="button" id="refile" class="btn btn-info" value="다시제출하기"></p>
+			<p class="text-center"><input type="button" class="btn btn-info refile" value="다시제출하기"></p>
+			
 			</div>
 		
 			
@@ -278,8 +75,8 @@
 
 			
 			<script>
-		$('#refile').click(function() {
-			location="checkrefile?lc_num="+$('#lc_num').val();
-		})
+			$('.refile').click(function() {
+				location='checkfile?lc_num='+$('#lc_num').val();
+			})
 	</script>
 
