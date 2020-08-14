@@ -35,7 +35,7 @@
 									<div class="card-title">해지</div>
 								</div>
 								<div class="card-body" style="margin-bottom: 20px; margin-top: 0">
-								<form action="cancel_check" method="post">
+								<form action="cancel_check" method="post" id="f">
 									<div class="row">
 										<div class="col-md-10 col-lg-10">
 											<table class="table">
@@ -56,14 +56,17 @@
 													<c:when test="${account.saving.sav_code != 0 }">
 														<tr>
 															<td style="border-style: none; width: 60px; ">▶</td >
-															<td  style="border-style: none; width: 140px;">${account.saving.sav_name}</td>
-															<td style="width: 400px; border-style: none;">계좌번호 : ${account.ac_num}</td>
+															<td colspan="2" style="border-style: none; width: 140px; font-size: 20px;">${account.saving.sav_name}</td>
+														</tr>
+														<tr>
+															<td style="border-style: none;"></td>
+															<td style="border-style: none;" >계좌번호 :</td>
+															<td style="border-style: none;">${account.ac_num}</td>
 														</tr>
 														<tr>
 															<td style="border-style: none;"></td>
 															<td style="border-style: none;" >가입날짜 :</td>
 															<td style="border-style: none;">${account.ac_start_date}</td>
-															
 														</tr>
 														<tr >
 															<td style="border-style: none;"></td>
@@ -75,7 +78,11 @@
 														<tr>
 															<td style="border-style: none; width: 60px; ">▶</td >
 															<td  style="border-style: none; width: 140px;">${account.ins.ins_name}</td>
-															<td style="width: 400px; border-style: none;">계좌번호 : ${account.ac_num}</td>
+														</tr>
+														<tr>
+															<td style="border-style: none;"></td>
+															<td style="border-style: none;" >계좌번호 :</td>
+															<td style="border-style: none;">${account.ac_num}</td>
 														</tr>
 														<tr>
 															<td style="border-style: none;"></td>
@@ -86,7 +93,7 @@
 														<tr >
 															<td style="border-style: none;"></td>
 															<td style="border-style: none;">잔액 : </td>
-															<td style="border-style: none;">${account.ac_balance}</td>
+															<td style="border-style: none;">￦ ${account.ac_balance}</td>
 														</tr>
 													</c:when>
 												</c:choose>
@@ -94,19 +101,15 @@
 											</table>
 									
 									<hr/>
-									
 									<div class="form-inline" style="margin-left: 10%;">
 										<span>입금 계좌번호</span>
-										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="계좌번호를 입력해주세요"/>
-									</div>
-									<div class="form-inline" style="margin-left: 10%;">
-										<span>계정 비밀번호</span>
-										<input type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="비밀번호를 입력해주세요"/>
+										<input id="take_ac" name="take_ac" type="text" class="form-control" style="width: 400px; margin-left: 30px;" placeholder="계좌번호를 입력해주세요" max="10"/>
 									</div>
 									<div style="margin-left: 60%; margin-top: 30px;" >
 										<input type="button" class="btn btn-info" value="취소" id="cancel">
 										<input type="hidden" id="ac_code" name="ac_code" value="${account.ac_code }">
-										<input type="submit" class="btn btn-info" value="해지하기">
+										<input type="hidden" id="ac_num" name="ac_num" value="${account.ac_num }">
+										<input type="button" class="btn btn-info" value="해지하기" id="next">
 									</div>
 								</div>
 							</div>
@@ -126,5 +129,34 @@
 	<script>
 		$('#cancel').click(function() {
 			location='index';
+<<<<<<< HEAD
+=======
+		});
+		$("#next").click(function() {
+			var take_ac = $("#take_ac").val();
+			var ac_num = $("#ac_num").val();
+			
+			if(take_ac === ac_num){
+				alert("다른 계좌번호를 입력해주세요.");
+				$('#take_ac').focus();
+			}else if(take_ac === ''){
+				alert("입금하실 계좌번호를 입력해주세요.");
+		    }else {
+		    	$.ajax({
+					url:'acNumChk?take_ac='+take_ac,
+					success:function(data){
+						var mem_name=data;
+ 						if(mem_name === ""){
+							alert("계좌번호를 확인 후 입력해주세요");
+							$('#take_ac').focus();
+						}else{
+							alert(mem_name+"님의 계좌: "+take_ac+" 으로 이체합니다.")
+							f.submit();
+						}
+					}
+				});
+			}
+			
+>>>>>>> refs/remotes/origin/backupmaster
 		});
 	</script>

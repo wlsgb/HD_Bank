@@ -190,7 +190,7 @@
 							                       where wit_code=(select max(wit_code) 
 							                                          from withdraw))
 			)
-	  	
+	  	 
 	  	</insert>
 		<!--5잔액 업데이트 -->
 		<update id="witwitupbalance" parameterType="hashMap">
@@ -218,7 +218,7 @@
 		<!--if2.입금계좌B체크 -->
 			<!-- 	1과동일 -->
 		<!--if3.출금계좌A잔고체크 -->
-		<select id="trbalchk" parameterType="hashMap" resultType="String">
+		<select id="trbalchk" parameterType="trdto" resultType="String">
 			select a.ac_balance ac_balance
 		    from account a
 		    	, account_client ac
@@ -230,11 +230,11 @@
 		<insert id="trpluswit" parameterType="String">
 			insert into withdraw values(WITHDRAW_SEQ.nextval,#{wit_money},sysdate)
 	    </insert>
-	    <insert id="trpluswittr" parameterType="hashMap">
+	    <insert id="trpluswittr" parameterType="trdto">
 	    	insert into transfer values(transfer_seq.nextval,#{at_dps_ac},#{at_set_mony},sysdate)
 	    </insert>
 		<!--tr5.출금계좌A입출내역작성,(내통장에표시할거표시) -->
-		<insert id="trplusspwit" parameterType="hashMap">
+		<insert id="trplusspwit" parameterType="trdto">
 			insert into sav_process values(sav_process_seq.nextval
 	        ,(select a.ac_code ac_code
 	        from account a
@@ -260,7 +260,7 @@
 	        )
 		</insert>
 		<!--tr6.출금계좌A통장잔고 업데이트 -->
-		<update id="trtrwitupbal" parameterType="hashMap">
+		<update id="trtrwitupbal" parameterType="trdto">
 		 	update account 
 	        set ac_balance=(select sp_balance 
 	                        from sav_process 
@@ -278,11 +278,11 @@
 		<select id="trplusdep" parameterType="String">
 			insert into deposit values(deposit_seq.nextval,#{dep_money},sysdate)
 		</select>
-		<select id="trplusdeptr" parameterType="hashMap">
+		<select id="trplusdeptr" parameterType="trdto">
 			insert into transfer values(transfer_seq.nextval,#{at_dps_ac},#{at_set_mony},sysdate)
 		</select>
 		<!--tr8.입금계좌B 입출내역작성(받는분통장에 표시할거 표시) -->
-		<insert id="trplusspdep" parameterType="hashMap">
+		<insert id="trplusspdep" parameterType="trdto">
 			insert into sav_process values(sav_process_seq.nextval
 		    ,(select a.ac_code ac_code
 		    from account a
@@ -427,8 +427,9 @@
 			, wit_money
 			, balance
 			, name
+            ,sp_code
 			from(
-			select rownum r_num, dealdate, dep_money, wit_money, balance, name
+			select rownum r_num, dealdate, dep_money, wit_money, balance, name,sp_code
 			from(
 			select COALESCE(to_char(d.dep_date,'YYYY-MM-DD HH24:MI')
 			,to_char(w.wit_date,'YYYY-MM-DD HH24:MI')) dealdate
@@ -436,6 +437,7 @@
 			,w.wit_money wit_money
 			,sp.sp_balance balance
 			, sp.sp_name name
+            ,sp.sp_code sp_code
 			from account a
 			,account_client ac 
 			,sav_process sp
@@ -450,7 +452,7 @@
 									   and ac.ac_code=a.ac_code) 
 			  and sp.ac_code=(select a.ac_code 
 			  					from account a, account ac 
-			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} 
+			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code}
 			  							and a.ac_code = ac.ac_code) 
 			  and d.dep_code(+)=sp.dep_code
 			   and w.wit_code(+) = sp.wit_code
@@ -461,15 +463,16 @@
 	  </select>
 	  <!--******조회시 	거래내역 가져오기 ,숫자,거래날자,입금액,출금액,잔액,이름 -->
 	  <select id="achistory_slct" parameterType="hashMap" resultType="achvo">
-			  select 
+	 	 select 
 			r_num
 			, dealdate
 			, dep_money
 			, wit_money
 			, balance
 			, name
+            ,sp_code
 			from(
-			select rownum r_num, dealdate, dep_money, wit_money, balance, name
+			select rownum r_num, dealdate, dep_money, wit_money, balance, name,sp_code
 			from(
 			select COALESCE(to_char(d.dep_date,'YYYY-MM-DD HH24:MI')
 			,to_char(w.wit_date,'YYYY-MM-DD HH24:MI')) dealdate
@@ -477,6 +480,7 @@
 			,w.wit_money wit_money
 			,sp.sp_balance balance
 			, sp.sp_name name
+            , sp.sp_code sp_code
 			from account a
 			,account_client ac 
 			,sav_process sp
@@ -490,8 +494,8 @@
 									  and ac.mem_code=#{mem_code}
 									   and ac.ac_code=a.ac_code) 
 			  and sp.ac_code=(select a.ac_code 
-			  					from account a, account ac 
-			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} 
+			  					from account a, account_client ac 
+			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code}  
 			  							and a.ac_code = ac.ac_code) 
 			  and d.dep_code(+)=sp.dep_code
 			   and w.wit_code(+) = sp.wit_code
@@ -499,7 +503,38 @@
 			)
 			)
 			where r_num between #{start} and #{end}  and substr(dealdate,0,10) between #{startdate} and #{lastdate}
+
 	  </select>
+<!-- 	  모달창 거래구분위해서 -->
+	<select id="classification" parameterType="String" resultType="smvo">
+		select dep_code,wit_code,at_code 
+		from sav_process
+		where sp_code =#{sp_code}
+	</select>
+<!--  모달계좌이체버젼 -->
+	<select id="modal_tr" parameterType="String" resultType="smvo">
+	select tr.at_date at_date,sp.sp_name sp_name,tr.at_dps_ac at_dps_ac,tr.at_set_mony at_set_mony
+	from sav_process sp,transfer tr
+	where sp.at_code = tr.at_code and sp.sp_code=#{sp_code}
+	</select>
+<!-- 	모달입금버전 -->
+	<select id="modal_dep" parameterType="String" resultType="smvo">
+	select dep.dep_date dep_date,sp.sp_name sp_name,dep.dep_money dep_money
+	from sav_process sp,deposit dep
+	where sp.dep_code=dep.dep_code and sp.sp_code=#{sp_code}
+	</select>
+<!-- 	모달출금버전 -->
+	<select id="modal_wit" parameterType="String" resultType="smvo"> 
+	select wit.wit_date wit_date,sp.sp_name sp_name,wit.wit_money wit_money
+	from sav_process sp,withdraw wit
+	where sp.wit_code=wit.wit_code and sp.sp_code =#{sp_code}
+	</select>
+	  
+	  
+	  
+	  
+	  
+	  
 		<!--페이징처리를 위한 총 갯수 가져오기 -->
 	  <select id="totalcnt" resultType="int" parameterType="hashMap">
 		  select count(*)

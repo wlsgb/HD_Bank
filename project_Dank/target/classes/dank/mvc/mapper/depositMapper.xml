@@ -120,12 +120,17 @@
 		</if>
 	</select>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	<!-- 계좌 생성 -->
 =======
 	
 	
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+	<!-- 계좌 생성 -->
+>>>>>>> refs/remotes/origin/backupmaster
 	<insert id="addAccount" parameterType="acvo">
 		insert into account
 		values(account_seq.nextVal,#{ac_num},#{ac_pwd},0,#{ac_name},sysdate,null)
@@ -135,9 +140,11 @@
 		insert into
 		account_client values(account_seq.currval,#{mem_code},#{pro_code})
 	</insert>
-	
+
+	<!-- 계좌 삭제 -->
 	<delete id="delAccount" parameterType="int">
-		delete from account where ac_code=#{ac_code}
+		delete from account where
+		ac_code=#{ac_code}
 	</delete>
 
 	<!-- 계좌 삭제 -->

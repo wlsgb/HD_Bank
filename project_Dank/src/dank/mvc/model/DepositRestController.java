@@ -22,10 +22,15 @@ import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.Sav_process_forModalVO;
 import dank.mvc.vo.deposit.SavingVO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import dank.mvc.vo.deposit.Shared_savingVO;
 import dank.mvc.vo.deposit.TransferDTO;
 =======
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+import dank.mvc.vo.deposit.Shared_savingVO;
+import dank.mvc.vo.deposit.TransferDTO;
+>>>>>>> refs/remotes/origin/backupmaster
 
 @RestController
 public class DepositRestController {
@@ -117,6 +122,7 @@ public class DepositRestController {
 		}
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		TransferDTO my_tr = new TransferDTO();
 		my_tr.setAc_num(myac);
 		my_tr.setMem_code(memcode);
@@ -159,6 +165,24 @@ public class DepositRestController {
 		mapyoursp.put("mem_code",youracmem);
 		mapyoursp.put("sp_name", youracwrite);
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		TransferDTO my_tr = new TransferDTO();
+		my_tr.setAc_num(myac);
+		my_tr.setMem_code(memcode);
+		my_tr.setAt_dps_ac(yourac);
+		my_tr.setSp_name(myacwrite);
+		my_tr.setAt_set_mony(trmoney);
+		my_tr.setAta_code(atacode);
+
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(yourac);
+		your_tr.setMem_code(youracmem);
+		your_tr.setAt_dps_ac(myac);
+		your_tr.setSp_name(youracmem);
+		your_tr.setAt_set_mony(trmoney);
+		your_tr.setAta_code(atacode);
+
+>>>>>>> refs/remotes/origin/backupmaster
 		
 		
 		

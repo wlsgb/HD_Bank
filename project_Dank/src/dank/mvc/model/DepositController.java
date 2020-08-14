@@ -142,6 +142,7 @@ public class DepositController {
 		return "deposit_new/new_success";
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	// 예금-해지
 	@RequestMapping(value = "/cancel")
@@ -155,6 +156,14 @@ public class DepositController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) { //세션 정보가 존재하지않는다면 로그인페이지로
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+	// 예금-해지
+	@RequestMapping(value = "/cancel")
+	public String depositecancel(HttpSession session, Model m) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if (member == null) { // 세션 정보가 존재하지않는다면 로그인페이지로
+>>>>>>> refs/remotes/origin/backupmaster
 			session.setAttribute("pageName", "cancle");
 			return "login/login";
 		}
@@ -164,12 +173,17 @@ public class DepositController {
 		List<AccountVO> savlist = new ArrayList<AccountVO>();
 		List<AccountVO> inslist = new ArrayList<AccountVO>();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (AccountVO e : aclist) {
 			if (e.getSaving().getSav_code() != 0) {
 =======
 		for(AccountVO e :aclist) {
 			if(e.getSaving().getSav_code() != 0) {
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		for (AccountVO e : aclist) {
+			if (e.getSaving().getSav_code() != 0) {
+>>>>>>> refs/remotes/origin/backupmaster
 				savlist.add(e);
 			} else if (e.getIns().getIns_code() != 0) {
 				inslist.add(e);
@@ -179,12 +193,17 @@ public class DepositController {
 		m.addAttribute("inslist", inslist);
 		m.addAttribute("aclist", aclist);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+>>>>>>> refs/remotes/origin/backupmaster
 		return "deposit_new/cancel";
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	// 계좌 삭제 신청
@@ -269,23 +288,70 @@ public class DepositController {
 	public String cancel_input_info(int ac_code,Model m) {
 		System.out.println("ac_code"+ac_code);
 		AccountVO account= depositDao.getAcdetail(ac_code);
+=======
+
+	// 계좌 삭제 신청
+	@RequestMapping(value = "/cancel_input_info")
+	public String cancel_input_info(HttpSession session, int ac_code, Model m) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if (member == null) { // 세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+
+		AccountVO account = depositDao.getAcdetail(ac_code);
+>>>>>>> refs/remotes/origin/backupmaster
 		m.addAttribute("account", account);
+
 		return "deposit_new/cancel_input_info";
 	}
-	//계좌 삭제 신청 확인
+
+	// 계좌 삭제 신청 확인
 	@RequestMapping(value = "/cancel_check")
-	public String cancel_check(int ac_code,Model m) {
-		System.out.println("ac_code"+ac_code);
-		AccountVO account= depositDao.getAcdetail(ac_code);
+	public String cancel_check(HttpSession session, int ac_code, String take_ac, Model m) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if (member == null) { // 세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+
+		AccountVO account = depositDao.getAcdetail(ac_code);
 		m.addAttribute("account", account);
+		m.addAttribute("take_ac", take_ac);
 		return "deposit_new/cancel_check";
 	}
-	//계좌 삭제
+
+	// 계좌 삭제
 	@RequestMapping(value = { "/cancelComplete" })
-	public String cancelComplete(int ac_code) {
-		depositDao.delAccount(ac_code);
+	public String cancelComplete(HttpSession session, int ac_code, int money, String ac_num, String take_ac) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if (member == null) { // 세션 정보가 존재하지않는다면 로그인페이지로
+			session.setAttribute("pageName", "cancle");
+			return "login/login";
+		}
+
+		MemberVO send = depositDao.getMember(ac_num);
+		MemberVO receive = depositDao.getMember(take_ac);
+
+		TransferDTO my_tr = new TransferDTO();
+		my_tr.setAc_num(ac_num);
+		my_tr.setMem_code(String.valueOf(send.getMem_code()));
+		my_tr.setAt_dps_ac(take_ac);
+		my_tr.setSp_name(send.getMem_name());
+		my_tr.setAt_set_mony(String.valueOf(money));
+
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(take_ac);
+		your_tr.setMem_code(String.valueOf(receive.getMem_code()));
+		your_tr.setAt_dps_ac(ac_num);
+		your_tr.setSp_name(receive.getMem_name());
+		your_tr.setAt_set_mony(String.valueOf(money));
+
+		depositService.cancelComplete(ac_code, my_tr, your_tr);
 		return "deposit_new/cancel_success";
+
 	}
+<<<<<<< HEAD
 //	@RequestMapping(value = "/share_new_req")
 //	public String share_new_req() {
 //		return "deposit/share_new_req";
@@ -312,6 +378,24 @@ public class DepositController {
 //	}
 	
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+	@RequestMapping(value = { "/deposite_cancle_check_shareAccount" })
+	public String deposite_cancle_check_shareAccount() {
+		return "deposit_new/deposite_cancle_check_shareAccount";
+	}
+
+	@RequestMapping(value = { "/share_cancel_req" })
+	public String share_cancel_req() {
+		return "deposit_new/share_cancel_req";
+	}
+
+	@RequestMapping(value = { "/share_cancel" })
+	public String share_cancel() {
+		return "deposit_new/share_cancel";
+	}
+
+>>>>>>> refs/remotes/origin/backupmaster
 	///////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////
 
@@ -333,6 +417,7 @@ public class DepositController {
 		}
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 		
@@ -340,10 +425,16 @@ public class DepositController {
 		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 
+<<<<<<< HEAD
 		mav.addObject("aclist",aclist);
 		mav.setViewName("deposit/deposite_inquire");
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+>>>>>>> refs/remotes/origin/backupmaster
 		
 		//여기서 부터 공유계좌 조회를 위한 코드(담당자:이현기)
 		for (AccountVO e : aclist) {
@@ -377,6 +468,7 @@ public class DepositController {
 		ModelAndView mav = new ModelAndView();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String money = "10000";
 
 		if (bangkingdao.depcheckac(ac_num) >= 1) {
@@ -406,6 +498,20 @@ public class DepositController {
 		paramapbal.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		bangkingservice.depositprocess(money, paramapsp, paramapbal);
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		String money = "10000";
+
+		if (bangkingdao.depcheckac(ac_num) >= 1) {
+			Map<String, String> paramapsp = new HashMap<String, String>();
+			paramapsp.put("ac_num", ac_num);
+			paramapsp.put("sp_name", "입금테스트용");
+			paramapsp.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+			Map<String, String> paramapbal = new HashMap<String, String>();
+			paramapbal.put("ac_num", ac_num);
+			paramapbal.put("dep_money", money);
+			paramapbal.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+			bangkingservice.depositprocess(money, paramapsp, paramapbal);
+>>>>>>> refs/remotes/origin/backupmaster
 		}
 
 		mav.setViewName("redirect:inquire");
@@ -418,6 +524,7 @@ public class DepositController {
 		// int acnum = Integer.parseInt(ac_num);
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		String money = "10000";
@@ -432,6 +539,12 @@ public class DepositController {
 		
 		if(bangkingdao.witcheckac(ac_num)>=1) {
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+		String money = "10000";
+
+		if (bangkingdao.witcheckac(ac_num) >= 1) {
+>>>>>>> refs/remotes/origin/backupmaster
 			Map<String, String> paramckbal = new HashMap<String, String>();
 			paramckbal.put("ac_num", ac_num);
 			paramckbal.put("mem_code", String.valueOf(sessionmem.getMem_code()));
@@ -452,7 +565,22 @@ public class DepositController {
 		mav.setViewName("redirect:inquire");
 		return mav;
 	}
+<<<<<<< HEAD
+=======
 
+	// 계좌이체 진행
+	@RequestMapping(value = "/transfer_process")
+	public ModelAndView transferprocess(HttpSession session, @RequestParam(value = "myac") String myac,
+			@RequestParam(value = "yourac") String yourac, @RequestParam(value = "youracmem") String youracmem,
+			@RequestParam(value = "trmoney") String trmoney,
+			@RequestParam(value = "youracwrite", defaultValue = "이체로들어옴") String youracwrite,
+			@RequestParam(value = "myacwrite", defaultValue = "이체로빠짐") String myacwrite
+
+	) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+>>>>>>> refs/remotes/origin/backupmaster
+
+<<<<<<< HEAD
 	// 계좌이체 진행
 	@RequestMapping(value = "/transfer_process")
 	public ModelAndView transferprocess(HttpSession session, @RequestParam(value = "myac") String myac,
@@ -508,7 +636,16 @@ public class DepositController {
 			
 			if(bangkingdao.trtrAcChk(yourac) >=1) {
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		TransferDTO my_tr = new TransferDTO();
+		my_tr.setAc_num(myac);
+		my_tr.setMem_code(String.valueOf(sessionmem.getMem_code()));
+		my_tr.setAt_dps_ac(yourac);
+		my_tr.setSp_name(myacwrite);
+		my_tr.setAt_set_mony(trmoney);
+>>>>>>> refs/remotes/origin/backupmaster
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		TransferDTO your_tr = new TransferDTO();
 		your_tr.setAc_num(yourac);
@@ -530,6 +667,22 @@ public class DepositController {
 				if(Long.parseLong(bangkingdao.trbalChk(mapmy)) >=Long.parseLong(trmoney)) {
 					bangkingservice.transferprocess(trmoney, mapmy, mapmysp, mapyour, mapyoursp);
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		TransferDTO your_tr = new TransferDTO();
+		your_tr.setAc_num(yourac);
+		your_tr.setMem_code(youracmem);
+		your_tr.setAt_dps_ac(myac);
+		your_tr.setSp_name(youracmem);
+		your_tr.setAt_set_mony(trmoney);
+
+
+		if (bangkingdao.trtrAcChk(myac) >= 1) {
+
+			if (bangkingdao.trtrAcChk(yourac) >= 1) {
+
+				if (Long.parseLong(bangkingdao.trbalChk(my_tr)) >= Long.parseLong(trmoney)) {
+					bangkingservice.transferprocess(my_tr, your_tr);
+>>>>>>> refs/remotes/origin/backupmaster
 					System.out.println("이체실행댐");
 				}
 			}
@@ -548,15 +701,20 @@ public class DepositController {
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+>>>>>>> refs/remotes/origin/backupmaster
 		Map<String, String> historymap = new HashMap<String, String>();
 		historymap.put("ac_num", ac_num);
 		historymap.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 
 		int total = bangkingdao.gettotalcnt(historymap);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pvo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 
@@ -565,6 +723,10 @@ public class DepositController {
 		
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		pvo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+>>>>>>> refs/remotes/origin/backupmaster
 		historymap.put("start", String.valueOf(pvo.getStart()));
 		historymap.put("end", String.valueOf(pvo.getEnd()));
 
@@ -575,13 +737,23 @@ public class DepositController {
 <<<<<<< HEAD
 =======
 		
+<<<<<<< HEAD
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+		for(AccountHistoryVO e: history) {
+			System.out.println(e.getSp_code());
+			System.out.println(e.getName());
+		}
+>>>>>>> refs/remotes/origin/backupmaster
 		
+<<<<<<< HEAD
 		for(AccountHistoryVO e: history) {
 			System.out.println(e.getSp_code());
 			System.out.println(e.getName());
 		}
 		
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_inquire_detail");
@@ -590,6 +762,7 @@ public class DepositController {
 		mav.addObject("ac_num", ac_num);
 		return mav;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	// 계좌내역상세조회페이지2
@@ -668,6 +841,41 @@ public class DepositController {
 		}
 	//이체 페이지로 이동
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+	// 계좌내역상세조회페이지2
+	@RequestMapping(value = { "/inquire_detail_slct" })
+	public ModelAndView inqure_detail_slctPage(HttpSession session, PageVO pvo,
+			@RequestParam(value = "ac_num") String ac_num, @RequestParam(value = "startdate") String startdate,
+			@RequestParam(value = "lastdate") String lastdate,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+			@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		System.out.println("ac_num은 :" + ac_num);
+		Map<String, String> historymap = new HashMap<String, String>();
+		historymap.put("ac_num", ac_num);
+		historymap.put("mem_code", String.valueOf(sessionmem.getMem_code()));
+
+		int total = bangkingdao.gettotalcnt(historymap);
+		pvo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		historymap.put("start", String.valueOf(pvo.getStart()));
+		historymap.put("end", String.valueOf(pvo.getEnd()));
+		historymap.put("startdate", startdate);
+		historymap.put("lastdate", lastdate);
+
+		List<AccountHistoryVO> history = bangkingdao.gethistory_slct(historymap);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_inquire_detail");
+		mav.addObject("history", history);
+		mav.addObject("paging", pvo);
+		mav.addObject("ac_num", ac_num);
+		return mav;
+	}
+
+	// 이체 페이지로 이동
+>>>>>>> refs/remotes/origin/backupmaster
 	@RequestMapping(value = { "/transfer" })
 	public ModelAndView transferPage(HttpSession session,
 			@RequestParam(value = "ac_num", defaultValue = "0") String ac_num) {
@@ -678,11 +886,14 @@ public class DepositController {
 			return mav;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 
@@ -693,12 +904,15 @@ public class DepositController {
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		
 
 		
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 		mav.setViewName("deposit/deposite_transfer");
 		mav.addObject("myaclist", myaclist);
 
@@ -713,6 +927,42 @@ public class DepositController {
 		mav.setViewName("deposit/deposite_transfer_auto");
 		mav.addObject("aclist", aclist);
 
+<<<<<<< HEAD
+		return mav;
+	}
+
+	@RequestMapping(value = { "/transfer_timereset" })
+	public ModelAndView transferautotimeresetPage(HttpSession session,
+			@RequestParam(value = "restartdate") String restartdate, @RequestParam(value = "retime") String retime,
+			@RequestParam(value = "ata_code") String ata_code) {
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		Map<String, String> atresetparam = new HashMap<String, String>();
+		atresetparam.put("restartdate", restartdate);
+		atresetparam.put("retime", retime);
+		atresetparam.put("ata_code", ata_code);
+
+		bangkingdao.atreset(atresetparam);
+
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist", aclist);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/transfer_auto_cancle")
+	public ModelAndView transferautoacancle(HttpSession session, @RequestParam(value = "ata_code") String ata_code) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+
+		bangkingdao.atdelete(ata_code);
+		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
+
+		mav.setViewName("deposit/deposite_transfer_auto");
+		mav.addObject("aclist", aclist);
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 		return mav;
 	}
 
@@ -748,45 +998,6 @@ public class DepositController {
 		mav.addObject("aclist", aclist);
 		return mav;
 	}
-	
-	@RequestMapping(value = { "/transfer_timereset" })
-	public ModelAndView transferautotimeresetPage(
-			HttpSession session
-			,@RequestParam(value = "restartdate") String restartdate
-			,@RequestParam(value = "retime") String retime
-			,@RequestParam(value = "ata_code") String ata_code
-			) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		Map<String, String> atresetparam = new HashMap<String, String>();
-		atresetparam.put("restartdate", restartdate);
-		atresetparam.put("retime", retime);
-		atresetparam.put("ata_code", ata_code);
-	
-		bangkingdao.atreset(atresetparam);
-		
-		
-		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("deposit/deposite_transfer_auto");
-		mav.addObject("aclist",aclist);
-		
-		return mav;
-	}
-	
-	@RequestMapping(value = "/transfer_auto_cancle")
-	public ModelAndView transferautoacancle(HttpSession session
-			,@RequestParam(value = "ata_code") String ata_code
-			) {
-		ModelAndView mav = new ModelAndView();
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
-		
-		bangkingdao.atdelete(ata_code);
-		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
-		
-		mav.setViewName("deposit/deposite_transfer_auto");
-		mav.addObject("aclist",aclist);
-		return mav;
-	}
 
 	@RequestMapping(value = { "/transfer_auto_apply" })
 	public ModelAndView transferautoapplyPage(HttpSession session, String ac_num) {
@@ -798,11 +1009,15 @@ public class DepositController {
 		getmyaclistwhentr.put("ac_num", ac_num);
 		List<String> myaclist = bangkingdao.getmyaclistwhentr(getmyaclistwhentr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 	
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+>>>>>>> refs/remotes/origin/backupmaster
 		mav.setViewName("deposit/deposite_transfer_auto_apply");
 		mav.addObject("myaclist", myaclist);
 		return mav;
@@ -828,14 +1043,20 @@ public class DepositController {
 		atapplyvo.setAta_check(Integer.parseInt(atacheck));
 		atapplyvo.setAta_ing(Integer.parseInt(ataing));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 	
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 
+<<<<<<< HEAD
 	
 		
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 		bangkingdao.insertatapply(atapplyvo);
 
 		ModelAndView mav = new ModelAndView();
@@ -854,11 +1075,16 @@ public class DepositController {
 		atlistparam.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		atlistparam.put("ac_num", ac_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 		
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+>>>>>>> refs/remotes/origin/backupmaster
 		List<Map<String, String>> atlist = bangkingdao.atlist(atlistparam);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		mav.addObject("atlist", atlist);
@@ -866,9 +1092,14 @@ public class DepositController {
 		
 		mav.addObject("atlist",atlist);
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+
+		mav.addObject("atlist", atlist);
+>>>>>>> refs/remotes/origin/backupmaster
 		return mav;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 	
@@ -886,6 +1117,8 @@ public class DepositController {
 	}
 	
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+>>>>>>> refs/remotes/origin/backupmaster
 	@RequestMapping(value = "/analysis")
 	public String viewAnalysis() {
 		return "deposit/analysis";

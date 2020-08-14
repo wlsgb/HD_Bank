@@ -235,6 +235,7 @@
 			
 			<script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$(document).on("click", ".modalclick", function () {
 			     var myId = $(this).data('id');
 			     //$(".modal-body #testbody").html(myId)
@@ -292,6 +293,44 @@
 
 // })
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+			$(document).on("click", ".modalclick", function () {
+			     var myId = $(this).data('id');
+			     //$(".modal-body #testbody").html(myId)
+			     // As pointed out in comments, 
+			     // it is unnecessary to have to manually call the modal.
+			     // $('#addBookDialog').modal('show');
+			     
+			     $.ajax({
+			 			url:'sp_codeis?sp_code='+myId,
+			 			success:function(data){
+			 				//console.log(data)
+			 				
+			 				if(data[0].classified==='이체거래'){
+			 					$('#modal1').html(data[0].classified)
+				 				$('#modal2').html(data[0].at_date)
+				 				$('#modal3').html(data[0].sp_name)
+				 				$('#modal4').html(data[0].at_set_mony)
+				 				$('#modal5').html(data[0].at_dps_ac)
+			 				}else if(data[0].classified==='입금거래'){
+			 					$('#modal1').html(data[0].classified)
+				 				$('#modal2').html(data[0].dep_date)
+				 				$('#modal3').html(data[0].sp_name)
+				 				$('#modal4').html(data[0].dep_money)
+				 				$('#modal5').html('-')
+			 				}else{
+			 					$('#modal1').html(data[0].classified)
+				 				$('#modal2').html(data[0].wit_date)
+				 				$('#modal3').html(data[0].sp_name)
+				 				$('#modal4').html(data[0].wit_money)
+				 				$('#modal5').html('-')
+			 				}
+			 				
+			 			}		
+			     
+			 		})
+			});
+>>>>>>> refs/remotes/origin/backupmaster
 
 
 	

@@ -94,6 +94,7 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!-- 												<form action="deposit" method="post" -->
 <!-- 													style="display: inline-block;"> -->
 <%-- 													<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
@@ -146,6 +147,11 @@
 								</table>
 								</div>
 >>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
+=======
+<!-- 												<form action="deposit" method="post" -->
+<!-- 													style="display: inline-block;"> -->
+<%-- 													<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+>>>>>>> refs/remotes/origin/backupmaster
 
 <%-- 													<input type="submit" value="ют╠щ" id="depbtn${i.index}" /> --%>
 <%-- 												</form> <c:choose> --%>

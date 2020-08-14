@@ -55,13 +55,14 @@ public class SecurityController {
 		return "security/security";
 	}
 
-	// 보안카드 인증 페이지로
+	// 보안카드 인증 페이지
 	@RequestMapping(value = "/securitysertify")
 	public String viewSecuritySertify(Model m, HttpSession session,String page) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "index");
 			return "login/login";
 		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			System.out.println("보안카드가 만들어지지 않았습니다.");
 			return "security/security";
 		}
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
@@ -105,8 +106,7 @@ public class SecurityController {
 
 	// 보안카드 신청 폼 페이지
 	@RequestMapping(value = "/securitycard")
-	public String viewSecurity_card(Model m, HttpSession session,
-			@RequestParam(value = "error", defaultValue = "t") String error) {
+	public String viewSecurity_card(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
@@ -120,7 +120,6 @@ public class SecurityController {
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
 		m.addAttribute("memberVO", memberVO);
-		m.addAttribute("error", error);
 		return "security/securityCard";
 	}
 
@@ -215,13 +214,20 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securityotp");
 			return "login/login";
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			session.setAttribute("error", "f");
+			return "redirect:security";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			System.out.println("보안카드가 만들어지지 않았습니다.");
+			return "security/security";
 		}
+		
 		session.setAttribute("otpProgress", true);
 		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
 		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
-		MemberVO memberVO = memberDao.numToEmailName(mem_code);
+		String mem_phn = memberDao.serPhone(mem_code);
 		m.addAttribute("aclist", aclist);
-		m.addAttribute("memberVO", memberVO);
+		m.addAttribute("mem_phn", mem_phn);
 		m.addAttribute("error", error);
 		return "security/securityOtp";
 	}
@@ -233,6 +239,11 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+			return "redirect:security";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			System.out.println("보안카드가 만들어지지 않았습니다.");
+			return "security/security";
 		}
 		String acNum = acNameNum.split("-")[1];
 		String pwd = String.valueOf(depositDao.pwdChk(acNum));
@@ -252,8 +263,11 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		}else if((securityDao.otpcheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
 			return "redirect:security";
+		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+			System.out.println("보안카드가 만들어지지 않았습니다.");
+			return "security/security";
 		}else  if ((boolean) session.getAttribute("scChk")) {
 			Map<String , Object> map = new HashMap<String, Object>();
 			map.put("mem_code", ((MemberVO) session.getAttribute("member")).getMem_code());
