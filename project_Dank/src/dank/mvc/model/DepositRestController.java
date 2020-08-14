@@ -21,8 +21,11 @@ import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.Sav_process_forModalVO;
 import dank.mvc.vo.deposit.SavingVO;
+<<<<<<< HEAD
 import dank.mvc.vo.deposit.Shared_savingVO;
 import dank.mvc.vo.deposit.TransferDTO;
+=======
+>>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
 
 @RestController
 public class DepositRestController {
@@ -113,6 +116,7 @@ public class DepositRestController {
 			e.printStackTrace();
 		}
 		
+<<<<<<< HEAD
 		TransferDTO my_tr = new TransferDTO();
 		my_tr.setAc_num(myac);
 		my_tr.setMem_code(memcode);
@@ -129,6 +133,32 @@ public class DepositRestController {
 		your_tr.setAt_set_mony(trmoney);
 		your_tr.setAta_code(atacode);
 
+=======
+		
+		Map<String, String> mapmy = new HashMap<String, String>();
+		mapmy.put("ac_num", myac);
+		mapmy.put("mem_code", memcode);
+		mapmy.put("at_dps_ac", yourac);
+		mapmy.put("at_set_mony", trmoney);
+		
+		
+		Map<String, String> mapmysp = new HashMap<String, String>();
+		mapmysp.put("ac_num", myac);
+		mapmysp.put("mem_code",memcode);
+		mapmysp.put("sp_name", myacwrite);
+		
+		
+		Map<String, String> mapyour = new HashMap<String, String>();
+		mapyour.put("ac_num", yourac);
+		mapyour.put("mem_code", youracmem);
+		mapyour.put("at_dps_ac",myac);
+		mapyour.put("at_set_mony", trmoney);
+		
+		Map<String, String> mapyoursp = new HashMap<String, String>();
+		mapyoursp.put("ac_num", yourac);
+		mapyoursp.put("mem_code",youracmem);
+		mapyoursp.put("sp_name", youracwrite);
+>>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
 		
 		
 		

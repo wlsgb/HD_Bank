@@ -463,6 +463,7 @@
 	  </select>
 	  <!--******조회시 	거래내역 가져오기 ,숫자,거래날자,입금액,출금액,잔액,이름 -->
 	  <select id="achistory_slct" parameterType="hashMap" resultType="achvo">
+<<<<<<< HEAD
 	 	 select 
 			r_num
 			, dealdate
@@ -535,6 +536,47 @@
 	  
 	  
 	  
+=======
+			  select 
+			r_num
+			, dealdate
+			, dep_money
+			, wit_money
+			, balance
+			, name
+			from(
+			select rownum r_num, dealdate, dep_money, wit_money, balance, name
+			from(
+			select COALESCE(to_char(d.dep_date,'YYYY-MM-DD HH24:MI')
+			,to_char(w.wit_date,'YYYY-MM-DD HH24:MI')) dealdate
+			, d.dep_money dep_money
+			,w.wit_money wit_money
+			,sp.sp_balance balance
+			, sp.sp_name name
+			from account a
+			,account_client ac 
+			,sav_process sp
+			, deposit d
+			, withdraw w
+			where ac.mem_code=#{mem_code}
+			 and a.ac_code=ac.ac_code 
+			 and a.ac_code=(select a.ac_code
+			 				 from account a, account_client ac
+			 				  where a.ac_num=#{ac_num}
+									  and ac.mem_code=#{mem_code}
+									   and ac.ac_code=a.ac_code) 
+			  and sp.ac_code=(select a.ac_code 
+			  					from account a, account ac 
+			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code} 
+			  							and a.ac_code = ac.ac_code) 
+			  and d.dep_code(+)=sp.dep_code
+			   and w.wit_code(+) = sp.wit_code
+			order by sp_code desc
+			)
+			)
+			where r_num between #{start} and #{end}  and substr(dealdate,0,10) between #{startdate} and #{lastdate}
+	  </select>
+>>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
 		<!--페이징처리를 위한 총 갯수 가져오기 -->
 	  <select id="totalcnt" resultType="int" parameterType="hashMap">
 		  select count(*)

@@ -93,9 +93,59 @@
 												</c:choose>
 
 
+<<<<<<< HEAD
 <!-- 												<form action="deposit" method="post" -->
 <!-- 													style="display: inline-block;"> -->
 <%-- 													<input type="hidden" value="${e.ac_num }" name="ac_num"> --%>
+=======
+								
+								</div>
+								<div class="card-body">
+								<table class="table">
+													<thead>
+														<tr>
+															<th>상품명</th>
+															<th>별명</th>
+															<th>계좌번호</th>
+															<th class="text-right">
+																잔액
+															</th>
+															
+															<th class="text-right">
+																비고
+															</th>
+														</tr>
+														
+													</thead>
+													<tbody>
+													<c:forEach var="e" items="${aclist}" varStatus="i">
+													<c:if test="${e.ins.ins_name != '0'}">
+													<tr>
+															<td>${e.ins.ins_name }</td>
+															<td>${e.ac_name}</td>
+															<td>${e.ac_num }</td>
+															<td class="text-right">
+																${e.ac_balance }
+															</td>
+															
+															<td class="text-right">
+																<form action="inquire_detail" method="post" style="display: inline-block;">
+																	<input type="hidden" value="${e.ac_num }" name="ac_num">
+																	<input type="submit" value="조회"  style="display: inline-block;" />
+																	</form>
+<!-- 																<input type="button" value="두섬팅" id="dosomething" /> -->
+<!-- 																<a href="#"><input type="button" value="입금" /></a> -->
+<!-- 																<a href="#"><input type="button" value="출금" /></a> -->
+															</td>
+														</tr>
+														</c:if>
+													</c:forEach>
+													
+													
+													</tbody>
+								</table>
+								</div>
+>>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
 
 <%-- 													<input type="submit" value="입금" id="depbtn${i.index}" /> --%>
 <%-- 												</form> <c:choose> --%>
