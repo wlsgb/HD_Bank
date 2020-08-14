@@ -2,8 +2,16 @@ package dank.mvc.vo.deposit;
 
 public class AccountHistoryVO {
 	
-	private int r_num;
+	private int r_num,sp_code;
 	private String dealdate,dep_money,wit_money,balance,name;
+	
+	
+	public int getSp_code() {
+		return sp_code;
+	}
+	public void setSp_code(int sp_code) {
+		this.sp_code = sp_code;
+	}
 	public int getR_num() {
 		return r_num;
 	}

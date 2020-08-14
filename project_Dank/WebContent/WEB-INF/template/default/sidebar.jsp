@@ -9,6 +9,7 @@
 						<c:when test="${member.mem_email==null }">
 							<!-- 로그인 창 시작합니다. -->
 								<div class="form-group">
+									
 									<input type="button"  onclick="location='loginPage'" class="btn btn-primary btn-block" value="로그인" />
 									<input type="button" onclick="location='memberForm'" class="btn btn-primary btn-block" value="회원가입" />
 								</div>
@@ -131,6 +132,7 @@
 								</ul>
 							</div>
 						</li>
+						
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#forms">
 								<i class="fas fa-layer-group"></i>
@@ -193,8 +195,15 @@
 								</ul>
 							</div>
 						</li>
+						<li class="nav-item">
+							<a href="chatGide">
+								<i class="fas fa-layer-group"></i>
+								<p>채팅 화상상담</p>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
+
 		<!-- End Sidebar -->

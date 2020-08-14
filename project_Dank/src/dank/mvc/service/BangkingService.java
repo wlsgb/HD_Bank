@@ -11,7 +11,7 @@ import dank.mvc.dao.BangkingDao;
 import dank.mvc.vo.deposit.TransferDTO;
 
 @Service
-@Transactional(isolation = Isolation.SERIALIZABLE)
+@Transactional
 public class BangkingService  {
 	@Autowired
 	private BangkingDao bangkingdao;

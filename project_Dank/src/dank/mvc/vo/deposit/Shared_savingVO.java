@@ -6,7 +6,24 @@ public class Shared_savingVO {
 //			"SHAS_COUNT"	NUMBER	DEFAULT 2	NOT NULL,
 //			"SHAS_MASTAR"	NUMBER	DEFAULT 1	NOT NULL
 //		);
-	private int shas_code,shas_count,shas_master;
+	private int shas_code, shas_count, shas_master;
+	private SavingVO savingVO;
+	private QualificationVO qualificationVO;
+	public QualificationVO getQualificationVO() {
+		return qualificationVO;
+	}
+
+	public void setQualificationVO(QualificationVO qualificationVO) {
+		this.qualificationVO = qualificationVO;
+	}
+
+	public SavingVO getSavingVO() {
+		return savingVO;
+	}
+
+	public void setSavingVO(SavingVO savingVO) {
+		this.savingVO = savingVO;
+	}
 
 	public int getShas_code() {
 		return shas_code;
@@ -31,5 +48,5 @@ public class Shared_savingVO {
 	public void setShas_master(int shas_master) {
 		this.shas_master = shas_master;
 	}
-	
+
 }

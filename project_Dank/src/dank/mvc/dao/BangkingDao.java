@@ -11,6 +11,7 @@ import dank.mvc.vo.deposit.TransferDTO;
 import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.At_applicationVO;
+import dank.mvc.vo.deposit.Sav_process_forModalVO;
 
 @Repository
 public class BangkingDao {
@@ -136,6 +137,21 @@ public class BangkingDao {
 	} 
 	public String getmybalwhentr(Map<String, String> getmybalwhentr) {
 		return ss.selectOne("bangking.getmybalwhentr", getmybalwhentr);
+	}
+	
+	
+	//모달을 거래구분위해서 코드값만 가져옴
+	public List<Sav_process_forModalVO> classifiedmodal(String sp_code){
+		return ss.selectList("bangking.classification", sp_code);
+	}
+	public List<Sav_process_forModalVO> modal_tr(String sp_code){
+		return ss.selectList("bangking.modal_tr", sp_code);
+	}
+	public List<Sav_process_forModalVO> modal_dep(String sp_code){
+		return ss.selectList("bangking.modal_dep", sp_code);
+	}
+	public List<Sav_process_forModalVO> modal_wit(String sp_code){
+		return ss.selectList("bangking.modal_wit", sp_code);
 	}
 	///////////////////////////////////////////////////////////거래내역조회종료/@
 	///////////////////////////////////////////////////////////자동이체시작@

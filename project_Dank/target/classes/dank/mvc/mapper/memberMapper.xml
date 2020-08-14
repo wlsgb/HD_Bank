@@ -17,14 +17,20 @@
 		#{mem_gender},#{mem_loc},#{mem_job},#{mem_reip})
 	</insert>
 	
-	<!-- 이메일(ID) => 회원이름-->
+	<!-- 이메일(ID) => 회원이름 -->
   	<select id="namechk" parameterType="String" resultType="String">
-  		select mem_name #{email}
+  		select mem_name from member where mem_email = #{mem_email}
   	</select>
 	
-	<!-- 회원 고유 번호 => 이메일,회원이름-->
+
+	<!-- 회원 고유 번호 => 이메일, 회원이름 -->
 	<select id="serNameEmail" parameterType="int" resultType="mem">
-		select mem_email,mem_name from member where mem_code=#{num}
+		select mem_email, mem_name from member where mem_code=#{num}
+	</select>
+	
+	<!-- 회원 고유 번호 => 전화번호 -->
+	<select id="serPhoneNum" parameterType="int" resultType="String">
+		select mem_phn from member where mem_code=#{num}
 	</select>
 	
 	<!-- 회원 고유 번호 => 회원 생일 -->
@@ -53,5 +59,15 @@
 		from member
 		where mem_email=#{mem_email} and mem_pwd=#{mem_pwd}
 	</select>
+
+	<select id="getMem_code" parameterType="String" resultType="mem">
+		select mem_code from member where mem_email = #{mem_email}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="memberLog" parameterType="ml">
+		insert into member_log
+		values (MEMBER_LOG_SEQ.nextVal,#{mem_code},#{ml_ip},#{ml_check},sysdate)
+	</insert>
 	
 </mapper>

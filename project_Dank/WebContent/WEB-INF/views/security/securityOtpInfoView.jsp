@@ -75,6 +75,7 @@
 															</div>
 														</td>
 													</tr>
+													
 												</tbody>
 												<tfoot>
 													<tr>
