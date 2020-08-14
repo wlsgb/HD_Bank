@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<beans:bean id="authenticationInterceptor" class="dank.mvc.interceptor.AuthenticationInterceptor">
     </beans:bean>
-    <!-- Interceptor 설정 -->
+    <!-- Interceptor 설정 --> 
     <interceptors>
         <interceptor>
         	<mvc:mapping path="/**"/>

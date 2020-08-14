@@ -69,12 +69,5 @@ public class DepositDao {
 	public void delAccount(int ac_code) {
 		ss.delete("deposit.delAccount",ac_code);
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'hov2' of https://github.com/wlsgb/HD_Bank.git
-=======
-
->>>>>>> refs/remotes/origin/backupmaster
 }
