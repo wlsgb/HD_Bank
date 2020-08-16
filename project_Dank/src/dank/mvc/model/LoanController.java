@@ -132,6 +132,10 @@ public class LoanController {
 		List<FilenameVO> list = loanDao.filelist();
 		mav.addObject("list", list);
 		mav.setViewName("loan/checkfile");
+		for(FilenameVO e: list) {
+			System.out.println(e);
+			
+		}
 		return mav;
 	}
 	@RequestMapping(value = "/checkrefile")
@@ -167,7 +171,10 @@ public class LoanController {
 		List<LoanFileVO> list = loanDao.filelist(lc_num);
 		mav.addObject("list",list);
 		mav.addObject("lc_num",lc_num);
-		
+		for(LoanFileVO e: list) {
+			System.out.println(e.getLf_oriname());
+			
+		}
 		return mav;
 	}
 	//대출 실행
@@ -284,8 +291,22 @@ public class LoanController {
 		
 		
 
-	
-		
+		System.out.println("*****!*!*!*!*!*!*!*!*");
+		System.out.println(logVO.getLc_num());
+		System.out.println(logVO.getLrl_amount());
+		System.out.println(logVO.getLrl_interest());
+		System.out.println(logVO.getLrl_total());
+		System.out.println();
+		System.out.println(my_tr.getAc_num());
+		System.out.println(my_tr.getMem_code());
+		System.out.println(my_tr.getAt_dps_ac());
+		System.out.println(my_tr.getAt_set_mony());
+		System.out.println(my_tr.getSp_name());
+		System.out.println(your_tr.getAc_num());
+		System.out.println(your_tr.getHd_code());
+		System.out.println(your_tr.getAt_dps_ac());
+		System.out.println(your_tr.getAt_set_mony());
+		System.out.println(your_tr.getSp_name());
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
@@ -442,7 +463,8 @@ public class LoanController {
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
 	     String fileDir =  req.getParameter("fileDir");
-	      
+	     System.out.println("*********************");
+	      System.out.println(fileName);
 	     modelMap.put("fileName", fileName);
 	     modelMap.put("fileDir", fileDir);
 	     return "/loan/server/filedown";
@@ -475,9 +497,7 @@ public class LoanController {
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
-		 		if(loanDao.checkstate(vo.getLc_num())=="서류제출대기") {
-		 			loanDao.stateupdate(vo.getLc_num());
-		 		}
+		 		loanDao.stateupdate(vo.getLc_num());
 		 		
 		 		
 		 return mav;

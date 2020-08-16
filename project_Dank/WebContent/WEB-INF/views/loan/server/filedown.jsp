@@ -10,7 +10,7 @@
  
  
  
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>파일다운로드</title>
  
  
@@ -20,9 +20,12 @@
     String fileDir = request.getParameter("fileDir");
      
     //파일명 인코딩
-    String UTF8FileName = new String(fileName.getBytes("8859_1"), "UTF-8");
+    String UTF8FileName = new String(fileName.getBytes("8859_1"), "EUC-KR");
  
     //실제 파일
+    System.out.println("하하하하하");
+    
+    System.out.println(fileName);
   String filePath = request.getRealPath("/") + fileDir + "/" + fileName;
    
   boolean MSIE = request.getHeader("user-agent").indexOf("MSIE") != -1;
