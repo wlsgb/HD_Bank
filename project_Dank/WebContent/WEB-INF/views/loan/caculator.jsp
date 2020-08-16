@@ -119,7 +119,7 @@ input[type="number"]::-webkit-inner-spin-button {
 										
 										<div class="col-3">
 												<div class="form-group">
-												<label class="form-label">이자율</label>
+												<label class="form-label">이자율(%)</label>
 												<div class="selectgroup w-100">
 													<label>
 														<input type="number" value="0" min="0" name="r" id="r" class="form-control input-lg" step="0.1">
