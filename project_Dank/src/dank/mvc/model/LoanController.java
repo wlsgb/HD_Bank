@@ -3,6 +3,8 @@ package dank.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -134,7 +136,7 @@ public class LoanController {
 		mav.setViewName("loan/checkfile");
 		for(FilenameVO e: list) {
 			System.out.println(e);
-			
+			System.out.println("***********((((((((((((((");
 		}
 		return mav;
 	}
@@ -173,7 +175,7 @@ public class LoanController {
 		mav.addObject("lc_num",lc_num);
 		for(LoanFileVO e: list) {
 			System.out.println(e.getLf_oriname());
-			
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
 		}
 		return mav;
 	}
@@ -459,14 +461,16 @@ public class LoanController {
 		return "loan/caculator";
 	}
 	// 제출서류 다운로드
-	 @RequestMapping("/fileDown.do")
+	 @RequestMapping(value = "/fileDown.do")
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
 	     String fileDir =  req.getParameter("fileDir");
 	     System.out.println("*********************");
 	      System.out.println(fileName);
+	      System.out.println("()())()()()()");
 	     modelMap.put("fileName", fileName);
 	     modelMap.put("fileDir", fileDir);
+	     
 	     return "/loan/server/filedown";
 	   }
 	 //제출 서류 등록
