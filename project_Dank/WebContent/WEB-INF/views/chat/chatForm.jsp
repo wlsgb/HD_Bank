@@ -46,7 +46,8 @@
 														</label>
 														<div class="row">
 															<div class="col-8">
-		   														<input type="text" class="form-control"  id="mem_name" name="mem_name">
+																<input type="hidden" id="mem_code" value="${mem_code}"/>
+		   														<input type="text" class="form-control"  id="mem_name" name="mem_name" value="${mem_name}" readonly="readonly">
 		   													</div>  
 														</div>
 													</div>
@@ -124,8 +125,12 @@
 						
 						var path = "https://192.168.0.167:3000/chatGide";
 						var roomNum = "room="+smsCode;
+						
 						var user = "user="+$("#mem_name").val();
-						var url = path+'?' + roomNum + "&" + user;
+						var encodeuser = decodeURI(user);
+						var mem_code = "userNum="+$("#mem_code").val();
+						var url = path+'?' + roomNum + "&" + encodeuser;
+						
 						$("#chttCnsltGuide").attr("onclick", "window.open('"+url+"','_blank','height=' + (screen.height) + ',width=' + (screen.width) + 'fullscreen=yes'+',toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,left=0')");
 					}else {
 						$("#codeTarget").append('<input type="hidden" value="fail" name="successData" />')

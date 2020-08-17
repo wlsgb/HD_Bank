@@ -142,10 +142,10 @@
     </insert>
     
     <select id="checkfiledetail" resultType="lfvo" parameterType="int">
-    	select * from loan_file1 where lc_num = #{lc_num}
+    	select * from loan_file where lc_num = #{lc_num}
     </select>
     
     <select id="checkstate" parameterType="int">
-    	select lc_state loan_check where lc_num = #{lc_num}
+    	select lc_state from loan_check where lc_num = #{lc_num}
     </select>
   </mapper>
