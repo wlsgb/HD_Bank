@@ -293,22 +293,6 @@ public class LoanController {
 		
 		
 
-		System.out.println("*****!*!*!*!*!*!*!*!*");
-		System.out.println(logVO.getLc_num());
-		System.out.println(logVO.getLrl_amount());
-		System.out.println(logVO.getLrl_interest());
-		System.out.println(logVO.getLrl_total());
-		System.out.println();
-		System.out.println(my_tr.getAc_num());
-		System.out.println(my_tr.getMem_code());
-		System.out.println(my_tr.getAt_dps_ac());
-		System.out.println(my_tr.getAt_set_mony());
-		System.out.println(my_tr.getSp_name());
-		System.out.println(your_tr.getAc_num());
-		System.out.println(your_tr.getHd_code());
-		System.out.println(your_tr.getAt_dps_ac());
-		System.out.println(your_tr.getAt_set_mony());
-		System.out.println(your_tr.getSp_name());
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
@@ -461,13 +445,14 @@ public class LoanController {
 		return "loan/caculator";
 	}
 	// 제출서류 다운로드
-	 @RequestMapping(value = "/fileDown.do")
+	 @RequestMapping(value = "/Download.do")
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
 	     String fileDir =  req.getParameter("fileDir");
+	     //String a = URLDecoder.decode(fileName, "EUC-KR");
+	     //System.out.println("디코더 : "+a);
 	     System.out.println("*********************");
 	      System.out.println(fileName);
-	      System.out.println("()())()()()()");
 	     modelMap.put("fileName", fileName);
 	     modelMap.put("fileDir", fileDir);
 	     
