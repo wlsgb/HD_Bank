@@ -415,7 +415,19 @@ public class LoanController {
 				list.add(v);
 			}
 		}
+		int sumM = 0;
+		int sumR = 0;
+		int sumT = 0;
+				
+		for(LoanCaculatorVO e: list) {
+			sumM += e.getRepayM();
+			sumR += e.getRepayR();
+			sumT += e.getRepayMR();
+		}
 		mav.addObject("list", list);
+		mav.addObject("sumM",sumM);
+		mav.addObject("sumR",sumR);
+		mav.addObject("sumT",sumT);
 		return mav;
 	}
 	
