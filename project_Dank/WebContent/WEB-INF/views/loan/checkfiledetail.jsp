@@ -44,9 +44,7 @@
 														<div class="form-group row">
 															<label for="file1" class="col-4" >${e.lf_name }</label>
 															<div class="col-8">
-																<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${e.lc_num }&fileName=${e.lf_oriname} "/>">
-															${e.lf_oriname}
-														</a>
+																<a href="<c:url value="/fileDown.do?fileDir=/resources/upload/${e.lc_num }&fileName=${e.lf_oriname} "/>">${e.lf_oriname}</a>
 													</div>
 												</div>
 													</c:if>
@@ -77,6 +75,11 @@
 			<script>
 			$('.refile').click(function() {
 				location='checkfile?lc_num='+$('#lc_num').val();
+			})
+			$('.downurl').click(function() {
+				fileName = $(this).text()
+				lc_num = $('#lc_num').val() 
+				location.href = "fileDown.do?fileDir=/resources/upload/"+lc_num+"&fileName="+fileName
 			})
 	</script>
 

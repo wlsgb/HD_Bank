@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@ page import="java.io.File" %>
  
@@ -11,7 +11,7 @@
  
  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ÆÄÀÏ´Ù¿î·Îµå</title>
+<title>íŒŒì¼ë‹¤ìš´ë¡œë“œ</title>
  
  
  
@@ -19,19 +19,22 @@
   String fileName = request.getParameter("fileName");
     String fileDir = request.getParameter("fileDir");
      
-    //ÆÄÀÏ¸í ÀÎÄÚµù
+    //íŒŒì¼ëª… ì¸ì½”ë”©
     String UTF8FileName = new String(fileName.getBytes("8859_1"), "UTF-8");
  
-    //½ÇÁ¦ ÆÄÀÏ
+    //ì‹¤ì œ íŒŒì¼
+    System.out.println("í•˜í•˜í•˜í•˜í•˜");
+    System.out.println(UTF8FileName);
+    System.out.println(fileName);
   String filePath = request.getRealPath("/") + fileDir + "/" + fileName;
-   
+   System.out.println(filePath);
   boolean MSIE = request.getHeader("user-agent").indexOf("MSIE") != -1;
   if(MSIE){
-        // ºê¶ó¿ìÀú°¡ IEÀÏ °æ¿ì ÀúÀåµÉ ÆÄÀÏ ÀÌ¸§
-        // °ø¹éÀÌ '+'·Î ÀÎÄÚµùµÈ°ÍÀ» ´Ù½Ã °ø¹éÀ¸·Î ¹Ù²ãÁØ´Ù.
+        // ë¸Œë¼ìš°ì €ê°€ IEì¼ ê²½ìš° ì €ì¥ë  íŒŒì¼ ì´ë¦„
+        // ê³µë°±ì´ '+'ë¡œ ì¸ì½”ë”©ëœê²ƒì„ ë‹¤ì‹œ ê³µë°±ìœ¼ë¡œ ë°”ê¿”ì¤€ë‹¤.
         fileName = URLEncoder.encode(UTF8FileName, "UTF8").replaceAll("\\+", " ");
     }else{
-        // ºê¶ó¿ìÀú°¡ IE°¡ ¾Æ´Ò °æ¿ì ÀúÀåµÉ ÆÄÀÏ ÀÌ¸§
+        // ë¸Œë¼ìš°ì €ê°€ IEê°€ ì•„ë‹ ê²½ìš° ì €ì¥ë  íŒŒì¼ ì´ë¦„
         fileName = new String(UTF8FileName.getBytes("UTF-8"), "8859_1");
     }
   try{
