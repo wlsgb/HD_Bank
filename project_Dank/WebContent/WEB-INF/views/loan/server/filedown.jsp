@@ -1,73 +1,109 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="application/unknown; charset=euc-kr" %><%@ page
+import="java.util.*,java.io.*"%><%
 
-<%@ page import="java.io.File" %>
+/* ¾ÆÆÄÄ¡ ÅèÄ¹¿¬µ¿ È¤Àº ÅèÄ¹ ´Üµ¶À¸·Î ¾²ÀÏ¶§ÀÇ ÇÑ±Û ÆÄÀÏ ´Ù¿î·Îµå
+ * 
+ * ¼Õ±Ç³² (kwon37xi_a#T_yahoo.co.kr)
+ * 
+ * http://www.okjsp.pe.kr¿¡ ¿Ã¶ó¿Â ¸¹Àº ¿¹Á¦µéÀ» Âü°íÇÏ°í, ³ª¸§´ë·Î
+ * °æÇè¿¡ ÀÇÇÑ ¹ıÄ¢µîÀ» Àû¿ëÇÏ¿¬ ¸¸µç °ÍÀÓ.
+ * ÀÌ°ÍÀº ¿¹Á¦ÀÏ »Ó, °æ·Î³ª ÆÄÀÏ ÀÌ¸§ ¹Ş¾ÆµéÀÌ´Â ¹æ¹ıµîÀº ÀÚ½Å¿¡ ¸Â°Ô
+ * ¼öÁ¤ÇÒ °Í.
+ *
+ * ¸ÇÀ§ÀÇ charset=euc-krÀ» »©¸ÔÀ¸¸é ¾ÈµÈ´Ù.!!!!!!
+ * 
+ * »©¸ÔÀ» °æ¿ì ÀÌ JSP ÆäÀÌÁö°¡ EUC_KR·Î ÇØ¼®µÇÁö ¾Ê¾Æ¼­ ÀÌ JSPÆäÀÌÁö ³»ÀÇ
+ * ÇÑ±ÛÀÌ ¸ğµÎ ±úÁ®¹ö¸°´Ù. ¹°·Ğ.. ¿©±â¼­´Â ÇÑ±ÛÀÌ ¾È¾²¿©¼­ º° »ó°üÀº
+ * ¾øÁö¸¸..
+ */
+
+/*
+ * ´Ù¿î·Îµå °ü·Ã ÆäÀÌÁö´Â ServletÀ¸·Î ¸¸µå´Â°Ô ¿øÄ¢ÀÌ´Ù.
+ * ÀÌ°ÍÀº ±×³É ½¬¿î ¿¹Á¦¸¦ º¸¿©ÁÖ´Â °Í »ÓÀÌ´Ù.
+ *
+ * ¶ÇÇÑ, JSP·Î ¸¸µé °æ¿ì¿¡ °¢ ÅÂ±× »çÀÌ¿¡ ºó°ø°£ÀÌ ÀÖ¾î¼­´Â ¾ÈµÈ´Ù.
+ * ±×·²°æ¿ì ´Ù¿î·ÎµåµÇ´Â ÆÄÀÏÀÌ º¯°æµÉ ¼ö ÀÖ´Ù. ±×·¯´Ï ±×³É ¼­ºí¸´À¸·Î
+ * ¸¸µé±â¸¦ ±ÇÇÔ.
+ */
+
+request.setCharacterEncoding("euc-kr");
+
+ String filename = request.getParameter("fileName");
+ String fileDir = request.getParameter("fileDir");
+ String filePath = request.getRealPath("") + fileDir + "/" + filename;
+ System.out.println(filename);
+ System.out.println(filePath);
+if (filename == null) {
+ return;
+}
+
+String mime = getServletContext().getMimeType(filename);
+
+if (mime == null) {
+ mime = "application/octet-stream;";
+}
+
+// ÀÚ½Å¿¡°Ô ¸Â°Ô ¼öÁ¤ÇÒ °Í.
+File file =
+ new File(filePath);
+
+byte b[] = new byte[2048];
+
+
+//response.setHeader("Content-Transfer-Encoding", "7bit");
+// À§ ºÎºĞÀ» ¾Æ·¡¿Í °°ÀÌ ¼öÁ¤ÇÔ. 2005/01/17
+response.setContentType(mime + "; charset=euc-kr"); 
+
+/*
+ * URLEncoderÀÇ »ç¿ë¿¡ ÁÖÀÇÇÒ°Í. J2SDK 1.3x ÀÌÇÏ¿¡¼­´Â
+ * java.net.URLEncoder.encode(filename) À¸·Î ¼öÁ¤ÇÒ °Í.
+ *
+ * MS IE 5.5¿¡´Â ¹ö±×°¡ ÀÖ¾î¼­ atatchment ºÎºĞÀ» »©Áà¾ßÇÑ´Ù.
+ *
+ */
+String aa =file.getName();
+if (request.getHeader("User-Agent").indexOf("MSIE 5.5") > -1) {
+ response.setHeader("Content-Disposition",
+   "filename=" +java.net.URLEncoder.encode(filename, "EUC-KR") + ";");
+} else {
+ response.setHeader("Content-Disposition",
+   "attachment; filename=" + java.net.URLEncoder.encode(filename, "EUC-KR") + ";");
+}
+System.out.println("filename="+filename);
+/*
+ * Áö±İ±îÁö ¸¹Àº »ç¶÷µéÀÌ ÇÑ±Û ÆÄÀÏ¸íÀ» latin1À¸·Î ¹Ù²ÛµÚ º¸³Â´Âµ¥,
+ * ÅèÄ¹ ´Üµ¶À¸·Î ¾²ÀÌ´Â °æ¿ì¿¡´Â »ó°ü¾øÀ» ¼ö ÀÖÁö¸¸ ¾ÆÆÄÄ¡µî À¥ ¼­¹ö¿Í ¿¬µ¿ÇÒ °æ¿ì
+ * latin1(8bit) À¸·Î µÈ ÆÄÀÏÀÌ¸§À» ±×´ë·Î º¸³»¸é ÇÑ±Û ÆÄÀÏ ÀÌ¸§ÀÌ ±úÁø´Ù.
+ * ¾ÆÆÄÄ¡°¡ (È¤Àº ¾ÆÆÄÄ¡¿Í ÅèÄ¹À» ¿¬µ¿ÇÏ´Â ¸ğµâÀÌ) Çì´õ¿¡¼­ latin1À¸·ÎµÈ ¹®ÀÚ¸¦
+ * ÀÚ±â ¸¾´ë·Î º¯Çü½ÃÅ°´Â °ÍÀ¸·Î º¸ÀÎ´Ù.(½ÇÁ¦ telnet À¸·Î Á¢¼ÓÇØ¼­ Çì´õÀÇ
+ * ÆÄÀÏÀÌ¸§ºÎºĞÀ» ÅèÄ¹´Üµ¶°ú ¾ÆÆÄÄ¡+ÅèÄ¹ ÀÏ¶§ º¸¸é latin1À¸·Î º¸³¾°æ¿ì¿¡ ¼­·Î
+ * ´Ù¸£°Ô ³ª¿Â´Ù)
+ * 
+ * ²À URLEncodingÀ» ÇØ¼­ º¸³»¾ß ¾ğÁ¦³ª Á¦´ë·ÎµÈ ÇÑ±Û ÀÌ¸§À¸·Î ´Ù¿î·Îµå°¡ µÈ´Ù.
+ *
+ * ±×·¯³ª ÀÌ°ÍÀº ¸ğÁú¶ó¿¡¼­´Â ÀÛµ¿ÇÏÁö ¾Ê¾Ò´Ù.
+ * 
+ * URLencoding µÈ ÆÄÀÏÀÌ¸§ÀÌ ³Ê¹« ±æ°æ¿ì¿¡µµ ´Ù¿î·ÎµåµÇÁö ¾Ê´Â´Ù.
+ * ¸ğÁú¶ó¿¡¼­´Â ºñ·Ï ÇÑ±ÛÆÄÀÏÀÌ¸§Àº ±úÁ®µµ ´Ù¿î·ÎµÇ µÇ´Â°ÍÀ¸·Î º¸¾Æ
+ * IE 5.x, 6.x ÀÇ ¹ö±×·Î ¿©°ÜÁø´Ù. - ÀÌ¹®Á¦¿¡ ´ëÇÑ ÇØ°áÃ¥ ´©±¸ ¾ø¼ö?
+ */
+
+response.setHeader("Content-Length", "" + file.length() );
+
+if (file.isFile() && file.length() > 0) // ÆÄÀÏ Å©±â°¡ 0º¸´Ù Ä¿¾ß ÇÑ´Ù.
+{
+ BufferedInputStream fin = new BufferedInputStream(new
+ FileInputStream(file));
+ BufferedOutputStream outs = new
+ BufferedOutputStream(response.getOutputStream());
+ int read = 0;
  
-<%@ page import="java.io.*"%>
-<%@ page import="java.net.URLEncoder"%>
+ while ((read = fin.read(b)) != -1){
+  outs.write(b,0,read);
+ }
+
+ outs.close();
+ fin.close();
  
- 
- 
- 
- 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>íŒŒì¼ë‹¤ìš´ë¡œë“œ</title>
- 
- 
- 
-<%
-  String fileName = request.getParameter("fileName");
-    String fileDir = request.getParameter("fileDir");
-     
-    //íŒŒì¼ëª… ì¸ì½”ë”©
-    String UTF8FileName = new String(fileName.getBytes("8859_1"), "UTF-8");
- 
-    //ì‹¤ì œ íŒŒì¼
-    System.out.println("í•˜í•˜í•˜í•˜í•˜");
-    System.out.println(UTF8FileName);
-    System.out.println(fileName);
-  String filePath = request.getRealPath("/") + fileDir + "/" + fileName;
-   System.out.println(filePath);
-  boolean MSIE = request.getHeader("user-agent").indexOf("MSIE") != -1;
-  if(MSIE){
-        // ë¸Œë¼ìš°ì €ê°€ IEì¼ ê²½ìš° ì €ì¥ë  íŒŒì¼ ì´ë¦„
-        // ê³µë°±ì´ '+'ë¡œ ì¸ì½”ë”©ëœê²ƒì„ ë‹¤ì‹œ ê³µë°±ìœ¼ë¡œ ë°”ê¿”ì¤€ë‹¤.
-        fileName = URLEncoder.encode(UTF8FileName, "UTF8").replaceAll("\\+", " ");
-    }else{
-        // ë¸Œë¼ìš°ì €ê°€ IEê°€ ì•„ë‹ ê²½ìš° ì €ì¥ë  íŒŒì¼ ì´ë¦„
-        fileName = new String(UTF8FileName.getBytes("UTF-8"), "8859_1");
-    }
-  try{
- 
-    out.clear();
-    out = pageContext.pushBody();
- 
-    File file = new File(filePath);
- 
-    byte b[] = new byte[1024];
- 
-    response.reset();
- 
-    //response.setContentType("application/octet-stream");
-    response.setHeader("Content-Type", "application/octet-stream;");
-    response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
- 
-    FileInputStream fis = new FileInputStream(filePath);
-    BufferedInputStream bis = new BufferedInputStream(fis);
-    BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
- 
-    int numRead;
- 
-    while((numRead = bis.read(b,0,b.length)) != -1){
-      bos.write(b,0,numRead);
-    }
-    bos.flush();
-    bos.close();
-    bis.close();
- 
-  }catch(Exception e){
- 
-    e.printStackTrace();
- 
-  }
+}
 %>
