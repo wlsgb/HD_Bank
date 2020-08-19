@@ -22,10 +22,14 @@
   		select mem_name from member where mem_email = #{mem_email}
   	</select>
 	
-
 	<!-- 회원 고유 번호 => 이메일, 회원이름 -->
 	<select id="serNameEmail" parameterType="int" resultType="mem">
 		select mem_email, mem_name from member where mem_code=#{num}
+	</select>
+	
+	<!-- 회원 고유 번호 => 이메일, 회원이름 -->
+	<select id="serNumToName" parameterType="int" resultType="String">
+		select mem_name from member where mem_code=#{num}
 	</select>
 	
 	<!-- 회원 고유 번호 => 전화번호 -->

@@ -123,7 +123,7 @@
 												</div>
 												
 												
-												<c:if test="${vo.lc_state eq '실행완료'}">
+												<c:if test="${vo.lc_state eq '실행완료' or vo.lc_state eq '상환종료'}">
 												<hr>
 													<h3>상환정보</h3>
 													
