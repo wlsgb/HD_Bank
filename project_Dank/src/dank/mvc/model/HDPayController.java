@@ -85,7 +85,7 @@ public class HDPayController {
 				cardInfo = new ObjectMapper().writeValueAsString(cardlist);
 			} catch (JsonProcessingException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e.printStackTrace(); 
 			}
             return cardInfo;
 		}else {
