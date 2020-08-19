@@ -10,8 +10,11 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-</style>
 
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+<script src="https://d3js.org/d3.v3.min.js"></script>     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 			<div class="content">
 				<div class="panel-header bg-primary-gradient">
 					<div class="page-inner py-5">
@@ -216,6 +219,29 @@ input[type="number"]::-webkit-inner-spin-button {
 					data: {type:$('[name=type]:checked').val(),term:$('[name=term]:checked').val(),n:$('#n').val(),term2:$('[name=term2]:checked').val(),g:$('#g').val(),m:$('#m').val(),r:$('#r').val()},
 					success: function(data){
 						$('#target').html(data);
+						
+						$.ajax({
+							type: "POST",
+							url: "caculatorchart",
+							data: {type:$('[name=type]:checked').val(),term:$('[name=term]:checked').val(),n:$('#n').val(),term2:$('[name=term2]:checked').val(),g:$('#g').val(),m:$('#m').val(),r:$('#r').val()},
+							success: function(data){
+								var data  = JSON.parse(data)
+								console.log(data["r"])
+								var chart = c3.generate({
+									bindto: "#chart",
+								    data: {
+								        columns: [
+								            data["r"],data["m"],data["mr"]
+								        ]
+								    }
+								});
+								
+								
+							}
+							
+						})
+						
+						
 					}
 					});
 
