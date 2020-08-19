@@ -23,6 +23,9 @@
     String UTF8FileName = new String(fileName.getBytes("8859_1"), "UTF-8");
  
     //실제 파일
+    System.out.println("하하하하하");
+    System.out.println(UTF8FileName);
+    System.out.println(fileName);
   String filePath = request.getRealPath("/") + fileDir + "/" + fileName;
    
   boolean MSIE = request.getHeader("user-agent").indexOf("MSIE") != -1;
