@@ -26,10 +26,11 @@
 <tfoot>
 <tr>
 	<td>гу╟Х</td>
-	<td>${sumM }</td>
+	<td>${m }</td>
 	<td>${sumR }</td>
 	<td>${sumT }</td>
-	<td></td>
+	<td>0</td>
 <tr>
 </tfoot>
 </table>
+<div id="chart"></div>

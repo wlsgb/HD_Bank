@@ -90,7 +90,7 @@ input[type="number"]::-webkit-inner-spin-button {
 												<label for="amount" class="col-2">대출 희망 금액</label>
 												<div class="col-6">
 												<input type="hidden" id="maximum" value="${vo.lp_maximum }">
-												<input type="number" class="form-control" name="la_hamount" id="la_hamount"  placeholder="희망금액" value="0">
+												<input type="text" class="form-control" name="la_hamount" id="la_hamount"  placeholder="희망금액">
 												</div>
 												<div class="col-4">
    														<p id="target"></p>
@@ -158,57 +158,37 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			
 			<script>
-			$("input").keydown(function () {
-			    // Save old value.
-			    if (!$(this).val() || (parseInt($(this).val()) <= $('#maximum').val()  && parseInt($(this).val()) >= 0))
-			    $(this).data("old", $(this).val());
-			  });
-			  $("input").keyup(function () {
-			    // Check correct, else revert back to old value.
-			    if (!$(this).val() || (parseInt($(this).val()) <= $('#maximum').val() && parseInt($(this).val()) >= 0)){
-			    	
-			    }else if(parseInt($(this).val()) < 0){
-			    	alert('희망대출액은 음수가 될 수 없습니다.')
-			    	$(this).val(0);
-			    }else{
-				  	alert('대출 가능 최대 금액을 초과해서 입력하셨습니다.')			    	
-			    	$(this).val($(this).data("old"));
-			    }
-			   
+			$("#la_hamount").keyup(function () {
+				x = $(this).val()
+		        x = x.replace(/[^0-9]/g,'');
+		        x = x.replace(/,/g,'');
+		        if(parseInt(x)>parseInt($('#maximum').val())){
+		        	alert('대출 가능 최대 금액을 초과해서 입력하셨습니다.')
+		        	$(this).val($('#maximum').val().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		        }else{
+		        	$(this).val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));	
+		        }
+		        
+		        
+		        var amount = parseInt($('#la_hamount').val().replace(/,/g,''));
+				  var result = '';
+				  if(Math.floor(amount/100000000)>0){
+					  result += (Math.floor(amount/100000000) + '억')
+				  }
+				  if(Math.floor(amount/10000)>0 && amount <100000000){
+						result += (Math.floor(amount/10000) + '만')
+				  }
+				  if(amount>0 && amount<10000){
+					    result += (amount+'원')
+				  }
+				  $('#target').html(result); 
+				  
+				
+							   
 
 			  });
 			  
-			  $('#la_hamount').change(function() {
-				  var amount = parseInt($('#la_hamount').val());
-				  var result = '';
-				  if(amount<10000){
-					  result = amount+'원';
-					  $('#target').html(result); 
-				  }else if(amount<100000000){
-					 console.log(result/10000)
-					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
-					  $('#target').html(result);
-				  }else if(amount<1000000000000){
-					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원';
-					  $('#target').html(result); 
-				  }
-			  })
 			  
-			  $('#la_hamount').keyup(function() {
-				  var amount = parseInt($('#la_hamount').val());
-				  var result = '';
-				  if(amount<10000){
-					  result = amount+'원';
-					  $('#target').html(result); 
-				  }else if(amount<100000000){
-					 console.log(result/10000)
-					  result = Math.floor(amount/10000) + '만' + (amount%10000) + '원';
-					  $('#target').html(result);
-				  }else if(amount<1000000000000){
-					  result = Math.floor(amount/100000000) + '억' + Math.floor((amount%100000000)/10000) + '만' + (amount%10000) + '원'
-					  $('#target').html(result); 
-				  }
-			  })
 			  
 			  
 				var date = new Date().toISOString().slice(0, 10);
