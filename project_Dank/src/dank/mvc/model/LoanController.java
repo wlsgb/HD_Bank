@@ -330,6 +330,7 @@ public class LoanController {
 		List<LoanCaculatorVO> list = new ArrayList<LoanCaculatorVO>();
 		
 		int m = vo.getM();
+		System.out.println(m);
 		int g = vo.getG();
 		float r = vo.getR()/100;
 		int n = vo.getN();
@@ -345,12 +346,23 @@ public class LoanController {
 			for (int i = 0; i < totalterm; i++) {
 				LoanCaculatorVO v = new LoanCaculatorVO();
 				if(i<g) {
+					System.out.println("거치");
 					v.setRepayM(0);
 					v.setRepayR((int)Math.ceil((m*(r/12))));
 					v.setRepayMR(v.getRepayM()+v.getRepayR());
 				}else {
+					System.out.println("상환");
 					v.setRepayM(m/n);
-					v.setRepayR((int) Math.ceil((m-((i-g)*m/n))*r/n));
+					if(i==0) {
+						v.setRepayR((int) Math.ceil(m*(r/12)));
+					}else {
+						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));						
+					}
+					//v.setRepayR((int) Math.ceil((m-((i-g)*m/12))*r/n));
+					System.out.println(i);
+					System.out.println(n);
+					System.out.println(r);
+					System.out.println(v.getRepayR());
 					v.setRepayMR(v.getRepayM()+v.getRepayR());
 					if(i==totalterm-1) {
 						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
@@ -380,6 +392,7 @@ public class LoanController {
 						v.setRepayR((int) Math.ceil((m*(r/12))));
 					}else {	
 						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));
+						
 					}	
 					
 					v.setRepayMR((int) (((m*r/12)*(Math.pow((1+r/12), n)))/((Math.pow((1+r/12), n))-1)));
@@ -471,12 +484,17 @@ public class LoanController {
 					rlist.add(v.getRepayR());
 					mrlist.add(v.getRepayMR());
 				}else {
-					
+					if(i==0) {
+						v.setRepayR((int) Math.ceil(m*(r/12)));
+						rlist.add(v.getRepayR());
+					}else {
+						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));
+						rlist.add(v.getRepayR());
+					}
 					
 					v.setRepayM(m/n);
-					v.setRepayR((int) Math.ceil((m-((i-g)*m/n))*r/n));
 					mlist.add(v.getRepayM());
-					rlist.add(v.getRepayR());
+					
 					if(i==totalterm-1) {
 						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
 						mrlist.add(v.getRepayMR());
