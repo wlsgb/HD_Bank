@@ -17,7 +17,7 @@
   	<!-- 대출신청 -->
   		<!--대출 정보 입력  -->
   	<insert id="check" parameterType="lcvo">
-  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.nextVal,'선정대기',#{mem_code},#{lp_num})
+  		insert into loan_check (LC_NUM, LC_STATE, MEM_CODE, LP_NUM) values(loan_check_seq.nextVal,'서류제출대기',#{mem_code},#{lp_num})
   	</insert>
   		<!--대출 신청정보 입력  -->
   	<insert id="application" parameterType="lpvo">
@@ -138,14 +138,15 @@
     </select>
     
     <insert id="fileup" parameterType="lfvo">
-    	insert into loan_file1 values(loan_file1_seq.nextVal,#{lc_num},#{lf_name},#{lf_oriname},sysdate)
+    	insert into loan_file values(loan_file1_seq.nextVal,#{lc_num},#{lf_name},#{lf_oriname},sysdate)
     </insert>
     
     <select id="checkfiledetail" resultType="lfvo" parameterType="int">
     	select * from loan_file where lc_num = #{lc_num}
     </select>
     
-    <select id="checkstate" parameterType="int">
+
+    <select id="checkstate" parameterType="int" resultType="String">
     	select lc_state from loan_check where lc_num = #{lc_num}
     </select>
   </mapper>
