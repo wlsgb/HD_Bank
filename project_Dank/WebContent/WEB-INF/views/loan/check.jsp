@@ -43,7 +43,7 @@
 												</thead>
 												<tbody>
 												<c:forEach items="${list }" var="e">
-												<c:if test="${e.lc_state ne '실행완료' }">
+												<c:if test="${e.lc_state ne '실행완료' and e.lc_state ne '상환종료'}">
 												
 													<tr>
 													 <td>${e.loanProductVO.lp_name}</td>
@@ -61,6 +61,10 @@
 															
 															<c:when test="${e.lc_state eq '대출승인' }">
 														<td><button type="button" class="btn btn-lg btn-primary loanstart" value="${e.lc_num}">대출실행</button></td>
+															
+															</c:when>
+															<c:when test="${e.lc_state eq '승인거절' }">
+														<td><button type="button" class="btn btn-lg btn-primary loanstart" disabled="disabled" value="${e.lc_num}">승인거절</button></td>
 															
 															</c:when>
 															<c:otherwise>
@@ -108,13 +112,21 @@
 												</thead>
 												<tbody>
 												 <c:forEach items="${list }" var="e">
-													<c:if test="${e.lc_state eq '실행완료'}">
+													<c:if test="${e.lc_state eq '실행완료' or e.lc_state eq '상환종료'}">
 													<tr>
 														<td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanRepayVO.lr_startdate }</td>
 														<td>${e.loanRepayVO.lr_amount }</td>
 														<td>${e.loanRepayVO.lr_balance }</td>
-														<td><button type="button" class="btn btn-lg btn-primary repay" value="${e.lc_num }">상환하기</button></td>
+														<c:choose>
+															<c:when test="${e.lc_state eq '실행완료'}">
+																<td><button type="button" class="btn btn-lg btn-primary repay" value="${e.lc_num }">상환하기</button></td>
+															</c:when>
+														
+															<c:when test="${e.lc_state eq '상환종료'}">
+																<td><button type="button" class="btn btn-lg btn-primary repay" disabled="disabled" value="${e.lc_num }">상환하기</button></td>
+															</c:when>
+														</c:choose>
 														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>
 													

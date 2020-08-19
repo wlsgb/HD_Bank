@@ -43,7 +43,7 @@
 												</thead>
 												<tbody>
 												<c:forEach items="${list }" var="e">
-												<c:if test="${e.lc_state ne '실행완료' and e.lc_state ne '대출승인'}">
+												<c:if test="${e.lc_state ne '실행완료' and e.lc_state ne '대출승인' and e.lc_state ne '승인거절'}">
 													<tr>
 													 <td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanApplicationVO.la_sysdate }</td>
@@ -58,6 +58,10 @@
 														<td><button type="button" class="btn btn-lg btn-primary file" value="${e.lc_num }">서류제출</button></td>
 															</c:when>
 															<c:when test="${e.lc_state eq '서류제출완료' }">
+														<td><button type="button" class="btn btn-lg btn-primary refile" value="${e.lc_num }">추가제출</button></td>
+															
+															</c:when>
+															<c:when test="${e.lc_state eq '대출승인' }">
 														<td><button type="button" class="btn btn-lg btn-primary refile" value="${e.lc_num }">추가제출</button></td>
 															
 															</c:when>

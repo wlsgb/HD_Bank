@@ -3,6 +3,8 @@ package dank.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -134,7 +136,7 @@ public class LoanController {
 		mav.setViewName("loan/checkfile");
 		for(FilenameVO e: list) {
 			System.out.println(e);
-			
+			System.out.println("***********((((((((((((((");
 		}
 		return mav;
 	}
@@ -173,7 +175,7 @@ public class LoanController {
 		mav.addObject("lc_num",lc_num);
 		for(LoanFileVO e: list) {
 			System.out.println(e.getLf_oriname());
-			
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
 		}
 		return mav;
 	}
@@ -291,22 +293,6 @@ public class LoanController {
 		
 		
 
-		System.out.println("*****!*!*!*!*!*!*!*!*");
-		System.out.println(logVO.getLc_num());
-		System.out.println(logVO.getLrl_amount());
-		System.out.println(logVO.getLrl_interest());
-		System.out.println(logVO.getLrl_total());
-		System.out.println();
-		System.out.println(my_tr.getAc_num());
-		System.out.println(my_tr.getMem_code());
-		System.out.println(my_tr.getAt_dps_ac());
-		System.out.println(my_tr.getAt_set_mony());
-		System.out.println(my_tr.getSp_name());
-		System.out.println(your_tr.getAc_num());
-		System.out.println(your_tr.getHd_code());
-		System.out.println(your_tr.getAt_dps_ac());
-		System.out.println(your_tr.getAt_set_mony());
-		System.out.println(your_tr.getSp_name());
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
@@ -429,7 +415,19 @@ public class LoanController {
 				list.add(v);
 			}
 		}
+		int sumM = 0;
+		int sumR = 0;
+		int sumT = 0;
+				
+		for(LoanCaculatorVO e: list) {
+			sumM += e.getRepayM();
+			sumR += e.getRepayR();
+			sumT += e.getRepayMR();
+		}
 		mav.addObject("list", list);
+		mav.addObject("sumM",sumM);
+		mav.addObject("sumR",sumR);
+		mav.addObject("sumT",sumT);
 		return mav;
 	}
 	
@@ -459,14 +457,17 @@ public class LoanController {
 		return "loan/caculator";
 	}
 	// 제출서류 다운로드
-	 @RequestMapping("/fileDown.do")
+	 @RequestMapping(value = "/Download.do")
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
 	     String fileDir =  req.getParameter("fileDir");
+	     //String a = URLDecoder.decode(fileName, "EUC-KR");
+	     //System.out.println("디코더 : "+a);
 	     System.out.println("*********************");
 	      System.out.println(fileName);
 	     modelMap.put("fileName", fileName);
 	     modelMap.put("fileDir", fileDir);
+	     
 	     return "/loan/server/filedown";
 	   }
 	 //제출 서류 등록

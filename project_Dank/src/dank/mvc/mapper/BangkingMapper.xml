@@ -190,7 +190,7 @@
 							                       where wit_code=(select max(wit_code) 
 							                                          from withdraw))
 			)
-	  	
+	  	 
 	  	</insert>
 		<!--5잔액 업데이트 -->
 		<update id="witwitupbalance" parameterType="hashMap">

@@ -76,9 +76,9 @@
 			
 </body>
 <script>
-<<<<<<< HEAD
+
 // 				setInterval(function() {
-=======
+
 /* setInterval(function() {
 	
 	$.ajax({
@@ -230,8 +230,5 @@
 		}
 	})	
 }, 5000) */
->>>>>>> refs/remotes/origin/master
-
-// ///////////////////////////////////////////////////
 </script>
 </html>
