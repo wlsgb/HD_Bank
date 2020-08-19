@@ -44,7 +44,6 @@ public class DepositController {
 	private AccountNum accountNum;
 	@Autowired
 	private DepositService depositService;
-
 	@Autowired
 	private MemberDao memberDao;
 
