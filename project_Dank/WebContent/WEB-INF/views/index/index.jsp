@@ -455,7 +455,7 @@ body {
 				<div class="row row-card-no-pd">
 						<div class="col-md-12">
 							<div class="card">
-							<div class="card-body">
+							<div class="card-body" style="overflow: hidden;">
 				<div class="slider-wrap con" data-slick-autoplay-status="Y">
     <div class="slider main-slider con">
         <div class="slide-item slide-item-1" data-dot-title="HDBANK">
