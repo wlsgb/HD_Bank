@@ -2,13 +2,14 @@ package dank.mvc.vo;
 
 public class HDCardVO {
 
-	private String card_num, card_type, valid_thru;
-	private int mem_code, ac_code;
-	
-	public String getCard_num() {
+	private String card_type, valid_thru;
+	private int card_num, mem_code, ac_code;
+
+
+	public int getCard_num() {
 		return card_num;
 	}
-	public void setCard_num(String card_num) {
+	public void setCard_num(int card_num) {
 		this.card_num = card_num;
 	}
 	public String getCard_type() {
