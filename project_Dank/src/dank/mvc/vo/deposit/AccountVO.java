@@ -2,7 +2,7 @@ package dank.mvc.vo.deposit;
 
 public class AccountVO {
 	private int ac_code, ac_balance;
-	private String ac_num, ac_pwd, ac_name, ac_start_date, ac, end_date;
+	private String ac_num, ac_pwd, ac_name, ac_start_date, end_date;
 	private ProductVO productVO;
 	private Account_ClientVO account_ClientVO;
 
@@ -88,15 +88,6 @@ public class AccountVO {
 	public void setAc_start_date(String ac_start_date) {
 		this.ac_start_date = ac_start_date;
 	}
-
-	public String getAc() {
-		return ac;
-	}
-
-	public void setAc(String ac) {
-		this.ac = ac;
-	}
-
 	public String getEnd_date() {
 		return end_date;
 	}

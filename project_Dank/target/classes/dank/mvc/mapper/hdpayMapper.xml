@@ -22,9 +22,21 @@
 	</select>
 	
 	<!-- 카드번호, 잔액 조회 -->
-	<select id="cardNumBal" parameterType="String" resultType="card">
+	<select id="cardNumBal" parameterType="String" resultType="Map">
 		select h.card_num,ac.ac_balance
 		from hd_card h, account ac
 		where h.ac_code=ac.ac_code and h.card_type =#{card_type}
 	</select>
+	
+	<!-- 카드번호로 조회 -->
+	<select id="selectCard" parameterType="int" resultType="Map">
+		select ac_num, mem_code
+		from hd_card h,account a
+		where h.ac_code=a.ac_code and card_num=#{card_num}
+	</select>
+	
+	<!-- 결제시 payment 생성 -->
+	<insert id="pay" parameterType="pay">
+		insert into payment values(payment_seq.nextVal,#{card_num},sysdate,#{pay_money},#{pay_receipt},#{score})
+	</insert>
 </mapper>
