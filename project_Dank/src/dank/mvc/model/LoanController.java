@@ -3,6 +3,8 @@ package dank.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,6 +136,10 @@ public class LoanController {
 		List<FilenameVO> list = loanDao.filelist();
 		mav.addObject("list", list);
 		mav.setViewName("loan/checkfile");
+		for(FilenameVO e: list) {
+			System.out.println(e);
+			System.out.println("***********((((((((((((((");
+		}
 		return mav;
 	}
 	@RequestMapping(value = "/checkrefile")
@@ -167,7 +175,10 @@ public class LoanController {
 		List<LoanFileVO> list = loanDao.filelist(lc_num);
 		mav.addObject("list",list);
 		mav.addObject("lc_num",lc_num);
-		
+		for(LoanFileVO e: list) {
+			System.out.println(e.getLf_oriname());
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
+		}
 		return mav;
 	}
 	//대출 실행
@@ -284,8 +295,6 @@ public class LoanController {
 		
 		
 
-	
-		
 		
 		if(bangkingdao.trtrAcChk("9001111111") >=1) {
 			if(bangkingdao.trtrAcChk(ac_num) >=1) {
@@ -321,6 +330,7 @@ public class LoanController {
 		List<LoanCaculatorVO> list = new ArrayList<LoanCaculatorVO>();
 		
 		int m = vo.getM();
+		System.out.println(m);
 		int g = vo.getG();
 		float r = vo.getR()/100;
 		int n = vo.getN();
@@ -336,12 +346,23 @@ public class LoanController {
 			for (int i = 0; i < totalterm; i++) {
 				LoanCaculatorVO v = new LoanCaculatorVO();
 				if(i<g) {
+					System.out.println("거치");
 					v.setRepayM(0);
 					v.setRepayR((int)Math.ceil((m*(r/12))));
 					v.setRepayMR(v.getRepayM()+v.getRepayR());
 				}else {
+					System.out.println("상환");
 					v.setRepayM(m/n);
-					v.setRepayR((int) Math.ceil((m-((i-g)*m/n))*r/n));
+					if(i==0) {
+						v.setRepayR((int) Math.ceil(m*(r/12)));
+					}else {
+						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));						
+					}
+					//v.setRepayR((int) Math.ceil((m-((i-g)*m/12))*r/n));
+					System.out.println(i);
+					System.out.println(n);
+					System.out.println(r);
+					System.out.println(v.getRepayR());
 					v.setRepayMR(v.getRepayM()+v.getRepayR());
 					if(i==totalterm-1) {
 						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
@@ -371,6 +392,7 @@ public class LoanController {
 						v.setRepayR((int) Math.ceil((m*(r/12))));
 					}else {	
 						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));
+						
 					}	
 					
 					v.setRepayMR((int) (((m*r/12)*(Math.pow((1+r/12), n)))/((Math.pow((1+r/12), n))-1)));
@@ -408,7 +430,183 @@ public class LoanController {
 				list.add(v);
 			}
 		}
+		int sumM = 0;
+		int sumR = 0;
+		int sumT = 0;
+				
+		for(LoanCaculatorVO e: list) {
+			sumM += e.getRepayM();
+			sumR += e.getRepayR();
+			sumT += e.getRepayMR();
+		}
 		mav.addObject("list", list);
+		mav.addObject("m",m);
+		mav.addObject("sumM",sumM);
+		mav.addObject("sumR",sumR);
+		mav.addObject("sumT",sumT);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/caculatorchart", method = RequestMethod.POST)
+	public ModelAndView caculatorchart(LoanCaculatorVO vo) {
+		ModelAndView mav = new ModelAndView("loan/server/caculatorchartserver");
+		List<LoanCaculatorVO> list = new ArrayList<LoanCaculatorVO>();
+		JSONObject json = new JSONObject();
+		JSONArray mlist = new JSONArray();
+		JSONArray rlist = new JSONArray();
+		JSONArray mrlist = new JSONArray();
+		JSONArray tlist = new JSONArray();
+		mlist.add("납입원금");
+		rlist.add("대출이자");
+		mrlist.add("월상환금");
+		tlist.add("대출잔금");
+		int m = vo.getM();
+		int g = vo.getG();
+		float r = vo.getR()/100;
+		int n = vo.getN();
+		if(vo.getTerm()==1) {
+			n *=12;
+		}
+		if(vo.getTerm2()==1) {
+			g*=12;
+		}
+		int totalterm = n+g;
+		
+		if(vo.getType()==1) {
+			for (int i = 0; i < totalterm; i++) {
+				LoanCaculatorVO v = new LoanCaculatorVO();
+				if(i<g) {
+					
+					v.setRepayM(0);
+					v.setRepayR((int)Math.ceil((m*(r/12))));
+					v.setRepayMR(v.getRepayM()+v.getRepayR());
+					mlist.add(v.getRepayM());
+					rlist.add(v.getRepayR());
+					mrlist.add(v.getRepayMR());
+				}else {
+					if(i==0) {
+						v.setRepayR((int) Math.ceil(m*(r/12)));
+						rlist.add(v.getRepayR());
+					}else {
+						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));
+						rlist.add(v.getRepayR());
+					}
+					
+					v.setRepayM(m/n);
+					mlist.add(v.getRepayM());
+					
+					if(i==totalterm-1) {
+						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
+						mrlist.add(v.getRepayMR());
+					}else {
+						v.setRepayMR(v.getRepayM()+v.getRepayR());
+						mrlist.add(v.getRepayMR());
+					}
+				}
+				
+				if(i==0) {
+					
+					v.setBalance(m+v.getRepayR()-v.getRepayMR());
+					tlist.add(v.getBalance());
+				}else {
+					
+					v.setBalance(list.get(list.size()-1).getBalance()+v.getRepayR()-v.getRepayMR());
+					tlist.add(v.getBalance());
+				}
+				
+				list.add(v);
+				json.put("m", mlist);
+				json.put("r", rlist);
+				json.put("mr", mrlist);
+				json.put("t", tlist);
+			}
+			
+		}else if(vo.getType()==2) {
+			
+			for(int i =0;i<totalterm;i++) {
+				LoanCaculatorVO v = new LoanCaculatorVO();
+				if(i<g) {
+					v.setRepayR((int) Math.ceil((m*(r/12))));
+					v.setRepayMR(v.getRepayR());
+					v.setRepayM(0);
+					mlist.add(v.getRepayM());
+					rlist.add(v.getRepayR());
+					mrlist.add(v.getRepayMR());
+				}else {
+					if(i==0) {
+						v.setRepayR((int) Math.ceil((m*(r/12))));
+						rlist.add(v.getRepayR());
+					}else {	
+						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));
+						rlist.add(v.getRepayR());
+					}	
+					if(i==totalterm-1) {
+						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
+						mrlist.add(v.getRepayMR());
+					}else {
+						v.setRepayMR((int) (((m*r/12)*(Math.pow((1+r/12), n)))/((Math.pow((1+r/12), n))-1)));
+						mrlist.add(v.getRepayMR());
+					}
+					v.setRepayM(v.getRepayMR()-v.getRepayR());
+					mlist.add(v.getRepayM());
+					
+				}
+				
+				if(i==0) {
+					v.setBalance(m+v.getRepayR()-v.getRepayMR());
+					tlist.add(v.getBalance());
+				}else {
+					v.setBalance(list.get(list.size()-1).getBalance()+v.getRepayR()-v.getRepayMR());
+					tlist.add(v.getBalance());
+				}
+				list.add(v);
+				json.put("m", mlist);
+				json.put("r", rlist);
+				json.put("mr", mrlist);
+				json.put("t", tlist);
+			}
+		}else if(vo.getType()==3) {
+			for (int i = 0; i < totalterm; i++) {
+				LoanCaculatorVO v = new LoanCaculatorVO();
+				v.setRepayR((int) (m*r/12));
+				rlist.add(v.getRepayR());
+				if(i!=totalterm-1) {
+					v.setRepayM(0);
+					v.setRepayMR(v.getRepayR());
+					mlist.add(v.getRepayM());
+					mrlist.add(v.getRepayMR());
+				}else {
+					v.setRepayM(m);
+					v.setRepayMR(v.getRepayR()+v.getRepayM());
+					mlist.add(v.getRepayM());
+					mrlist.add(v.getRepayMR());
+				}
+				
+				if(i==0) {
+					v.setBalance(m+v.getRepayR()-v.getRepayMR());
+					tlist.add(v.getBalance());
+				}else {
+					v.setBalance(list.get(list.size()-1).getBalance()+v.getRepayR()-v.getRepayMR());
+					tlist.add(v.getBalance());
+				}
+				
+				list.add(v);
+				json.put("m", mlist);
+				json.put("r", rlist);
+				json.put("mr", mrlist);
+				json.put("t", tlist);
+			}
+		}
+		int sumM = 0;
+		int sumR = 0;
+		int sumT = 0;
+				
+		for(LoanCaculatorVO e: list) {
+			sumM += e.getRepayM();
+			sumR += e.getRepayR();
+			sumT += e.getRepayMR();
+		}
+		mav.addObject("json", json);
 		return mav;
 	}
 	
@@ -438,13 +636,17 @@ public class LoanController {
 		return "loan/caculator";
 	}
 	// 제출서류 다운로드
-	 @RequestMapping("/fileDown.do")
+	 @RequestMapping(value = "/Download.do")
 	   public String fileDown(HttpServletRequest req , ModelMap modelMap) throws Exception {
 	     String fileName = req.getParameter("fileName");
 	     String fileDir =  req.getParameter("fileDir");
-	      
+	     //String a = URLDecoder.decode(fileName, "EUC-KR");
+	     //System.out.println("디코더 : "+a);
+	     System.out.println("*********************");
+	      System.out.println(fileName);
 	     modelMap.put("fileName", fileName);
 	     modelMap.put("fileDir", fileDir);
+	     
 	     return "/loan/server/filedown";
 	   }
 	 //제출 서류 등록
@@ -475,9 +677,7 @@ public class LoanController {
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
-		 		if(loanDao.checkstate(vo.getLc_num())=="서류제출대기") {
-		 			loanDao.stateupdate(vo.getLc_num());
-		 		}
+		 		loanDao.stateupdate(vo.getLc_num());
 		 		
 		 		
 		 return mav;

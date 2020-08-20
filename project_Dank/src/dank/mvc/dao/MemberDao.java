@@ -33,6 +33,10 @@ public class MemberDao {
 		return ss.selectOne("member.serNameEmail", num);
 	}
 	
+	public String serNumToName(int num) {
+		return ss.selectOne("member.serNumToName", num);
+	}
+	
 	public String forBirth(int num) {
 		return ss.selectOne("member.forBirth", num);
 	}

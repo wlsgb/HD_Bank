@@ -63,6 +63,8 @@
 		<typeAlias type="dank.mvc.vo.Curr_VisitorVO" alias="cvvo"/>
 		<!-- 멤버로그 -->
 		<typeAlias type="dank.mvc.vo.MemberLogVO" alias="ml"/>
+		<!-- hdpay -->
+		<typeAlias type="dank.mvc.vo.HDCardVO" alias="card"/>
   	</typeAliases>
 
   </configuration>
