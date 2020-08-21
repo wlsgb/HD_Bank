@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +26,19 @@ import mvc.dto.BoardDto;
 
 @Controller
 public class NewsController {
-	public static List<BoardDto> ReadCsvList() {
+	
+	public static List<BoardDto> ReadCsvList(HttpServletRequest request) {
 		// 반환용 리스트
+		
 		List<List<String>> ret = new ArrayList<List<String>>();
 		BufferedReader br = null;
 		List<BoardDto> dtolist = new ArrayList<BoardDto>();
 		try {
-			CSVReader reader = new CSVReader(new FileReader("C:\\Users\\gusrl\\git\\HD_Bank\\project_Dank\\WebContent\\resources\\hd_csv.csv"));
+			HttpSession session = request.getSession();
+		 	String r_path = session.getServletContext().getRealPath("/");
+		 	System.out.println(r_path);
+			String img_path ="resources\\hd_csv.csv";
+			CSVReader reader = new CSVReader(new FileReader(r_path+img_path));
 			String[] line;
 
 			while ((line = reader.readNext()) != null) {
@@ -75,31 +84,32 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = "/goNews")
-	public String goNews(PageVO vo, Model model,
+	public String goNews(PageVO vo, Model model,HttpServletRequest request,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "5") String cntPerPage,
 			@RequestParam(value = "searchType", required = false) String searchType,
-			@RequestParam(value = "searchValue", required = false) String searchValue) {;
-		int total = ReadCsvList().size();
+			@RequestParam(value = "searchValue", required = false) String searchValue) {
+		
+		
+			int total = ReadCsvList(request).size();
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		if (searchType != null && searchType.equals("1") && searchValue != null) {
-			for (int i = 0; i < ReadCsvList().size(); i++) {
-				if (ReadCsvList().get(i).getTitle().contains(searchValue)) {
-					list.add(ReadCsvList().get(i));
+			for (int i = 0; i < total; i++) {
+				if (ReadCsvList(request).get(i).getTitle().contains(searchValue)) {
+					list.add(ReadCsvList(request).get(i));
 				}
 			}
 		} else if (searchType != null && searchType.equals("2") && searchValue != null) {
-			for (int i = 0; i < ReadCsvList().size(); i++) {
-				if (ReadCsvList().get(i).getContent().contains(searchValue)) {
-					list.add(ReadCsvList().get(i));
+			for (int i = 0; i < ReadCsvList(request).size(); i++) {
+				if (ReadCsvList(request).get(i).getContent().contains(searchValue)) {
+					list.add(ReadCsvList(request).get(i));
 				}
 			}
 		} else {
-			list = ReadCsvList();
+			list = ReadCsvList(request);
 		}
 
 		System.out.println(list.get(0).getTitle());
-		
 		
 		System.out.println("total:" + total);
 		vo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), vo.getCategori());

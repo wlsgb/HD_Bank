@@ -654,7 +654,7 @@ public class LoanController {
 	 public ModelAndView fileupload(LoanFileVO vo,HttpServletRequest request) {
 		 ModelAndView mav = new ModelAndView("redirect:check");
 		 HttpSession session = request.getSession();
-			String r_path = session.getServletContext().getRealPath("/");
+		 	String r_path = session.getServletContext().getRealPath("/");
 			String img_path ="resources\\upload\\";
 		 		try {
 		 			 File ff = null; 

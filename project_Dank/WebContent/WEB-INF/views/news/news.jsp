@@ -19,8 +19,8 @@
 				</div>
 				<div class="ml-md-auto py-2 py-md-0">
 					<a href="checkbalance"
-						class="btn btn-white btn-border btn-round mr-2">뉴스페이지</a> <a
-						href="qna" class="btn btn-secondary btn-round">금융뉴스페이지</a>
+						class="btn btn-white btn-border btn-round mr-2">빠른페이지</a> <a
+						href="qna" class="btn btn-secondary btn-round">고객센터</a>
 				</div>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 									<span class="lead">${e.content }</span>
 									<br />
 									<br />
-									<p style="text-align: right;">관련링크 : <b>${e.link }</b></p>
+									<p style="text-align: right;">관련링크 : <a href="${e.link }"><b>${e.link }</b></a></p>
 								</div>
 								<br />
 								<br />
