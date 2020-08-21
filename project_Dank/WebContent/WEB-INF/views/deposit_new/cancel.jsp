@@ -65,7 +65,7 @@
 															<td style="border-style: none;"></td>
 															<td style="border-style: none;">잔액 : </td>
 															<td style="border-style: none;">${e.ac_balance }원</td>
-															<td style="border-style: none;"><a href="deposite_cancle_check_select">예금해지 예상 보러가기</a></td>
+															<!-- <td style="border-style: none;"><a href="deposite_cancle_check_select">예금해지 예상 보러가기</a></td> -->
 														</tr>
 														</c:forEach>
 													</tbody>
@@ -96,7 +96,7 @@
 															<tr>
 																<td style="border-style: none;"></td><td style="border-style: none;">잔액 : </td>
 																<td style="border-style: none;">${e.ac_balance }원</td>
-																<td style="border-style: none;"><a href="deposite_cancle_check_select">예금해지 예상 보러가기</a></td>
+																<!-- <td style="border-style: none;"><a href="deposite_cancle_check_select">예금해지 예상 보러가기</a></td> -->
 															</tr>
 															</c:forEach>
 															</form>
