@@ -369,7 +369,7 @@ public class DepositController {
 		your_tr.setAc_num(yourac);
 		your_tr.setMem_code(youracmem);
 		your_tr.setAt_dps_ac(myac);
-		your_tr.setSp_name(youracmem);
+		your_tr.setSp_name(youracwrite);
 		your_tr.setAt_set_mony(trmoney);
 
 
