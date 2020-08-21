@@ -407,9 +407,6 @@ public class DepositController {
 		historymap.put("start", String.valueOf(pvo.getStart()));
 		historymap.put("end", String.valueOf(pvo.getEnd()));
 
-		
-		
-		
 		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
 		
 		for(AccountHistoryVO e: history) {
@@ -417,7 +414,6 @@ public class DepositController {
 			System.out.println(e.getName());
 		}
 		
-
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_inquire_detail");
 		mav.addObject("history", history);
