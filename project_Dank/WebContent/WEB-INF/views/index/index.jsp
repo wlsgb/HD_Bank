@@ -634,8 +634,6 @@ body {
 				</div>
 			</div>
 	<script>
-
-		
 	window.onload = function() {
 		console.clear();
 

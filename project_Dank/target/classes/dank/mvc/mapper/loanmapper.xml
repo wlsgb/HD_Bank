@@ -138,7 +138,7 @@
     </select>
     
     <insert id="fileup" parameterType="lfvo">
-    	insert into loan_file values(loan_file1_seq.nextVal,#{lc_num},#{lf_name},#{lf_oriname},sysdate)
+    	insert into loan_file values(loan_file_seq.nextVal,#{lc_num},#{lf_name},#{lf_oriname},sysdate)
     </insert>
     
     <select id="checkfiledetail" resultType="lfvo" parameterType="int">

@@ -37,6 +37,6 @@
 	
 	<!-- 결제시 payment 생성 -->
 	<insert id="pay" parameterType="pay">
-		insert into payment values(payment_seq.nextVal,#{card_num},sysdate,#{pay_money},#{pay_receipt},#{score})
+		insert into hd_payment values(payment_seq.nextVal,#{card_num},sysdate,#{pay_money},#{pay_receipt},#{score})
 	</insert>
 </mapper>
