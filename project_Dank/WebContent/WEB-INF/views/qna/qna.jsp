@@ -60,8 +60,6 @@
 							<button id="five" class="btn btn-primary">±‚≈∏</button>
 							<br />
 							<br />
-
-			
 							<c:forEach items="${list }" var="e">
 								<div class="row col-12">
 									<span class="blockquote blockquote-primary text-info">
