@@ -26,7 +26,7 @@
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
 				<div class="row">
-						<div class="col-sm-6 col-md-3" id="savinfo">
+						<div class="col-4" id="savinfo">
 							<div class="card card-stats card-primary card-round">
 								<div class="card-body">
 									<div class="numbers">
@@ -35,7 +35,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3" id="insinfo">
+						<div class="col-4" id="insinfo">
 							<div class="card card-stats card-info card-round">
 								<div class="card-body">
 									<div class="numbers">
@@ -44,7 +44,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3" id="shasinfo">
+						<div class="col-4" id="shasinfo">
 							<div class="card card-stats card-success card-round">
 								<div class="card-body ">
 									<div class="numbers">
@@ -53,7 +53,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-3" id="shacinfo">
+						<!-- <div class="col-sm-6 col-md-3" id="shacinfo">
 							<div class="card card-stats card-secondary card-round">
 								<div class="card-body ">
 									<div class="numbers">
@@ -61,7 +61,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<!-- 상단 페이지 이동 4개 -->
 				<div class="row">
