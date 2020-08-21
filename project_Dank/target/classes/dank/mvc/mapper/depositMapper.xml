@@ -119,6 +119,13 @@
 			</where>
 		</if>
 	</select>
+	
+	<!-- 주식계좌 조회 -->
+	<select id="seleStock" parameterType="int" resultType="int">
+		select count(*) 
+		from account_client ac, account a
+		where ac.ac_code = a.ac_code and mem_code=#{mem_code} and pro_code=6
+	</select>
 
 	<!-- 계좌 생성 -->
 	<insert id="addAccount" parameterType="acvo">

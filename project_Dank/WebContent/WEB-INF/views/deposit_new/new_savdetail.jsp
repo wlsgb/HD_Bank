@@ -119,7 +119,7 @@
 										<input type="hidden" id="sav_code" name="sav_code" value="${saving.sav_code }">
 										<input type="hidden" id="deptype" name="deptype" value="100">
 										<!-- 신청 버튼 -->
-											<c:if test="${saving.sav_online != 0}">
+											<c:if test="${saving.sav_online != 0 && stockBool}">
 												<input type="submit" class="btn btn-primary" value="신청">
 											</c:if>
 										</form>
