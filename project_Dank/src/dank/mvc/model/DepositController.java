@@ -1,5 +1,6 @@
 package dank.mvc.model;
 
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,9 +56,16 @@ public class DepositController {
 
 	// 예금-신규-특정 예금 상품 페이지 이동
 	@RequestMapping(value = "/new_savdetail")
-	public String saving_detail(Model m, int sav_code) {
+	public String saving_detail(HttpSession session, Model m, int sav_code) {
+		
 		System.out.println(sav_code);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		
+		boolean boolStock= depositDao.seleStock(member.getMem_code());
+		
+		m.addAttribute("boolStock", boolStock);
 		m.addAttribute("saving", saving);
 		return "deposit_new/new_savdetail";
 	}
@@ -85,6 +93,11 @@ public class DepositController {
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("memberVO", memberVO);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
+		
+		boolean stockBool = true;
+		stockBool = depositDao.seleStock(mem_code);
+		
+		m.addAttribute("stockBool", stockBool);
 		m.addAttribute("saving", saving);
 		m.addAttribute("deptype", deptype);
 		return "deposit_new/new_deposit";
@@ -407,9 +420,6 @@ public class DepositController {
 		historymap.put("start", String.valueOf(pvo.getStart()));
 		historymap.put("end", String.valueOf(pvo.getEnd()));
 
-		
-		
-		
 		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
 		
 		for(AccountHistoryVO e: history) {
@@ -417,7 +427,6 @@ public class DepositController {
 			System.out.println(e.getName());
 		}
 		
-
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_inquire_detail");
 		mav.addObject("history", history);

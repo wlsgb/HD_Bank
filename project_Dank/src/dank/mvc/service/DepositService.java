@@ -1,5 +1,7 @@
 package dank.mvc.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import dank.mvc.dao.BangkingDao;
 import dank.mvc.dao.DepositDao;
+import dank.mvc.dao.HDPayDao;
+import dank.mvc.vo.HDCardVO;
+import dank.mvc.vo.PaymentVO;
 import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.TransferDTO;
@@ -18,6 +23,8 @@ public class DepositService {
 	private DepositDao depositDao;
 	@Autowired
 	private BangkingDao bangkingdao;
+	@Autowired
+	private HDPayDao payDao;
 	
 	public void newAccount(AccountVO accountVO, Account_ClientVO clientVO) {
 		depositDao.addAccount(accountVO);
@@ -42,4 +49,10 @@ public class DepositService {
 		return "deposit_new/cancel_success";
 	}
 	
+	public void payment(String money,Map<String, String> paramapsp,Map<String, String> paramapbal,PaymentVO vo) {
+		bangkingdao.witpluswit(money);
+		bangkingdao.witplussp(paramapsp);
+		bangkingdao.witwitupbalance(paramapbal);
+		payDao.pay(vo);
+	}
 }

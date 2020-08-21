@@ -452,103 +452,104 @@ body {
 					</div>
 				</div>
 				<!-- 상단의 푸른색 공간 끝 -->
-				<div class="row row-card-no-pd">
+				<div class="page-inner mt--5">
 						<div class="col-md-12">
 							<div class="card">
-							<div class="card-body" style="overflow: hidden;">
-				<div class="slider-wrap con" data-slick-autoplay-status="Y">
-    <div class="slider main-slider con">
-        <div class="slide-item slide-item-1" data-dot-title="HDBANK">
-            <div class="slide-con">
-                <div class="slide-dummy"></div>
-                <div class="slide-txt">
-                    <h2 class="txt-tt">소상공인 지원</h2>
-                    <p class="txt-desc">코로나 19 소상공인 지원.</p>
-                    <div class="txt-btn">
-                        <a href="#" class="txt-btn-2">소상공인 지원 더보기</a>
-                    </div>
-                </div>
-                <picture class="img-box">
-                    <source srcset="resources/img/mainIMG/test8.jpg" media="(max-width: 770px)">
-                    <img src="resources/img/mainIMG/test8.jpg" alt="">
-                </picture>
-            </div>
-        </div>
-        <div class="slide-item slide-item-2" data-dot-title="HDBANK">
-            <div class="slide-con">
-                <div class="slide-dummy"></div>
-                <div class="slide-txt">
-                    <h2 class="txt-tt" style="color:black;">HDBANK</h2>
-                    <p class="txt-desc" style="color:black;">언제나 함께하는 동반자. HDbank</p>
-                    <div class="txt-btn">
-                        <a href="#" class="txt-btn-1" style="color:black;">고객 서비스</a>
-                        <a href="#" class="txt-btn-2" style="color:black;">은행 정보</a>
-                    </div>
-                </div>
-                <picture class="img-box">
-                    <source srcset="resources/img/mainIMG/test5.jpg" media="(max-width: 770px)">
-                    <img src="resources/img/mainIMG/test5.jpg" alt="">
-                </picture>
-            </div>
-        </div>
-        <div class="slide-item slide-item-3" data-dot-title="금융서비스">
-            <div class="slide-con">
-                <div class="slide-dummy"></div>
-                <div class="slide-txt">
-                    <h2 class="txt-tt txt-tt-book"style="color:black;">비대면 계좌서비스</h2>
-                    <p class="txt-desc"style="color:black;">컴퓨터만 있다면 언제 어디서든!</p>
-                    <div class="txt-btn">
-                        <a href="#" class="txt-btn-1"style="color:black;">더 알아보기</a>
-                        <a href="#" class="txt-btn-2"style="color:black;">계좌 확인하기</a>
-                    </div>
-                </div>
-                <picture class="img-box">
-                    <source srcset="resources/img/mainIMG/test4.jpg" media="(max-width: 770px)">
-                    <img src="resources/img/mainIMG/test4.jpg" alt="">
-                </picture>
-            </div>
-        </div>
-        <div class="slide-item slide-item-4" data-dot-title="대출서비스">
-            <div class="slide-con">
-                <div class="slide-dummy"></div>
-                <div class="slide-txt">
-                    <h2 class="txt-tt"style="color:black;">든든한 대출 서비스</h2>
-                    <p class="txt-desc"style="color:black;">빠른 대출 신청으로 쉽고 빠르게</p>
-                    <div class="txt-btn">
-                        <a href="#" class="txt-btn-1"style="color:black;">더 알아보기</a>
-                        <a href="#" class="txt-btn-2"style="color:black;">대출 바로가기</a>
-                    </div>
-                </div>
-                <picture class="img-box">
-                    <source srcset="resources/img/mainIMG/test6.jpg" media="(max-width: 770px)">
-                    <img src="resources/img/mainIMG/test6.jpg" alt="">
-                </picture>
-            </div>
-        </div>
-        <div class="slide-item slide-item-5" data-dot-title="주식서비스">
-            <div class="slide-con">
-                <div class="slide-dummy"></div>
-                <div class="slide-txt">
-                    <h2 class="txt-tt"style="color:black;">전문적인 주식 분석</h2>
-                    <p class="txt-desc"style="color:black;">핸드폰에 주식을 담다. HDSTOCK</p>
-                    <div class="txt-btn">
-                        <a href="#" class="txt-btn-1"style="color:black;">더 알아보기</a>
-                        <a href="#" class="txt-btn-2"style="color:black;">모바일 웹 이동</a>
-                    </div>
-                </div>
-                <picture class="img-box">
-                    <source srcset="resources/img/mainIMG/test7.jpg" media="(max-width: 770px)">
-                    <img src="resources/img/mainIMG/test7.jpg" alt="">
-                </picture>
-            </div>
-        </div>
-    </div>
-    <button class="s-autoplay-btn"></button>
-</div>
-						</div>
-									</div>
+								<div class="card-body" style="overflow: hidden;">
+								<div class="slider-wrap con" data-slick-autoplay-status="Y">
+								    <div class="slider main-slider con">
+								        <div class="slide-item slide-item-1" data-dot-title="HDBANK">
+								            <div class="slide-con">
+								                <div class="slide-dummy"></div>
+								                <div class="slide-txt">
+								                    <h2 class="txt-tt">소상공인 지원</h2>
+								                    <p class="txt-desc">코로나 19 소상공인 지원.</p>
+								                    <div class="txt-btn">
+								                        <a href="#" class="txt-btn-2">소상공인 지원 더보기</a>
+								                    </div>
+								                </div>
+								                <picture class="img-box">
+								                    <source srcset="resources/img/mainIMG/test8.jpg" media="(max-width: 770px)">
+								                    <img src="resources/img/mainIMG/test8.jpg" alt="">
+								                </picture>
+								            </div>
+								        </div>
+								        <div class="slide-item slide-item-2" data-dot-title="HDBANK">
+								            <div class="slide-con">
+								                <div class="slide-dummy"></div>
+								                <div class="slide-txt">
+								                    <h2 class="txt-tt" style="color:black;">HDBANK</h2>
+								                    <p class="txt-desc" style="color:black;">언제나 함께하는 동반자. HDbank</p>
+								                    <div class="txt-btn">
+								                        <a href="#" class="txt-btn-1" style="color:black;">고객 서비스</a>
+								                        <a href="#" class="txt-btn-2" style="color:black;">은행 정보</a>
+								                    </div>
+								                </div>
+								                <picture class="img-box">
+								                    <source srcset="resources/img/mainIMG/test5.jpg" media="(max-width: 770px)">
+								                    <img src="resources/img/mainIMG/test5.jpg" alt="">
+								                </picture>
+								            </div>
+								        </div>
+								        <div class="slide-item slide-item-3" data-dot-title="금융서비스">
+								            <div class="slide-con">
+								                <div class="slide-dummy"></div>
+								                <div class="slide-txt">
+								                    <h2 class="txt-tt txt-tt-book"style="color:black;">비대면 계좌서비스</h2>
+								                    <p class="txt-desc"style="color:black;">컴퓨터만 있다면 언제 어디서든!</p>
+								                    <div class="txt-btn">
+								                        <a href="#" class="txt-btn-1"style="color:black;">더 알아보기</a>
+								                        <a href="#" class="txt-btn-2"style="color:black;">계좌 확인하기</a>
+								                    </div>
+								                </div>
+								                <picture class="img-box">
+								                    <source srcset="resources/img/mainIMG/test4.jpg" media="(max-width: 770px)">
+								                    <img src="resources/img/mainIMG/test4.jpg" alt="">
+								                </picture>
+								            </div>
+								        </div>
+								        <div class="slide-item slide-item-4" data-dot-title="대출서비스">
+								            <div class="slide-con">
+								                <div class="slide-dummy"></div>
+								                <div class="slide-txt">
+								                    <h2 class="txt-tt"style="color:black;">든든한 대출 서비스</h2>
+								                    <p class="txt-desc"style="color:black;">빠른 대출 신청으로 쉽고 빠르게</p>
+								                    <div class="txt-btn">
+								                        <a href="#" class="txt-btn-1"style="color:black;">더 알아보기</a>
+								                        <a href="#" class="txt-btn-2"style="color:black;">대출 바로가기</a>
+								                    </div>
+								                </div>
+								                <picture class="img-box">
+								                    <source srcset="resources/img/mainIMG/test6.jpg" media="(max-width: 770px)">
+								                    <img src="resources/img/mainIMG/test6.jpg" alt="">
+								                </picture>
+								            </div>
+								        </div>
+								        <div class="slide-item slide-item-5" data-dot-title="주식서비스">
+								            <div class="slide-con">
+								                <div class="slide-dummy"></div>
+								                <div class="slide-txt">
+								                    <h2 class="txt-tt"style="color:black;">전문적인 주식 분석</h2>
+								                    <p class="txt-desc"style="color:black;">핸드폰에 주식을 담다. HDSTOCK</p>
+								                    <div class="txt-btn">
+								                        <a href="#" class="txt-btn-1"style="color:black;">더 알아보기</a>
+								                        <a href="#" class="txt-btn-2"style="color:black;">모바일 웹 이동</a>
+								                    </div>
+								                </div>
+								                <picture class="img-box">
+								                    <source srcset="resources/img/mainIMG/test7.jpg" media="(max-width: 770px)">
+								                    <img src="resources/img/mainIMG/test7.jpg" alt="">
+								                </picture>
+								            </div>
+								        </div>
+								    </div>
+								    <button class="s-autoplay-btn"></button>
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div class="page-inner mt--5">
 				<!-- 페이지 레이아웃 시작 -->
 				<div class="row">
@@ -629,16 +630,10 @@ body {
 							</div>
 						</div>
 					</div>
-				
-		
-					
 					<!-- 페이지 레이아웃 끝 -->
 				</div>
 			</div>
-	
 	<script>
-
-		
 	window.onload = function() {
 		console.clear();
 

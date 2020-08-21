@@ -69,5 +69,15 @@ public class DepositDao {
 	public void delAccount(int ac_code) {
 		ss.delete("deposit.delAccount",ac_code);
 	}
+	
+	//аж╫д
+	public boolean seleStock(int mem_code) {
+		boolean result = true;
+		int stockBool = ss.delete("deposit.seleStock",mem_code);
+		if(stockBool > 0) {
+			result = false;
+		}
+		return result;
+	}
 
 }

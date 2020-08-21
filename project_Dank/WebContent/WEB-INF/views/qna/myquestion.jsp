@@ -41,20 +41,28 @@
 						<div class="card-body">
 						
 							<c:forEach items="${list }" var="e">
-							
-								<div>${e.inq_num }번)
+							<div>
+								<span class="blockquote blockquote-primary text-info">
+									[
 									<c:if test="${e.cat_num eq 2}">예금</c:if>
 									<c:if test="${e.cat_num eq 3}">대출</c:if>
 									<c:if test="${e.cat_num eq 4}">회원정보</c:if>
 									<c:if test="${e.cat_num eq 5}">기타</c:if>
-								</div>
-								
-								<div>제목 : ${e.inq_title }</div><div>문의 시간 : ${e.inq_date }</div>
-								<div style="border: 1px solid gray; background-color: #E2E2E2;">내용 : ${e.inq_content }
-									
-								</div>
+									]
+								</span>
+								&nbsp;
+								<span class="blockquote blockquote-primary">${e.inq_title}</span>
+							</div>
+							<div class="card-sub">
+								<span class="lead">${e.inq_content}</span>
+								<br />
+								<br />
+								<p style="text-align: right;">수정/게시된 날짜 : <b>${e.inq_date}</b></p>
+							</div>
+							<br />
+							<br />
 							</c:forEach>
-							<div class="card-body">
+							<%-- <div class="card-body">
 								<div class="demo">
 									<ul class="pagination pg-primary">
 										<li class="page-item">
@@ -89,7 +97,7 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div> --%>
 						</div>
 					</div>
 				</div>
