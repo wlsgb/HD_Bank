@@ -62,10 +62,16 @@ public class DepositController {
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
+		int mem_code = member.getMem_code();
+		Map<String, String> map = new HashMap<>();
+		map.put("mem_code", String.valueOf(mem_code));
+		map.put("sav_code", String.valueOf(sav_code));
 		
-		boolean boolStock= depositDao.seleStock(member.getMem_code());
+		boolean stockBool = true;
+		stockBool = depositDao.seleStock(map);
+		System.out.println("stockBool:"+stockBool);
 		
-		m.addAttribute("boolStock", boolStock);
+		m.addAttribute("stockBool", stockBool);
 		m.addAttribute("saving", saving);
 		return "deposit_new/new_savdetail";
 	}
@@ -94,10 +100,6 @@ public class DepositController {
 		m.addAttribute("memberVO", memberVO);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
 		
-		boolean stockBool = true;
-		stockBool = depositDao.seleStock(mem_code);
-		
-		m.addAttribute("stockBool", stockBool);
 		m.addAttribute("saving", saving);
 		m.addAttribute("deptype", deptype);
 		return "deposit_new/new_deposit";
