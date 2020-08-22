@@ -35,7 +35,6 @@ import dank.mvc.vo.deposit.At_applicationVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 
 import dank.mvc.vo.deposit.SavingVO;
-import dank.mvc.vo.deposit.Shared_savingVO;
 
 @Controller
 public class DepositController {
