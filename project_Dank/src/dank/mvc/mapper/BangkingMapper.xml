@@ -418,6 +418,49 @@
 <!-- /@계좌이체 끝 -->
 
 <!--@거래내역 가져오기 시작 -->
+		<select id="acAllHistory" parameterType="hashMap" resultType="achvo">
+		select 
+			r_num
+			, dealdate
+			, dep_money
+			, wit_money
+			, balance
+			, name
+            ,sp_code
+			from(
+			select rownum r_num, dealdate, dep_money, wit_money, balance, name,sp_code
+			from(
+			select COALESCE(to_char(d.dep_date,'YYYY-MM-DD HH24:MI')
+			,to_char(w.wit_date,'YYYY-MM-DD HH24:MI')) dealdate
+			, d.dep_money dep_money
+			,w.wit_money wit_money
+			,sp.sp_balance balance
+			, sp.sp_name name
+            , sp.sp_code sp_code
+			from account a
+			,account_client ac 
+			,sav_process sp
+			, deposit d
+			, withdraw w
+			where ac.mem_code=2
+			 and a.ac_code=ac.ac_code 
+			 and a.ac_code=(select a.ac_code
+			 				 from account a, account_client ac
+			 				  where a.ac_num=1007325226
+									  and ac.mem_code=2
+									   and ac.ac_code=a.ac_code) 
+			  and sp.ac_code=(select a.ac_code 
+			  					from account a, account_client ac 
+			  					where a.ac_num=1007325226 and ac.mem_code=2
+			  							and a.ac_code = ac.ac_code) 
+			  and d.dep_code(+)=sp.dep_code
+			   and w.wit_code(+) = sp.wit_code
+			order by sp_code desc
+			)
+			)
+		</select>
+
+
 		<!-- 	거래내역 가져오기 ,숫자,거래날자,입금액,출금액,잔액,이름 -->
 	  <select id="achistory" parameterType="hashMap" resultType="achvo">
 			  select 

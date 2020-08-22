@@ -408,6 +408,7 @@ public class DepositController {
 			@RequestParam(value = "ac_num") String ac_num,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
+		
 		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
 
 		Map<String, String> historymap = new HashMap<String, String>();

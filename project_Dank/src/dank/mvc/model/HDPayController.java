@@ -25,7 +25,9 @@ import dank.mvc.service.DepositService;
 import dank.mvc.vo.HDCardVO;
 import dank.mvc.vo.MemberVO;
 import dank.mvc.vo.PaymentVO;
+import dank.mvc.vo.deposit.AccountHistoryVO;
 import dank.mvc.vo.deposit.AccountVO;
+import dank.mvc.vo.deposit.PageVO;
 
 @RestController
 public class HDPayController {
@@ -70,23 +72,54 @@ public class HDPayController {
     }
 	
 	//계좌 조회
-	@RequestMapping(value = "/listAc" , produces="text/plain;charset=UTF-8")
-	public String listAc(int mem_code) {
-		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
+	@RequestMapping(value = "/allListAc" , produces="text/plain;charset=UTF-8")
+	public String allListAc(int mem_code, String ac_num) {
 		
-		if(aclist != null) {
-			String acInfo = null;
+		Map<String, String> historymap = new HashMap<String, String>();
+		historymap.put("ac_num", ac_num);
+		historymap.put("mem_code", String.valueOf(mem_code));
+
+		int total = bangkingdao.gettotalcnt(historymap);
+		List<AccountHistoryVO> history =bangkingdao.getAllHistory(historymap);
+		
+		for(AccountHistoryVO e: history) {
+			System.out.println(e.getSp_code());
+			System.out.println(e.getName());
+		}
+		
+		if(history != null) {
+			String historyHistory = null;
 			try {
-				acInfo = new ObjectMapper().writeValueAsString(aclist);
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
+				historyHistory = new ObjectMapper().writeValueAsString(history);
+			} catch (Exception e) {
+				// TODO: handle exception
 				e.printStackTrace();
 			}
-            return acInfo;
+			return historyHistory;
 		}else {
-            return null;
+			return null;
 		}
 	}
+	
+	//계좌 조회
+		@RequestMapping(value = "/listAc" , produces="text/plain;charset=UTF-8")
+		public String detailListAc(int mem_code) {
+			
+			List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
+			
+			if(aclist != null) {
+				String acInfo = null;
+				try {
+					acInfo = new ObjectMapper().writeValueAsString(aclist);
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            return acInfo;
+			}else {
+	            return null;
+			}
+		}
 	
 	//카드 리스트
 	@RequestMapping(value = "/listCardType" , produces="text/plain;charset=UTF-8")
