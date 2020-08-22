@@ -419,7 +419,7 @@
 
 <!--@거래내역 가져오기 시작 -->
 		<select id="acAllHistory" parameterType="hashMap" resultType="achvo">
-		select 
+		  select 
 			r_num
 			, dealdate
 			, dep_money
@@ -436,22 +436,22 @@
 			,w.wit_money wit_money
 			,sp.sp_balance balance
 			, sp.sp_name name
-            , sp.sp_code sp_code
+            ,sp.sp_code sp_code
 			from account a
 			,account_client ac 
 			,sav_process sp
 			, deposit d
 			, withdraw w
-			where ac.mem_code=2
+			where ac.mem_code=#{mem_code}
 			 and a.ac_code=ac.ac_code 
 			 and a.ac_code=(select a.ac_code
 			 				 from account a, account_client ac
-			 				  where a.ac_num=1007325226
-									  and ac.mem_code=2
+			 				  where a.ac_num=#{ac_num}
+									  and ac.mem_code=#{mem_code}
 									   and ac.ac_code=a.ac_code) 
 			  and sp.ac_code=(select a.ac_code 
-			  					from account a, account_client ac 
-			  					where a.ac_num=1007325226 and ac.mem_code=2
+			  					from account a, account ac 
+			  					where a.ac_num=#{ac_num} and ac.mem_code=#{mem_code}
 			  							and a.ac_code = ac.ac_code) 
 			  and d.dep_code(+)=sp.dep_code
 			   and w.wit_code(+) = sp.wit_code

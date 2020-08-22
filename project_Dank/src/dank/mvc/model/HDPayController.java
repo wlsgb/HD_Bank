@@ -80,7 +80,7 @@ public class HDPayController {
 		historymap.put("mem_code", String.valueOf(mem_code));
 
 		int total = bangkingdao.gettotalcnt(historymap);
-		List<AccountHistoryVO> history =bangkingdao.getAllHistory(historymap);
+		List<AccountHistoryVO> history = bangkingdao.getAllHistory(historymap);
 		
 		for(AccountHistoryVO e: history) {
 			System.out.println(e.getSp_code());
