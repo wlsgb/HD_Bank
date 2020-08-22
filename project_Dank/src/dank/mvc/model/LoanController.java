@@ -136,10 +136,6 @@ public class LoanController {
 		List<FilenameVO> list = loanDao.filelist();
 		mav.addObject("list", list);
 		mav.setViewName("loan/checkfile");
-		for(FilenameVO e: list) {
-			System.out.println(e);
-			System.out.println("***********((((((((((((((");
-		}
 		return mav;
 	}
 	@RequestMapping(value = "/checkrefile")
@@ -175,10 +171,6 @@ public class LoanController {
 		List<LoanFileVO> list = loanDao.filelist(lc_num);
 		mav.addObject("list",list);
 		mav.addObject("lc_num",lc_num);
-		for(LoanFileVO e: list) {
-			System.out.println(e.getLf_oriname());
-			System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
-		}
 		return mav;
 	}
 	//대출 실행
@@ -330,7 +322,6 @@ public class LoanController {
 		List<LoanCaculatorVO> list = new ArrayList<LoanCaculatorVO>();
 		
 		int m = vo.getM();
-		System.out.println(m);
 		int g = vo.getG();
 		float r = vo.getR()/100;
 		int n = vo.getN();
@@ -359,10 +350,6 @@ public class LoanController {
 						v.setRepayR((int) Math.ceil(list.get(list.size()-1).getBalance()*(r/12)));						
 					}
 					//v.setRepayR((int) Math.ceil((m-((i-g)*m/12))*r/n));
-					System.out.println(i);
-					System.out.println(n);
-					System.out.println(r);
-					System.out.println(v.getRepayR());
 					v.setRepayMR(v.getRepayM()+v.getRepayR());
 					if(i==totalterm-1) {
 						v.setRepayMR(list.get(list.size()-1).getBalance()+v.getRepayR());
@@ -642,8 +629,7 @@ public class LoanController {
 	     String fileDir =  req.getParameter("fileDir");
 	     //String a = URLDecoder.decode(fileName, "EUC-KR");
 	     //System.out.println("디코더 : "+a);
-	     System.out.println("*********************");
-	      System.out.println(fileName);
+
 	     modelMap.put("fileName", fileName);
 	     modelMap.put("fileDir", fileDir);
 	     

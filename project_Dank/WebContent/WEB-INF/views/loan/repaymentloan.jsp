@@ -151,7 +151,6 @@
 			var can = Number($('#lp_cancelfee').val())
 			var max = (repaybal*100)/(100-can)
 			
-			console.log(max)
 			max = Math.floor(max)
 			max = max + ""
 			document.getElementById('target').innerHTML = max.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
