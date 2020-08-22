@@ -126,6 +126,8 @@
 				return;
 			}
 			myform.action = 'loanrepay'
+			bal = $('#bal').val().replace(/,/g,"")
+			$('#bal').val(bal)
 			myform.submit() 
 			
 		}
