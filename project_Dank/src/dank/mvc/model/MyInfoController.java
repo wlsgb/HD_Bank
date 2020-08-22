@@ -151,8 +151,13 @@ public class MyInfoController {
 	 */
 
 	@RequestMapping(value = "/tap")
-	public String tap() {
-		return "myinfo/tap";
+	public String tap(HttpSession session) {
+		if (session.getAttribute("member") != null) {
+			return "index/index";
+		}else {
+			return "myinfo/tap";
+		}
+		
 	}
 
 }
