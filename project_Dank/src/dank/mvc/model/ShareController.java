@@ -129,6 +129,7 @@ public class ShareController {
 		AccountVO account = new AccountVO();
 		account.setAc_pwd(ac_pwd);
 
+		System.out.println("shas_code:"+shas_code);
 		System.out.println("여기에요" + your_email);
 		MemberVO member = (MemberVO) session.getAttribute("member");
 

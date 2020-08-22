@@ -121,10 +121,16 @@
 	</select>
 	
 	<!-- 주식계좌 조회 -->
-	<select id="seleStock" parameterType="int" resultType="int">
-		select count(*) 
-		from account_client ac, account a
-		where ac.ac_code = a.ac_code and mem_code=#{mem_code} and pro_code=6
+	<select id="seleStock" parameterType="hashMap" resultType="int">
+   		select count(*) 
+		from member m, account_client ac , product p,saving sav
+		where 
+		    m.mem_code = #{mem_code} 
+		    and m.mem_code = ac.mem_code 
+		    and ac.pro_code = p.pro_code
+		    and p.pro_code = 6
+		    and  p.sav_code = sav.sav_code
+		    and sav.sav_code = #{sav_code}
 	</select>
 
 	<!-- 계좌 생성 -->

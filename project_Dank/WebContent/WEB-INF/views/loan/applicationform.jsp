@@ -31,7 +31,7 @@ input[type="number"]::-webkit-inner-spin-button {
 					</div>
 				</div>
 				<!--대출 신청   -->
-		<form action="applicationsuccess" method="post" class="form-horizontal">
+		<form name="form1" method="post" class="form-horizontal">
 				<div class="row mt--4">
 				<div class="col-sm-6 col-md-2"></div>
 						<div class="col-sm-6 col-md-8">
@@ -149,7 +149,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						</div>
 			
 					
-			<p class="text-center"><button type="submit" class="btn btn-info">대출 신청</button></p>
+			<p class="text-center"><button type="button" class="btn btn-info" onclick="application()">대출 신청</button></p>
 		</form>
 			</div>
 		
@@ -158,6 +158,18 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			
 			<script>
+			
+			
+			function application(){
+		        document.form1.action="applicationsuccess"
+		        la_hampunt = $('#la_hamount').val().replace(/,/g,'')
+		        $('#la_hamount').val(la_hampunt)
+		        document.form1.submit()
+		    }
+			
+			
+			
+			
 			$("#la_hamount").keyup(function () {
 				x = $(this).val()
 		        x = x.replace(/[^0-9]/g,'');

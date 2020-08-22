@@ -112,7 +112,7 @@
 												</thead>
 												<tbody>
 												 <c:forEach items="${list }" var="e">
-													<c:if test="${e.lc_state eq '실행완료' or e.lc_state eq '상환종료'}">
+													<c:if test="${e.lc_state eq '실행완료'}">
 													<tr>
 														<td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanRepayVO.lr_startdate }</td>
@@ -123,9 +123,6 @@
 																<td><button type="button" class="btn btn-lg btn-primary repay" value="${e.lc_num }">상환하기</button></td>
 															</c:when>
 														
-															<c:when test="${e.lc_state eq '상환종료'}">
-																<td><button type="button" class="btn btn-lg btn-primary repay" disabled="disabled" value="${e.lc_num }">상환하기</button></td>
-															</c:when>
 														</c:choose>
 														<td><button type="button" class="btn btn-lg btn-primary checkdetail" value="${e.lc_num }">상세보기</button></td>
 													</tr>

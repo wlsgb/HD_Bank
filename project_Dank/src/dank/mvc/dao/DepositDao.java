@@ -1,6 +1,7 @@
 package dank.mvc.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
-import dank.mvc.vo.deposit.Shared_savingVO;
 
 @Repository
 public class DepositDao {
@@ -71,13 +71,16 @@ public class DepositDao {
 	}
 	
 	//аж╫д
-	public boolean seleStock(int mem_code) {
-		boolean result = true;
-		int stockBool = ss.delete("deposit.seleStock",mem_code);
+	public boolean seleStock(Map<String,String> sotck_bool) {
+		
+		int stockBool = ss.selectOne("deposit.seleStock",sotck_bool);
+		//System.out.println("seleStock Count:"+stockBool);
+		
 		if(stockBool > 0) {
-			result = false;
+			return false;
+		}else {
+			return true;
 		}
-		return result;
 	}
 
 }

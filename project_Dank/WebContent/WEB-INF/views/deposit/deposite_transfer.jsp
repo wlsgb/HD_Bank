@@ -176,7 +176,7 @@
 					url:'getmemcodewhentr?acnum='+$('#inputacval').val(),
 					success: function (data) {
 								getarr=data;
-								console.log(typeof(data))
+							//	console.log(typeof(data))
 								//console.log(data)
 								
 								data.forEach(function(item, index) {
@@ -204,23 +204,23 @@
 			$('#selectyourname').change(function() {
 				$('#trmem').val("0");
 				var youracvar =$('#selectyourname').val();
-				console.log(typeof(youracvar))
+				//console.log(typeof(youracvar))
 				$('#trmem').val(youracvar);
-				console.log("히드값은"+$('#trmem').val());
+				//console.log("히드값은"+$('#trmem').val());
 			})
 			
 			$("input:radio[name=mselect]").click(function() {
 				$('#trmoney').val($(this).val())
 				var radioval =$(this).val()
 				var radiovalint =parseInt($(this).val())
-				console.log("라디오갑"+radioval)
+				//console.log("라디오갑"+radioval)
 				
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#myac').val(),
 					success: function (data) {
-						console.log(data)
-						console.log(typeof(data))
-						console.log(typeof(radiovalint))
+						//console.log(data)
+					//	console.log(typeof(data))
+					//	console.log(typeof(radiovalint))
 						let money = parseInt(data)
 						
 						if(radiovalint > money || radioval==='all'){
@@ -235,7 +235,7 @@
 			})
 			
 			$('#trmoney').keyup(function() {
-				console.log($(this).val())
+			//	console.log($(this).val())
 				
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#myac').val(),

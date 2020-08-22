@@ -205,7 +205,7 @@
 					url:'getmemcodewhentr?acnum='+$('#inputacval').val(),
 					success: function (data) {
 								getarr=data;
-								console.log(typeof(data))
+								//console.log(typeof(data))
 								
 								data.forEach(function(item, index) {
 									add +="<option value="+item.mem_code+">";
@@ -232,9 +232,9 @@
 			$('#selectyourname').change(function() {
 				$('#atapplymem').val("0");
 				var youracvar =$('#selectyourname').val();
-				console.log(typeof(youracvar))
+				//console.log(typeof(youracvar))
 				$('#atapplymem').val(youracvar);
-				console.log("히드값은"+$('#atapplymem').val());
+				//console.log("히드값은"+$('#atapplymem').val());
 			})
 			
 			
@@ -311,7 +311,7 @@
 			
 
 			$('#ata_setmoney').keyup(function() {
-				console.log($(this).val())
+				//console.log($(this).val())
 				
 				$.ajax({
 					url:'getmybalwhentr?ac_num='+$('#ac_num').val(),

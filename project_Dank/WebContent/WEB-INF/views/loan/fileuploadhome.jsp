@@ -43,7 +43,7 @@
 												</thead>
 												<tbody>
 												<c:forEach items="${list }" var="e">
-												<c:if test="${e.lc_state ne '실행완료' and e.lc_state ne '대출승인' and e.lc_state ne '승인거절'}">
+												<c:if test="${e.lc_state ne '실행완료' and e.lc_state ne '대출승인' and e.lc_state ne '승인거절' and e.lc_state ne '상환종료'}">
 													<tr>
 													 <td>${e.loanProductVO.lp_name}</td>
 														<td>${e.loanApplicationVO.la_sysdate }</td>

@@ -226,7 +226,6 @@ input[type="number"]::-webkit-inner-spin-button {
 							data: {type:$('[name=type]:checked').val(),term:$('[name=term]:checked').val(),n:$('#n').val(),term2:$('[name=term2]:checked').val(),g:$('#g').val(),m:$('#m').val(),r:$('#r').val()},
 							success: function(data){
 								var data  = JSON.parse(data)
-								console.log(data["r"])
 								var chart = c3.generate({
 									bindto: "#chart",
 								    data: {
