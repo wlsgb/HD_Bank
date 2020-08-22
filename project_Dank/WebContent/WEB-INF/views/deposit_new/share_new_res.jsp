@@ -52,7 +52,7 @@
 								<div class="col-md-10">
 									<form action="share_new_insert" method="post">
 										<input type="hidden" name="your_name" value="${your_name}">
-										<input type="hidden" name="shas_co		de" value="${shas_code}">
+										<input type="hidden" name="shas_code" value="${shas_code}">
 										<input type="hidden" name="sav_code" value="${sav_code}">
 										<input type="hidden" name="your_email" value="${your_email}">
 										<input type="hidden" name="deptype" value="${deptype}">

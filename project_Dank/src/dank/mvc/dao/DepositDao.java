@@ -12,7 +12,6 @@ import dank.mvc.vo.deposit.AccountVO;
 import dank.mvc.vo.deposit.Account_ClientVO;
 import dank.mvc.vo.deposit.Installment_savingVO;
 import dank.mvc.vo.deposit.SavingVO;
-import dank.mvc.vo.deposit.Shared_savingVO;
 
 @Repository
 public class DepositDao {
@@ -75,7 +74,7 @@ public class DepositDao {
 	public boolean seleStock(Map<String,String> sotck_bool) {
 		
 		int stockBool = ss.selectOne("deposit.seleStock",sotck_bool);
-		System.out.println("seleStock Count:"+stockBool);
+		//System.out.println("seleStock Count:"+stockBool);
 		
 		if(stockBool > 0) {
 			return false;
