@@ -1,6 +1,7 @@
 package dank.mvc.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,19 @@ public class DepositDao {
 	//계좌 삭제
 	public void delAccount(int ac_code) {
 		ss.delete("deposit.delAccount",ac_code);
+	}
+	
+	//주식
+	public boolean seleStock(Map<String,String> sotck_bool) {
+		
+		int stockBool = ss.selectOne("deposit.seleStock",sotck_bool);
+		System.out.println("seleStock Count:"+stockBool);
+		
+		if(stockBool > 0) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 }

@@ -33,12 +33,12 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-head-row">
-							<div class="card-title col-3">자주 찾는 질문</div>
+							<div class="card-title col-12">자주 찾는 질문</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<!-- <div class="input-icon"> -->
-						<div class="col-md-6 row">
+						<div class="col-md-12 row">
 							<select name="searchType" id="searchType" class="form-control col-3">
 								<option value="2">제목</option>
 									
@@ -60,8 +60,6 @@
 							<button id="five" class="btn btn-primary">기타</button>
 							<br />
 							<br />
-
-			
 							<c:forEach items="${list }" var="e">
 								<div class="row col-12">
 									<span class="blockquote blockquote-primary text-info">

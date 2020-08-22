@@ -82,7 +82,7 @@
 													</tr>
 													<tr>
 														<th>상환금액</th>
-														<td><input type="number" name="lr_balance" id="bal"></td>
+														<td><input type="text" name="lr_balance" id="bal"></td>
 													</tr>	
 													
 													<tr>
@@ -130,6 +130,20 @@
 			
 		}
 		
+		$('#bal').keyup(function() {
+			x = $(this).val()
+	        x = x.replace(/[^0-9]/g,'');
+	        x = x.replace(/,/g,'');
+	        if(parseInt(x)>parseInt($('#target').text().replace(/,/g,''))){
+	        	alert('상환 가능 최대 금액을 초과해서 입력하셨습니다.')
+	        	$(this).val($('#target').text().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        }else{
+	        	$(this).val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));	
+	        }
+			
+		})
+		
+		
 		window.onload = function(){
 			var repaybal = Number($('#repaybal').val())
 			var can = Number($('#lp_cancelfee').val())
@@ -137,7 +151,8 @@
 			
 			console.log(max)
 			max = Math.floor(max)
-			document.getElementById('target').innerHTML = max
+			max = max + ""
+			document.getElementById('target').innerHTML = max.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 		}
 		
 	</script>

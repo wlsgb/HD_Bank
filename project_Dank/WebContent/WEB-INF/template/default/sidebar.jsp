@@ -201,6 +201,12 @@
 								<p>채팅 화상상담</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="goNews">
+								<i class="fas fa-layer-group"></i>
+								<p>뉴스기사</p>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

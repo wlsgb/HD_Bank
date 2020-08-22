@@ -149,7 +149,7 @@
 																	<input type="button" class="btn btn-warning" id="update" value="개인정보 수정하기"/>
 																</div>
 																<div class="col-md-8 ml-auto mr-auto">
-																	<button class="btn btn-danger" id="cancel">취소</button>
+																	<button type="button" class="btn btn-danger" id="cancel">취소</button>
 																	<input type="button" class="btn btn-success" value="확인" onclick="chk()">
 																</div>
 															</div>

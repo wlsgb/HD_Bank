@@ -49,6 +49,7 @@
 									<input type="hidden" name="shas_code" value="${shas_code}">
 									<input type="hidden" name="deptype" value="${deptype}">
 									<input type="hidden" name="sav_code" value="${sav_code}">
+									<input type="hidden" name="phone" value="" id="phone">
 										<table class="table mt-1">
 											<thead>
 
@@ -138,14 +139,15 @@
 					if (num === 1) {
 						document.getElementById("go").action="share_new_res";
 						var phone = "";
-						$('.phone input').val().each(function(i, element) {
-							phone += element;
+						$('.phone input').each(function(i, element) {
+							phone += $(this).val();
 						});
-						$('#go').html("<input type='hidden' name='phone' value='"+phone+"'>");
+						$('#phone').attr("value", phone);
 						$(this).attr("type", "submit");
 						$(this).submit();
 					} else {
 						alert("등록된 이메일이 아닙니다.");
+				
 					}
 				});
 
