@@ -122,6 +122,9 @@ public class BangkingDao {
 	public List<AccountHistoryVO> gethistory(Map<String, String> historymap){
 		return ss.selectList("bangking.achistory", historymap);
 	}
+	public List<AccountHistoryVO> getAllHistory(Map<String, String> historymap){
+		return ss.selectList("bangking.acAllHistory", historymap);
+	}
 	public List<AccountHistoryVO> gethistory_slct(Map<String, String> historymap){
 		return ss.selectList("bangking.achistory_slct", historymap);
 	}
