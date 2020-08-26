@@ -49,14 +49,14 @@
 					<c:choose>
 						<c:when test="${member ne null}">
 						<il>
-							<button type="button" class="btn btn-focus btn-xs" id="alert_demo_1"> ${member.mem_name } </button>	
+							<button type="button" class="btn btn-info btn-xs" id="alert_demo_1"> ${member.mem_name } </button>	
 							<input type="hidden" id="name" value="${member.mem_name }">
 						</il>	
 						<il>
 							<button class="btn btn-info btn-xs" onclick="location='pri_info_chk'" >마이페이지</button>
 						</il>
 						<il>
-							<button type="button" class="btn btn-focus btn-xs" id="counter">0:10:00</button>		
+							<button type="button" class="btn btn-info btn-xs" id="counter" style="background: white;">0:10:00</button>		
 						</il>
 						<il>
 							<button class="btn btn-info btn-xs" onclick="counter_reset()">연장</button>
