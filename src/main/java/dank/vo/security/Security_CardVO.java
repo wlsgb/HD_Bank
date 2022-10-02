@@ -3,11 +3,11 @@ package main.java.dank.vo.security;
 public class Security_CardVO {
 	private int sc_code;
 	private String sc_detcode_1, sc_detcode_2, sc_detcode_3, sc_detcode_4, sc_detcode_5, sc_detcode_6, sc_detcode_7,
-			sc_detcode_8, sc_detcode_9, sc_detcode_10, sc_detcode_11, sc_detcode_12, sc_detcode_13, sc_detcode_14,
-			sc_detcode_15, sc_detcode_16, sc_detcode_17, sc_detcode_18, sc_detcode_19, sc_detcode_20, sc_detcode_21,
-			sc_detcode_22, sc_detcode_23, sc_detcode_24, sc_detcode_25, sc_detcode_26, sc_detcode_27, sc_detcode_28,
-			sc_detcode_29, sc_detcode_30;
-	private String[] sc_detcode;
+		sc_detcode_8, sc_detcode_9, sc_detcode_10, sc_detcode_11, sc_detcode_12, sc_detcode_13, sc_detcode_14,
+		sc_detcode_15, sc_detcode_16, sc_detcode_17, sc_detcode_18, sc_detcode_19, sc_detcode_20, sc_detcode_21,
+		sc_detcode_22, sc_detcode_23, sc_detcode_24, sc_detcode_25, sc_detcode_26, sc_detcode_27, sc_detcode_28,
+		sc_detcode_29, sc_detcode_30;
+	private final String[] sc_detcode;
 
 	public Security_CardVO() {
 		sc_detcode = new String[30];

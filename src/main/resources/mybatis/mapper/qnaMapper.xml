@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+    <!-- #은 getter 다 -->
+    <!-- 	<insert id="add" parameterType="mem">
+            insert into qna
+            values(qna_seq.nextVal,#{qna_num},#{he_code},#{cat_num},#{qna_title},#{qna_content},sysdate)
+        </insert> QuestionPrinchkMapper-->
+
+    <select id="list" resultType="qnavo" parameterType="pvo">
+        select * from (
+        select rownum r_num, a.* from
+        (
+        select * from qna
+        <if test="categori == 0">
+            where cat_num between 1 and 5
+        </if>
+        <if test="categori != 0">
+            where cat_num = #{categori}
+        </if>
+        <if test="searchValue != null">
+            <choose>
+                <when test="searchType==1">
+                    and qna_title Like '%'|| #{searchValue} ||'%'
+                </when>
+                <when test="searchType==2">
+                    and qna_title Like '%'|| #{searchValue} ||'%'
+                </when>
+                <when test="searchType==3">
+                    and qna_content Like '%'|| #{searchValue} ||'%'
+                </when>
+                <when test="searchType==4">
+                    and qna_date Like '%'|| #{searchValue} ||'%'
+                </when>
+                <otherwise></otherwise>
+            </choose>
+
+        </if>
+
+        order by 1 desc
+        ) a
+        ) WHERE r_num between #{start} and #{end}
+    </select>
+
+    <select id="totalCount" resultType="int" parameterType="pvo">
+        select count(*) cnt from qna
+        <if test="categori == 0">
+            where cat_num between 1 and 5
+        </if>
+        <if test="categori != 0">
+            where cat_num = #{categori}
+        </if>
+        <choose>
+            <when test="searchType==1">
+                and cat_num Like '%'|| #{searchValue} ||'%'
+            </when>
+            <when test="searchType==2">
+                and qna_num Like '%'|| #{searchValue} ||'%'
+            </when>
+            <when test="searchType==3">
+                and qna_content Like '%'|| #{searchValue} ||'%'
+            </when>
+            <when test="searchType==4">
+                and qna_date Like '%'|| #{searchValue} ||'%'
+            </when>
+            <otherwise></otherwise>
+        </choose>
+    </select>
+</mapper>

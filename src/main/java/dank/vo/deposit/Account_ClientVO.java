@@ -5,8 +5,8 @@ import main.java.dank.vo.MemberVO;
 public class Account_ClientVO {
 	private int ac_code, mem_code, pro_code;
 	private MemberVO memberVO;
-	private AccountVO accountVO;
-	private ProductVO productVO;
+	private main.java.dank.vo.deposit.AccountVO accountVO;
+	private main.java.dank.vo.deposit.ProductVO productVO;
 
 	public int getAc_code() {
 
@@ -41,19 +41,19 @@ public class Account_ClientVO {
 		this.memberVO = memberVO;
 	}
 
-	public AccountVO getAccountVO() {
+	public main.java.dank.vo.deposit.AccountVO getAccountVO() {
 		return accountVO;
 	}
 
-	public void setAccountVO(AccountVO accountVO) {
+	public void setAccountVO(main.java.dank.vo.deposit.AccountVO accountVO) {
 		this.accountVO = accountVO;
 	}
 
-	public ProductVO getProductVO() {
+	public main.java.dank.vo.deposit.ProductVO getProductVO() {
 		return productVO;
 	}
 
-	public void setProductVO(ProductVO productVO) {
+	public void setProductVO(main.java.dank.vo.deposit.ProductVO productVO) {
 		this.productVO = productVO;
 	}
 

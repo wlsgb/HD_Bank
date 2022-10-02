@@ -1,8 +1,8 @@
 package main.java.dank.vo;
 
 public class QualificationVO {
-	private int qua_code,qua_minperiod,qua_maxperiod,qua_minage,qua_maxage;
-	
+	private int qua_code, qua_minperiod, qua_maxperiod, qua_minage, qua_maxage;
+
 	public int getQua_code() {
 		return qua_code;
 	}
@@ -42,6 +42,5 @@ public class QualificationVO {
 	public void setQua_maxage(int qua_maxage) {
 		this.qua_maxage = qua_maxage;
 	}
-	
-	
+
 }

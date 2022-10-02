@@ -33,13 +33,13 @@ public class SecurityController {
 
 	@Autowired
 	private BangkingDao bangkingdao;
-	
+
 	@Autowired
 	private SecurityCode securityCode;
 
 	@Autowired
 	private SecurityDao securityDao;
-	
+
 	@Autowired
 	private SecurityService securityService;
 
@@ -57,15 +57,15 @@ public class SecurityController {
 
 	// ����ī�� ���� ������
 	@RequestMapping(value = "/securitysertify")
-	public String viewSecuritySertify(Model m, HttpSession session,String page) {
+	public String viewSecuritySertify(Model m, HttpSession session, String page) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "index");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) <= 0) {
 			System.out.println("����ī�尡 ��������� �ʾҽ��ϴ�.");
 			return "security/security";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		Security_Card_RegVO vo = securityDao.securityCardDetail(mem_code);
 		m.addAttribute("scrVo", vo);
 		m.addAttribute("scCardNum", vo.getSecCard().getSc_detcode());
@@ -85,7 +85,7 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "index");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) <= 0) {
 			return "security/security";
 		}
 		// ���� �������� <input type="hidden"> ���� �Է� �޾ƿ´�.
@@ -94,11 +94,11 @@ public class SecurityController {
 		String fir_code = securitySertufyVO.getFir_code();
 		String sec_code = securitySertufyVO.getSec_code();
 		// ���䵥����
-		String[][] realData = (String[][]) session.getAttribute("securityCheckData");
-		if (main_code.equals(realData[0][2])&&fir_code.equals(realData[1][2])&&sec_code.equals(realData[2][2])) {
+		String[][] realData = (String[][])session.getAttribute("securityCheckData");
+		if (main_code.equals(realData[0][2]) && fir_code.equals(realData[1][2]) && sec_code.equals(realData[2][2])) {
 			session.setAttribute("scChk", true);
-			return "redirect:"+(String)session.getAttribute("pageName");
-		}else {
+			return "redirect:" + session.getAttribute("pageName");
+		} else {
 			session.setAttribute("scChk", false);
 			return "redirect:securityCardSertify";
 		}
@@ -110,12 +110,12 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) >= 1) {
 			session.setAttribute("error", "f");
 			return "security/security";
 		}
 		session.setAttribute("error", "t");
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("aclist", aclist);
@@ -126,11 +126,11 @@ public class SecurityController {
 	// ����ī�� �Է� Ȯ�� ������
 	@RequestMapping(value = "/securitycardinfoView")
 	public String viewSecurityCardInfoView(Model m, AccountVO accountVO, MemberVO memberVO, String acNameNum,
-			@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
+		@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) >= 1) {
 			session.setAttribute("error", "f");
 			return "security/security";
 		}
@@ -150,7 +150,7 @@ public class SecurityController {
 	// ����ī�� ����� ���
 	@RequestMapping(value = "/securitycardcreate")
 	public String viewSecurity_card_success(Model m, HttpSession session) {
-		if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+		if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) >= 1) {
 			return "index/index";
 		} else if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
@@ -158,7 +158,7 @@ public class SecurityController {
 		}
 		Security_CardVO security_CardVO = securityCode.securityCardCreate();
 		Security_Card_RegVO security_Card_RegVO = new Security_Card_RegVO();
-		security_Card_RegVO.setMem_code(((MemberVO) session.getAttribute("member")).getMem_code());
+		security_Card_RegVO.setMem_code(((MemberVO)session.getAttribute("member")).getMem_code());
 		securityService.createSecurityCard(security_CardVO, security_Card_RegVO);
 		// ���Ϸ� ������� ����ī�带 �����ش�.
 		MemberVO memberVO = memberDao.numToEmailName(security_Card_RegVO.getMem_code());
@@ -178,15 +178,15 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) >= 1) {
 			session.setAttribute("error", "f");
 			return "security/security";
 		}
-		Security_Card_RegVO vo = (Security_Card_RegVO) session.getAttribute("scrVO");
+		Security_Card_RegVO vo = (Security_Card_RegVO)session.getAttribute("scrVO");
 		MemberVO memberVO = memberDao.numToEmailName(vo.getMem_code());
 		String name = memberVO.getMem_name();
 		String email = memberVO.getMem_email();
-		String content = securityCode.securityCardSend((Security_CardVO) session.getAttribute("security_Cardvo"), name);
+		String content = securityCode.securityCardSend((Security_CardVO)session.getAttribute("security_Cardvo"), name);
 		mail.emailSend(email, name, name + "���� ����ī��", content);
 		m.addAttribute("memberVO", memberVO);
 		return "security/securityCardSuccess";
@@ -198,7 +198,7 @@ public class SecurityController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) >= 1) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) >= 1) {
 			session.setAttribute("error", "f");
 			return "security/security";
 		}
@@ -210,20 +210,20 @@ public class SecurityController {
 	// OTP ��û ��
 	@RequestMapping(value = "/securityotp")
 	public String viewSecurity_otp(Model m, HttpSession session,
-			@RequestParam(value = "error", defaultValue = "t") String error) {
+		@RequestParam(value = "error", defaultValue = "t") String error) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securityotp");
 			return "login/login";
-		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+		} else if ((securityDao.otpCheck(((MemberVO)session.getAttribute("member")).getMem_code())) >= 1) {
 			session.setAttribute("error", "f");
 			return "redirect:security";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) <= 0) {
 			System.out.println("����ī�尡 ��������� �ʾҽ��ϴ�.");
 			return "security/security";
 		}
-		
+
 		session.setAttribute("otpProgress", true);
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		List<AccountVO> aclist = bangkingdao.getaclist(mem_code);
 		String mem_phn = memberDao.serPhone(mem_code);
 		m.addAttribute("aclist", aclist);
@@ -235,13 +235,13 @@ public class SecurityController {
 	// OTP �Է� Ȯ�� ������
 	@RequestMapping(value = "/otpInfoView")
 	public String viewOTPInfoView(Model m, AccountVO accountVO, MemberVO memberVO, String acNameNum,
-			@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
+		@RequestParam(value = "successData", defaultValue = "fail") String successData, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+		} else if ((securityDao.otpCheck(((MemberVO)session.getAttribute("member")).getMem_code())) >= 1) {
 			return "redirect:security";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) <= 0) {
 			System.out.println("����ī�尡 ��������� �ʾҽ��ϴ�.");
 			return "security/security";
 		}
@@ -256,23 +256,23 @@ public class SecurityController {
 			return "redirect:securityotp?error=f";
 		}
 	}
-	
+
 	// otp��û�� �Ϸ�Ǿ����� �����ϴ� ������
 	@RequestMapping(value = "/securityotpsuccess")
 	public String viewCheckBalance(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "securitycard");
 			return "login/login";
-		}else if((securityDao.otpCheck(((MemberVO) session.getAttribute("member")).getMem_code()))>=1){
+		} else if ((securityDao.otpCheck(((MemberVO)session.getAttribute("member")).getMem_code())) >= 1) {
 			return "redirect:security";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) <= 0) {
 			System.out.println("����ī�尡 ��������� �ʾҽ��ϴ�.");
 			return "security/security";
-		}else  if ((boolean) session.getAttribute("scChk")) {
-			Map<String , Object> map = new HashMap<String, Object>();
-			map.put("mem_code", ((MemberVO) session.getAttribute("member")).getMem_code());
+		} else if ((boolean)session.getAttribute("scChk")) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("mem_code", ((MemberVO)session.getAttribute("member")).getMem_code());
 			map.put("otp_certify", 1);
-			securityDao.otpCreate((HashMap<String, Object>) map);
+			securityDao.otpCreate((HashMap<String, Object>)map);
 			session.removeAttribute("scChk");
 			session.removeAttribute("pageName");
 			return "security/securityOtpSuccess";

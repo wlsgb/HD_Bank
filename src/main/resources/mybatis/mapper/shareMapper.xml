@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shvo">
+    <!--여기서부터 현기가 작성한 공유계좌 mapper -->
+    <select id="shasDetail" parameterType="int" resultMap="shasmap">
+        select sh.shas_code,
+               sh.shas_master,
+               sh.shas_count,
+               s.sav_name,
+               s.sav_online,
+               s.sav_interestrate,
+               s.sav_code,
+               q.qua_code,
+               q.qua_name,
+               q.qua_maxage,
+               q.qua_minage,
+               q.qua_maxperiod,
+               q.qua_minperiod,
+               q.qua_maxmoney,
+               q.qua_minmoney
+        from saving s,
+             qualification q,
+             shared_saving sh
+        where s.qua_code =
+              q.qua_code
+          and sh.shas_code = #{shas_code}
+    </select>
+    <resultMap type="shasvo" id="shasmap">
+        <id property="shas_code" column="shas_code"/>
+        <result property="shas_count" column="chas_count"/>
+        <result property="shas_master" column="chas_master"/>
+        <association property="savingVO" column="savingVO"
+                     javaType="savvo">
+            <id property="sav_code" column="sav_code"/>
+            <result property="sav_interestrate" column="sav_interestrate"/>
+            <result property="sav_online" column="sav_online"/>
+            <result property="shas_code" column="shas_code"/>
+            <result property="qua_code" column="qua_code"/>
+            <result property="sav_name" column="sav_name"/>
+        </association>
+        <association property="qualificationVO" column="qua_code"
+                     javaType="quavo">
+            <id property="qua_code" column="qua_code"/>
+            <result property="qua_name" column="qua_name"/>
+            <result property="qua_minperiod" column="qua_minperiod"/>
+            <result property="qua_maxperiod" column="qua_maxperiod"/>
+            <result property="qua_minage" column="qua_minage"/>
+            <result property="qua_maxage" column="qua_maxage"/>
+            <result property="qua_minmoney" column="qua_minmoney"/>
+            <result property="qua_maxmoney" column="qua_maxmoney"/>
+        </association>
+
+    </resultMap>
+    <resultMap type="acvo" id="acmap">
+        <id property="ac_code" column="ac_code"/>
+        <result property="ac_balance" column="ac_balance"/>
+        <result property="ac_num" column="ac_num"/>
+        <result property="ac_pwd" column="ac_pwd"/>
+        <result property="ac_name" column="ac_name"/>
+        <result property="ac_start_date" column="ac_start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="ac" column="ac"/>
+        <association property="saving" column="saving"
+                     javaType="savvo">
+            <id property="sav_code" column="sav_code"/>
+            <result property="sav_interestrate" column="sav_interestrate"/>
+            <result property="sav_online" column="sav_online"/>
+            <result property="shas_code" column="shas_code"/>
+            <result property="qua_code" column="qua_code"/>
+            <result property="sav_name" column="sav_name"/>
+        </association>
+        <association property="productVO" column="pro_code"
+                     javaType="provo">
+            <id property="pro_code" column="pro_code"/>
+            <result property="sav_code" column="sav_code"/>
+            <result property="ins_code" column="ins_code"/>
+        </association>
+        <association property="account_ClientVO" column="ac_code"
+                     javaType="clientvo">
+            <id property="ac_code" column="ac_code"/>
+            <result property="mem_code" column="mem_code"/>
+            <result property="pro_code" column="pro_code"/>
+        </association>
+    </resultMap>
+    <select id="sharelist" resultMap="shasmap">
+        select sh.shas_code,
+               sh.shas_count,
+               sh.shas_master,
+               s.sav_name
+        from shared_saving sh,
+             saving s
+        where sh.shas_code = s.shas_code
+        order by s.shas_code
+    </select>
+    <insert id="addAcClient" parameterType="clientvo">
+        insert into account_client
+        values (account_seq.currval, #{mem_code}, #{pro_code})
+    </insert>
+    <insert id="addShareAccount" parameterType="acvo">
+        insert into account
+        values (account_seq.nextVal, #{ac_num}, #{ac_pwd}, 0, #{ac_name}, sysdate, null)
+    </insert>
+    <select id="getAdditionalList" parameterType="String"
+            resultMap="acmap">
+        select ac.*, a.*, p.sav_code, s.sav_name, s.shas_code
+        from account a,
+             account_client ac,
+             product p,
+             saving s
+        where a.ac_code = ac.ac_code
+          and ac.pro_code = p.pro_code
+          and p.sav_code = s.sav_code
+          and ac_name like
+              '%' || #{mem_email} || '%'
+    </select>
+    <!-- 현기 -->
+</mapper>

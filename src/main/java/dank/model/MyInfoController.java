@@ -22,7 +22,7 @@ public class MyInfoController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	@Autowired
 	private SecurityDao securityDao;
 
@@ -33,35 +33,35 @@ public class MyInfoController {
 			session.setAttribute("pageName", "pri_info_chk");
 			return "login/login";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		// ��� ���̺� (�н�����, ���� ���� ��)
 		MemberVO memberVO = myinfoDao.myinfo(mem_code);
 		m.addAttribute("memberVO", memberVO);
 		// ����ī��� OTP��û ���θ� �����ش�.
 		int scurityCardYN = securityDao.scrNumChk(mem_code);
 		int otpYN = securityDao.otpCheck(mem_code);
-		m.addAttribute("scurityCardYN",scurityCardYN);
-		m.addAttribute("otpYN",otpYN);
+		m.addAttribute("scurityCardYN", scurityCardYN);
+		m.addAttribute("otpYN", otpYN);
 		return "myinfo/pri_info_chk";
 
 	}
 
 	// �������� ���� ��
 	@RequestMapping(value = "/pri_info_chk2")
-	public String momo8(MemberVO vo,HttpSession session,Model m) {
+	public String momo8(MemberVO vo, HttpSession session, Model m) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "pri_info_chk2");
 			return "login/login";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		// ��� ���̺� (�н�����, ���� ���� ��)
 		MemberVO memberVO = myinfoDao.myinfo(mem_code);
 		m.addAttribute("memberVO", memberVO);
 		// ����ī��� OTP��û ���θ� �����ش�.
 		int scurityCardYN = securityDao.scrNumChk(mem_code);
 		int otpYN = securityDao.otpCheck(mem_code);
-		m.addAttribute("scurityCardYN",scurityCardYN);
-		m.addAttribute("otpYN",otpYN);
+		m.addAttribute("scurityCardYN", scurityCardYN);
+		m.addAttribute("otpYN", otpYN);
 		return "myinfo/pri_info_chk2";
 	}
 
@@ -73,7 +73,7 @@ public class MyInfoController {
 			session.setAttribute("pageName", "updatemyinfo");
 			mav.setViewName("login/login");
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		vo.setMem_code(mem_code);
 		myinfoDao.myinfoUpdate(vo);
 		mav.setViewName("redirect:pri_info_chk");
@@ -83,19 +83,19 @@ public class MyInfoController {
 	// ��й�ȣ�� �Է��ϴ� ��
 	@RequestMapping(value = "/mem_pw_reset")
 	public ModelAndView mypwdUpdate(MemberVO vo, HttpSession session, String pwd,
-			@RequestParam(value = "successData", defaultValue = "fail") String successData) {
+		@RequestParam(value = "successData", defaultValue = "fail") String successData) {
 		ModelAndView mav = new ModelAndView();
 		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "mem_pw_reset_input");
 			mav.setViewName("login/login");
-		}else if (memberDao.pwdChk(mem_code).equals(pwd) && successData.equals("success")) {
+		} else if (memberDao.pwdChk(mem_code).equals(pwd) && successData.equals("success")) {
 			MemberVO memberVO = myinfoDao.myinfo(mem_code);
 			mav.addObject("memberVO", memberVO);
 			mav.setViewName("myinfo/mem_pw_reset");
 			session.setAttribute("error", "t");
 			session.setAttribute("mem_pw_reset", true);
-		}else {
+		} else {
 			session.setAttribute("error", "f");
 			mav.setViewName("redirect:mem_pw_reset_input");
 		}
@@ -108,13 +108,13 @@ public class MyInfoController {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "mem_pw_reset_input");
 			return "login/login";
-		}else if ((boolean) session.getAttribute("mem_pw_reset")) {
+		} else if ((boolean)session.getAttribute("mem_pw_reset")) {
 			MemberVO vo = new MemberVO();
 			vo.setMem_code(((MemberVO)session.getAttribute("member")).getMem_code());
 			vo.setMem_pwd(pwd);
 			myinfoDao.mypwdUpdate(vo);
 			return "myinfo/mem_pw_success";
-		}else {
+		} else {
 			session.setAttribute("error", "f");
 			return "redirect:mem_pw_reset_input";
 		}
@@ -137,7 +137,7 @@ public class MyInfoController {
 			session.setAttribute("pageName", "mem_pw_reset_input");
 			return "login/login";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("memberVO", memberVO);
 		return "myinfo/mem_pw_reset_input";
@@ -152,10 +152,10 @@ public class MyInfoController {
 	public String tap(HttpSession session) {
 		if (session.getAttribute("member") != null) {
 			return "index/index";
-		}else {
+		} else {
 			return "myinfo/tap";
 		}
-		
+
 	}
 
 }

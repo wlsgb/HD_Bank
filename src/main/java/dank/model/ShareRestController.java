@@ -19,11 +19,13 @@ public class ShareRestController {
 	private MemberDao memberDao;
 	@Autowired
 	private Mail mail;
+
 	@RequestMapping(value = "/sharelist")
 	public List<Shared_savingVO> sharelist() {
 		System.out.println(shareDao.getSharelist().get(0).getSavingVO().getSav_name());
 		return shareDao.getSharelist();
 	}
+
 	/*
 	 * @RequestMapping(value = "/send_mail") public List<Shared_savingVO>
 	 * send_mail(String your_email,String your_name) { String content = new
@@ -36,7 +38,7 @@ public class ShareRestController {
 	 * shareDao.getSharelist(); }
 	 */
 	@RequestMapping(value = "/checkEmail")
-	public int checkEmail(String email) {	
+	public int checkEmail(String email) {
 		System.out.println(email);
 		System.out.println(memberDao.idchk(email));
 		return memberDao.idchk(email);

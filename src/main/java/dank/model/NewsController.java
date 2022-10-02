@@ -18,24 +18,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.opencsv.CSVReader;
 
-import main.java.dank.vo.PageVO;
 import main.java.dank.dto.BoardDto;
+import main.java.dank.vo.PageVO;
 
 @Controller
 public class NewsController {
-	
+
 	public static List<BoardDto> ReadCsvList(HttpServletRequest request) {
 		// ��ȯ�� ����Ʈ
-		
+
 		List<List<String>> ret = new ArrayList<List<String>>();
 		BufferedReader br = null;
 		List<BoardDto> dtolist = new ArrayList<BoardDto>();
 		try {
 			HttpSession session = request.getSession();
-		 	String r_path = session.getServletContext().getRealPath("/");
-		 	System.out.println(r_path);
-			String img_path ="resources\\hd_csv.csv";
-			CSVReader reader = new CSVReader(new FileReader(r_path+img_path));
+			String r_path = session.getServletContext().getRealPath("/");
+			System.out.println(r_path);
+			String img_path = "resources\\hd_csv.csv";
+			CSVReader reader = new CSVReader(new FileReader(r_path + img_path));
 			String[] line;
 
 			while ((line = reader.readNext()) != null) {
@@ -54,8 +54,8 @@ public class NewsController {
 				ret.add(tmpList);
 			}
 			for (List<String> list : ret) {
-				if (!list.get(0).equals("num")  && !list.get(1).equals("title")  && !list.get(2).equals("link")
-						&& !list.get(3).equals("content")) {
+				if (!list.get(0).equals("num") && !list.get(1).equals("title") && !list.get(2).equals("link")
+					&& !list.get(3).equals("content")) {
 					BoardDto dto = new BoardDto();
 					dto.setNum(Integer.parseInt(list.get(0)));
 					dto.setTitle(list.get(1));
@@ -81,14 +81,13 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = "/goNews")
-	public String goNews(PageVO vo, Model model,HttpServletRequest request,
-			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
-			@RequestParam(value = "cntPerPage", required = false, defaultValue = "5") String cntPerPage,
-			@RequestParam(value = "searchType", required = false) String searchType,
-			@RequestParam(value = "searchValue", required = false) String searchValue) {
-		
-		
-			int total = ReadCsvList(request).size();
+	public String goNews(PageVO vo, Model model, HttpServletRequest request,
+		@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+		@RequestParam(value = "cntPerPage", required = false, defaultValue = "5") String cntPerPage,
+		@RequestParam(value = "searchType", required = false) String searchType,
+		@RequestParam(value = "searchValue", required = false) String searchValue) {
+
+		int total = ReadCsvList(request).size();
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		if (searchType != null && searchType.equals("1") && searchValue != null) {
 			for (int i = 0; i < total; i++) {
@@ -107,13 +106,13 @@ public class NewsController {
 		}
 
 		System.out.println(list.get(0).getTitle());
-		
+
 		System.out.println("total:" + total);
 		vo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), vo.getCategori());
 		System.out.println("start : " + vo.getStart());
 		System.out.println("end : " + vo.getEnd());
 		System.out.println("------------------------");
-		List<BoardDto> searchedlist = list.subList(vo.getStart()-1, vo.getEnd()-1);
+		List<BoardDto> searchedlist = list.subList(vo.getStart() - 1, vo.getEnd() - 1);
 		vo.setSearchType(searchType);
 		vo.setSearchValue(searchValue);
 		System.out.println("Ÿ��" + vo.getSearchType());

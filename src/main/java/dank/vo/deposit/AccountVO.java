@@ -3,41 +3,40 @@ package main.java.dank.vo.deposit;
 public class AccountVO {
 	private int ac_code, ac_balance;
 	private String ac_num, ac_pwd, ac_name, ac_start_date, end_date;
-	private ProductVO productVO;
-	private Account_ClientVO account_ClientVO;
+	private main.java.dank.vo.deposit.ProductVO productVO;
+	private main.java.dank.vo.deposit.Account_ClientVO account_ClientVO;
+	private main.java.dank.vo.deposit.SavingVO saving;
+	private main.java.dank.vo.deposit.Installment_savingVO ins;
 
-	public Account_ClientVO getAccount_ClientVO() {
+	public main.java.dank.vo.deposit.Account_ClientVO getAccount_ClientVO() {
 		return account_ClientVO;
 	}
 
-	public void setAccount_ClientVO(Account_ClientVO account_ClientVO) {
+	public void setAccount_ClientVO(main.java.dank.vo.deposit.Account_ClientVO account_ClientVO) {
 		this.account_ClientVO = account_ClientVO;
 	}
 
-	public ProductVO getProductVO() {
+	public main.java.dank.vo.deposit.ProductVO getProductVO() {
 		return productVO;
 	}
 
-	public void setProductVO(ProductVO productVO) {
+	public void setProductVO(main.java.dank.vo.deposit.ProductVO productVO) {
 		this.productVO = productVO;
 	}
 
-	private SavingVO saving;
-	private Installment_savingVO ins;
-
-	public SavingVO getSaving() {
+	public main.java.dank.vo.deposit.SavingVO getSaving() {
 		return saving;
 	}
 
-	public void setSaving(SavingVO saving) {
+	public void setSaving(main.java.dank.vo.deposit.SavingVO saving) {
 		this.saving = saving;
 	}
 
-	public Installment_savingVO getIns() {
+	public main.java.dank.vo.deposit.Installment_savingVO getIns() {
 		return ins;
 	}
 
-	public void setIns(Installment_savingVO ins) {
+	public void setIns(main.java.dank.vo.deposit.Installment_savingVO ins) {
 		this.ins = ins;
 	}
 
@@ -88,6 +87,7 @@ public class AccountVO {
 	public void setAc_start_date(String ac_start_date) {
 		this.ac_start_date = ac_start_date;
 	}
+
 	public String getEnd_date() {
 		return end_date;
 	}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+    <!-- 이메일(ID) => 이메일 중복체크 -->
+    <select id="idchk" resultType="int" parameterType="String">
+        select count(*)
+        from member
+        where mem_email = #{mem_email}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="memberjoin" parameterType="mem">
+        insert into member
+        values (member_seq.nextVal, #{mem_email}, #{mem_pwd}, #{mem_name},
+                #{mem_phn}, sysdate, #{mem_pri_chk}, #{mem_email_chk}, #{mem_birth},
+                #{mem_gender}, #{mem_loc}, #{mem_job}, #{mem_reip})
+    </insert>
+
+    <!-- 이메일(ID) => 회원이름 -->
+    <select id="namechk" parameterType="String" resultType="String">
+        select mem_name
+        from member
+        where mem_email = #{mem_email}
+    </select>
+
+    <!-- 회원 고유 번호 => 이메일, 회원이름 -->
+    <select id="serNameEmail" parameterType="int" resultType="mem">
+        select mem_email, mem_name
+        from member
+        where mem_code = #{num}
+    </select>
+
+    <!-- 회원 고유 번호 => 이메일, 회원이름 -->
+    <select id="serNumToName" parameterType="int" resultType="String">
+        select mem_name
+        from member
+        where mem_code = #{num}
+    </select>
+
+    <!-- 회원 고유 번호 => 전화번호 -->
+    <select id="serPhoneNum" parameterType="int" resultType="String">
+        select mem_phn
+        from member
+        where mem_code = #{num}
+    </select>
+
+    <!-- 회원 고유 번호 => 회원 생일 -->
+    <select id="forBirth" parameterType="int" resultType="String">
+        select mem_birth
+        from member
+        where mem_code = #{num}
+    </select>
+
+    <!-- 회원 고유번호 => 비밀번호 -->
+    <select id="pwdChk" parameterType="int" resultType="String">
+        select mem_pwd
+        from member
+        where mem_code = #{num}
+    </select>
+
+    <!-- 이메일,비밀번호 => 회원정보 -->
+    <select id="memlogin" parameterType="mem" resultType="mem">
+        select mem_code,
+               mem_email,
+               mem_name,
+               mem_phn,
+               mem_in_date,
+               mem_pri_chk,
+               mem_email_chk,
+               mem_birth,
+               mem_gender,
+               mem_loc
+        from member
+        where mem_email = #{mem_email}
+          and mem_pwd = #{mem_pwd}
+    </select>
+
+    <select id="getMem_code" parameterType="String" resultType="mem">
+        select mem_code
+        from member
+        where mem_email = #{mem_email}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="memberLog" parameterType="ml">
+        insert into member_log
+        values (MEMBER_LOG_SEQ.nextVal, #{mem_code}, #{ml_ip}, #{ml_check}, sysdate)
+    </insert>
+
+</mapper>

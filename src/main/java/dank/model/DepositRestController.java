@@ -27,12 +27,19 @@ import main.java.dank.vo.deposit.TransferDTO;
 public class DepositRestController {
 	@Autowired
 	private DepositDao depositDao;
-	
+	//////////����////////////////////////////////////////////////////
+	//////////38��///////////////////////////////////////////////////
+	//////////����///////////////////////////////////////////////////
+	@Autowired
+	private BangkingDao bangkingdao;
+	@Autowired
+	private BangkingService bangkingservice;
+
 	@RequestMapping(value = "/savlist")
 	public List<SavingVO> savlist() {
 		return depositDao.getSavlist();
 	}
-	
+
 	@RequestMapping(value = "/inslist")
 	public List<Installment_savingVO> inslist() {
 		return depositDao.getInslist();
@@ -40,70 +47,59 @@ public class DepositRestController {
 
 	//����-��й�ȣ Ȯ��
 	@RequestMapping(value = "/acPwdChk")
-	public boolean acPwdChk(String ac_pwd,String ac_num) {
+	public boolean acPwdChk(String ac_pwd, String ac_num) {
 		String password = String.valueOf(depositDao.pwdChk(ac_num));
-		
-		if(password.equals(ac_pwd)) {
-			return true;
-		}
-		return false;
+
+		return password.equals(ac_pwd);
 	}
+
 	//����-�ܰ� ��ü�� ���� ��ȿ�� Ȯ��
 	@RequestMapping(value = "/acNumChk", produces = "application/text; charset=utf8")
 	public String acNumChk(String take_ac) {
 		boolean existAc = depositDao.existAc(take_ac);
-		
-		if(existAc) {
+
+		if (existAc) {
 			MemberVO member = depositDao.getMember(take_ac);
 			return member.getMem_name();
 		}
 		return null;
 	}
-	//////////����////////////////////////////////////////////////////
-	//////////38��///////////////////////////////////////////////////
-	//////////����///////////////////////////////////////////////////
-	@Autowired
-	private BangkingDao bangkingdao;
-	
-	@Autowired
-	private BangkingService bangkingservice;
-	
+
 	@RequestMapping(value = "/getmemcodewhentr")
 	public List<Map<String, String>> gettransfermemcode(String acnum) {/////ac_num �̾ƴ϶� acnum��
-		List<Map<String, String>>  val= 	bangkingdao.getmemcodewhentr(acnum);
-	
+		List<Map<String, String>> val = bangkingdao.getmemcodewhentr(acnum);
+
 		return val;
 	}
+
 	@RequestMapping(value = "/getmybalwhentr")
-	public String getmybalwhentr(HttpSession session,String ac_num) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+	public String getmybalwhentr(HttpSession session, String ac_num) {
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		Map<String, String> getmybalwhentr = new HashMap<String, String>();
 		getmybalwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
 		getmybalwhentr.put("ac_num", ac_num);
 		return bangkingdao.getmybalwhentr(getmybalwhentr);
 	}
-	
-	
+
 	@RequestMapping(value = "/atloadval")
-	public List<At_applicationVO> atloadval(){
-		
-		
+	public List<At_applicationVO> atloadval() {
+
 		return bangkingdao.atloadval();
 	}
-	
+
 	@RequestMapping(value = "/atprocess")//���� �ʿ����
 	public String atprocess(
-			@RequestParam(value = "myac") String myac
-			,@RequestParam(value = "memcode") String memcode
-			,@RequestParam(value = "yourac") String yourac
-			,@RequestParam(value = "youracmem") String youracmem
-			,@RequestParam(value = "trmoney") String trmoney
-			,@RequestParam(value = "youracwrite", defaultValue = "�ڵ���ü�ε���") String youracwrite
-			,@RequestParam(value = "myacwrite", defaultValue = "�ڵ���ü�κ���") String myacwrite
-			,@RequestParam(value = "atacode") String atacode
-			
-			){
-		
+		@RequestParam(value = "myac") String myac
+		, @RequestParam(value = "memcode") String memcode
+		, @RequestParam(value = "yourac") String yourac
+		, @RequestParam(value = "youracmem") String youracmem
+		, @RequestParam(value = "trmoney") String trmoney
+		, @RequestParam(value = "youracwrite", defaultValue = "�ڵ���ü�ε���") String youracwrite
+		, @RequestParam(value = "myacwrite", defaultValue = "�ڵ���ü�κ���") String myacwrite
+		, @RequestParam(value = "atacode") String atacode
+
+	) {
+
 		try {
 			myacwrite = URLDecoder.decode(myacwrite, "UTF-8");
 			youracwrite = URLDecoder.decode(youracwrite, "UTF-8");
@@ -111,7 +107,7 @@ public class DepositRestController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		TransferDTO my_tr = new TransferDTO();
 		my_tr.setAc_num(myac);
 		my_tr.setMem_code(memcode);
@@ -128,70 +124,60 @@ public class DepositRestController {
 		your_tr.setAt_set_mony(trmoney);
 		your_tr.setAta_code(atacode);
 
-		
-		
-		
-		
-		if(bangkingdao.trtrAcChk(myac) >=1) {
+		if (bangkingdao.trtrAcChk(myac) >= 1) {
 			System.out.println("1");
-			if(bangkingdao.trtrAcChk(yourac) >=1) {
+			if (bangkingdao.trtrAcChk(yourac) >= 1) {
 
 				System.out.println("2");
-				
-				if(Long.parseLong(bangkingdao.trbalChk(my_tr)) >=Long.parseLong(trmoney)) {
+
+				if (Long.parseLong(bangkingdao.trbalChk(my_tr)) >= Long.parseLong(trmoney)) {
 					bangkingservice.transferprocess(my_tr, your_tr);
 					System.out.println("�ڵ���ü�����");
-				}else {
+				} else {
 					bangkingdao.ifnomoneywhenat(atacode);
 				}
 			}
 		}
-		
-		
-		
-		
 
 		return "a";
 	}
-	
+
 	@RequestMapping(value = "/dosomething")
 	public void dosomething() {
 		System.out.println("gdgdgd im do something");
 	}
-	
+
 	@RequestMapping(value = "/dosomething2")
 	public void dosomething2() {
 		System.out.println("gdgdgd im do something2");
 	}
-	
+
 	//sp_code�� �޾ƿͼ� �ŷ����� Ȯ��
 	@RequestMapping(value = "/sp_codeis")
 	public List<Sav_process_forModalVO> getsp_code(String sp_code) {
 		//System.out.println(sp_code);
-		List<Sav_process_forModalVO> classified =bangkingdao.classifiedmodal(sp_code);
-		List<Sav_process_forModalVO> modal=null;
-		for (Sav_process_forModalVO e:classified) {
+		List<Sav_process_forModalVO> classified = bangkingdao.classifiedmodal(sp_code);
+		List<Sav_process_forModalVO> modal = null;
+		for (Sav_process_forModalVO e : classified) {
 			//System.out.println(e.getWit_code());
 			//System.out.println(e.getDep_code());
 			//System.out.println(e.getAt_code());
-			
-			
-			if(e.getAt_code() !=0) {
-				modal =bangkingdao.modal_tr(sp_code);
+
+			if (e.getAt_code() != 0) {
+				modal = bangkingdao.modal_tr(sp_code);
 				modal.get(0).setClassified("��ü�ŷ�");
 				//System.out.println("������ü�ŷ�");
-			}else if((e.getAt_code()==0)&&(e.getDep_code()!=0)) {
-				modal =bangkingdao.modal_dep(sp_code);
+			} else if ((e.getAt_code() == 0) && (e.getDep_code() != 0)) {
+				modal = bangkingdao.modal_dep(sp_code);
 				modal.get(0).setClassified("�Աݰŷ�");
 				//System.out.println("�ӱݰŷ�");
-			}else if((e.getAt_code()==0)&&(e.getWit_code()!=0)) {
-				modal =bangkingdao.modal_wit(sp_code);
+			} else if ((e.getAt_code() == 0) && (e.getWit_code() != 0)) {
+				modal = bangkingdao.modal_wit(sp_code);
 				modal.get(0).setClassified("��ݰŷ�");
 				//System.out.println("��ݰŷ�");
 			}
 		}
-		
-		
+
 		return modal;
 	}
 }

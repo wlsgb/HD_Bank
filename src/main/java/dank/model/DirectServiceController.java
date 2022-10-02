@@ -28,18 +28,18 @@ public class DirectServiceController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	@RequestMapping(value = "/checkbalance")
-	public String viewCheckBalance(Model m , @RequestParam(value = "check",defaultValue = "yes")String check) {
-		m.addAttribute("check",check);
+	public String viewCheckBalance(Model m, @RequestParam(value = "check", defaultValue = "yes") String check) {
+		m.addAttribute("check", check);
 		return "directservice/checkBalance";
 	}
 
 	@RequestMapping(value = "/chkvalue")
 	public String cheValue(Model m, AccountVO accountVO, String membirth,
-			/* String type, String searchDate, */ PageVO pvo,
-			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
-			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage) {
+		/* String type, String searchDate, */ PageVO pvo,
+		@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+		@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage) {
 		// �Է¹��� ���¹�ȣ�� ������
 		String ac_num = accountVO.getAc_num();
 		// ���� ��ȣ�� ����ڵ带 �����´�.
@@ -48,7 +48,7 @@ public class DirectServiceController {
 		String pwd = String.valueOf(depositDao.pwdChk(ac_num));
 		String birth = memberDao.forBirth(mem_code);
 		// �� �н����� ���н� ��
-		if (!accountVO.getAc_pwd().equals(pwd)&&birth.equals(membirth)) {
+		if (!accountVO.getAc_pwd().equals(pwd) && birth.equals(membirth)) {
 			return "redirect:checkbalance?check=no";
 		}
 		// �� �н����� ���н� ��

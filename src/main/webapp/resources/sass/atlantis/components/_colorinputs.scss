@@ -18,6 +18,7 @@
   border: 1px solid rgba(0, 40, 100, 0.12);
   color: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
   &:before {
     content: '';
     opacity: 0;
@@ -35,6 +36,7 @@
   &:checked ~ .colorinput-color:before {
     opacity: 1;
   }
+
   &:focus ~ .colorinput-color {
     border-color: #467fcf;
     box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);

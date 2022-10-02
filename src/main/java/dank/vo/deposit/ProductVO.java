@@ -1,29 +1,28 @@
 package main.java.dank.vo.deposit;
 
 public class ProductVO {
-//	CREATE TABLE "PRODUCT" (
-//			"PRO_CODE"	number		NOT NULL,
-//			"INS_CODE"	number		NULL,
-//			"SAV_CODE"	number		NOT NULL
-//		);
-	private int pro_code,ins_code,sav_code;
-	private SavingVO savingVO;
-	private Installment_savingVO installment_savingVO;
-	
-	
-	public SavingVO getSavingVO() {
+	//	CREATE TABLE "PRODUCT" (
+	//			"PRO_CODE"	number		NOT NULL,
+	//			"INS_CODE"	number		NULL,
+	//			"SAV_CODE"	number		NOT NULL
+	//		);
+	private int pro_code, ins_code, sav_code;
+	private main.java.dank.vo.deposit.SavingVO savingVO;
+	private main.java.dank.vo.deposit.Installment_savingVO installment_savingVO;
+
+	public main.java.dank.vo.deposit.SavingVO getSavingVO() {
 		return savingVO;
 	}
 
-	public void setSavingVO(SavingVO savingVO) {
+	public void setSavingVO(main.java.dank.vo.deposit.SavingVO savingVO) {
 		this.savingVO = savingVO;
 	}
 
-	public Installment_savingVO getInstallment_savingVO() {
+	public main.java.dank.vo.deposit.Installment_savingVO getInstallment_savingVO() {
 		return installment_savingVO;
 	}
 
-	public void setInstallment_savingVO(Installment_savingVO installment_savingVO) {
+	public void setInstallment_savingVO(main.java.dank.vo.deposit.Installment_savingVO installment_savingVO) {
 		this.installment_savingVO = installment_savingVO;
 	}
 
@@ -50,5 +49,5 @@ public class ProductVO {
 	public void setSav_code(int sav_code) {
 		this.sav_code = sav_code;
 	}
-	
+
 }

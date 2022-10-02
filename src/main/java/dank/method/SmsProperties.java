@@ -1,11 +1,13 @@
 package main.java.dank.method;
 
 import java.util.HashMap;
+
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Repository;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 @Repository
 public class SmsProperties {
 
@@ -15,18 +17,18 @@ public class SmsProperties {
 		 * @brief This sample code demonstrate how to send sms through CoolSMS Rest API
 		 *        PHP
 		 */
-		
-//		if(true) {
-//			System.out.println("�޼��� ���۱���� �Ͻ������Ǿ��ֽ��ϴ�.");
-//			return false;
-//		}
+
+		//		if(true) {
+		//			System.out.println("�޼��� ���۱���� �Ͻ������Ǿ��ֽ��ϴ�.");
+		//			return false;
+		//		}
 		String api_key = "NCSNJETH2DZH45LE";
 		String api_secret = "HPUX3CCLXEEJSLEWMVS3JTSDNIWVHDNZ";
 		Message coolsms = new Message(api_key, api_secret);
 
 		String[] phoneNumList = mem_phn.split("-");
 		String phoneNum = "";
-		for(String e : phoneNumList){
+		for (String e : phoneNumList) {
 			phoneNum += e;
 		}
 		// 4 params(to, from, type, text) are mandatory. must be filled
@@ -38,7 +40,7 @@ public class SmsProperties {
 		params.put("app_version", "test app 1.2"); // application name and version
 
 		try {
-			JSONObject obj = (JSONObject) coolsms.send(params);
+			JSONObject obj = coolsms.send(params);
 			System.out.println(obj.toString());
 		} catch (CoolsmsException e) {
 			System.out.println(e.getMessage());

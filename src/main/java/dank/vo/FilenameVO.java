@@ -10,6 +10,5 @@ public class FilenameVO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	
-	
+
 }

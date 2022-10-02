@@ -10,8 +10,10 @@
   -webkit-box-shadow: 1px 1px 14px 0px rgba(18, 38, 63, 0.26);
   -moz-box-shadow: 1px 1px 14px 0px rgba(18, 38, 63, 0.26);
   box-shadow: 1px 1px 14px 0px rgba(18, 38, 63, 0.26);
+
   [data-notify="icon"] {
     display: block;
+
     &::before {
       line-height: 35px;
       font-size: 22px;
@@ -27,6 +29,7 @@
       color: #fff;
     }
   }
+
   [data-notify="title"] {
     display: block;
     color: #2b2b2b;
@@ -34,10 +37,12 @@
     font-size: 14px;
     margin-bottom: 5px;
   }
+
   [data-notify="message"] {
     font-size: 13px;
     color: #908e8e;
   }
+
   .close {
     background: rgba(255, 255, 255, 0.8);
     width: 25px;
@@ -50,7 +55,7 @@
 
 /*    Alert States    */
 
-@mixin alert-state($color){
+@mixin alert-state($color) {
   border-left: 4px solid $color;
   [data-notify="icon"]:before {
     background: $color;

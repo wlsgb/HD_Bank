@@ -6,7 +6,7 @@ public class Otp_RegVO {
 
 	private int otp_code, mem_code;
 	private String otp_certify;
-	
+
 	private MemberVO memberVO;
 
 	public int getOtp_code() {
@@ -40,6 +40,5 @@ public class Otp_RegVO {
 	public void setMemberVO(MemberVO memberVO) {
 		this.memberVO = memberVO;
 	}
-	
-	
+
 }

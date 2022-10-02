@@ -8,11 +8,11 @@ import main.java.dank.method.ExchangeRate;
 
 @RestController
 public class ExchangeRateRestController {
-	
+
 	@Autowired
 	private ExchangeRate exchangeRate;
-	
-	@RequestMapping(value = "exchangeRateJson",produces = "application/text; charset=euc-kr")
+
+	@RequestMapping(value = "exchangeRateJson", produces = "application/text; charset=euc-kr")
 	public String exchangeRateJson() {
 		String erj = exchangeRate.exchangeRateJson();
 		return erj;

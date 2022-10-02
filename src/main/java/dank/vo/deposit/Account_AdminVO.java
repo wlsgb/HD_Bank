@@ -5,7 +5,7 @@ import main.java.dank.vo.EmployeeVO;
 public class Account_AdminVO {
 	private int ac_code, hd_code;
 	private EmployeeVO employeeVO;
-	private AccountVO accountVO;
+	private main.java.dank.vo.deposit.AccountVO accountVO;
 
 	public int getAc_code() {
 		return ac_code;
@@ -31,11 +31,11 @@ public class Account_AdminVO {
 		this.employeeVO = employeeVO;
 	}
 
-	public AccountVO getAccountVO() {
+	public main.java.dank.vo.deposit.AccountVO getAccountVO() {
 		return accountVO;
 	}
 
-	public void setAccountVO(AccountVO accountVO) {
+	public void setAccountVO(main.java.dank.vo.deposit.AccountVO accountVO) {
 		this.accountVO = accountVO;
 	}
 

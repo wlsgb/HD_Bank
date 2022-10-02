@@ -12,8 +12,8 @@
     copies of the Software, and to permit persons to whom the Software is
     furnished to do so, subject to the following conditions:
 */
-(function($){
-    var simpleSlider = function(element, useroptions){
+(function ($) {
+    var simpleSlider = function (element, useroptions) {
         // Set some variables
         var obj = this,
             sliderInterval = null;
@@ -30,7 +30,7 @@
             slideOnInterval: true,
             interval: 5000,
             swipe: true,
-			transition: "slide",
+            transition: "slide",
             animateDuration: 1000,
             animationEasing: 'ease',
             pauseOnHover: false,
@@ -38,42 +38,41 @@
         }, useroptions);
 
         // Init the slider
-        obj.init = function(){
+        obj.init = function () {
             // If transit is included and useTransitionEnd == false we will change this to true (better animation performance).
             // Unless the user changed updateTransit to false
-            if(options.updateTransit && $.support.transition && jQuery().transition && !$.transit.useTransitionEnd){
+            if (options.updateTransit && $.support.transition && jQuery().transition && !$.transit.useTransitionEnd) {
                 $.transit.useTransitionEnd = true;
             }
 
             // Count the total slides
             obj.totalSlides = $(options.slidesContainer).find(options.slides).length;
 
-			var cacheWidth = 0;
-		  
+            var cacheWidth = 0;
+
             // Find the slides in the sliderdom and add the index attribute
-            $(options.slidesContainer).find(options.slides).each(function(index){
+            $(options.slidesContainer).find(options.slides).each(function (index) {
                 // Give each slide a data-index so we can control it later on
                 $(this).attr('data-index', index);
-				cacheWidth = ($(this).outerWidth() > cacheWidth) ? $(this).outerWidth() : cacheWidth;
+                cacheWidth = ($(this).outerWidth() > cacheWidth) ? $(this).outerWidth() : cacheWidth;
 
-				if(options.transition == "slide"){
+                if (options.transition == "slide") {
                     // A fixed width is needed for the IE left animation. Here we give each slide a width
-                     if($.support.transition !== undefined){
+                    if ($.support.transition !== undefined) {
                         $(this).css({
                             x: index * 100 + '%',
                             'z-index': obj.totalSlides - index,
                             width: cacheWidth
                         });
-                     }
-                     else{
+                    } else {
                         $(this).css({
                             left: index * 100 + '%',
                             'z-index': obj.totalSlides - index,
                             width: cacheWidth
                         });
-                     }
-                 }
-                 if(options.transition == "fade"){
+                    }
+                }
+                if (options.transition == "fade") {
                     // A fixed width is needed for the IE left animation. Here we give each slide a width
                     var alpha = (index == 0) ? 1 : 0;
                     $(this).css({
@@ -83,60 +82,59 @@
                         width: cacheWidth,
                         opacity: alpha
                     });
-                 }
+                }
 
             });
 
             // Place the slideTracker after the container if enabled in the options
-            if(options.slideTracker){
+            if (options.slideTracker) {
                 // Add the slideposition div and add the indicators
-                $(options.slidesContainer).after("<div id='"+ options.slideTrackerID +"'><ul></ul></div>");
-                for(var x = 0; x < obj.totalSlides;x++){
-                    $('#'+ options.slideTrackerID +' ul').append('<li class="indicator" data-index="'+x+'"></li>');
+                $(options.slidesContainer).after("<div id='" + options.slideTrackerID + "'><ul></ul></div>");
+                for (var x = 0; x < obj.totalSlides; x++) {
+                    $('#' + options.slideTrackerID + ' ul').append('<li class="indicator" data-index="' + x + '"></li>');
                 }
-                $('#'+ options.slideTrackerID +' ul li[data-index="'+obj.currentSlide+'"]').addClass('active');
+                $('#' + options.slideTrackerID + ' ul li[data-index="' + obj.currentSlide + '"]').addClass('active');
 
                 // Make the slide indicators clickable
-                $("#"+ options.slideTrackerID +" ul li").click(function(){
-                    if(!($(this).hasClass("active")))
+                $("#" + options.slideTrackerID + " ul li").click(function () {
+                    if (!($(this).hasClass("active")))
                         obj.nextSlide($(this).data('index'));
                 });
             }
 
             // Start the slider interval if enabled in options
-            if(options.slideOnInterval){
+            if (options.slideOnInterval) {
                 setSliderInterval();
             }
 
             // Change the cursor with a grabbing hand that simulates the swiping on desktops
-            if(options.swipe && jQuery().swipe){
-                $(options.slidesContainer).css('cursor','-webkit-grab');
-                $(options.slidesContainer).css('cursor','-moz-grab');
-                $(options.slidesContainer).css('cursor','grab');
+            if (options.swipe && jQuery().swipe) {
+                $(options.slidesContainer).css('cursor', '-webkit-grab');
+                $(options.slidesContainer).css('cursor', '-moz-grab');
+                $(options.slidesContainer).css('cursor', 'grab');
 
-                $(options.slidesContainer).mousedown(function(){
-                    $(options.slidesContainer).css('cursor','-webkit-grabbing');
-                    $(options.slidesContainer).css('cursor','-moz-grabbing');
-                    $(options.slidesContainer).css('cursor','grabbing');
+                $(options.slidesContainer).mousedown(function () {
+                    $(options.slidesContainer).css('cursor', '-webkit-grabbing');
+                    $(options.slidesContainer).css('cursor', '-moz-grabbing');
+                    $(options.slidesContainer).css('cursor', 'grabbing');
                 });
 
-                $(options.slidesContainer).mouseup(function(){
-                    $(options.slidesContainer).css('cursor','-webkit-grab');
-                    $(options.slidesContainer).css('cursor','-moz-grab');
-                    $(options.slidesContainer).css('cursor','grab');
+                $(options.slidesContainer).mouseup(function () {
+                    $(options.slidesContainer).css('cursor', '-webkit-grab');
+                    $(options.slidesContainer).css('cursor', '-moz-grab');
+                    $(options.slidesContainer).css('cursor', 'grab');
                 });
 
                 // Add the swipe actions to the container
                 $(options.slidesContainer).swipe({
-                    swipeLeft: function(){
+                    swipeLeft: function () {
                         obj.nextSlide();
                     },
-                    swipeRight: function(){
+                    swipeRight: function () {
                         obj.prevSlide();
                     }
                 });
-            }
-            else if(!jQuery().swipe && options.swipe === true){
+            } else if (!jQuery().swipe && options.swipe === true) {
                 console.warn("Duo the missing TouchSwipe.js swipe has been disabled.");
             }
 
@@ -148,42 +146,42 @@
         }();
 
         // Bind the function that recalculates the width of each slide on a resize.
-        $(window).resize(function(){
-			var cacheWidth = 0;
-		
-            $(options.slidesContainer).find(options.slides).each(function(index){
+        $(window).resize(function () {
+            var cacheWidth = 0;
+
+            $(options.slidesContainer).find(options.slides).each(function (index) {
                 // Reset width; otherwise it will keep the same width as before
-                $(this).css('width','');
-				
-				cacheWidth = ($(this).outerWidth() > cacheWidth) ? $(this).outerWidth() : cacheWidth;
-				
+                $(this).css('width', '');
+
+                cacheWidth = ($(this).outerWidth() > cacheWidth) ? $(this).outerWidth() : cacheWidth;
+
                 $(this).css({x: ($(this).data('index') - obj.currentSlideindex) * 100 + '%', width: cacheWidth});
             });
         });
 
         // Controller of the interval
-        function setSliderInterval(){
+        function setSliderInterval() {
             clearInterval(sliderInterval);
-            sliderInterval = setInterval(function(){
+            sliderInterval = setInterval(function () {
                 obj.nextSlide();
-            },options.interval);
-        };
+            }, options.interval);
+        }
 
         // Go to a previous slide (calls the nextslide function with the new slide number
-        obj.prevSlide = function(){
+        obj.prevSlide = function () {
             var slide = (obj.currentSlide > 0) ? obj.currentSlide -= 1 : (obj.totalSlides - 1);
             obj.nextSlide(slide);
         };
 
         // Go to a next slide (function is also used for the previous slide and goto slide functions).
         // If a paramater is given it will go to the given slide
-        obj.nextSlide = function(slide){
+        obj.nextSlide = function (slide) {
             // Cache the previous slide number and set slided to false
             var prevSlide = obj.currentSlide,
                 slided = false;
 
-            if(slide === undefined)
-                obj.currentSlide = (obj.currentSlide < (obj.totalSlides-1)) ? obj.currentSlide += 1 : 0 ;
+            if (slide === undefined)
+                obj.currentSlide = (obj.currentSlide < (obj.totalSlides - 1)) ? obj.currentSlide += 1 : 0;
             else
                 obj.currentSlide = slide;
 
@@ -195,19 +193,19 @@
             });
 
             // Slide animation, here we determine if we can use CSS transitions (transit.js) or have to use jQuery animate
-            $(options.slidesContainer).find(options.slides).each(function(index){
-			
-				if(options.transition == "slide"){                    
-					if ($.support.transition && jQuery().transition)
-						$(this).stop().transition({x: ($(this).data('index')-obj.currentSlide)*100+'%'}, options.animateDuration, options.animationEasing);
-					else
-						$(this).stop().animate({left: ($(this).data('index')-obj.currentSlide)*100+'%'}, options.animateDuration, triggerSlideEnd);
+            $(options.slidesContainer).find(options.slides).each(function (index) {
+
+                if (options.transition == "slide") {
+                    if ($.support.transition && jQuery().transition)
+                        $(this).stop().transition({x: ($(this).data('index') - obj.currentSlide) * 100 + '%'}, options.animateDuration, options.animationEasing);
+                    else
+                        $(this).stop().animate({left: ($(this).data('index') - obj.currentSlide) * 100 + '%'}, options.animateDuration, triggerSlideEnd);
                 }
-				
-                if(options.transition == "fade"){
+
+                if (options.transition == "fade") {
                     var alpha = (index == obj.currentSlide) ? 1 : 0;
 
-                    if(index == obj.currentSlide){
+                    if (index == obj.currentSlide) {
                         $(this).show();
                     }
 
@@ -216,26 +214,25 @@
                     else
                         $(this).stop().animate({opacity: alpha}, options.animateDuration, triggerSlideEnd);
                 }
-			
+
             });
 
             // Somehow the callback from $.transition doesn't work, so we create ow custom bind here
             $(options.slidesContainer).on('oTransitionEnd webkitTransitionEnd oTransitionEnd otransitionend transitionend', triggerSlideEnd);
 
             // Create trigger point after a slide slides. All the slides return a TransitionEnd; to prevent a repeating trigger we keep a slided var
-            function triggerSlideEnd(){
-                if(!slided){
-					if(options.transition == "fade"){
-                        $(options.slidesContainer).children(options.slides).each(function(index){
-                            if($(this).data('index') == obj.currentSlide){
+            function triggerSlideEnd() {
+                if (!slided) {
+                    if (options.transition == "fade") {
+                        $(options.slidesContainer).children(options.slides).each(function (index) {
+                            if ($(this).data('index') == obj.currentSlide) {
                                 $(this).show();
-                            }
-                            else{
+                            } else {
                                 $(this).hide();
                             }
                         });
                     }
-				
+
                     $(element).trigger({
                         type: "afterSliding",
                         prevSlide: prevSlide,
@@ -246,29 +243,29 @@
             }
 
             // Show current slide bulb
-            $('#'+ options.slideTrackerID +' ul li').removeClass('active');
-            $('#'+ options.slideTrackerID +' ul li[data-index="'+obj.currentSlide+'"]').addClass('active');
+            $('#' + options.slideTrackerID + ' ul li').removeClass('active');
+            $('#' + options.slideTrackerID + ' ul li[data-index="' + obj.currentSlide + '"]').addClass('active');
 
             // (Re)set the slider interval
-            if(options.slideOnInterval){
+            if (options.slideOnInterval) {
                 setSliderInterval();
             }
         };
 
         // Function for the pauseOnHover.
         //The function will clear the interval and restart it after the mouse disappears from the container
-        if(options.pauseOnHover){
-            $(options.slidesContainer).hover(function(){
+        if (options.pauseOnHover) {
+            $(options.slidesContainer).hover(function () {
                 clearInterval(sliderInterval);
-            }, function(){
+            }, function () {
                 setSliderInterval();
             });
         }
     };
 
     // Create a plugin
-    $.fn.simpleSlider = function(options){
-        return this.each(function(){
+    $.fn.simpleSlider = function (options) {
+        return this.each(function () {
             var element = $(this);
 
             // Return early if this element already has a plugin instance

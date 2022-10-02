@@ -13,6 +13,7 @@ import main.java.dank.vo.deposit.Account_ClientVO;
 public class ShareService {
 	@Autowired
 	private ShareDao shareDao;
+
 	public void newAccount(AccountVO accountVO, Account_ClientVO clientVO) {
 		shareDao.addShareAccount(accountVO);
 		shareDao.addAcClient(clientVO);
@@ -21,6 +22,6 @@ public class ShareService {
 	public void newAccount_for_share(AccountVO account, Account_ClientVO clientVO1) {
 		shareDao.addShareAccount(account);
 		shareDao.addAcClient(clientVO1);
-		
+
 	}
 }

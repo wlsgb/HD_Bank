@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- Null 반환 값 받기위한 설정 -->
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
+    <typeAliases>
+        <!-- 대출 영역 시작 -->
+        <typeAlias type="main.java.dank.vo.LoanProductVO" alias="lpvo"/>
+        <typeAlias type="main.java.dank.vo.LoanCheckVO" alias="lcvo"/>
+        <typeAlias type="main.java.dank.vo.LoanApplicationVO" alias="lavo"/>
+        <typeAlias type="main.java.dank.vo.LoanFileVO" alias="lfvo"/>
+        <typeAlias type="main.java.dank.vo.LoanRepayVO" alias="lrvo"/>
+        <typeAlias type="main.java.dank.vo.LoanRepayLogVO" alias="lrlvo"/>
+        <typeAlias type="main.java.dank.vo.FilenameVO" alias="fnvo"/>
+        <!-- 대출 영역 끝 -->
+
+        <!-- 보안 알리아스 시작-->
+        <typeAlias type="main.java.dank.vo.security.Otp_RegVO" alias="otpvo"/>
+        <typeAlias type="main.java.dank.vo.security.Security_Card_RegVO" alias="scrvo"/>
+        <typeAlias type="main.java.dank.vo.security.Security_CardVO" alias="cardvo"/>
+        <!-- 보안 알리아스 끝-->
+
+
+        <!-- 예금 영역 시작 -->
+        <typeAlias type="main.java.dank.vo.deposit.AccountVO" alias="acvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.DepositVO" alias="depvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.Installment_savingVO" alias="insvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.ProductVO" alias="provo"/>
+        <typeAlias type="main.java.dank.vo.deposit.QualificationVO" alias="quavo"/>
+        <typeAlias type="main.java.dank.vo.deposit.Sav_processVO" alias="savprvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.SavingVO" alias="savvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.Shared_challengeVO" alias="shacvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.Shared_savingVO" alias="shasvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.TransferVO" alias="trvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.WithdrawVO" alias="witvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.AccountHistoryVO" alias="achvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.PageVO" alias="deppvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.At_applicationVO" alias="atapplyvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.Account_AdminVO" alias="adminvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.Account_ClientVO" alias="clientvo"/>
+        <typeAlias type="main.java.dank.vo.deposit.TransferDTO" alias="trdto"/>
+        <typeAlias type="main.java.dank.vo.deposit.Sav_process_forModalVO" alias="smvo"/>
+
+        <typeAlias type="main.java.dank.vo.deposit.ProSavInsDto" alias="psidto"/>
+        <!-- 예금 영역 끝 -->
+
+        <typeAlias type="main.java.dank.vo.PageVO" alias="pvo"/>
+        <typeAlias type="main.java.dank.vo.QnaVO" alias="qnavo"/>
+        <typeAlias type="main.java.dank.vo.MemberVO" alias="mem"/>
+        <typeAlias type="main.java.dank.vo.EmployeeVO" alias="emp"/>
+        <typeAlias type="main.java.dank.vo.Question_princhk_VO" alias="qvo"/>
+
+        <!-- 현재 접속자 -->
+        <typeAlias type="main.java.dank.vo.Curr_VisitorVO" alias="cvvo"/>
+        <!-- 멤버로그 -->
+        <typeAlias type="main.java.dank.vo.MemberLogVO" alias="ml"/>
+        <!-- hdpay -->
+        <typeAlias type="main.java.dank.vo.HDCardVO" alias="card"/>
+        <typeAlias type="main.java.dank.vo.PaymentVO" alias="pay"/>
+    </typeAliases>
+
+</configuration>
+  
+  

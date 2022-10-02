@@ -5,21 +5,25 @@
     thead > tr > th, tbody > tr > th, tfoot > tr > th, thead > tr > td, tbody > tr > td, tfoot > tr > td {
       vertical-align: middle;
     }
+
     tbody > tr > {
       td, th {
         padding: 8px;
       }
     }
+
     tfoot > tr > {
       td, th {
         padding: 8px;
       }
     }
   }
+
   thead th {
     border-bottom-width: 2px;
     font-weight: $font-weight-bold;
   }
+
   td, th {
     font-size: 14px;
     border-top-width: 0px;
@@ -133,10 +137,10 @@
   }
 }
 
-@mixin table-bg-state($color){
+@mixin table-bg-state($color) {
   background: $color !important;
   color: $white-color !important;
-  border: 0px !important;  
+  border: 0px !important;
 }
 
 .table-head-bg-default thead th, .table-striped-bg-default tbody tr:nth-of-type(odd) {

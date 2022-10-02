@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question">
+    <!-- #은 getter 다 -->
+    <insert id="add" parameterType="qvo">
+        insert into inquiry
+        values (inquiry_seq.nextVal, #{mem_code}, #{cat_num},
+                #{inq_title}, #{inq_content}, 0, null, sysdate, 1)
+    </insert>
+
+    <select id="myqlist" resultType="qvo" parameterType="qvo">
+        select inq_num,
+               mem_code,
+               cat_num,
+               inq_title,
+               inq_content,
+               inq_hit,
+               inq_file1,
+               inq_date,
+               pro_code
+        from INQUIRY
+        order by inq_num desc
+    </select>
+
+</mapper>

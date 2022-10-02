@@ -8,13 +8,16 @@
   flex-grow: 1;
   position: relative;
   font-weight: $font-weight-normal !important;
+
   + .selectgroup-item {
     margin-left: -1px;
   }
+
   &:not(:first-child) .selectgroup-button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+
   &:not(:last-child) .selectgroup-button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -60,6 +63,7 @@
     color: $primary-color;
     background: rgba($primary-color, .15);
   }
+
   &:focus + .selectgroup-button {
     border-color: $primary-color;
     z-index: 2;
@@ -73,11 +77,13 @@
   flex-wrap: wrap;
   -ms-flex-align: start;
   align-items: flex-start;
+
   .selectgroup-item {
     margin-right: .5rem;
     -ms-flex-positive: 0;
     flex-grow: 0;
   }
+
   .selectgroup-button {
     border-radius: 50px !important;
   }
@@ -90,6 +96,7 @@
       color: $color;
       background: rgba($color, .15);
     }
+
     &:focus + .selectgroup-button {
       border-color: $color;
       color: $color;
@@ -102,18 +109,23 @@
   &.selectgroup-primary {
     @include select-group-state-style($primary-color);
   }
+
   &.selectgroup-secondary {
     @include select-group-state-style($secondary-color);
   }
+
   &.selectgroup-info {
     @include select-group-state-style($info-color);
   }
+
   &.selectgroup-success {
     @include select-group-state-style($success-color);
   }
+
   &.selectgroup-warning {
     @include select-group-state-style($warning-color);
   }
+
   &.selectgroup-danger {
     @include select-group-state-style($danger-color);
   }

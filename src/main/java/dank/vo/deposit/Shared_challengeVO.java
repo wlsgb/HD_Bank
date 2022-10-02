@@ -1,12 +1,12 @@
 package main.java.dank.vo.deposit;
 
 public class Shared_challengeVO {
-//	CREATE TABLE "SHARED_CHALLENGE" (
-//			"SHAC_CODE"	number		NOT NULL,
-//			"SHAC_MANNUM"	number	DEFAULT 2	NOT NULL,
-//			"SHAC_MASTER"	NUMBER	DEFAULT 1	NOT NULL
-//		);
-	private int shac_code,shac_mannum,shac_master;
+	//	CREATE TABLE "SHARED_CHALLENGE" (
+	//			"SHAC_CODE"	number		NOT NULL,
+	//			"SHAC_MANNUM"	number	DEFAULT 2	NOT NULL,
+	//			"SHAC_MASTER"	NUMBER	DEFAULT 1	NOT NULL
+	//		);
+	private int shac_code, shac_mannum, shac_master;
 
 	public int getShac_code() {
 		return shac_code;

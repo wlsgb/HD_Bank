@@ -1,4 +1,5 @@
 package main.java.dank.vo.deposit;
+
 /*
  * 
  * mapmy.put("ac_num", myac);
@@ -8,14 +9,14 @@ package main.java.dank.vo.deposit;
  * */
 public class TransferDTO {
 
-	private String ac_num,mem_code,at_dps_ac,at_set_mony,sp_name;
-	
+	private String ac_num, mem_code, at_dps_ac, at_set_mony, sp_name;
+
 	//�ڵ���ü�� �ʿ��ؼ� �׳� �־��(service if �ɸ���)
 	private String ata_code;
-	
+
 	//HD_Code?
 	private String hd_code;
-	
+
 	public String getHd_code() {
 		return hd_code;
 	}

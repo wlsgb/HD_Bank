@@ -5,12 +5,15 @@
   font-size: 14px;
   opacity: 1;
   border-radius: 3px;
+
   &:hover, &:focus {
     opacity: 0.9;
     transition: all .3s;
   }
-  .btn-label{
+
+  .btn-label {
     display: inline-block;
+
     i {
       font-size: 16px;
       vertical-align: middle;
@@ -19,7 +22,8 @@
       line-height: 0;
       margin-top: -2.5px;
     }
-    &.just-icon i{
+
+    &.just-icon i {
       margin-left: 0 !important;
       margin-right: 0px !important;
     }
@@ -32,7 +36,8 @@
   border-radius: 3px;
   padding: 12.5px 27.5px;
   font-weight: $font-weight-normal;
-  .btn-label{
+
+  .btn-label {
     i {
       font-size: 27px;
       vertical-align: middle;
@@ -41,7 +46,8 @@
       line-height: 0;
       margin-top: -2.5px;
     }
-    &.just-icon i{
+
+    &.just-icon i {
       margin-left: 0 !important;
       margin-right: 0px !important;
     }
@@ -65,7 +71,7 @@
 }
 
 /*      Button Icon        */
-.btn-icon{
+.btn-icon {
   font-size: .9375rem;
   height: 2.5125rem;
   line-height: normal;
@@ -74,16 +80,19 @@
   padding: 0;
   position: relative;
   width: 2.5125rem;
+
   &.btn-lg {
     height: 2.75rem;
     min-width: 2.75rem;
     width: 2.75rem;
   }
+
   &.btn-sm {
     height: 2rem;
     min-width: 2rem;
     width: 2rem;
   }
+
   &.btn-xs {
     height: 1.6875rem;
     min-width: 1.6875rem;
@@ -95,6 +104,7 @@
 .btn-white {
   background: $white-color !important;
   color: $dark-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $white-color !important;
     color: $dark-color !important;
@@ -104,6 +114,7 @@
 .btn-default {
   background: $dark-color !important;
   color: $white-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $dark-color !important;
     color: $white-color !important;
@@ -113,6 +124,7 @@
 .btn-primary {
   background: $primary-color !important;
   border-color: $primary-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $primary-color !important;
     border-color: $primary-color !important;
@@ -122,6 +134,7 @@
 .btn-secondary {
   background: $secondary-color !important;
   border-color: $secondary-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $secondary-color !important;
     border-color: $secondary-color !important;
@@ -131,6 +144,7 @@
 .btn-info {
   background: $info-color !important;
   border-color: $info-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $info-color !important;
     border-color: $info-color !important;
@@ -140,6 +154,7 @@
 .btn-success {
   background: $success-color !important;
   border-color: $success-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $success-color !important;
     border-color: $success-color !important;
@@ -150,6 +165,7 @@
   background: $warning-color !important;
   border-color: $warning-color !important;
   color: $white-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $warning-color !important;
     border-color: $warning-color !important;
@@ -160,15 +176,17 @@
 .btn-danger {
   background: $danger-color !important;
   border-color: $danger-color !important;
+
   &:hover, &:focus, &:disabled {
     background: $danger-color !important;
     border-color: $danger-color !important;
   }
 }
 
-.btn-light{
+.btn-light {
   background: $white-color !important;
   border-color: transparent;
+
   &:hover, &:focus, &:disabled {
     background: #ebecec !important;
     border-color: transparent;
@@ -180,6 +198,7 @@
   background: transparent;
   color: inherit;
   font-size: 15px;
+
   &:after {
     display: none;
   }
@@ -188,32 +207,40 @@
 /*      Button Border     */
 @mixin btn-border($color) {
   color: $color !important;
-  border: 1px solid $color !important;  
+  border: 1px solid $color !important;
 }
 
 .btn-border {
   background: $transparent-bg !important;
+
   &:hover, &:focus {
     background: $transparent-bg !important;
   }
+
   &.btn-white {
     @include btn-border($white-color);
   }
+
   &.btn-default {
     @include btn-border($dark-color);
   }
+
   &.btn-primary {
     @include btn-border($primary-color);
   }
+
   &.btn-secondary {
     @include btn-border($secondary-color);
   }
+
   &.btn-info {
     @include btn-border($info-color);
-  }  
+  }
+
   &.btn-success {
     @include btn-border($success-color);
   }
+
   &.btn-warning {
     @include btn-border($warning-color);
   }
@@ -221,6 +248,7 @@
   &.btn-danger {
     @include btn-border($danger-color);
   }
+
   &.btn-light {
     border: 1px solid #efefef;
     background: #fff !important;
@@ -243,6 +271,7 @@
 .btn-link {
   border: 0 !important;
   background: $transparent-bg !important;
+
   &:hover, &:focus {
     text-decoration: underline !important;
     background: $transparent-bg !important;
@@ -285,6 +314,7 @@
 
 .toggle-handle {
   background: $white-color !important;
+
   &:hover {
     background: $white-color !important;
   }

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ExchangeRate {
-	
+
 	public static String callURL(String myURL) {
 
 		System.out.println("Requeted URL:" + myURL);
@@ -46,7 +47,7 @@ public class ExchangeRate {
 				if (bufferedReader != null) {
 					int cp;
 					while ((cp = bufferedReader.read()) != -1) {
-						sb.append((char) cp);
+						sb.append((char)cp);
 					}
 					bufferedReader.close();
 				}

@@ -1,14 +1,15 @@
 package main.java.dank.vo.deposit;
 
 public class Shared_savingVO {
-//	CREATE TABLE "SHARED_SAVING" (
-//			"SHAS_CODE"	number		NOT NULL,
-//			"SHAS_COUNT"	NUMBER	DEFAULT 2	NOT NULL,
-//			"SHAS_MASTAR"	NUMBER	DEFAULT 1	NOT NULL
-//		);
+	//	CREATE TABLE "SHARED_SAVING" (
+	//			"SHAS_CODE"	number		NOT NULL,
+	//			"SHAS_COUNT"	NUMBER	DEFAULT 2	NOT NULL,
+	//			"SHAS_MASTAR"	NUMBER	DEFAULT 1	NOT NULL
+	//		);
 	private int shas_code, shas_count, shas_master;
-	private SavingVO savingVO;
+	private main.java.dank.vo.deposit.SavingVO savingVO;
 	private QualificationVO qualificationVO;
+
 	public QualificationVO getQualificationVO() {
 		return qualificationVO;
 	}
@@ -17,11 +18,11 @@ public class Shared_savingVO {
 		this.qualificationVO = qualificationVO;
 	}
 
-	public SavingVO getSavingVO() {
+	public main.java.dank.vo.deposit.SavingVO getSavingVO() {
 		return savingVO;
 	}
 
-	public void setSavingVO(SavingVO savingVO) {
+	public void setSavingVO(main.java.dank.vo.deposit.SavingVO savingVO) {
 		this.savingVO = savingVO;
 	}
 

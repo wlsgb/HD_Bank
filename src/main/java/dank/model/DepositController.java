@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,17 +22,16 @@ import main.java.dank.dao.ShareDao;
 import main.java.dank.method.AccountNum;
 import main.java.dank.service.BangkingService;
 import main.java.dank.service.DepositService;
-import main.java.dank.vo.deposit.PageVO;
-import main.java.dank.vo.deposit.ProSavInsDto;
 import main.java.dank.vo.MemberVO;
-import main.java.dank.vo.deposit.TransferDTO;
 import main.java.dank.vo.deposit.AccountHistoryVO;
 import main.java.dank.vo.deposit.AccountVO;
 import main.java.dank.vo.deposit.Account_ClientVO;
 import main.java.dank.vo.deposit.At_applicationVO;
 import main.java.dank.vo.deposit.Installment_savingVO;
-
+import main.java.dank.vo.deposit.PageVO;
+import main.java.dank.vo.deposit.ProSavInsDto;
 import main.java.dank.vo.deposit.SavingVO;
+import main.java.dank.vo.deposit.TransferDTO;
 
 @Controller
 public class DepositController {
@@ -45,6 +43,14 @@ public class DepositController {
 	private DepositService depositService;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private BangkingDao bangkingdao;
+	@Autowired
+	private BangkingService bangkingservice;
+	@Autowired
+	private ShareDao shareDao;
+
+	// ����-�ű�-Ư�� �������� ��ǰ ������ �̵�
 
 	// ����-�ű������� �̵�
 	@RequestMapping(value = "/new")
@@ -55,20 +61,20 @@ public class DepositController {
 	// ����-�ű�-Ư�� ���� ��ǰ ������ �̵�
 	@RequestMapping(value = "/new_savdetail")
 	public String saving_detail(HttpSession session, Model m, int sav_code) {
-		
+
 		System.out.println(sav_code);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-		
-		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		int mem_code = member.getMem_code();
 		Map<String, String> map = new HashMap<>();
 		map.put("mem_code", String.valueOf(mem_code));
 		map.put("sav_code", String.valueOf(sav_code));
-		
+
 		boolean stockBool = true;
 		stockBool = depositDao.seleStock(map);
-		System.out.println("stockBool:"+stockBool);
-		
+		System.out.println("stockBool:" + stockBool);
+
 		m.addAttribute("stockBool", stockBool);
 		m.addAttribute("saving", saving);
 		return "deposit_new/new_savdetail";
@@ -82,22 +88,20 @@ public class DepositController {
 		return "deposit_new/new_insdetail";
 	}
 
-	// ����-�ű�-Ư�� �������� ��ǰ ������ �̵�
-
 	// ����-�ű�-���� ��û ������ �̵�
 	@RequestMapping(value = "/saving_new")
 	public String saving_new(HttpSession session, Model m, int sav_code, int deptype) {
 
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "new");
 			return "login/login";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("memberVO", memberVO);
 		SavingVO saving = depositDao.getSavingQuaDetail(sav_code);
-		
+
 		m.addAttribute("saving", saving);
 		m.addAttribute("deptype", deptype);
 		return "deposit_new/new_deposit";
@@ -107,12 +111,12 @@ public class DepositController {
 	@RequestMapping(value = "/ins_new")
 	public String ins_new(HttpSession session, Model m, int ins_code, int deptype) {
 
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "new");
 			return "login/login";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		MemberVO memberVO = memberDao.numToEmailName(mem_code);
 		m.addAttribute("memberVO", memberVO);
 		Installment_savingVO ins = depositDao.getInsQuaDetail(ins_code);
@@ -124,10 +128,10 @@ public class DepositController {
 	// ����-�ű�-���� ��û
 	@RequestMapping(value = "/deposit_newComplete")
 	public String deposit_new(HttpSession session, Model m, AccountVO account, int deptype,
-			@RequestParam(value = "sav_code", defaultValue = "0") int sav_code,
-			@RequestParam(value = "ins_code", defaultValue = "0") int ins_code) {
+		@RequestParam(value = "sav_code", defaultValue = "0") int sav_code,
+		@RequestParam(value = "ins_code", defaultValue = "0") int ins_code) {
 
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "new");
 			return "login/login";
@@ -157,7 +161,7 @@ public class DepositController {
 	// ����-����
 	@RequestMapping(value = "/cancel")
 	public String depositecancel(HttpSession session, Model m) {
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "cancle");
 			return "login/login";
@@ -184,7 +188,7 @@ public class DepositController {
 	// ���� ���� ��û
 	@RequestMapping(value = "/cancel_input_info")
 	public String cancel_input_info(HttpSession session, int ac_code, Model m) {
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "cancle");
 			return "login/login";
@@ -199,7 +203,7 @@ public class DepositController {
 	// ���� ���� ��û Ȯ��
 	@RequestMapping(value = "/cancel_check")
 	public String cancel_check(HttpSession session, int ac_code, String take_ac, Model m) {
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "cancle");
 			return "login/login";
@@ -212,9 +216,9 @@ public class DepositController {
 	}
 
 	// ���� ����
-	@RequestMapping(value = { "/cancelComplete" })
+	@RequestMapping(value = {"/cancelComplete"})
 	public String cancelComplete(HttpSession session, int ac_code, int money, String ac_num, String take_ac) {
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "cancle");
 			return "login/login";
@@ -242,33 +246,26 @@ public class DepositController {
 
 	}
 
-	@RequestMapping(value = { "/deposite_cancle_check_shareAccount" })
+	///////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = {"/deposite_cancle_check_shareAccount"})
 	public String deposite_cancle_check_shareAccount() {
 		return "deposit_new/deposite_cancle_check_shareAccount";
 	}
 
-	@RequestMapping(value = { "/share_cancel_req" })
+	@RequestMapping(value = {"/share_cancel_req"})
 	public String share_cancel_req() {
 		return "deposit_new/share_cancel_req";
 	}
 
-	@RequestMapping(value = { "/share_cancel" })
+	@RequestMapping(value = {"/share_cancel"})
 	public String share_cancel() {
 		return "deposit_new/share_cancel";
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////
-
-	@Autowired
-	private BangkingDao bangkingdao;
-	@Autowired
-	private BangkingService bangkingservice;
-	@Autowired
-	private ShareDao shareDao;
-
 	// ��ȸ-������ȸ
-	@RequestMapping(value = { "/inquire" })
+	@RequestMapping(value = {"/inquire"})
 	public ModelAndView inquirePage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if (session.getAttribute("member") == null) {
@@ -276,10 +273,10 @@ public class DepositController {
 			mav.setViewName("login/login");
 			return mav;
 		}
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 
 		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
-		
+
 		//���⼭ ���� �������� ��ȸ�� ���� �ڵ�(�����:������)
 		for (AccountVO e : aclist) {
 			if (e.getSaving().getShas_code() != 0) {
@@ -290,15 +287,15 @@ public class DepositController {
 		List<AccountVO> additionalList = shareDao.getAdditionalList(sessionmem.getMem_email());
 		for (AccountVO e : additionalList) {
 			String[] namearr = e.getAc_name().substring(e.getAc_name().indexOf("{") + 1, e.getAc_name().indexOf("}"))
-					.split(",");
-	
+				.split(",");
+
 			if (namearr[1].trim().equals(sessionmem.getMem_email().trim())) {
 				e.setAc_name(e.getAc_name().substring(0, e.getAc_name().indexOf("{")) + "(��������:������)");
 				aclist.add(e);
 			}
 		}
 		//������� �������� ��ȸ�� ���� �ڵ�(�����:������)
-		
+
 		mav.addObject("aclist", aclist);
 		mav.setViewName("deposit/deposite_inquire");
 
@@ -306,9 +303,9 @@ public class DepositController {
 	}
 
 	// �Ա��ϱ� (�ӽñ��)
-	@RequestMapping(value = { "/deposit" })
+	@RequestMapping(value = {"/deposit"})
 	public ModelAndView executedeposit(HttpSession session, String ac_num) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
 
 		String money = "10000";
@@ -330,10 +327,10 @@ public class DepositController {
 	}
 
 	// ����ϱ�(�ӽñ��)
-	@RequestMapping(value = { "/withdraw" })
+	@RequestMapping(value = {"/withdraw"})
 	public ModelAndView executewithdraw(HttpSession session, String ac_num) {
 		// int acnum = Integer.parseInt(ac_num);
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
 
 		String money = "10000";
@@ -363,13 +360,13 @@ public class DepositController {
 	// ������ü ����
 	@RequestMapping(value = "/transfer_process")
 	public ModelAndView transferprocess(HttpSession session, @RequestParam(value = "myac") String myac,
-			@RequestParam(value = "yourac") String yourac, @RequestParam(value = "youracmem") String youracmem,
-			@RequestParam(value = "trmoney") String trmoney,
-			@RequestParam(value = "youracwrite", defaultValue = "��ü�ε���") String youracwrite,
-			@RequestParam(value = "myacwrite", defaultValue = "��ü�κ���") String myacwrite
+		@RequestParam(value = "yourac") String yourac, @RequestParam(value = "youracmem") String youracmem,
+		@RequestParam(value = "trmoney") String trmoney,
+		@RequestParam(value = "youracwrite", defaultValue = "��ü�ε���") String youracwrite,
+		@RequestParam(value = "myacwrite", defaultValue = "��ü�κ���") String myacwrite
 
 	) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 
 		TransferDTO my_tr = new TransferDTO();
 		my_tr.setAc_num(myac);
@@ -384,7 +381,6 @@ public class DepositController {
 		your_tr.setAt_dps_ac(myac);
 		your_tr.setSp_name(youracwrite);
 		your_tr.setAt_set_mony(trmoney);
-
 
 		if (bangkingdao.trtrAcChk(myac) >= 1) {
 
@@ -403,13 +399,13 @@ public class DepositController {
 	}
 
 	// ���³�������ȸ������
-	@RequestMapping(value = { "/inquire_detail" })
+	@RequestMapping(value = {"/inquire_detail"})
 	public ModelAndView inqure_detailPage(HttpSession session, PageVO pvo,
-			@RequestParam(value = "ac_num") String ac_num,
-			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
-			@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
-		
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		@RequestParam(value = "ac_num") String ac_num,
+		@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+		@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
+
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 
 		Map<String, String> historymap = new HashMap<String, String>();
 		historymap.put("ac_num", ac_num);
@@ -421,13 +417,13 @@ public class DepositController {
 		historymap.put("start", String.valueOf(pvo.getStart()));
 		historymap.put("end", String.valueOf(pvo.getEnd()));
 
-		List<AccountHistoryVO> history =bangkingdao.gethistory(historymap);
-		
-		for(AccountHistoryVO e: history) {
+		List<AccountHistoryVO> history = bangkingdao.gethistory(historymap);
+
+		for (AccountHistoryVO e : history) {
 			System.out.println(e.getSp_code());
 			System.out.println(e.getName());
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_inquire_detail");
 		mav.addObject("history", history);
@@ -437,13 +433,13 @@ public class DepositController {
 	}
 
 	// ���³�������ȸ������2
-	@RequestMapping(value = { "/inquire_detail_slct" })
+	@RequestMapping(value = {"/inquire_detail_slct"})
 	public ModelAndView inqure_detail_slctPage(HttpSession session, PageVO pvo,
-			@RequestParam(value = "ac_num") String ac_num, @RequestParam(value = "startdate") String startdate,
-			@RequestParam(value = "lastdate") String lastdate,
-			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
-			@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		@RequestParam(value = "ac_num") String ac_num, @RequestParam(value = "startdate") String startdate,
+		@RequestParam(value = "lastdate") String lastdate,
+		@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+		@RequestParam(value = "cntPerPage", required = false, defaultValue = "20") String cntPerPage) {
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		System.out.println("ac_num�� :" + ac_num);
 		Map<String, String> historymap = new HashMap<String, String>();
 		historymap.put("ac_num", ac_num);
@@ -468,9 +464,9 @@ public class DepositController {
 	}
 
 	// ��ü �������� �̵�
-	@RequestMapping(value = { "/transfer" })
+	@RequestMapping(value = {"/transfer"})
 	public ModelAndView transferPage(HttpSession session,
-			@RequestParam(value = "ac_num", defaultValue = "0") String ac_num) {
+		@RequestParam(value = "ac_num", defaultValue = "0") String ac_num) {
 		ModelAndView mav = new ModelAndView();
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "transfer");
@@ -478,7 +474,7 @@ public class DepositController {
 			return mav;
 		}
 
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 
 		Map<String, String> getmyaclistwhentr = new HashMap<String, String>();
 		getmyaclistwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
@@ -492,9 +488,9 @@ public class DepositController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/transfer_auto" })
+	@RequestMapping(value = {"/transfer_auto"})
 	public ModelAndView transferautoPage(HttpSession session) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/deposite_transfer_auto");
@@ -503,11 +499,11 @@ public class DepositController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/transfer_timereset" })
+	@RequestMapping(value = {"/transfer_timereset"})
 	public ModelAndView transferautotimeresetPage(HttpSession session,
-			@RequestParam(value = "restartdate") String restartdate, @RequestParam(value = "retime") String retime,
-			@RequestParam(value = "ata_code") String ata_code) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		@RequestParam(value = "restartdate") String restartdate, @RequestParam(value = "retime") String retime,
+		@RequestParam(value = "ata_code") String ata_code) {
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		Map<String, String> atresetparam = new HashMap<String, String>();
 		atresetparam.put("restartdate", restartdate);
 		atresetparam.put("retime", retime);
@@ -526,7 +522,7 @@ public class DepositController {
 	@RequestMapping(value = "/transfer_auto_cancle")
 	public ModelAndView transferautoacancle(HttpSession session, @RequestParam(value = "ata_code") String ata_code) {
 		ModelAndView mav = new ModelAndView();
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 
 		bangkingdao.atdelete(ata_code);
 		List<AccountVO> aclist = bangkingdao.getaclist(sessionmem.getMem_code());
@@ -536,10 +532,10 @@ public class DepositController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/transfer_auto_apply" })
+	@RequestMapping(value = {"/transfer_auto_apply"})
 	public ModelAndView transferautoapplyPage(HttpSession session, String ac_num) {
 
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
 		Map<String, String> getmyaclistwhentr = new HashMap<String, String>();
 		getmyaclistwhentr.put("mem_code", String.valueOf(sessionmem.getMem_code()));
@@ -551,18 +547,18 @@ public class DepositController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/transfer_auto_apply_process" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/transfer_auto_apply_process"}, method = RequestMethod.POST)
 	public ModelAndView transferautoapplyprocess(HttpSession session, At_applicationVO atapplyvo,
-			@RequestParam(value = "atastopdate", defaultValue = "-1", required = false) String atastopdate,
-			@RequestParam(value = "atadterm", defaultValue = "-1", required = false) String atadterm,
-			@RequestParam(value = "atamyacmemo", defaultValue = "�ڵ���ü", required = false) String atamyacmemo,
-			@RequestParam(value = "atayouracmemo", defaultValue = "�ڵ���ü", required = false) String atayouracmemo,
-			@RequestParam(value = "atacheck", defaultValue = "-1", required = false) String atacheck,
-			@RequestParam(value = "ataing", defaultValue = "-1", required = false) String ataing
-	// �Ķ���� ����Ʈ�� �ޱ����ؼ� ����� ����ŷ� ������
-	// ���ͷ� vo���� �־��־���.
+		@RequestParam(value = "atastopdate", defaultValue = "-1", required = false) String atastopdate,
+		@RequestParam(value = "atadterm", defaultValue = "-1", required = false) String atadterm,
+		@RequestParam(value = "atamyacmemo", defaultValue = "�ڵ���ü", required = false) String atamyacmemo,
+		@RequestParam(value = "atayouracmemo", defaultValue = "�ڵ���ü", required = false) String atayouracmemo,
+		@RequestParam(value = "atacheck", defaultValue = "-1", required = false) String atacheck,
+		@RequestParam(value = "ataing", defaultValue = "-1", required = false) String ataing
+		// �Ķ���� ����Ʈ�� �ޱ����ؼ� ����� ����ŷ� ������
+		// ���ͷ� vo���� �־��־���.
 	) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		atapplyvo.setMem_code(sessionmem.getMem_code());
 		atapplyvo.setAta_stopdate(atastopdate);
 		atapplyvo.setAta_dterm(Integer.parseInt(atadterm));
@@ -581,8 +577,8 @@ public class DepositController {
 
 	@RequestMapping(value = "/deposit_transfer_auto_server")
 	public ModelAndView deposit_transfer_auto_server(HttpSession session,
-			@RequestParam(value = "ac_num") String ac_num) {
-		MemberVO sessionmem = (MemberVO) session.getAttribute("member");
+		@RequestParam(value = "ac_num") String ac_num) {
+		MemberVO sessionmem = (MemberVO)session.getAttribute("member");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deposit/server/deposit_transfer_auto_server");
 		Map<String, String> atlistparam = new HashMap<String, String>();

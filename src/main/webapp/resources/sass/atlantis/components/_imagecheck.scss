@@ -22,6 +22,7 @@
     border-color: $primary-color;
     box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);
   }
+
   &:checked ~ .imagecheck-figure {
     border-color: rgba(0, 40, 100, 0.24);
   }
@@ -56,10 +57,12 @@
   max-width: 100%;
   opacity: .64;
   transition: .3s opacity;
+
   &:first-child {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
   }
+
   &:last-child {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;

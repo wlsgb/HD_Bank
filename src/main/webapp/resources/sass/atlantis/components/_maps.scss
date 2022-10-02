@@ -7,9 +7,11 @@
 .vmap {
   width: 100%;
   min-height: 265px;
+
   > svg {
     margin: auto;
     display: flex;
+
     > g {
       transition: all ease-in-out .2s;
     }

@@ -15,8 +15,8 @@ public class ChatRestController {
 		if (session.getAttribute("member") == null) {
 			return "loginPage";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
-		
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
+
 		return null;
 	}
 }

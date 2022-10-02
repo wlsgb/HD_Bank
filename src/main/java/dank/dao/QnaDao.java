@@ -1,4 +1,3 @@
-
 package main.java.dank.dao;
 
 import java.util.List;
@@ -32,12 +31,13 @@ public class QnaDao {
 	public List<QnaVO> getSeachList(PageVO pvo) {
 		return ss.selectList("qna.searchlist", pvo);
 	}
-	
+
 	public int getTotalCount(PageVO vo) {
 		return ss.selectOne("qna.totalCount", vo);
 	}
-	public List<QnaVO> getSearchList(PageVO svo){ // nowpage������ ������ �� start , end
-		return ss.selectList("qna.searchlist",svo);
+
+	public List<QnaVO> getSearchList(PageVO svo) { // nowpage������ ������ �� start , end
+		return ss.selectList("qna.searchlist", svo);
 	}
 
 }

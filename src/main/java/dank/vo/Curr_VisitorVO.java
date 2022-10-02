@@ -3,7 +3,7 @@ package main.java.dank.vo;
 public class Curr_VisitorVO {
 	private int cv_code, mem_code;
 	private String cv_ip, cv_time, cv_page, cv_url, cv_referer, cv_agent;
-	private MemberVO memberVO;
+	private main.java.dank.vo.MemberVO memberVO;
 
 	public int getCv_code() {
 		return cv_code;
@@ -53,7 +53,6 @@ public class Curr_VisitorVO {
 		this.cv_url = cv_url;
 	}
 
-
 	public String getCv_referer() {
 		return cv_referer;
 	}
@@ -70,11 +69,11 @@ public class Curr_VisitorVO {
 		this.cv_agent = cv_agent;
 	}
 
-	public MemberVO getMemberVO() {
+	public main.java.dank.vo.MemberVO getMemberVO() {
 		return memberVO;
 	}
 
-	public void setMemberVO(MemberVO memberVO) {
+	public void setMemberVO(main.java.dank.vo.MemberVO memberVO) {
 		this.memberVO = memberVO;
 	}
 }

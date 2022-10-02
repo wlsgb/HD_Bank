@@ -1,12 +1,8 @@
 package main.java.dank.vo;
 
 public class LoanRepayLogVO {
-	private int lrl_num,lc_num,lrl_amount,lrl_interest,lrl_total;
 	String mdate;
-	
-	
-	
-	
+	private int lrl_num, lc_num, lrl_amount, lrl_interest, lrl_total;
 
 	public int getLrl_num() {
 		return lrl_num;
@@ -55,6 +51,5 @@ public class LoanRepayLogVO {
 	public void setLrl_total(int lrl_total) {
 		this.lrl_total = lrl_total;
 	}
-	
-	
+
 }

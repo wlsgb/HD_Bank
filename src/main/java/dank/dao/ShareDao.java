@@ -35,7 +35,7 @@ public class ShareDao {
 
 	public List<AccountVO> getAdditionalList(String mem_email) {
 		// TODO Auto-generated method stub
-		return ss.selectList("shvo.getAdditionalList",mem_email);
+		return ss.selectList("shvo.getAdditionalList", mem_email);
 	}
 
 }

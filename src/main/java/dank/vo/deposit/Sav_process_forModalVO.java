@@ -2,21 +2,19 @@ package main.java.dank.vo.deposit;
 
 public class Sav_process_forModalVO {
 
-	private int dep_code,wit_code,at_code;
+	private int dep_code, wit_code, at_code;
 	private String sp_name;
-	
-	private String wit_money,wit_date;
-	
-	private String dep_money,dep_date;
-	
-	private String at_dps_ac,at_set_mony,at_date;
 
-	private int check;	
-	
+	private String wit_money, wit_date;
+
+	private String dep_money, dep_date;
+
+	private String at_dps_ac, at_set_mony, at_date;
+
+	private int check;
+
 	private String classified;
-	
-	
-	
+
 	public String getClassified() {
 		return classified;
 	}
@@ -120,8 +118,5 @@ public class Sav_process_forModalVO {
 	public void setAt_date(String at_date) {
 		this.at_date = at_date;
 	}
-	
-	
-	
-	
+
 }

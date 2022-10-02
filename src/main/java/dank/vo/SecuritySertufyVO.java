@@ -2,7 +2,7 @@ package main.java.dank.vo;
 
 public class SecuritySertufyVO {
 
-	private String main_code,fir_code,sec_code;
+	private String main_code, fir_code, sec_code;
 
 	public String getMain_code() {
 		return main_code;
@@ -27,5 +27,5 @@ public class SecuritySertufyVO {
 	public void setSec_code(String sec_code) {
 		this.sec_code = sec_code;
 	}
-	
+
 }

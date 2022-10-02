@@ -1,9 +1,8 @@
-
 package main.java.dank.vo;
 
 public class MemberVO {
 
-	private int mem_code,mem_pri_chk,mem_email_chk;
+	private int mem_code, mem_pri_chk, mem_email_chk;
 	private String mem_email, mem_pwd, mem_name, mem_phn, mem_in_date, mem_birth, mem_gender, mem_loc;
 	private int mem_job;
 	private String mem_reip;
@@ -111,6 +110,5 @@ public class MemberVO {
 	public void setMem_loc(String mem_loc) {
 		this.mem_loc = mem_loc;
 	}
-
 
 }

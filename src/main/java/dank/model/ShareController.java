@@ -1,7 +1,5 @@
 package main.java.dank.model;
 
-import static org.junit.Assert.fail;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import main.java.dank.service.ShareService;
 import main.java.dank.vo.MemberVO;
 import main.java.dank.vo.deposit.AccountVO;
 import main.java.dank.vo.deposit.Account_ClientVO;
-
 import main.java.dank.vo.deposit.ProSavInsDto;
 import main.java.dank.vo.deposit.Shared_savingVO;
 import main.java.dank.vo.security.Security_Card_RegVO;
@@ -49,15 +46,15 @@ public class ShareController {
 	}
 
 	@RequestMapping(value = "/share_new_req_sequrity")
-	public String share_new_req(Model m, int sav_code,int shas_code, int deptype, HttpSession session) {
+	public String share_new_req(Model m, int sav_code, int shas_code, int deptype, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "index");
 			return "login/login";
-		} else if (securityDao.scrNumChk(((MemberVO) session.getAttribute("member")).getMem_code()) <= 0) {
+		} else if (securityDao.scrNumChk(((MemberVO)session.getAttribute("member")).getMem_code()) <= 0) {
 			System.out.println("����ī�尡 ��������� �ʾҽ��ϴ�.");
 			return "security/security";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		Security_Card_RegVO vo = securityDao.securityCardDetail(mem_code);
 		m.addAttribute("scrVo", vo);
 		m.addAttribute("scCardNum", vo.getSecCard().getSc_detcode());
@@ -80,10 +77,10 @@ public class ShareController {
 	@RequestMapping(value = "/share_new_req")
 	public String share_new_req(Model m, HttpSession session) {
 
-		Shared_savingVO shas = (Shared_savingVO) session.getAttribute("shas");
+		Shared_savingVO shas = (Shared_savingVO)session.getAttribute("shas");
 		System.out.println("req" + shas.getShas_code());
 
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "new");
@@ -92,7 +89,7 @@ public class ShareController {
 		m.addAttribute("sav_code", session.getAttribute("sav_code"));
 		m.addAttribute("shas_code", shas.getShas_code());
 		m.addAttribute("deptype", session.getAttribute("deptype"));
-		
+
 		session.removeAttribute("sav_code");
 		session.removeAttribute("shas");
 		session.removeAttribute("deptype");
@@ -102,8 +99,9 @@ public class ShareController {
 	}
 
 	@RequestMapping(value = "/share_new_res", method = RequestMethod.POST)
-	public String share_new_res(Model m, HttpSession session, String your_email,String sav_code, String your_name, int deptype,
-			int shas_code) {
+	public String share_new_res(Model m, HttpSession session, String your_email, String sav_code, String your_name,
+		int deptype,
+		int shas_code) {
 
 		m.addAttribute("your_name", your_name);
 		m.addAttribute("shas_code", shas_code);
@@ -111,7 +109,7 @@ public class ShareController {
 		m.addAttribute("your_email", your_email);
 		m.addAttribute("sav_code", sav_code);
 
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "new");
 			return "login/login";
@@ -122,20 +120,21 @@ public class ShareController {
 	}
 
 	@RequestMapping(value = "/share_new_insert")
-	public String share_new_insert(String your_email, String mem_email, HttpSession session, Model m, int deptype,String ac_name,String your_name,
-			String ac_pwd, int shas_code,int sav_code) {
+	public String share_new_insert(String your_email, String mem_email, HttpSession session, Model m, int deptype,
+		String ac_name, String your_name,
+		String ac_pwd, int shas_code, int sav_code) {
 		AccountVO account = new AccountVO();
 		account.setAc_pwd(ac_pwd);
 
-		System.out.println("shas_code:"+shas_code);
+		System.out.println("shas_code:" + shas_code);
 		System.out.println("���⿡��" + your_email);
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 
 		if (member == null) { // ���� ������ ���������ʴ´ٸ� �α�����������
 			session.setAttribute("pageName", "new");
 			return "login/login";
 		}
-		account.setAc_name(ac_name+"{"+member.getMem_email() + "," + your_email+"}");
+		account.setAc_name(ac_name + "{" + member.getMem_email() + "," + your_email + "}");
 		System.out.println(member.getMem_email());
 		ProSavInsDto psid = new ProSavInsDto();
 		psid.setDeptype(deptype);
@@ -165,7 +164,7 @@ public class ShareController {
 
 	@RequestMapping(value = "/completeOrReturn")
 	public String completeOrReturn(HttpSession session,
-			@RequestParam(value = "shas_code", required = false, defaultValue = "1") int shas_code) {
+		@RequestParam(value = "shas_code", required = false, defaultValue = "1") int shas_code) {
 		Shared_savingVO shas = shareDao.getShasQuaDetail(shas_code);
 		session.setAttribute("shas", shas);
 		session.setAttribute("deptype", 500);

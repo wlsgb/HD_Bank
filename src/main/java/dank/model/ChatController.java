@@ -15,14 +15,14 @@ public class ChatController {
 
 	@Autowired
 	MemberDao memberDao;
-	
+
 	@RequestMapping(value = "/chatGide")
 	public String chatGidePage(Model m, HttpSession session) {
 		if (session.getAttribute("member") == null) {
 			session.setAttribute("pageName", "chatGide");
 			return "login/login";
 		}
-		int mem_code = ((MemberVO) session.getAttribute("member")).getMem_code();
+		int mem_code = ((MemberVO)session.getAttribute("member")).getMem_code();
 		String mem_phn = memberDao.serPhone(mem_code);
 		String mem_name = memberDao.serNumToName(mem_code);
 		m.addAttribute("mem_phn", mem_phn);

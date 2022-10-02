@@ -36,6 +36,7 @@
     display: table;
     border-collapse: collapse;
   }
+
   &:after {
     clear: both;
   }
@@ -48,7 +49,7 @@
   left: 0;
   position: absolute;
   opacity: 0;
-  filter: Alpha(Opacity = 0);
+  filter: Alpha(Opacity=0);
 }
 
 .ui-front {
@@ -184,6 +185,7 @@
   position: relative;
   text-align: left;
   background: #ddd;
+
   .ui-slider-handle {
     position: absolute;
     z-index: 2;
@@ -193,6 +195,7 @@
     -ms-touch-action: none;
     touch-action: none;
   }
+
   .ui-slider-range {
     position: absolute;
     z-index: 1;
@@ -201,6 +204,7 @@
     border: 0;
     background-position: 0 0;
   }
+
   &.ui-state-disabled {
     .ui-slider-handle, .ui-slider-range {
       filter: inherit;
@@ -210,17 +214,21 @@
 
 .ui-slider-horizontal {
   height: .4em;
+
   .ui-slider-handle {
     top: -.4em;
     margin-left: -.6em;
   }
+
   .ui-slider-range {
     top: 0;
     height: 100%;
   }
+
   .ui-slider-range-min {
     left: 0;
   }
+
   .ui-slider-range-max {
     right: 0;
   }
@@ -229,18 +237,22 @@
 .ui-slider-vertical {
   width: .8em;
   height: 100px;
+
   .ui-slider-handle {
     left: -.3em;
     margin-left: 0;
     margin-bottom: -.6em;
   }
+
   .ui-slider-range {
     left: 0;
     width: 100%;
   }
+
   .ui-slider-range-min {
     bottom: 0;
   }
+
   .ui-slider-range-max {
     top: 0;
   }
@@ -256,6 +268,7 @@
   background: linear-gradient(to bottom, $white-color 0, #f7f7f7 100%);
   border-radius: 50px;
   box-shadow: 0 1px 4px 0 #9191ab !important;
+
   &:focus {
     background: $white-color;
     background: -moz-linear-gradient(top, $white-color 0, #f7f7f7 100%);

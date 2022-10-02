@@ -5,10 +5,12 @@
     border: 1px solid #eee;
     background: #eee;
     border-radius: 5px;
+
     &:hover, &:focus {
       border: 1px solid #ddd;
     }
   }
+
   .form-control {
     border: 0;
     background: $transparent-bg !important;
@@ -17,14 +19,17 @@
     min-width: 200px;
     max-width: 100%;
   }
+
   .input-group-text {
     border: 0;
     background: $transparent-bg;
   }
+
   .search-icon {
     font-size: 18px;
     color: #8d9498;
   }
+
   .btn-search {
     background: $transparent-bg;
     padding: .375rem 1rem;
